@@ -104,7 +104,7 @@ class _SupplierUIState extends State<SupplierUI> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {
-                      Get.to(() => AddSupplier());
+                      Get.to(() => AddSupplier(update: false));
                     },
                     child: customText('Add Supplier',
                         color: Theme.of(context).scaffoldBackgroundColor),
@@ -129,6 +129,8 @@ class _SupplierUIState extends State<SupplierUI> {
           dataColumn("Name", true),
           dataColumn("Mob", true),
           dataColumn("Action", true),
+          dataColumn("", true),
+
         ],
         rows: orders.asMap().entries.map<DataRow>((entry) {
           final item = entry.value;
@@ -152,6 +154,12 @@ class _SupplierUIState extends State<SupplierUI> {
               dataCell(item.name),
               dataCell(item.mobile),
               dataCell("View"),
+              DataCell(IconButton(
+                  onPressed: () {
+                    Get.to(() => AddSupplier(update: true));
+                  },
+                  icon: Icon(Icons.edit_document, color: Theme.of(context).highlightColor,),
+                  )),
             ],
           );
         }).toList());
