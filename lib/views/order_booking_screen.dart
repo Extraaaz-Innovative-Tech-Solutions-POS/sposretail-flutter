@@ -329,7 +329,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                         showOpenItemAlertDialog(context);
                       },
                       child: customText("Add Open Item",
-                          color: Theme.of(context).highlightColor)),
+                          color: Theme.of(context).focusColor)),
                 )
               ],
             ),

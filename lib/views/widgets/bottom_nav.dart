@@ -71,7 +71,7 @@ class _BottomNavState extends State<BottomNav> {
             ),
             child: Drawer(
               elevation: 0,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              backgroundColor: Theme.of(context).primaryColor,
               child: ListView(
                 children: [
                   SizedBox(
@@ -79,7 +79,7 @@ class _BottomNavState extends State<BottomNav> {
                     child: DrawerHeader(
                       padding: EdgeInsets.zero,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).highlightColor,
+                        color: Theme.of(context).primaryColor,
                       ),
                       child: Image.asset(Images.logoAsset),
                     ),
@@ -88,7 +88,7 @@ class _BottomNavState extends State<BottomNav> {
                       ? listTile(context, 'Staff',
                           leading: Icon(
                             Icons.group,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).focusColor,
                           ), onpress: () {
                           Get.to(const StaffSettings());
                         })
@@ -163,7 +163,7 @@ class _BottomNavState extends State<BottomNav> {
                   //     : const SizedBox.shrink(),
                   listTile(context, "Printer Setup",
                       leading: Icon(Icons.local_printshop,
-                          color: Theme.of(context).primaryColor), onpress: () {
+                          color: Theme.of(context).focusColor), onpress: () {
                     //Get.to();
                     //Get.to(AddTable());
                     //Get.to(PrinterSettings());
@@ -171,28 +171,28 @@ class _BottomNavState extends State<BottomNav> {
                   }),
                   listTile(context, "Customer Details",
                       leading: Icon(Icons.person,
-                          color: Theme.of(context).primaryColor), onpress: () {
+                          color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const Customerdetails());
                     customerController.getcustomerlist();
                   }),
                   listTile(context, "Restaurant Update",
                       leading: Icon(Icons.apartment,
-                          color: Theme.of(context).primaryColor), onpress: () {
+                          color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const RestaurantUpdate());
                     customerController.getcustomerlist();
                   }),
                   listTile(context, "Taxes Setup",
                       leading: Icon(Icons.currency_rupee,
-                          color: Theme.of(context).primaryColor), onpress: () {
+                          color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const AddTaxes());
                     //
                   }),
                   ExpansionTile(
                     title: listTile(context, "Inventory"),
                     leading: Icon(Icons.inventory,
-                        color: Theme.of(context).primaryColor),
+                        color: Theme.of(context).focusColor),
                     trailing: Icon(Icons.arrow_drop_down,
-                        color: Theme.of(context).primaryColor),
+                        color: Theme.of(context).focusColor),
                     children: [
                       listTile(context, "Dashboard", onpress: () {
                         Get.to(const InventoryDashboard());
@@ -213,7 +213,7 @@ class _BottomNavState extends State<BottomNav> {
                     context,
                     "Logout",
                     leading: Icon(Icons.arrow_back,
-                        color: Theme.of(context).primaryColor),
+                        color: Theme.of(context).focusColor),
                     onpress: () {
                       showDialog(
                           context: context,
@@ -373,7 +373,7 @@ class _BottomNavState extends State<BottomNav> {
       leading: leading,
       title: Text(
         title,
-        style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20.0),
+        style: TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0),
       ),
       onTap: onpress,
     );
