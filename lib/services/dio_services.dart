@@ -45,6 +45,7 @@ class DioServices {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString("token");
     print(jsonEncode(data));
+    print("Bearer Token is : - $token");
     print(url);
     var headers = {
       'Accept': 'application/json',

@@ -101,7 +101,7 @@ static const String transfer = "table-transfer";
 // Inventory------------------->
 static const String inventoryList = 'inventory';
 static const String createSupplier = "create-supplier";
-static const String getSupplier = "inventory-list";
+static const String getSupplier = "supplier-list";
 static const String suppliers = "suppliers";
 static const String purchaseList = "purchase-list";
 static const String createPurchase = "create-purchase";

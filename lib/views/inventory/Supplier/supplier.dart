@@ -12,7 +12,7 @@ class SupplierUI extends StatefulWidget {
 }
 
 class _SupplierUIState extends State<SupplierUI> {
-  SupplierController suppliercontroller = Get.put(SupplierController());
+  SupplierController supplierController = Get.put(SupplierController());
   DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
   DateTime endDate = DateTime.now();
   String formattedStartDate = "";
@@ -53,7 +53,7 @@ class _SupplierUIState extends State<SupplierUI> {
   @override
   void initState() {
     super.initState();
-    suppliercontroller.getSupplier();
+    supplierController.getSupplier();
     print("Enter in the Supplier------------>");
   }
 
@@ -95,7 +95,7 @@ class _SupplierUIState extends State<SupplierUI> {
                 setState(() {});
               },
             ),
-            orderedItemsListWidget(suppliercontroller.getInventory, context),
+            orderedItemsListWidget(supplierController.getInventory, context),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SizedBox(
@@ -134,8 +134,12 @@ class _SupplierUIState extends State<SupplierUI> {
           final item = entry.value;
           final value = entry.key + 1;
           return DataRow(
+            onLongPress: () {
+                  supplierController.deleteSuppliers(item.id);
+                },
             cells: [
               DataCell(
+                
                 Text(
                   value.toString(),
                   maxLines: 2,
