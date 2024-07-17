@@ -142,11 +142,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(
-          context,
-          widget.ordertype == "Dine" ? "Dine-In" : widget.ordertype.toString(),
-          "",
-          action: []),
+      appBar: commonAppBar(context, "Retail Order", "", action: []),
       body: _buildBody(),
     );
   }
@@ -368,86 +364,86 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                   ),
                 ),
 
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () async {
-                      if (printername == null) {
-                        try {
-                          Get.put(CartController()).getTakewaRunningOrder();
-                          DateTime invoiceDate = DateTime.now();
-                          final invoicePDF = generatekotpdf(
-                              orderType: widget.ordertype.toString(),
-                              orderId: controller.kot,
-                              kotId: controller.orderedItems,
-                              date: DateTime.now(),
-                              table: widget.table ?? 0,
-                              floor: widget.floor ?? 0,
-                              orders: widget.items, //widget.orderedItems
-                              rebuildStatus: true,
-                              rebuildItems: controller.orderedItems);
-                          await Printing.layoutPdf(
-                            onLayout: (format) {
-                              return Future(() => invoicePDF);
-                            },
-                            format: PdfPageFormat.roll80,
-                            name:
-                                "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
-                          );
-                          if (widget.ordertype == "Dine") {
-                            Get.back();
-                          }
-                        } catch (e) {
-                          // print(e.toString());
-                        }
-                      } else {
-                        Get.put(CartController()).getTakewaRunningOrder();
-                        String itemsString = widget.items
-                            .map((element) => element.name)
-                            .join('/'); // Joining all elements with '/'
-                        String itemsquantity = widget.items
-                            .map((element) => element.quantity.toString())
-                            .join('/');
-                        var formData = KOTPrinterModel(
-                            printerNames: printername.toString(),
-                            billNo: "0",
-                            tableNo: widget.ordertype == "Dine"
-                                ? "Dine"
-                                : "Take Away",
-                            items: itemsString,
-                            qty: itemsquantity,
-                            billType: '0',
-                            dateTime:
-                                "${invoiceDate.day}-${invoiceDate.month}-${invoiceDate.year} "
-                                "${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
-                            ipAddress: '192.168.1.100',
-                            is3T: invoiceType != null
-                                ? invoiceType.toString()
-                                : "0",
-                            kotNo: '6',
-                            iN: '0');
-                        printerController.kotPrinterPost(formData);
-                      }
-                    },
-                    child: Container(
-                      height: 48.0,
-                      //width: 150.0,
-                      margin: const EdgeInsets.only(right: 10.0),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: customText(
-                          "Rebuilt KOT",
-                          color: Theme.of(context).primaryColor,
-                          weight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Expanded(
+                //   child: GestureDetector(
+                //     onTap: () async {
+                //       if (printername == null) {
+                //         try {
+                //           Get.put(CartController()).getTakewaRunningOrder();
+                //           DateTime invoiceDate = DateTime.now();
+                //           final invoicePDF = generatekotpdf(
+                //               orderType: widget.ordertype.toString(),
+                //               orderId: controller.kot,
+                //               kotId: controller.orderedItems,
+                //               date: DateTime.now(),
+                //               table: widget.table ?? 0,
+                //               floor: widget.floor ?? 0,
+                //               orders: widget.items, //widget.orderedItems
+                //               rebuildStatus: true,
+                //               rebuildItems: controller.orderedItems);
+                //           await Printing.layoutPdf(
+                //             onLayout: (format) {
+                //               return Future(() => invoicePDF);
+                //             },
+                //             format: PdfPageFormat.roll80,
+                //             name:
+                //                 "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
+                //           );
+                //           if (widget.ordertype == "Dine") {
+                //             Get.back();
+                //           }
+                //         } catch (e) {
+                //           // print(e.toString());
+                //         }
+                //       } else {
+                //         Get.put(CartController()).getTakewaRunningOrder();
+                //         String itemsString = widget.items
+                //             .map((element) => element.name)
+                //             .join('/'); // Joining all elements with '/'
+                //         String itemsquantity = widget.items
+                //             .map((element) => element.quantity.toString())
+                //             .join('/');
+                //         var formData = KOTPrinterModel(
+                //             printerNames: printername.toString(),
+                //             billNo: "0",
+                //             tableNo: widget.ordertype == "Dine"
+                //                 ? "Dine"
+                //                 : "Take Away",
+                //             items: itemsString,
+                //             qty: itemsquantity,
+                //             billType: '0',
+                //             dateTime:
+                //                 "${invoiceDate.day}-${invoiceDate.month}-${invoiceDate.year} "
+                //                 "${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
+                //             ipAddress: '192.168.1.100',
+                //             is3T: invoiceType != null
+                //                 ? invoiceType.toString()
+                //                 : "0",
+                //             kotNo: '6',
+                //             iN: '0');
+                //         printerController.kotPrinterPost(formData);
+                //       }
+                //     },
+                //     child: Container(
+                //       height: 48.0,
+                //       //width: 150.0,
+                //       margin: const EdgeInsets.only(right: 10.0),
+                //       decoration: BoxDecoration(
+                //         color: Theme.of(context).scaffoldBackgroundColor,
+                //         border:
+                //             Border.all(color: Theme.of(context).primaryColor),
+                //         borderRadius: BorderRadius.circular(15),
+                //       ),
+                //       child: Center(
+                //         child: customText(
+                //           "Rebuilt KOT",
+                //           color: Theme.of(context).primaryColor,
+                //           weight: FontWeight.w500,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 Expanded(
                   child: GestureDetector(

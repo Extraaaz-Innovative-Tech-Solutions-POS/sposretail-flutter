@@ -6,8 +6,7 @@ ThemeData dark = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   // primaryColor: const Color(0xFFFFB401),
   primaryColor: const Color.fromARGB(255, 14, 93, 154),
-  focusColor: Color.fromARGB(
-      255, 248, 248, 248), // const Color.fromARGB(48, 218, 218, 218),
+  focusColor: Color.fromARGB(255, 255, 255, 255), // const Color.fromARGB(48, 218, 218, 218),
   highlightColor: Color.fromARGB(255, 6, 6, 6),
   hoverColor: const Color(0xFFFF0000),
   indicatorColor: Colors.green,

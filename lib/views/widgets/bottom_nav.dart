@@ -93,74 +93,74 @@ class _BottomNavState extends State<BottomNav> {
                           Get.to(const StaffSettings());
                         })
                       : const SizedBox.shrink(),
-                  businessType == "catering"
-                      ? const SizedBox.shrink()
-                      : usercontroller.user!.role == 'manager'
-                          ? listTile(context, 'Floor',
-                              leading: Icon(Icons.apartment,
-                                  color: Theme.of(context).primaryColor),
-                              onpress: () {
-                              floorController.fetchAllFloor(true);
-                              sectionController.fetchSection();
-                            })
-                          : const SizedBox.shrink(),
-                  businessType == "catering"
-                      ? const SizedBox.shrink()
-                      : usercontroller.user!.role == 'manager'
-                          ? listTile(context, "Add Floors",
-                              leading: Icon(Icons.six_ft_apart,
-                                  color: Theme.of(context).primaryColor),
-                              onpress: () {
-                              Get.to(AddFloor());
-                            })
-                          : const SizedBox.shrink(),
-                  businessType == "catering"
-                      ? const SizedBox.shrink()
-                      : usercontroller.user!.role == 'manager'
-                          ? listTile(context, 'Delete Floors',
-                              leading: Icon(
-                                Icons.delete,
-                                color: Theme.of(context).primaryColor,
-                              ), onpress: () {
-                              Get.to(const DeleteFloor());
-                            })
-                          : const SizedBox.shrink(),
-                  businessType == "catering"
-                      ? const SizedBox.shrink()
-                      : usercontroller.user!.role == 'manager'
-                          ? listTile(context, "Add Section",
-                              leading: Icon(Icons.backup_table,
-                                  color: Theme.of(context).primaryColor),
-                              onpress: () {
-                              Get.to(SectionItem());
-                            })
-                          : const SizedBox.shrink(),
-                  businessType == "catering"
-                      ? const SizedBox.shrink()
-                      : usercontroller.user!.role == 'manager'
-                          ? listTile(context, "Add Section/Table",
-                              leading: Icon(Icons.table_bar,
-                                  color: Theme.of(context).primaryColor),
-                              onpress: () {
-                              floorController.fetchAllFloor(false);
-                            })
-                          : const SizedBox.shrink(),
-                  usercontroller.user!.role == 'manager'
-                      ? listTile(context, "Sub Items Groups",
-                          leading: Icon(Icons.fastfood,
-                              color: Theme.of(context).primaryColor),
-                          onpress: () {
-                          Get.to(const AllModifierGroupUI());
-                        })
-                      : const SizedBox.shrink(),
-                  usercontroller.user!.role == 'manager'
-                      ? listTile(context, "Sub Items",
-                          leading: Icon(Icons.food_bank,
-                              color: Theme.of(context).primaryColor),
-                          onpress: () {
-                          Get.to(const AllModifierUI());
-                        })
-                      : const SizedBox.shrink(),
+                  // businessType == "catering"
+                  //     ? const SizedBox.shrink()
+                  //     : usercontroller.user!.role == 'manager'
+                  //         ? listTile(context, 'Floor',
+                  //             leading: Icon(Icons.apartment,
+                  //                 color: Theme.of(context).primaryColor),
+                  //             onpress: () {
+                  //             floorController.fetchAllFloor(true);
+                  //             sectionController.fetchSection();
+                  //           })
+                  //         : const SizedBox.shrink(),
+                  // businessType == "catering"
+                  //     ? const SizedBox.shrink()
+                  //     : usercontroller.user!.role == 'manager'
+                  //         ? listTile(context, "Add Floors",
+                  //             leading: Icon(Icons.six_ft_apart,
+                  //                 color: Theme.of(context).primaryColor),
+                  //             onpress: () {
+                  //             Get.to(AddFloor());
+                  //           })
+                  //         : const SizedBox.shrink(),
+                  // businessType == "catering"
+                  //     ? const SizedBox.shrink()
+                  //     : usercontroller.user!.role == 'manager'
+                  //         ? listTile(context, 'Delete Floors',
+                  //             leading: Icon(
+                  //               Icons.delete,
+                  //               color: Theme.of(context).primaryColor,
+                  //             ), onpress: () {
+                  //             Get.to(const DeleteFloor());
+                  //           })
+                  //         : const SizedBox.shrink(),
+                  // businessType == "catering"
+                  //     ? const SizedBox.shrink()
+                  //     : usercontroller.user!.role == 'manager'
+                  //         ? listTile(context, "Add Section",
+                  //             leading: Icon(Icons.backup_table,
+                  //                 color: Theme.of(context).primaryColor),
+                  //             onpress: () {
+                  //             Get.to(SectionItem());
+                  //           })
+                  //         : const SizedBox.shrink(),
+                  // businessType == "catering"
+                  //     ? const SizedBox.shrink()
+                  //     : usercontroller.user!.role == 'manager'
+                  //         ? listTile(context, "Add Section/Table",
+                  //             leading: Icon(Icons.table_bar,
+                  //                 color: Theme.of(context).primaryColor),
+                  //             onpress: () {
+                  //             floorController.fetchAllFloor(false);
+                  //           })
+                  //         : const SizedBox.shrink(),
+                  // usercontroller.user!.role == 'manager'
+                  //     ? listTile(context, "Sub Items Groups",
+                  //         leading: Icon(Icons.fastfood,
+                  //             color: Theme.of(context).primaryColor),
+                  //         onpress: () {
+                  //         Get.to(const AllModifierGroupUI());
+                  //       })
+                  //     : const SizedBox.shrink(),
+                  // usercontroller.user!.role == 'manager'
+                  //     ? listTile(context, "Sub Items",
+                  //         leading: Icon(Icons.food_bank,
+                  //             color: Theme.of(context).primaryColor),
+                  //         onpress: () {
+                  //         Get.to(const AllModifierUI());
+                  //       })
+                  //     : const SizedBox.shrink(),
                   listTile(context, "Printer Setup",
                       leading: Icon(Icons.local_printshop,
                           color: Theme.of(context).primaryColor), onpress: () {
@@ -264,22 +264,23 @@ class _BottomNavState extends State<BottomNav> {
           name,
           "($role)",
           action: [
-            GestureDetector(
-              onTap: () {
-                showAdvanceNotify(
-                    context: context,
-                    orderdata: controller.pendingAdvanceOrderList);
-              },
-              child: StatefulBuilder(builder: (BuildContext context,
-                  void Function(void Function()) setState) {
-                return Icon(
-                  Icons.notifications,
-                  color: controller.checkadvance.isTrue
-                      ? Theme.of(context).hoverColor
-                      : Theme.of(context).highlightColor,
-                );
-              }),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     showAdvanceNotify(
+            //         context: context,
+            //         orderdata: controller.pendingAdvanceOrderList);
+            //   },
+            //   child: StatefulBuilder(builder: (BuildContext context,
+            //       void Function(void Function()) setState) {
+            //     return Icon(
+            //       Icons.notifications,
+            //       color: controller.checkadvance.isTrue
+            //           ? Theme.of(context).hoverColor
+            //           : Theme.of(context).highlightColor,
+            //     );
+            //   }),
+            // ),
+
             Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),

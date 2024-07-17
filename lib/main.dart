@@ -2,7 +2,6 @@ import 'package:spos_retail/views/widgets/export.dart';
 
 void main() {
   Get.put(UtcTimeController());
-  // Get.put(FloorController()).fetchFloorTable(false, "");
   runApp(MyApp());
 }
 

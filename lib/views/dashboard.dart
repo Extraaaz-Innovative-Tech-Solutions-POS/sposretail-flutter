@@ -132,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
                             //   floorController.fetchAllFloor(true);
                             // }),
                             const SizedBox(width: 12),
-                            multipleOption(context, "Take Orders", () async {
+                            multipleOption(context, "Retails Orders", () async {
                               _statusbool().whenComplete(() {
                                 if (statusclick == true) {
                                   Get.to(() => TakeAwayCustomerDetails());
@@ -191,7 +191,15 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
               ),
-            )));
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              
+              onPressed: (){
+                 Get.to(() => OrderBookingScreen(
+                                        ordertype: "Take Away",
+                                      ));
+              }, label: Text("Retails Orders")),
+            ),);
   }
 
   Widget headingTitle(context, title) {

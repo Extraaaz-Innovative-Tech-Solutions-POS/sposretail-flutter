@@ -189,9 +189,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     text: "Menu".padRight(5),
                     style: const TextStyle(fontSize: 18)),
                 TextSpan(
-                    text: widget.ordertype == "Dine"
-                        ? "(F.${widget.floor}/T${widget.tablenumber ?? widget.table})"
-                        : widget.ordertype,
+                    text: "Retail Orders",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -322,12 +320,17 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     });
                   }),
                 ),
-                TextButton(
-                    onPressed: () {
-                      showOpenItemAlertDialog(context);
-                    },
-                    child: customText("Add Open Item",
-                        color: Theme.of(context).highlightColor))
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor),
+                      onPressed: () {
+                        showOpenItemAlertDialog(context);
+                      },
+                      child: customText("Add Open Item",
+                          color: Theme.of(context).highlightColor)),
+                )
               ],
             ),
             // search(context, onchange: (value) {
@@ -848,8 +851,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     final item = addonsList[index];
-                                    bool isSelected =
-                                        addonSelectIndex == index;
+                                    bool isSelected = addonSelectIndex == index;
 
                                     // setState(() {
                                     addons = true;
@@ -1270,8 +1272,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 },
                 child: customText(
                   "Confirm Order",
-                      font: 17.0,
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                  font: 17.0,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 )),
           )
         ],

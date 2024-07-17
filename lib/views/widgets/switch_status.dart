@@ -25,7 +25,8 @@ class _KOTstatusState extends State<KOTstatus> {
 //* KOT and CustomerDetailsBool placed here------------------>
   Future<void> _checkBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool("CustomerDetailsBool", switchclick ?? false); // Save switch state
+    await prefs.setBool(
+        "CustomerDetailsBool", switchclick ?? false); // Save switch state
     setState(() {});
   }
 
@@ -64,14 +65,14 @@ class _KOTstatusState extends State<KOTstatus> {
     return Padding(
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: Column(children: [
-          switchButton("KOT", kotSwitchClick == null ? false : kotSwitchClick,
-              onChange: (value) {
-            _kotcheckBool();
-            _kotstatusbool();
-            setState(() {
-              kotSwitchClick = value;
-            });
-          }),
+          // switchButton("KOT", kotSwitchClick == null ? false : kotSwitchClick,
+          //     onChange: (value) {
+          //   _kotcheckBool();
+          //   _kotstatusbool();
+          //   setState(() {
+          //     kotSwitchClick = value;
+          //   });
+          // }),
           switchButton("Client Info", switchclick == null ? false : switchclick,
               onChange: (value) {
             _checkBool();
