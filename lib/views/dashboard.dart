@@ -95,111 +95,102 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async {
-          SystemNavigator.pop();
-          return false;
-        },
-        child: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            body: Shortcuts(
-              shortcuts: {
-                LogicalKeySet(LogicalKeyboardKey.keyD): DineIntent(),
-                LogicalKeySet(LogicalKeyboardKey.keyT): TakeAwayIntent(),
-                LogicalKeySet(LogicalKeyboardKey.keyA): AdvanceIntent(),
-              },
-              child: Actions(
-                actions: {
-                  DineIntent: CallbackAction<DineIntent>(
-                      onInvoke: ((intent) =>
-                          floorController.fetchAllFloor(true))),
-                  TakeAwayIntent: CallbackAction<TakeAwayIntent>(
-                      onInvoke: ((intent) =>
-                          floorController.fetchFloorTable(true, "Take Away"))),
-                  AdvanceIntent: CallbackAction<AdvanceIntent>(
-                      onInvoke: ((intent) =>
-                          Get.to(() => PendingAdvanceOrder())))
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            // multipleOption(context, "Dine-In", () {
-                            //   floorController.fetchAllFloor(true);
-                            // }),
-                            const SizedBox(width: 12),
-                            multipleOption(context, "Retails Orders", () async {
-                              _statusbool().whenComplete(() {
-                                if (statusclick == true) {
-                                  Get.to(() => TakeAwayCustomerDetails());
-                                } else {
-                                  Get.to(() => OrderBookingScreen(
-                                        ordertype: "Take Away",
-                                      ));
-                                }
-                              });
-                              // Get.to(OrderBookingScreen(
-                              //   ordertype: "Take Away",
-                              // ));
-                            }),
-                          ],
-                        ),
-                        // Row(
-                        //   children: [
-                        //     multipleOption(context, "Advanced Order", () {
-                        //       // floorController.fetchFloorTable(true, "Advance");
-                        //       Get.to(() => PendingAdvanceOrder());
-                        //     }),
-                        //     const SizedBox(width: 12),
-                        //     multipleOption(context, "Delivery", () {
-                        //       Get.to(() => PendingOrderUI(
-                        //           advance: false, catering: false));
-                        //     }),
-                        //   ],
-                        // ),
+      onWillPop: () async {
+        SystemNavigator.pop();
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Shortcuts(
+          shortcuts: {
+            LogicalKeySet(LogicalKeyboardKey.keyD): DineIntent(),
+            LogicalKeySet(LogicalKeyboardKey.keyT): TakeAwayIntent(),
+            LogicalKeySet(LogicalKeyboardKey.keyA): AdvanceIntent(),
+          },
+          child: Actions(
+            actions: {
+              DineIntent: CallbackAction<DineIntent>(
+                  onInvoke: ((intent) => floorController.fetchAllFloor(true))),
+              TakeAwayIntent: CallbackAction<TakeAwayIntent>(
+                  onInvoke: ((intent) =>
+                      floorController.fetchFloorTable(true, "Take Away"))),
+              AdvanceIntent: CallbackAction<AdvanceIntent>(
+                  onInvoke: ((intent) => Get.to(() => PendingAdvanceOrder())))
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Row(
+                    //   children: [
+                    //     // multipleOption(context, "Dine-In", () {
+                    //     //   floorController.fetchAllFloor(true);
+                    //     // }),
+                    //     const SizedBox(width: 12),
+                    //     // multipleOption(context, "Retails Orders", () async {
+                    //     // //  _statusbool().whenComplete(() {
+                    //     //     // if (statusclick == true) {
+                    //     //     //   Get.to(() => TakeAwayCustomerDetails());
+                    //     //     // } else {
+                    //     //     //   Get.to(() => OrderBookingScreen(
+                    //     //     //         ordertype: "Take Away",
+                    //     //     //       ));
+                    //     //     // }
+                    //     //   //});
+                    //     //   // Get.to(OrderBookingScreen(
+                    //     //   //   ordertype: "Take Away",
+                    //     //   // ));
+                    //     // }),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     multipleOption(context, "Advanced Order", () {
+                    //       // floorController.fetchFloorTable(true, "Advance");
+                    //       Get.to(() => PendingAdvanceOrder());
+                    //     }),
+                    //     const SizedBox(width: 12),
+                    //     multipleOption(context, "Delivery", () {
+                    //       Get.to(() => PendingOrderUI(
+                    //           advance: false, catering: false));
+                    //     }),
+                    //   ],
+                    // ),
 
-                        usercontroller.user!.role == "manager"
-                            ? headingTitle(context, "Dashboard")
-                            : const SizedBox.shrink(),
-                        //* Dashboard Graphs ------------->
-                        commondashboardGraphs(context, usercontroller,
-                            graphController, dashboardController),
-                        //* Mode Of Payments------------->
-                        modeofPayments(
-                            context, usercontroller, paymentController),
+                    usercontroller.user!.role == "manager"
+                        ? headingTitle(context, "Dashboard")
+                        : const SizedBox.shrink(),
+                    //* Dashboard Graphs ------------->
+                    commondashboardGraphs(context, usercontroller,
+                        graphController, dashboardController),
+                    //* Mode Of Payments------------->
+                    modeofPayments(context, usercontroller, paymentController),
 
-                        headingTitle(
-                          context,
-                          "Top Selling Products",
-                        ),
-                        //* Search
-                        search(
-                          context,
-                          onchange: (value) {
-                            setState(() {
-                              query = value;
-                            });
-                          },
-                        ),
-                        topSellingProduct(context, query)
-                      ],
+                    headingTitle(
+                      context,
+                      "Top Selling Products",
                     ),
-                  ),
+                    //* Search
+                    search(
+                      context,
+                      onchange: (value) {
+                        setState(() {
+                          query = value;
+                        });
+                      },
+                    ),
+                    topSellingProduct(context, query)
+                  ],
                 ),
               ),
             ),
-            floatingActionButton: FloatingActionButton.extended(
-              
-              onPressed: (){
-                 Get.to(() => OrderBookingScreen(
-                                        ordertype: "Take Away",
-                                      ));
-              }, label: Text("Retails Orders")),
-            ),);
+          ),
+        ),
+      ),
+    );
   }
 
   Widget headingTitle(context, title) {

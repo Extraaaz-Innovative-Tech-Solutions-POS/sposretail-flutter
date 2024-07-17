@@ -1,3 +1,4 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class BottomNav extends StatefulWidget {
@@ -21,6 +22,13 @@ class _BottomNavState extends State<BottomNav> {
   final usercontroller = Get.put(UserController());
 
   final customerController = Get.put(CustomerlistController());
+  int _bottomNavIndex = 1;
+  final List<IconData> iconList = [
+    Icons.grid_view,
+    Icons.home_outlined,
+    Icons.insights_outlined,
+    Icons.timelapse,
+  ];
 
   @override
   void initState() {
@@ -294,78 +302,108 @@ class _BottomNavState extends State<BottomNav> {
                     })),
           ],
         ),
-        body: pages[widget.pageindex ?? 1],
+        body: pages[_bottomNavIndex],
         bottomNavigationBar: buildBottomNav(context),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(
+            Icons.store,
+            color: Theme.of(context).focusColor,
+          ),
+          onPressed: () {
+            Get.to(() => OrderBookingScreen(
+                  ordertype: "Take Away",
+                ));
+          },
+          //params
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       );
     });
   }
 
   Widget buildBottomNav(context) {
-    return Container(
-      height: 71,
-      decoration: BoxDecoration(
-        color: Theme.of(context).focusColor,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(20),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          role == 'manager'
-              ? bottomIcon(
-                  Icons.grid_view,
-                  widget.pageindex == 0
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).highlightColor,
-                  "Menu",
-                  0, onpressed: () {
-                  setState(() {
-                    widget.pageindex = 0;
-                  });
-                })
-              : const SizedBox.shrink(),
-          bottomIcon(
-              Icons.home_outlined,
-              widget.pageindex == 1
-                  ? Theme.of(context).primaryColor
-                  : Theme.of(context).highlightColor,
-              "Home",
-              1, onpressed: () {
-            setState(() {
-              widget.pageindex = 1;
-            });
-          }),
-          role == 'manager'
-              ? bottomIcon(
-                  Icons.insights_outlined,
-                  widget.pageindex == 2
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).highlightColor,
-                  "Reports",
-                  2, onpressed: () {
-                  setState(() {
-                    widget.pageindex = 2;
-                  });
-                })
-              : const SizedBox.shrink(),
-          role == 'manager'
-              ? bottomIcon(
-                  Icons.timelapse,
-                  widget.pageindex == 3
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).highlightColor,
-                  "Ongoing",
-                  3, onpressed: () {
-                  setState(() {
-                    widget.pageindex = 3;
-                  });
-                })
-              : const SizedBox.shrink()
-        ],
-      ),
+    return AnimatedBottomNavigationBar.builder(
+      itemCount: iconList.length,
+      tabBuilder: (int index, bool isActive) {
+        return Icon(iconList[index],
+            size: 24,
+            color: isActive
+                ? Theme.of(context).primaryColor
+                : Theme.of(context).highlightColor);
+      },
+      activeIndex: _bottomNavIndex,
+      gapLocation: GapLocation.center,
+      notchSmoothness: NotchSmoothness.verySmoothEdge,
+      leftCornerRadius: 32,
+      rightCornerRadius: 32,
+      onTap: (index) => setState(() => _bottomNavIndex = index),
     );
+    // Container(
+    //   height: 71,
+    //   decoration: BoxDecoration(
+    //     color: Theme.of(context).focusColor,
+    //     borderRadius: const BorderRadius.only(
+    //       topLeft: Radius.circular(10),
+    //       topRight: Radius.circular(20),
+    //     ),
+    //   ),
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //     children: [
+    //       role == 'manager'
+    //           ? bottomIcon(
+    //               Icons.grid_view,
+    //               widget.pageindex == 0
+    //                   ? Theme.of(context).primaryColor
+    //                   : Theme.of(context).highlightColor,
+    //               "Menu",
+    //               0, onpressed: () {
+    //               setState(() {
+    //                 widget.pageindex = 0;
+    //               });
+    //             })
+    //           : const SizedBox.shrink(),
+    //       bottomIcon(
+    //           Icons.home_outlined,
+    //           widget.pageindex == 1
+    //               ? Theme.of(context).primaryColor
+    //               : Theme.of(context).highlightColor,
+    //           "Home",
+    //           1, onpressed: () {
+    //         setState(() {
+    //           widget.pageindex = 1;
+    //         });
+    //       }),
+    //       role == 'manager'
+    //           ? bottomIcon(
+    //               Icons.insights_outlined,
+    //               widget.pageindex == 2
+    //                   ? Theme.of(context).primaryColor
+    //                   : Theme.of(context).highlightColor,
+    //               "Reports",
+    //               2, onpressed: () {
+    //               setState(() {
+    //                 widget.pageindex = 2;
+    //               });
+    //             })
+    //           : const SizedBox.shrink(),
+    //       role == 'manager'
+    //           ? bottomIcon(
+    //               Icons.timelapse,
+    //               widget.pageindex == 3
+    //                   ? Theme.of(context).primaryColor
+    //                   : Theme.of(context).highlightColor,
+    //               "Ongoing",
+    //               3, onpressed: () {
+    //               setState(() {
+    //                 widget.pageindex = 3;
+    //               });
+    //             })
+    //           : const SizedBox.shrink()
+    //     ],
+    //   ),
+    // );
   }
 
   Widget listTile(context, title, {onpress, Widget? leading}) {
