@@ -22,11 +22,38 @@ class SupplierController extends GetxController {
       if (response.statusCode == 200) {
         Get.back();
         getSupplier();
+        snackBar("Success", "Supplier Added Successfully");
+      } else {
+         snackBar("Failed", "Failed to add Supplier");
       }
     } catch (e) {
       print(e);
     }
   }
+
+
+  Future<void> updateSupplier(String name, String mobileno, String gstin,
+      String cPerson, String cNumber, id) async {
+    AddSupplier data = AddSupplier(
+        name: name,
+        mobileNumber: mobileno,
+        gstin: gstin,
+        c_person: cPerson,
+        c_number: cNumber);
+    try {
+      final response = await DioServices.put("${AppConstant.suppliers}/$id", data.toJson());
+      if (response.statusCode == 200) {
+        Get.back();
+        getSupplier();
+        snackBar("Success", "Supplier Added Successfully");
+      } else {
+         snackBar("Failed", "Failed to add Supplier");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
 
   Future<void> getSupplier() async {
     final response = await DioServices.get(AppConstant.getSupplier);
@@ -46,11 +73,13 @@ class SupplierController extends GetxController {
     }
   }
 
-  Future<void> deleteSuppliers(int i) async {
+  Future<void> deleteSuppliers(i) async {
     try {
       final response = await DioServices.delete("${AppConstant.suppliers}/$i");
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "Delete Successfully");
+      } else {
+        Fluttertoast.showToast(msg: "Delete Failed");
       }
     } catch (e) {
       print(e);
