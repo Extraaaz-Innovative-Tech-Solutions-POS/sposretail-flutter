@@ -1,6 +1,8 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
+import '../../controllers/Inventory_Controller/purchase.dart';
+
 class BottomNav extends StatefulWidget {
   int? pageindex;
   BottomNav({
@@ -20,6 +22,7 @@ class _BottomNavState extends State<BottomNav> {
   final floorController = Get.put(FloorController());
   final sectionController = Get.put(SectionController());
   final usercontroller = Get.put(UserController());
+  final purchaseController = Get.put(PurchaseController());
 
   final customerController = Get.put(CustomerlistController());
   int _bottomNavIndex = 1;
@@ -215,6 +218,7 @@ class _BottomNavState extends State<BottomNav> {
                         Get.to(const SupplierUI());
                       }),
                       listTile(context, 'Purchase', onpress: () {
+                        purchaseController.getPurchase();
                         Get.to(const PurchaseUI());
                       }),
                     ],
