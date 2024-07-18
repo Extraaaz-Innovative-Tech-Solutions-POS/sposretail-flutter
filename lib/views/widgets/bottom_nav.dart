@@ -34,7 +34,7 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     super.initState();
     sharedPrefrence();
-    advanceController.advancedPendingOrder();
+    // advanceController.advancedPendingOrder();
     sectionController.fetchSection();
   }
 
@@ -87,9 +87,11 @@ class _BottomNavState extends State<BottomNav> {
                     child: DrawerHeader(
                       padding: EdgeInsets.zero,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).focusColor,
                       ),
-                      child: Image.asset(Images.logoAsset),
+                      child: Image.asset(
+                        Images.logoAsset,
+                      ),
                     ),
                   ),
                   usercontroller.user!.role == 'manager'
@@ -183,7 +185,7 @@ class _BottomNavState extends State<BottomNav> {
                     Get.to(const Customerdetails());
                     customerController.getcustomerlist();
                   }),
-                  listTile(context, "Restaurant Update",
+                  listTile(context, "Retail Update",
                       leading: Icon(Icons.apartment,
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const RestaurantUpdate());

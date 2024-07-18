@@ -37,8 +37,10 @@ class _LoginState extends State<Login> {
                     const SizedBox(height: 80),
                     Container(
                       color: Theme.of(context).highlightColor,
-                      child:
-                          Image.asset(Images.logoAsset, width: size.width / 2),
+                      child: Image.asset(
+                        Images.logoAsset,
+                        width: size.width,
+                      ),
                     ),
                     const SizedBox(height: 80),
                     ClipRRect(
@@ -52,7 +54,6 @@ class _LoginState extends State<Login> {
                           decoration: BoxDecoration(
                             gradient: gradient(
                               [
-                                Theme.of(context).focusColor,
                                 Theme.of(context).focusColor.withOpacity(0.1),
                                 Theme.of(context).focusColor.withOpacity(0.3)
                               ],
@@ -77,12 +78,12 @@ class _LoginState extends State<Login> {
                                     text: TextSpan(
                                       style: TextStyle(
                                         fontSize: 25.0,
-                                        color: Theme.of(context).highlightColor,
+                                        color: Theme.of(context).focusColor,
                                       ),
                                       children: <TextSpan>[
                                         const TextSpan(text: 'Welcome To '),
                                         TextSpan(
-                                            text: 'Spos +',
+                                            text: "BHARAT POS",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Theme.of(context)
@@ -99,7 +100,7 @@ class _LoginState extends State<Login> {
                                   margin: const EdgeInsets.only(
                                       left: 30, top: 10.0, bottom: 4.0),
                                   child: customText("Email",
-                                      color: Theme.of(context).highlightColor)),
+                                      color: Theme.of(context).focusColor)),
 
                               emailForm(size, _emailController, "Email",
                                   Icons.email, () {}),
@@ -110,7 +111,7 @@ class _LoginState extends State<Login> {
                                 margin: const EdgeInsets.only(
                                     left: 30, top: 10.0, bottom: 4.0),
                                 child: customText("Password",
-                                    color: Theme.of(context).highlightColor),
+                                    color: Theme.of(context).focusColor),
                               ),
 
                               textField(
@@ -169,7 +170,7 @@ class _LoginState extends State<Login> {
                                     },
                                     child: customText(
                                       "Login",
-                                      color: Theme.of(context).highlightColor,
+                                      color: Theme.of(context).focusColor,
                                     ),
                                   ),
                                 ),

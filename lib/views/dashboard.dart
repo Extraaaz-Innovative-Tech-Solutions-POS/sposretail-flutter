@@ -37,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
     topsellingDashboardController.fetchDashboard();
     paymentController.onlinePayment();
     paymentController.cashPayment();
-    advanceController.advancedPendingOrder();
+    // advanceController.advancedPendingOrder();
 
     DateTime currentDate = DateTime.now();
 
@@ -58,7 +58,7 @@ class _DashboardState extends State<Dashboard> {
 
     graphController.getGraph(formattedStartDate, formattedEndDate, "");
     _statusbool();
-    dismiss();
+    // dismiss();
     // checkfordavance();
   }
 
@@ -69,28 +69,28 @@ class _DashboardState extends State<Dashboard> {
     setState(() {});
   }
 
-  Future<void> dismiss() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  // Future<void> dismiss() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    dismissClick = prefs.getBool("Dismiss");
-    if (dismissClick == null) {
-      dismissClick = true;
+  //   dismissClick = prefs.getBool("Dismiss");
+  //   if (dismissClick == null) {
+  //     dismissClick = true;
 
-      SchedulerBinding.instance
-          .addPostFrameCallback((_) => advanceOrderCheckDate());
+  //     SchedulerBinding.instance
+  //         .addPostFrameCallback((_) => advanceOrderCheckDate());
 
-      setState(() {});
-    }
-    //setState(() {});
-  }
+  //     setState(() {});
+  //   }
+  //   //setState(() {});
+  // }
 
-  Future<void> advanceOrderCheckDate() async {
-    dismissClick
-        ? showAdvanceNotify(
-            context: context,
-            orderdata: advanceController.pendingAdvanceOrderList)
-        : null;
-  }
+  // Future<void> advanceOrderCheckDate() async {
+  //   dismissClick
+  //       ? showAdvanceNotify(
+  //           context: context,
+  //           orderdata: advanceController.pendingAdvanceOrderList)
+  //       : null;
+  // }
 
   @override
   Widget build(BuildContext context) {
