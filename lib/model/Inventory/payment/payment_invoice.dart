@@ -3,7 +3,11 @@ import 'package:spos_retail/model/Inventory/payment/payment_details.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class PaymentInvoice extends StatefulWidget {
-  const PaymentInvoice({super.key});
+  String id;
+  PaymentInvoice({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
   @override
   State<PaymentInvoice> createState() => _PaymentInvoiceState();
@@ -11,10 +15,11 @@ class PaymentInvoice extends StatefulWidget {
 
 class _PaymentInvoiceState extends State<PaymentInvoice> {
   final PurchaseController purchaseController = Get.put(PurchaseController());
+
   @override
   void initState() {
     super.initState();
-    purchaseController.viewPaymentList();
+    purchaseController.viewPaymentList(widget.id);
   }
 
   @override

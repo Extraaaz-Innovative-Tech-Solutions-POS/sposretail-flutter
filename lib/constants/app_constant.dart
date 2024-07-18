@@ -103,11 +103,15 @@ class AppConstant {
   static const String createSupplier = "create-supplier";
   static const String getSupplier = "supplier-list";
   static const String suppliers = "suppliers";
-  static const String purchaseList = "purchase-list";
-  static const String createPurchase = "create-purchase";
-  static const String deletePurchase = "purchase-orders";
   static const String viewStatement = "view-statement";
   static const String addPayment = "add-payment";
+
+//purchase-------------------->
+  static const String createPurchase = "create-purchase";
+  static const String purchaseList = "purchase-list";
+  static const String deletePurchase = "purchase-orders";
   static const String inventoryHistory = "inventory-history";
   static const String viewPayment = "view-payment-list";
+// purchase-orders/444
+// delete
 }

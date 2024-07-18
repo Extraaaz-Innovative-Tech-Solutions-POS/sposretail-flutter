@@ -156,7 +156,7 @@ class _SupplierUIState extends State<SupplierUI> {
               dataCell("View"),
               DataCell(IconButton(
                   onPressed: () {
-                  //  Get.to(() => AddSupplier(update: true));
+                    Get.to(() => AddSupplier(update: true, name: item.name, number: item.mobile, gstin: item.gstin, cnumber :item.cNumber, cname: item.cNumber, address: item.address, id: item.id.toString() ));
                   },
                   icon: Icon(Icons.edit_document, color: Theme.of(context).highlightColor,),
                   )),
