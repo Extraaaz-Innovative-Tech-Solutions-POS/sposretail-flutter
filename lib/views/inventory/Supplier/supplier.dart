@@ -104,7 +104,7 @@ class _SupplierUIState extends State<SupplierUI> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {
-                      Get.to(() => AddSupplier(update: false));
+                    //  Get.to(() => AddSupplier(update: false));
                     },
                     child: customText('Add Supplier',
                         color: Theme.of(context).scaffoldBackgroundColor),
@@ -156,7 +156,7 @@ class _SupplierUIState extends State<SupplierUI> {
               dataCell("View"),
               DataCell(IconButton(
                   onPressed: () {
-                    Get.to(() => AddSupplier(update: true));
+                  //  Get.to(() => AddSupplier(update: true));
                   },
                   icon: Icon(Icons.edit_document, color: Theme.of(context).highlightColor,),
                   )),

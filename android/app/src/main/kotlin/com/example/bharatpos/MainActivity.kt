@@ -1,4 +1,4 @@
-package com.example.spos_retail
+package com.example.bharatpos
 
 import io.flutter.embedding.android.FlutterActivity
 
