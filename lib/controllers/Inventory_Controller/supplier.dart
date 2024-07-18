@@ -6,6 +6,7 @@ import '../../model/Inventory/view_Statement.dart';
 
 class SupplierController extends GetxController {
   List<GetSupplierInventory> getInventory = [];
+  List<Map<String, dynamic>> dropdownSupplierId = [];
   RxList<ViewStatementData> viewStatementList = <ViewStatementData>[].obs;
 
   Future<void> addSupplier(String name, String mobileno, String gstin,
@@ -66,6 +67,20 @@ class SupplierController extends GetxController {
             .toList();
 
         update();
+
+
+         dropdownSupplierId.clear();
+        for (int index = 0; index < getInventory.length; index++) {
+          dropdownSupplierId.add({
+            'name': getInventory[index].name,
+            'id': getInventory[index].id,
+            'index': index,
+          });
+        }
+
+
+
+        
       }
     } catch (e) {
       // print("Data----------->");

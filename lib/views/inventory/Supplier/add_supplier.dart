@@ -2,7 +2,11 @@ import 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class AddSupplier extends StatefulWidget {
-  const AddSupplier({super.key});
+  bool update;
+  
+  String? name, number, email, address, gstin, cnumber, cname, id;
+
+  AddSupplier({super.key, required this.update, this.name, number, email, this.address, this.gstin, this.cnumber, this.cname, this.id});
 
   @override
   State<AddSupplier> createState() => _AddSupplierState();
@@ -21,23 +25,24 @@ class _AddSupplierState extends State<AddSupplier> {
   final GlobalKey<FormState> _gstkey = GlobalKey<FormState>();
   final GlobalKey<FormState> _contactpersonKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _contactNumberKey = GlobalKey<FormState>();
+  final supplierController = Get.put(SupplierController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    namecontroller = TextEditingController();
-    phonecontroller = TextEditingController();
-    emailcontroller = TextEditingController();
-    gstController = TextEditingController();
-    contactNumbercontroller = TextEditingController();
-    contactPersoncontroller = TextEditingController();
+    namecontroller = TextEditingController(text: widget.update? widget.name.toString() : "");
+    phonecontroller = TextEditingController(text: widget.update? widget.number.toString() : "");
+    emailcontroller = TextEditingController(text: widget.update? widget.email.toString() : "");
+    gstController = TextEditingController(text: widget.update? widget.gstin.toString() : "");
+    contactNumbercontroller = TextEditingController(text: widget.update? widget.cnumber: "");
+    contactPersoncontroller = TextEditingController(text: widget.update? widget.cname.toString() : "");
   }
 
   SupplierController suppliercontroller = Get.put(SupplierController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(context, "Add Supplier", ""),
+      appBar: commonAppBar(context, widget.update? "Update Supplier" : "Add Supplier", ""),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +50,8 @@ class _AddSupplierState extends State<AddSupplier> {
             const SizedBox(
               height: 10,
             ),
+
+            
             _buildTextFieldWithHeading(_nameKey, "Supplier Name", context,
                 namecontroller, "Supplier Name", TextInputType.name),
             const SizedBox(height: 5),
@@ -85,7 +92,29 @@ class _AddSupplierState extends State<AddSupplier> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {
-                      if (namecontroller.text.isNotEmpty &&
+
+                      if(widget.update) {
+
+                         if (namecontroller.text.isNotEmpty &&
+                          emailcontroller.text.isNotEmpty &&
+                          phonecontroller.text.isNotEmpty &&
+                          contactNumbercontroller.text.isNotEmpty &&
+                          contactPersoncontroller.text.isNotEmpty &&
+                          gstController.text.isNotEmpty) {
+                        suppliercontroller.updateSupplier(
+                            namecontroller.text,
+                            phonecontroller.text,
+                            gstController.text,
+                            contactPersoncontroller.text,
+                            contactNumbercontroller.text, widget.id.toString());
+                      } else {
+                        snackBarBottom(
+                            "Error", "Enter the required field", context);
+                      }
+
+                      } else {
+
+                        if (namecontroller.text.isNotEmpty &&
                           emailcontroller.text.isNotEmpty &&
                           phonecontroller.text.isNotEmpty &&
                           contactNumbercontroller.text.isNotEmpty &&
@@ -101,8 +130,15 @@ class _AddSupplierState extends State<AddSupplier> {
                         snackBarBottom(
                             "Error", "Enter the required field", context);
                       }
+
+
+                      }
+
+
+
+                       
                     },
-                    child: customText('Add Supplier',
+                    child: customText(widget.update ? "Update Supplier" : 'Add Supplier',
                         color: Theme.of(context).scaffoldBackgroundColor),
                   ),
                 ))

@@ -1,3 +1,6 @@
+import 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
+import 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
+
 import '../../widgets/export.dart';
 
 class AddPurchaseUI extends StatefulWidget {
@@ -11,13 +14,16 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
   @override
   Widget build(BuildContext context) {
     TextEditingController productName = TextEditingController();
-    TextEditingController unit = TextEditingController();
-    TextEditingController quantity = TextEditingController();
+    TextEditingController cgstController = TextEditingController();
+    TextEditingController sgstController = TextEditingController();
     TextEditingController rate = TextEditingController();
     TextEditingController amount = TextEditingController();
     TextEditingController dicount = TextEditingController();
+    TextEditingController quantityController = TextEditingController();
+    TextEditingController unitController = TextEditingController();
     TextEditingController netrange = TextEditingController();
-
+    final purchaseController = Get.put(PurchaseController());
+    final supplierController = Get.put(SupplierController());
     final GlobalKey<FormState> _productName = GlobalKey<FormState>();
     final GlobalKey<FormState> _unit = GlobalKey<FormState>();
     final GlobalKey<FormState> _quantity = GlobalKey<FormState>();
@@ -27,6 +33,8 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
     final GlobalKey<FormState> _csgst = GlobalKey<FormState>();
     final GlobalKey<FormState> _dicount = GlobalKey<FormState>();
     final GlobalKey<FormState> _netrange = GlobalKey<FormState>();
+    var selectedItem, supplierId;
+    String? _selectedItem;
     return Scaffold(
         appBar: commonAppBar(context, "Add Purchase", ""),
         body: SingleChildScrollView(
@@ -38,15 +46,90 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
             _buildTextFieldWithHeading(_productName, "Product Name", context,
                 productName, "Product Name", TextInputType.text),
             const SizedBox(height: 10),
+
+            Container(
+            // decoration: BoxDecoration(
+            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+            //     border: Border.all(color: Theme.of(context).highlightColor)),
+            padding: const EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.all(10),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButtonFormField(
+                dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+                value: _selectedItem,
+                items: supplierController.dropdownSupplierId
+                    .asMap()
+                    .entries
+                    .map((entry) => DropdownMenuItem(
+                          child: customText(entry.value["name"],
+                              color: Theme.of(context).highlightColor),
+                          value: entry.value["name"],
+                          onTap: () {
+                            selectedItem = entry.value["id"];
+
+                            setState(() {});
+                          },
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedItem = value.toString();
+                  });
+                },
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Select Supplier',
+                    labelStyle:
+                        TextStyle(color: Theme.of(context).highlightColor)),
+              ),
+            ),
+          ),
+
+            /////////////////////
+            //  DropdownButtonHideUnderline(
+            //         child: DropdownButtonFormField(
+            //           value: 
+            //               (supplierController.dropdownSupplierId.isNotEmpty
+            //                   ? supplierController
+            //                       .dropdownSupplierId.first["name"]
+            //                   : null),
+            //           items: supplierController.dropdownSupplierId
+            //               .asMap()
+            //               .entries
+            //               .map((entry) => DropdownMenuItem(
+            //                     child: customText(
+            //                       entry.value["name"],
+            //                       //color: Theme.of(context).highlightColor
+            //                     ),
+            //                     value: entry.value["name"],
+            //                     onTap: () {
+            //                       setState(() {
+            //                         supplierId = entry.value["id"];
+            //                         // sectionId = entry.value["index"];
+            //                         // selectedFloorId = entry.value["id"];
+            //                       });
+            //                     },
+            //                   ))
+            //               .toList(),
+            //           onChanged: (value) {
+            //             setState(() {
+            //              selectedItem = value.toString();
+            //             });
+            //           },
+            //           decoration: const InputDecoration(
+            //             labelText: 'Select Supplier',
+            //           ),
+            //         ),
+            //       ),
             Row(
               children: [
                 Expanded(
                     child: _buildTextFieldWithHeading(_unit, "Unit", context,
-                        unit, "Unit", TextInputType.text)),
+                        unitController, "Unit", TextInputType.text)),
                 // SizedBox(width: 10),
                 Expanded(
                     child: _buildTextFieldWithHeading(_quantity, "Quantity",
-                        context, quantity, "Quantity", TextInputType.number)),
+                        context, quantityController, "Quantity", TextInputType.number)),
               ],
             ),
             const SizedBox(height: 10),
@@ -69,11 +152,11 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
               children: [
                 Expanded(
                     child: _buildTextFieldWithHeading(_csgst, "CGST", context,
-                        unit, "CGST", TextInputType.text)),
+                        cgstController, "CGST", TextInputType.text)),
                 // SizedBox(width: 10),
                 Expanded(
                     child: _buildTextFieldWithHeading(_sgst, "SGST", context,
-                        quantity, "SGST", TextInputType.number)),
+                        sgstController, "SGST", TextInputType.number)),
               ],
             ),
             _buildTextFieldWithHeading(_netrange, "Net Pay", context, netrange,
@@ -93,6 +176,9 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
                       ),
                     ),
                     onPressed: () {
+                      purchaseController.createPurchase();
+                     // purchaseController.createPurchase(1, productName.text, "invoiceNumber", int.parse(unitController.text), int.parse(quantityController.text),int.parse(rate.text), int.parse(cgstController.text), int.parse(sgstController.text), 0, 0, discount.text);
+                      // purchaseController.addPayment(id, isFullPaid, isPartial, status, amount_paid, payment_type)
                       // addCustomerController.addAddress(
                       //     widget.customerID,
                       //     addressController.text,
@@ -143,6 +229,7 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
   }
 
   Widget _buildTextFieldWithHeading(
+    
       key,
       String heading,
       BuildContext context,
@@ -158,6 +245,8 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
                 font: 16.0,
                 weight: FontWeight.bold,
                 color: Theme.of(context).primaryColor)),
+
+               
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(

@@ -1,4 +1,7 @@
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
+import 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
+import 'package:spos_retail/model/Inventory/purchaseModel.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class PurchaseUI extends StatefulWidget {
@@ -13,6 +16,7 @@ class _PurchaseUIState extends State<PurchaseUI> {
   DateTime endDate = DateTime.now();
   String formattedStartDate = "";
   String formattedEndDate = "";
+  final purchaseController = Get.put(PurchaseController());
   startDatePicker() async {
     DateTime? selectedDate = await showDatePicker(
       // barrierColor: Theme.of(context).highlightColor,
@@ -80,7 +84,7 @@ class _PurchaseUIState extends State<PurchaseUI> {
               setState(() {});
             },
           ),
-          orderedItemsListWidget(context),
+          orderedItemsListWidget(purchaseController.purchaseList),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SizedBox(
@@ -100,7 +104,8 @@ class _PurchaseUIState extends State<PurchaseUI> {
     );
   }
 
-  Widget orderedItemsListWidget(BuildContext context) {
+  Widget orderedItemsListWidget(List<PurchaseData> orders) {
+    
     return DataTable(
         //showCheckboxColumn: true,
         columnSpacing: 15.0,
@@ -114,29 +119,29 @@ class _PurchaseUIState extends State<PurchaseUI> {
           dataColumn("Invoice", true),
           dataColumn("Action", true),
         ],
-        rows: [
-          DataRow(
+
+        rows: orders.asMap().entries.map<DataRow>((entry) {
+          final item = entry.value;
+          final value = entry.key + 1;
+          return DataRow(
+            // onLongPress: () {
+            //       supplierController.deleteSuppliers(item.id);
+            //     },
             cells: [
               DataCell(
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "1",
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Theme.of(context).highlightColor,
-                          fontSize: 16.0),
-                    ),
-                  ],
+                
+                Text(
+                  value.toString(),
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: Theme.of(context).highlightColor, fontSize: 16.0),
                 ),
               ),
-              dataCell("Jash"),
-              dataCell("06/04/24"),
-              DataCell(TextButton(
+              dataCell(item.productName),
+              dataCell(item.discount),
+               DataCell(TextButton(
                   onPressed: () {
                     Get.to(const PaymentInvoice());
                   },
@@ -144,13 +149,54 @@ class _PurchaseUIState extends State<PurchaseUI> {
                     "Click",
                     color: Colors.blue,
                   ))),
-              DataCell(Icon(
-                Icons.delete,
-                color: Theme.of(context).hoverColor,
-              ))
+              DataCell(IconButton(
+                  onPressed: () {
+                   
+                  },
+                  icon: Icon(Icons.edit_document, color: Theme.of(context).highlightColor,),
+                  )),
             ],
-          )
-        ]);
+          );
+        }).toList());
+      //   rows: [
+      //     DataRow(
+      //       cells: [
+      //         DataCell(
+      //           Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             mainAxisAlignment: MainAxisAlignment.center,
+      //             children: [
+      //               Text(
+      //                 "1",
+      //                 maxLines: 2,
+      //                 softWrap: true,
+      //                 overflow: TextOverflow.ellipsis,
+      //                 style: TextStyle(
+      //                     color: Theme.of(context).highlightColor,
+      //                     fontSize: 16.0),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //         dataCell("Jash"),
+      //         dataCell("06/04/24"),
+      //         DataCell(TextButton(
+      //             onPressed: () {
+      //               Get.to(const PaymentInvoice());
+      //             },
+      //             child: customText(
+      //               "Click",
+      //               color: Colors.blue,
+      //             ))),
+      //         DataCell(Icon(
+      //           Icons.delete,
+      //           color: Theme.of(context).hoverColor,
+      //         ))
+      //       ],
+      //     )
+      //   ]
+        
+      //  );
   }
 
   DataCell dataCell(text) {
