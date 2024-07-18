@@ -1,10 +1,15 @@
+import 'package:spos_retail/model/Inventory/history/inventory_history.dart';
+import 'package:spos_retail/model/Inventory/paymentList.dart';
 import 'package:spos_retail/model/Inventory/purchaseModel.dart';
 import 'package:spos_retail/model/common_model.dart';
 
+import '../../model/Inventory/payment/payment_details.dart';
 import '../../views/widgets/export.dart';
 
 class PurchaseController extends GetxController {
   RxList<PurchaseData> purchaseList = <PurchaseData>[].obs;
+  RxList<History> inventoryHistoryList = <History>[].obs;
+  RxList<PaymentDetailsModel> paymentDetails = <PaymentDetailsModel>[].obs;
   Future<void> createPurchase(
       int supplierId,
       String productName,
@@ -79,6 +84,32 @@ class PurchaseController extends GetxController {
           AppConstant.addPayment, addPayment.toJson());
       if (response.statusCode == 200) {
         print("Payment Added Sucessfully");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> inventoryHistory() async {
+    try {
+      final response = await DioServices.get(AppConstant.inventoryHistory);
+      if (response.statusCode == 200) {
+        inventoryHistoryList.assignAll((response.data as List)
+            .map((orderJson) => History.fromJson(orderJson)));
+        update();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> viewPaymentList() async {
+    try {
+      final response = await DioServices.get(AppConstant.viewPayment);
+      if (response.statusCode == 200) {
+        paymentDetails.assignAll((response.data as List)
+            .map((orderJson) => PaymentDetailsModel.fromJson(orderJson)));
+        update();
       }
     } catch (e) {
       print(e);
