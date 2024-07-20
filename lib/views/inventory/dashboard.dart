@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class InventoryDashboard extends StatefulWidget {
@@ -112,7 +113,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                   ),
                 ),
                 customText(
-                  "Top Selling Products",
+                  "Inventory History",
                   font: 16.0,
                   color: Theme.of(context).highlightColor,
                 ),
@@ -124,7 +125,73 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                     });
                   },
                 ),
-                topSellingProduct(context, query)
+
+                SizedBox(
+    // height: screenHeight(context),
+    // child: SingleChildScrollView(child:
+    child: GetBuilder<PurchaseController>(
+        builder: (PurchaseController controller) {
+      if (controller.inventoryHistoryList.isEmpty) {
+        return const Center(
+          child: Text("No Top Selling Found"),
+        );
+      } else {
+        final inventoryHistory = query.isEmpty
+            ? controller.inventoryHistoryList
+            : controller.inventoryHistoryList
+                .where(
+                    (e) => e.productName!.toLowerCase().contains(query.toLowerCase()))
+                .toList();
+
+        if (inventoryHistory.isEmpty) {
+          return Center(
+            child: customText("No Search Result Found",
+                color: Theme.of(context).highlightColor),
+          );
+        } else {
+          final inventoryHistory = query.isEmpty
+              ? controller.inventoryHistoryList
+              : controller.inventoryHistoryList
+                  .where((e) =>
+                      e.productName!.toLowerCase().contains(query.toLowerCase()))
+                  .toList();
+
+          if (inventoryHistory.isEmpty) {
+            return Center(
+              child: customText("No Search Result Found",
+                  color: Theme.of(context).highlightColor),
+            );
+          }
+
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: inventoryHistory.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  color: Theme.of(context).focusColor,
+                  child: ListTile(
+                      title: customText(inventoryHistory[index].productName.toString(),
+                          color: Theme.of(context).highlightColor, font: 16.0),
+                      subtitle: customText(
+                          "Quantity Change : ${inventoryHistory[index].qtyChange}",
+                          color: Theme.of(context).highlightColor.withOpacity(0.6),
+                          font: 14.0),
+                      trailing: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          customText(" ${inventoryHistory[index].changeType}",
+                              color: Theme.of(context).hintColor, font: 16.0),
+                        
+                        ],
+                      )
+                      ),
+                );
+              });
+        }
+      }
+    }),
+  ),
               ]),
         ),
       ),
