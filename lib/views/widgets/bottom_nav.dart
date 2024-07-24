@@ -158,22 +158,22 @@ class _BottomNavState extends State<BottomNav> {
                   //             floorController.fetchAllFloor(false);
                   //           })
                   //         : const SizedBox.shrink(),
-                  // usercontroller.user!.role == 'manager'
-                  //     ? listTile(context, "Sub Items Groups",
-                  //         leading: Icon(Icons.fastfood,
-                  //             color: Theme.of(context).primaryColor),
-                  //         onpress: () {
-                  //         Get.to(const AllModifierGroupUI());
-                  //       })
-                  //     : const SizedBox.shrink(),
-                  // usercontroller.user!.role == 'manager'
-                  //     ? listTile(context, "Sub Items",
-                  //         leading: Icon(Icons.food_bank,
-                  //             color: Theme.of(context).primaryColor),
-                  //         onpress: () {
-                  //         Get.to(const AllModifierUI());
-                  //       })
-                  //     : const SizedBox.shrink(),
+                  usercontroller.user!.role == 'manager'
+                      ? listTile(context, "Sub Items Groups",
+                          leading: Icon(Icons.fastfood,
+                              color: Theme.of(context).primaryColor),
+                          onpress: () {
+                          Get.to(const AllModifierGroupUI());
+                        })
+                      : const SizedBox.shrink(),
+                  usercontroller.user!.role == 'manager'
+                      ? listTile(context, "Sub Items",
+                          leading: Icon(Icons.food_bank,
+                              color: Theme.of(context).primaryColor),
+                          onpress: () {
+                          Get.to(const AllModifierUI());
+                        })
+                      : const SizedBox.shrink(),
                   listTile(context, "Printer Setup",
                       leading: Icon(Icons.local_printshop,
                           color: Theme.of(context).focusColor), onpress: () {
