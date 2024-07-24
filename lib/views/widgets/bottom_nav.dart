@@ -209,6 +209,7 @@ class _BottomNavState extends State<BottomNav> {
                     children: [
                       listTile(context, "Dashboard", onpress: () {
                         Get.to(const InventoryDashboard());
+                          purchaseController.inventoryHistory();
                       }),
                       listTile(context, 'Manage', onpress: () {
                         Get.to(const InventoryList());

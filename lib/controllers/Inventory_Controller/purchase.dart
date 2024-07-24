@@ -2,13 +2,12 @@ import 'package:spos_retail/model/Inventory/history/inventory_history.dart';
 import 'package:spos_retail/model/Inventory/paymentList.dart';
 import 'package:spos_retail/model/Inventory/purchaseModel.dart';
 import 'package:spos_retail/model/common_model.dart';
-
-import '../../model/Inventory/payment/payment_details.dart';
 import '../../views/widgets/export.dart';
 
 class PurchaseController extends GetxController {
+  List<History> inventoryHistoryList = [];
 
-  RxList<History> inventoryHistoryList = <History>[].obs;
+ // RxList<History> inventoryHistoryList = <History>[].obs;
   RxList<PaymentDetailsModel> paymentDetails = <PaymentDetailsModel>[].obs;
 
   //RxList<PurchaseData> purchaseList = <PurchaseData>[].obs;
@@ -60,7 +59,7 @@ class PurchaseController extends GetxController {
   "payment_type":"cash"
           });
       if (response.statusCode == 200) {
-        print("Purchase Create sucessfully");
+        debugPrint("Purchase Create sucessfully");
       }
     } catch (e) {
       print(e);
@@ -95,7 +94,7 @@ class PurchaseController extends GetxController {
       final response =
           await DioServices.delete("${AppConstant.deletePurchase}/$id");
       if (response.statusCode == 200) {
-        print("Purchase Delete Sucessfully");
+        debugPrint("Purchase Delete Sucessfully");
       }
     } catch (e) {
       print(e);
@@ -103,18 +102,18 @@ class PurchaseController extends GetxController {
   }
 
   Future<void> addPayment(int id, int isFullPaid, int isPartial, String status,
-      int amount_paid, String payment_type) async {
+      int amountPaid, String paymentType) async {
     try {
       AddPayment addPayment = AddPayment(
           isFullPaid: isFullPaid,
           isPartial: isPartial,
           status: status,
-          amount_paid: amount_paid,
-          payment_type: payment_type);
+          amount_paid: amountPaid,
+          payment_type: paymentType);
       final response = await DioServices.postRequest(
           AppConstant.addPayment, addPayment.toJson());
       if (response.statusCode == 200) {
-        print("Payment Added Sucessfully");
+        debugPrint("Payment Added Sucessfully");
       }
     } catch (e) {
       print(e);
@@ -125,8 +124,24 @@ class PurchaseController extends GetxController {
     try {
       final response = await DioServices.get(AppConstant.inventoryHistory);
       if (response.statusCode == 200) {
-        inventoryHistoryList.assignAll((response.data as List)
+        print(response);
+
+
+        // topsellingList.assignAll((response.data['data'] as List)
+        //     .map((orderJson) => TopSelling.fromJson(orderJson)));
+
+        // update();
+
+
+
+        inventoryHistoryList.assignAll((response.data['history'] as List)
             .map((orderJson) => History.fromJson(orderJson)));
+/////////////////////////////////
+
+            //  inventoryHistoryList = response.data['data']
+            // .map<History>(
+            //     (json) => History.fromJson(json))
+            // .toList();
         update();
       }
     } catch (e) {

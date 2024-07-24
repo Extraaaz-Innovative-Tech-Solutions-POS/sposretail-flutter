@@ -85,42 +85,6 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
             ),
           ),
 
-            /////////////////////
-            //  DropdownButtonHideUnderline(
-            //         child: DropdownButtonFormField(
-            //           value: 
-            //               (supplierController.dropdownSupplierId.isNotEmpty
-            //                   ? supplierController
-            //                       .dropdownSupplierId.first["name"]
-            //                   : null),
-            //           items: supplierController.dropdownSupplierId
-            //               .asMap()
-            //               .entries
-            //               .map((entry) => DropdownMenuItem(
-            //                     child: customText(
-            //                       entry.value["name"],
-            //                       //color: Theme.of(context).highlightColor
-            //                     ),
-            //                     value: entry.value["name"],
-            //                     onTap: () {
-            //                       setState(() {
-            //                         supplierId = entry.value["id"];
-            //                         // sectionId = entry.value["index"];
-            //                         // selectedFloorId = entry.value["id"];
-            //                       });
-            //                     },
-            //                   ))
-            //               .toList(),
-            //           onChanged: (value) {
-            //             setState(() {
-            //              selectedItem = value.toString();
-            //             });
-            //           },
-            //           decoration: const InputDecoration(
-            //             labelText: 'Select Supplier',
-            //           ),
-            //         ),
-            //       ),
             Row(
               children: [
                 Expanded(
