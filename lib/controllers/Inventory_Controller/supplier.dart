@@ -25,13 +25,12 @@ class SupplierController extends GetxController {
         getSupplier();
         snackBar("Success", "Supplier Added Successfully");
       } else {
-         snackBar("Failed", "Failed to add Supplier");
+        snackBar("Failed", "Failed to add Supplier");
       }
     } catch (e) {
       print(e);
     }
   }
-
 
   Future<void> updateSupplier(String name, String mobileno, String gstin,
       String cPerson, String cNumber, id) async {
@@ -42,34 +41,32 @@ class SupplierController extends GetxController {
         c_person: cPerson,
         c_number: cNumber);
     try {
-      final response = await DioServices.put("${AppConstant.suppliers}/$id", data.toJson());
+      final response =
+          await DioServices.put("${AppConstant.suppliers}/$id", data.toJson());
       if (response.statusCode == 200) {
         Get.back();
         getSupplier();
         snackBar("Success", "Supplier Added Successfully");
       } else {
-         snackBar("Failed", "Failed to add Supplier");
+        snackBar("Failed", "Failed to add Supplier");
       }
     } catch (e) {
       print(e);
     }
   }
 
-
   Future<void> getSupplier() async {
     final response = await DioServices.get(AppConstant.getSupplier);
     try {
-      final response = await DioServices.get(AppConstant.getSupplier);
       if (response.statusCode == 200) {
         getInventory = response.data['data']
             .map<GetSupplierInventory>(
                 (json) => GetSupplierInventory.fromJson(json))
             .toList();
-
+        print(response.data);
         update();
 
-
-         dropdownSupplierId.clear();
+        dropdownSupplierId.clear();
         for (int index = 0; index < getInventory.length; index++) {
           dropdownSupplierId.add({
             'name': getInventory[index].name,
@@ -77,10 +74,6 @@ class SupplierController extends GetxController {
             'index': index,
           });
         }
-
-
-
-        
       }
     } catch (e) {
       // print("Data----------->");
