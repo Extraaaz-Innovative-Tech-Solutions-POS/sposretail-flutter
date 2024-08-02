@@ -436,6 +436,20 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
   final customerName = controller.cartOrder.value!.customer!.name.toString();
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
     final address = controller.cartOrder.value!.customer!.address.toString();
+    final catGrandTotal = controller.cartOrder.value!.grandTotal == null
+            ? ""
+            : controller.cartOrder.value!.grandTotal.toString();
+        final catPayableAmount = controller.cartOrder.value!.grandTotal == null
+            ? ""
+            : controller.cartOrder.value!.grandTotal.toString();
+        final catAmountPaid =
+            controller.cartOrder.value!.totalGivenAmount == null
+                ? ""
+                : controller.cartOrder.value!.totalGivenAmount.toString();
+        final catRemainingamount =
+            controller.cartOrder.value!.remainingMoney == null
+                ? ""
+                : controller.cartOrder.value!.remainingMoney.toString();
         DateTime invoiceDate = DateTime.now();
         final formData = BillPrinterModel(
           printerNames: printername.toString(),
@@ -457,6 +471,11 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
           ipAddress: '192.168.1.100',
           is3T: '0',
           iN: '0', customerNames: customerName, mobileNo: mobileNo, address: address,
+          NP: "0",
+          catGrandTotal: catGrandTotal,
+            catPayableAmount: catPayableAmount,
+            catAmountPaid: catAmountPaid,
+            catRemainingamount: catRemainingamount
         );
 
         printerUtlityController
@@ -505,6 +524,20 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
   final customerName = controller.cartOrder.value!.customer!.name.toString();
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
     final address = controller.cartOrder.value!.customer!.address.toString();
+    final catGrandTotal = controller.cartOrder.value!.grandTotal == null
+            ? ""
+            : controller.cartOrder.value!.grandTotal.toString();
+        final catPayableAmount = controller.cartOrder.value!.grandTotal == null
+            ? ""
+            : controller.cartOrder.value!.grandTotal.toString();
+        final catAmountPaid =
+            controller.cartOrder.value!.totalGivenAmount == null
+                ? ""
+                : controller.cartOrder.value!.totalGivenAmount.toString();
+        final catRemainingamount =
+            controller.cartOrder.value!.remainingMoney == null
+                ? ""
+                : controller.cartOrder.value!.remainingMoney.toString();
 // Print the resulting string
         //  print(itemsString);
         DateTime invoiceDate = DateTime.now();
@@ -528,6 +561,11 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
           is3T: '0',
           iN: '0', 
           customerNames: customerName, mobileNo: mobileNo, address: address,
+          NP:"0",
+          catAmountPaid: catAmountPaid,
+          catGrandTotal: catGrandTotal,
+          catPayableAmount: catPayableAmount,
+          catRemainingamount: catRemainingamount
         );
       } else {
         controller.completeCatAdvOrder(

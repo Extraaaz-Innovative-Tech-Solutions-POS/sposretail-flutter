@@ -51,6 +51,9 @@ class _CateringPendingOrderState extends State<CateringPendingOrderList> {
                             return GestureDetector(
                               onTap: () {
                                 Get.to(() => ShowOngoingOrder(
+                                  totalGivenAmount: controller.cateringAdvanceOrderList[index].totalGivenAmount.toString()??"0",
+                                  remainingAmount: controller.cateringAdvanceOrderList[index].remainingMoney.toString()??"0",
+                                  totalAmount: controller.cateringAdvanceOrderList[index].total.toString()??"0",
                                       ordertype: "Catering",
                                       tableId: controller
                                           .cateringAdvanceOrderList[index]

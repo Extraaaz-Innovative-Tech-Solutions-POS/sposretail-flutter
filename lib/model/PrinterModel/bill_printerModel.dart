@@ -16,6 +16,11 @@ class BillPrinterModel {
   final String ipAddress;
   final String is3T;
   final String iN;
+   final String NP;
+  final String catRemainingamount;
+  final String catGrandTotal;
+  final String catPayableAmount;
+  final String catAmountPaid;
 
   BillPrinterModel({
     required this.printerNames,
@@ -35,6 +40,11 @@ class BillPrinterModel {
     required this.ipAddress,
     required this.is3T,
     required this.iN,
+    required this.NP,
+    required this.catAmountPaid,
+    required this.catGrandTotal,
+    required this.catPayableAmount,
+    required this.catRemainingamount,
   });
 
   Map<String, String> toJson() {
@@ -55,7 +65,11 @@ class BillPrinterModel {
       'last_record': lastRecord,
       'ipAddress': ipAddress,
       'is3T': is3T,
-      'IN': iN,
+      'IN': iN,"NP": NP,
+      'CatAmountPaid': catAmountPaid,
+      'CatGrandTotal': catGrandTotal,
+      'CatPayableAmount': catPayableAmount,
+      'CatRemainingAmount': catRemainingamount,
     };
   }
 }

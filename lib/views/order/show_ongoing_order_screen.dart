@@ -22,6 +22,9 @@ class ShowOngoingOrder extends StatefulWidget {
   final String tableId;
   final int? paymentcount;
   final int? customerId;
+  final String? totalAmount;
+  final String? remainingAmount;
+  final String? totalGivenAmount;
 
   ShowOngoingOrder({
     Key? key,
@@ -34,6 +37,9 @@ class ShowOngoingOrder extends StatefulWidget {
     required this.tableId,
     this.paymentcount,
     this.customerId,
+    this.totalAmount,
+    this.totalGivenAmount,
+    this.remainingAmount
   }) : super(key: key);
 
   @override
@@ -995,6 +1001,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
 
     final invoiceDate = DateTime.now();
+    final catGrandTotal = widget.totalAmount;
+    final catPayableAmount = widget.remainingAmount.toString();// "0.0";
+    final  catAmountPaid = widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
+    final catRemainingamount =  "0.0";//widget.remainingAmount.toString();
 
     return BillPrinterModel(
       printerNames: printername.toString(),
@@ -1018,6 +1028,11 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       customerNames: customerName,
       mobileNo: mobileNo,
       address: address,
+      NP:"0",
+      catGrandTotal: catGrandTotal.toString(),
+      catPayableAmount: catPayableAmount,
+      catAmountPaid: catAmountPaid,
+      catRemainingamount : catRemainingamount 
     );
   }
 
@@ -1037,6 +1052,11 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final sGst = controller.cartOrder.value!.taxData!.sgst.toString();
     final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
     final invoiceDate = DateTime.now();
+    final catGrandTotal = widget.totalAmount;
+    final catPayableAmount = widget.remainingAmount.toString();// "0.0";
+    final  catAmountPaid = widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
+    final catRemainingamount =  "0.0";//widget.remainingAmount.toString();
+
     return BillDesktopModel(
         printerNames: printername.toString(),
         billType: "1",
@@ -1054,7 +1074,16 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             "${discountpercentage == 0 ? 00.0 : discountpercentage}/$sGst/$cGst/"
             "${controller.cartOrder.value!.grandTotal!}",
         kotNo: invoiceiD.toString(),
-        is3T: invoiceType != null ? invoiceType.toString() : "0");
+        is3T: invoiceType != null ? invoiceType.toString() : "0",
+        
+        NP: "0",
+        catGrandTotal: catGrandTotal.toString(),
+      catPayableAmount: catPayableAmount,
+      catAmountPaid: catAmountPaid,
+      catRemainingamount : catRemainingamount 
+
+        );
+        
   }
 
   Future<void> completeAdvanceOrder(bool advance, String paymentType) async {
