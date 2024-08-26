@@ -96,6 +96,9 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                 return GestureDetector(
                                   onTap: () {
                                     Get.to(() => ShowOngoingOrder(
+                                      totalGivenAmount: controller.pendingAdvanceOrderList[index].totalGivenAmount.toString()??"0",
+                                  remainingAmount: controller.pendingAdvanceOrderList[index].remainingMoney.toString()??"0",
+                                  totalAmount: controller.pendingAdvanceOrderList[index].total.toString()??"0",
                                           customerId: controller
                                               .pendingOrderList[index]
                                               .customerId,

@@ -134,6 +134,9 @@ class _AllModifierUIState extends State<AllModifierUI> {
                 ),
                 onPressed: () {
                   Get.to(AddModifierUI(
+                    modifierName: "",
+                    modifierDescription: "",
+                    modifierprice: "",
                     modifierId: '',
                     click: false,
                   ));

@@ -216,6 +216,7 @@ class _FloorSectionTableState extends State<FloorSectionTable> {
                                       activetable < active.tableData!.length;
                                       activetable++) {
                                     Get.to(ShowOngoingOrder(
+                                      
                                       ordertype: "Dine-In",
                                       floor: int.parse(
                                           selectedFloorId), //int.parse(widget.floor),

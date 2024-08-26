@@ -6,7 +6,7 @@ import 'package:spos_retail/controllers/modifier_controller/update_modifiers_con
 import 'package:spos_retail/views/widgets/app_bar.dart';
 
 class AddModifierUI extends StatefulWidget {
-  String modifierId;
+  String? modifierId;
   String? modifierName;
   String? modifierprice;
   String? modifierDescription;
@@ -14,7 +14,7 @@ class AddModifierUI extends StatefulWidget {
 
   AddModifierUI({
     Key? key,
-    required this.modifierId,
+    this.modifierId,
     required this.click,
     this.modifierName,
     this.modifierDescription,
@@ -31,9 +31,9 @@ class _AddModifierUIState extends State<AddModifierUI> {
   // late List<String> _buttonTitles;
   bool modifierRestrict = false;
   bool itemRestrict = false;
-  late final TextEditingController _titleController;
+  late TextEditingController _titleController;
   // final _modifierGroupController = TextEditingController();
-  late final TextEditingController _priceController;
+  late TextEditingController _priceController;
   late final TextEditingController _descriptionController;
   final addModifierController = Get.put(AddModifierContoller());
   final _updateModifierController = Get.put(UpdateModifier());
@@ -69,6 +69,7 @@ class _AddModifierUIState extends State<AddModifierUI> {
   }
 
   Widget basicinfo(context) {
+    //return Container();
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
@@ -77,17 +78,17 @@ class _AddModifierUIState extends State<AddModifierUI> {
           alignment: Alignment.centerLeft,
           child: customText(
             "Modifiers",
-            font: 16,
+            font: 16.0,
             color: Theme.of(context).highlightColor,
           ),
         ),
         const Padding(padding: EdgeInsets.all(8.0)),
-        buildTextFieldWithHeading("Title", context, _titleController, "Title"),
+         buildTextFieldWithHeading("Title", context, _titleController, "Title"),
+         const SizedBox(height: 5),
+         buildTextFieldWithHeading("Price", context, _priceController, "Price"),
         const SizedBox(height: 5),
-        buildTextFieldWithHeading("Price", context, _priceController, "Price"),
-        const SizedBox(height: 5),
-        description(
-            "Description", context, _descriptionController, "Description"),
+         description(
+             "Description", context, _descriptionController, "Description"),
         const SizedBox(height: 60),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -113,7 +114,7 @@ class _AddModifierUIState extends State<AddModifierUI> {
                       _priceController.text.isNotEmpty) {
                     widget.click
                         ? _updateModifierController.updateModifier(
-                            widget.modifierId,
+                            widget.modifierId??"1",
                             _titleController.text,
                             _priceController.text,
                             _descriptionController.text)
