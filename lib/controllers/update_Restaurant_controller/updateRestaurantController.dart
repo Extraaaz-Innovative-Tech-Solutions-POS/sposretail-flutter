@@ -1,4 +1,3 @@
-import 'package:spos_retail/constants/app_constant.dart';
 import 'package:spos_retail/model/common_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -12,7 +11,7 @@ class UpdateRestaurantController extends GetxController {
         updateRestaurant.toJson());
     if (response.statusCode == 201) {
       // print(response.data);
-      snackBar("Success", "Your Restaurant Update Successfully");
+      snackBar("Success", "Your Retailer Update Successfully");
       Get.back();
       update();
     }

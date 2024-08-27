@@ -416,14 +416,14 @@ class _RegisterState extends State<Register> {
                                               child: Text(
                                                 _phoneController.text
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.green,
                                                     fontSize: 18.0),
                                               ),
                                             ),
                                           ),
                                         )
-                                      : SizedBox.shrink(),
+                                      : const SizedBox.shrink(),
                               //! Restaurant Name Field-------------------->
                               resturantname
                                   ? Container(
@@ -432,7 +432,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: Text(
-                                        "Restaurant Name",
+                                        "Retailer Name",
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .highlightColor),
@@ -443,7 +443,7 @@ class _RegisterState extends State<Register> {
                                   ? registerNoObscureForm(
                                       size,
                                       _restaurantController,
-                                      "Restaurant Name",
+                                      "Retailer Name",
                                       keyboardType: TextInputType.name,
                                       Icons.apartment, () {
                                       if (_namecontroller.text.isNotEmpty &&
@@ -467,7 +467,7 @@ class _RegisterState extends State<Register> {
                                           .text.isEmpty) {
                                         snackBarBottom(
                                             "Error",
-                                            "Restaurant Name Field Shouldn't Empty",
+                                            "Retailer Name Field Shouldn't Empty",
                                             context);
                                       } else {
                                         phonefield = false;
@@ -515,7 +515,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: Text(
-                                        "Restaurant Address",
+                                        "Retailer Address",
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .highlightColor),
@@ -526,7 +526,7 @@ class _RegisterState extends State<Register> {
                                   ? registerNoObscureForm(
                                       size,
                                       _addressController,
-                                      "Restaurant Address",
+                                      "Retailer Address",
                                       keyboardType: TextInputType.streetAddress,
                                       Icons.location_history, () {
                                       if (_namecontroller.text.isNotEmpty &&
@@ -601,7 +601,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: customText(
-                                        "Restaurant Address",
+                                        "Retailer Address",
                                         color: Theme.of(context).highlightColor,
                                       ),
                                     )

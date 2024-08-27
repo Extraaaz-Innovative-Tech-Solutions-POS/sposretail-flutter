@@ -62,23 +62,23 @@ class _RestaurantUpdateState extends State<RestaurantUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(context, "Restaurant Details", ""),
+      appBar: commonAppBar(context, "Retailer Details", ""),
       body: Column(
         children: [
           _buildTextFieldWithHeading(
               _restaurantnameKey,
-              "Restaurant Name",
+              "Retailer Name",
               context,
               _restaursantNameController,
-              "Restaurant Name",
+              "Retailer Name",
               TextInputType.name),
           const SizedBox(height: 5),
           _buildTextFieldWithHeading(
               _restaurantAddressKey,
-              "Restaurant Address",
+              "Retailer Address",
               context,
               _restaursantAddressController,
-              "Restaurant Address",
+              "Retailer Address",
               TextInputType.name),
           const SizedBox(height: 5),
           _buildTextFieldWithHeading(_restaurantStateKey, "State", context,
