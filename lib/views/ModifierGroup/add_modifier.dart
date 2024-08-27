@@ -14,7 +14,6 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
   final controller = Get.put(AddModifierGroupController());
   final sectionController = Get.put(SectionController());
   String dropdownvalue = 'Varients';
-  String? _selectedItem;
   var selectedSectionId;
   var items = ['Varients', 'Addons'];
 
@@ -91,57 +90,6 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-            child: Text(
-              "Select Section",
-              style: TextStyle(
-                  fontSize: 16, color: Theme.of(context).primaryColor),
-            ),
-          ),
-          GetBuilder<SectionController>(
-              builder: (SectionController controller) {
-            return Container(
-              decoration: BoxDecoration(
-                  color: Theme.of(context).focusColor,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(color: Theme.of(context).highlightColor)),
-              padding: const EdgeInsets.only(left: 10),
-              margin: const EdgeInsets.all(10),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButtonFormField(
-                  dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-                  value: _selectedItem,
-                  items: sectionController.dropdownSectionList
-                      .asMap()
-                      .entries
-                      .map((entry) => DropdownMenuItem(
-                            child: customText(entry.value["sectionName"],
-                                color: Theme.of(context).highlightColor),
-                            value: entry.value["sectionName"],
-                            onTap: () {
-                              selectedSectionId = entry.value["id"];
-
-                              setState(() {});
-                            },
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _selectedItem = value.toString();
-                    });
-                  },
-                  decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: 'Select Section',
-                      labelStyle:
-                          TextStyle(color: Theme.of(context).highlightColor)),
-                ),
-              ),
-            );
-          }),
           
           const SizedBox(height: 10),
           description("Description", context, descriptionController),
@@ -173,7 +121,9 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
                               _titleController.text,
                               descriptionController.text,
                               1,
-                              int.parse(selectedSectionId.toString()));
+                              1
+                              //int.parse(selectedSectionId.toString())
+                              );
                         } else {
                           controller.addModifierGroupPost(
                               _titleController.text,

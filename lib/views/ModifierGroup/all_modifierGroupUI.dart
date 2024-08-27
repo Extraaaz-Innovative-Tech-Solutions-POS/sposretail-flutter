@@ -151,11 +151,6 @@ class _AllModifierGroupUIState extends State<AllModifierGroupUI> {
                                               'Type- ${allModifierGroup[index].type}',
                                               color: Theme.of(context)
                                                   .highlightColor),
-                                          customText(
-                                              'Section - ${allModifierGroup[index].sectionname}'
-                                                  .toUpperCase(),
-                                              color: Theme.of(context)
-                                                  .highlightColor),
                                         ],
                                       ),
 
