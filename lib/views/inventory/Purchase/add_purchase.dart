@@ -1,5 +1,4 @@
-import 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
-import 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
+import 'package:spos_retail/views/widgets/custom_textfield.dart';
 
 import '../../widgets/export.dart';
 
@@ -11,30 +10,24 @@ class AddPurchaseUI extends StatefulWidget {
 }
 
 class _AddPurchaseUIState extends State<AddPurchaseUI> {
+  final purchaseController = Get.put(PurchaseController());
+  final supplierController = Get.put(SupplierController());
+
+  final recipeController = Get.put(RecipeController());
+  String? _selectedSupplierId;
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController productName = TextEditingController();
-    TextEditingController cgstController = TextEditingController();
-    TextEditingController sgstController = TextEditingController();
-    TextEditingController rate = TextEditingController();
-    TextEditingController amount = TextEditingController();
-    TextEditingController dicount = TextEditingController();
-    TextEditingController quantityController = TextEditingController();
-    TextEditingController unitController = TextEditingController();
-    TextEditingController netrange = TextEditingController();
-    final purchaseController = Get.put(PurchaseController());
-    final supplierController = Get.put(SupplierController());
-    final GlobalKey<FormState> _productName = GlobalKey<FormState>();
-    final GlobalKey<FormState> _unit = GlobalKey<FormState>();
-    final GlobalKey<FormState> _quantity = GlobalKey<FormState>();
-    final GlobalKey<FormState> _rate = GlobalKey<FormState>();
-    final GlobalKey<FormState> _amount = GlobalKey<FormState>();
-    final GlobalKey<FormState> _sgst = GlobalKey<FormState>();
-    final GlobalKey<FormState> _csgst = GlobalKey<FormState>();
-    final GlobalKey<FormState> _dicount = GlobalKey<FormState>();
-    final GlobalKey<FormState> _netrange = GlobalKey<FormState>();
-    var selectedItem, supplierId;
-    String? _selectedItem;
+   
+    final GlobalKey<FormState> productName = GlobalKey<FormState>();
+    final GlobalKey<FormState> unit = GlobalKey<FormState>();
+    final GlobalKey<FormState> quantity = GlobalKey<FormState>();
+    final GlobalKey<FormState> rate = GlobalKey<FormState>();
+    final GlobalKey<FormState> amount = GlobalKey<FormState>();
+    final GlobalKey<FormState> sgst = GlobalKey<FormState>();
+    final GlobalKey<FormState> csgst = GlobalKey<FormState>();
+    final GlobalKey<FormState> dicount = GlobalKey<FormState>();
+    final GlobalKey<FormState> netrange = GlobalKey<FormState>();
     return Scaffold(
         appBar: commonAppBar(context, "Add Purchase", ""),
         body: SingleChildScrollView(
@@ -43,95 +36,115 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
             const SizedBox(
               height: 10,
             ),
-            _buildTextFieldWithHeading(_productName, "Product Name", context,
-                productName, "Product Name", TextInputType.text),
-            const SizedBox(height: 10),
-
             Container(
-            // decoration: BoxDecoration(
-            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
-            //     border: Border.all(color: Theme.of(context).highlightColor)),
-            padding: const EdgeInsets.only(left: 10),
-            margin: const EdgeInsets.all(10),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButtonFormField(
-                dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-                value: _selectedItem,
-                items: supplierController.dropdownSupplierId
-                    .asMap()
-                    .entries
-                    .map((entry) => DropdownMenuItem(
-                          child: customText(entry.value["name"],
-                              color: Theme.of(context).highlightColor),
-                          value: entry.value["name"],
-                          onTap: () {
-                            selectedItem = entry.value["id"];
+              decoration: BoxDecoration(
+                  color: Theme.of(context).focusColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  border: Border.all(color: Theme.of(context).highlightColor)),
+              padding: const EdgeInsets.only(left: 10),
+              margin: const EdgeInsets.all(10),
+              child: GetBuilder<SupplierController>(builder: (c) {
+                return DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField(
+                    dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+                    value: _selectedSupplierId,
+                    items: c.dropdownSupplierId
+                        .asMap()
+                        .entries
+                        .map((entry) => DropdownMenuItem(
+                              child: customText(entry.value["name"],
+                                  color: Theme.of(context).highlightColor),
+                              value: entry.value["name"],
+                              onTap: () {
+                                c.supplierId.value = entry.value["id"];
+                                setState(() {});
+                                print(c.supplierId.value);
+                              },
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedSupplierId = value.toString();
+                      });
+                    },
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        labelText: 'Select Supplier',
+                        labelStyle:
+                            TextStyle(color: Theme.of(context).highlightColor)),
+                  ),
+                );
+              }),
+            ),
 
-                            setState(() {});
-                          },
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedItem = value.toString();
-                  });
-                },
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    labelText: 'Select Supplier',
-                    labelStyle:
-                        TextStyle(color: Theme.of(context).highlightColor)),
-              ),
-            ),
-          ),
-
-            Row(
-              children: [
-                Expanded(
-                    child: _buildTextFieldWithHeading(_unit, "Unit", context,
-                        unitController, "Unit", TextInputType.text)),
-                // SizedBox(width: 10),
-                Expanded(
-                    child: _buildTextFieldWithHeading(_quantity, "Quantity",
-                        context, quantityController, "Quantity", TextInputType.number)),
-              ],
-            ),
-            const SizedBox(height: 10),
-            _buildTextFieldWithHeading(
-                _rate, "Rate", context, rate, "Rate", TextInputType.text),
+            textFieldWithHeading(productName, "Product Name", context,
+                 "Product Name", TextInputType.text, onchanged: (v){
+                  purchaseController.purchaseName.value =v;
+                 }),
             const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
-                    child: _buildTextFieldWithHeading(_amount, "Amount",
-                        context, amount, "Amount", TextInputType.text)),
+                    child: textFieldWithHeading(unit, "Unit", context,
+                         "Unit", TextInputType.text,
+                        onchanged: (v){
+                  purchaseController.purchaseUnit.value =v;
+                 })),
                 // SizedBox(width: 10),
                 Expanded(
-                    child: _buildTextFieldWithHeading(_dicount, "Discount",
-                        context, dicount, "Discount", TextInputType.number)),
+                    child: textFieldWithHeading(quantity, "Quantity",
+                        context,"Quantity", TextInputType.number, onchanged: (v){
+                  purchaseController.purchaseQuantity.value =v;
+                 })),
+              ],
+            ),
+            const SizedBox(height: 10),
+            textFieldWithHeading(
+                rate, "Rate", context, "Rate", TextInputType.text, onchanged: (v){
+                  purchaseController.purchaseRate.value =v;
+                 }),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    child: textFieldWithHeading(amount, "Amount",
+                        context, "Amount", TextInputType.text, onchanged: (v){
+                  purchaseController.purchaseAmount.value =v;
+                 })),
+                // SizedBox(width: 10),
+                Expanded(
+                    child: textFieldWithHeading(dicount, "Discount",
+                        context, "Discount", TextInputType.number, onchanged: (v){
+                  purchaseController.purchaseDiscount.value =v;
+                 })),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
-                    child: _buildTextFieldWithHeading(_csgst, "CGST", context,
-                        cgstController, "CGST", TextInputType.text)),
-                // SizedBox(width: 10),
+                    child: textFieldWithHeading(csgst, "CGST", context,
+                         "CGST", TextInputType.text, onchanged: (v){
+                  purchaseController.purchaseCgst.value =v;
+                 })),
                 Expanded(
-                    child: _buildTextFieldWithHeading(_sgst, "SGST", context,
-                        sgstController, "SGST", TextInputType.number)),
+                    child: textFieldWithHeading(sgst, "SGST", context,
+                        "SGST", TextInputType.number, onchanged: (v){
+                  purchaseController.purchaseSgst.value =v;
+                 })),
               ],
             ),
-            _buildTextFieldWithHeading(_netrange, "Net Pay", context, netrange,
-                "Net Pay", TextInputType.text),
+            textFieldWithHeading(netrange, "Net Pay", context,
+                "Net Pay", TextInputType.text, onchanged: (v){
+                  purchaseController.purchaseNetRange.value =v;
+                 }),
             const SizedBox(height: 35),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 40,
-                  width: 100,
+                  // width: 100,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
@@ -140,30 +153,20 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
                       ),
                     ),
                     onPressed: () {
-                      purchaseController.createPurchase();
-                     // purchaseController.createPurchase(1, productName.text, "invoiceNumber", int.parse(unitController.text), int.parse(quantityController.text),int.parse(rate.text), int.parse(cgstController.text), int.parse(sgstController.text), 0, 0, discount.text);
-                      // purchaseController.addPayment(id, isFullPaid, isPartial, status, amount_paid, payment_type)
-                      // addCustomerController.addAddress(
-                      //     widget.customerID,
-                      //     addressController.text,
-                      //     cityController.text,
-                      //     stateController.text,
-                      //     int.parse(pincodeController.text),
-                      //     _selectedItem,
-                      //     countryController.text);
+                        purchaseController.createPurchase(
+                            context,
+                            supplierController.supplierId.value);
+
                     },
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                      ),
+                    child: customText(
+                      'Create Purchase',
+                      color: Theme.of(context).scaffoldBackgroundColor,
                     ),
                   ),
                 ),
                 const SizedBox(width: 20),
                 SizedBox(
                   height: 40,
-                  width: 100,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
@@ -178,11 +181,9 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(
+                    child: customText(
                       'Cancel',
-                      style: TextStyle(
-                        color: Theme.of(context).highlightColor,
-                      ),
+                      color: Theme.of(context).highlightColor,
                     ),
                   ),
                 ),
@@ -190,73 +191,5 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
             ),
           ]),
         ));
-  }
-
-  Widget _buildTextFieldWithHeading(
-    
-      key,
-      String heading,
-      BuildContext context,
-      TextEditingController controller,
-      String hinttext,
-      TextInputType keyboardtype) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: customText(heading,
-                font: 16.0,
-                weight: FontWeight.bold,
-                color: Theme.of(context).primaryColor)),
-
-               
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: key,
-            child: SizedBox(
-              height: 55,
-              child: TextFormField(
-                controller: controller,
-                keyboardType: keyboardtype,
-                style: TextStyle(color: Theme.of(context).highlightColor),
-                decoration: InputDecoration(
-                  hintText: hinttext,
-                  border: const OutlineInputBorder(
-                    // Set consistent border for all states
-                    borderSide: BorderSide(
-                        color: Colors.grey,
-                        width: 1.0), // Set border color and width
-                  ),
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Theme.of(context).highlightColor),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    //gapPadding: 5.0,
-                    borderSide:
-                        BorderSide(color: Theme.of(context).highlightColor),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 16.0),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Theme.of(context).highlightColor),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == "") {
-                    return 'Please Enter $heading';
-                  }
-                  return null; // Return null if the input is valid
-                },
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:spos_retail/views/widgets/export.dart';
+import '../../widgets/export.dart';
 
 class EditInventory extends StatefulWidget {
   const EditInventory({super.key});
@@ -20,7 +20,6 @@ class _EditInventoryState extends State<EditInventory> {
   final GlobalKey<FormState> _contactNumberKey = GlobalKey<FormState>();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     namecontroller = TextEditingController();
     phonecontroller = TextEditingController();
@@ -44,19 +43,24 @@ class _EditInventoryState extends State<EditInventory> {
             _buildTextFieldWithHeading(_nameKey, "Product Name", context,
                 namecontroller, "Sugar", TextInputType.name),
             const SizedBox(height: 5),
+            _buildTextFieldWithHeading(_actualQuantitykey, "Actual Quantity", context,
+                actualQuantityController, "0.00", TextInputType.number),
+            const SizedBox(height: 5),
             _buildTextFieldWithHeading(
-                _actualQuantitykey,
-                "Actual Quantity",
+                _contactpersonKey,
+                "Unit",
                 context,
-                actualQuantityController,
-                "0.00",
-                TextInputType.number),
+                contactPersoncontroller,
+                "Kg",
+                TextInputType.text),
             const SizedBox(height: 5),
-            _buildTextFieldWithHeading(_contactpersonKey, "Unit", context,
-                contactPersoncontroller, "Kg", TextInputType.text),
-            const SizedBox(height: 5),
-            _buildTextFieldWithHeading(_contactNumberKey, "Reason", context,
-                contactNumbercontroller, "", TextInputType.text),
+            _buildTextFieldWithHeading(
+                _contactNumberKey,
+                "Reason",
+                context,
+                contactNumbercontroller,
+                "",
+                TextInputType.text),
 
             //  const SizedBox(height: 5),
 

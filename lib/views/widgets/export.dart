@@ -3,7 +3,9 @@ export 'package:spos_retail/constants/constant.dart';
 export 'package:spos_retail/constants/app_constant.dart';
 
 //others
-
+export 'package:spos_retail/views/inventory/RecipeManagement/recipe_list.dart';
+export 'package:spos_retail/views/widgets/custom_data.dart';
+export 'package:spos_retail/views/inventory/Supplier/add_supplier.dart';
 export 'package:spos_retail/constants/widget_constant.dart';
 export 'package:spos_retail/controllers/get_modifierItemByID.dart';
 export 'package:spos_retail/services/dio_services.dart';
@@ -116,6 +118,9 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'dart:async';
 
 //Models
+export 'package:spos_retail/model/Inventory/get_inventory.dart';
+export 'package:spos_retail/model/Inventory/Recipe/ingredient_details.dart';
+export 'package:spos_retail/model/Inventory/Recipe/recipe_list.dart';
 export 'package:spos_retail/model/graph.dart';
 export 'package:spos_retail/model/floor_model.dart';
 export 'package:spos_retail/model/order_request_model.dart';
@@ -132,6 +137,9 @@ export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
+export 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
+export 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
 export 'package:spos_retail/controllers/allOnGoingOrder_controller/allLiveOrderController.dart';
 export 'package:spos_retail/controllers/reports_controller.dart';
 export 'package:spos_retail/controllers/update_Restaurant_controller/updateRestaurantController.dart';

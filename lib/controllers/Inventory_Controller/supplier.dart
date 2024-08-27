@@ -1,93 +1,88 @@
+
 import 'package:spos_retail/model/Inventory/get_inventory.dart';
 import 'package:spos_retail/model/common_model.dart';
-import 'package:spos_retail/views/widgets/export.dart';
 
-import '../../model/Inventory/view_Statement.dart';
+import '../../model/Inventory/view_statement.dart';
+import '../../views/widgets/export.dart';
 
 class SupplierController extends GetxController {
-  List<GetSupplierInventory> getInventory = [];
+  RxList<SupplierData> supplierListdata = <SupplierData>[].obs;
   List<Map<String, dynamic>> dropdownSupplierId = [];
+  RxInt supplierId = 0.obs;
+  RxString supplierName = "".obs;
+  RxString supplierMobile = "".obs;
+  RxString supplierGstin = "".obs;
+  RxString supplierAddress = "".obs;
+  RxString supplierPerson = "".obs;
+  RxString supplierNumber = "".obs;
+
   RxList<ViewStatementData> viewStatementList = <ViewStatementData>[].obs;
 
-  Future<void> addSupplier(String name, String mobileno, String gstin,
-      String cPerson, String cNumber) async {
-    AddSupplier data = AddSupplier(
-        name: name,
-        mobileNumber: mobileno,
-        gstin: gstin,
-        c_person: cPerson,
-        c_number: cNumber);
-    try {
-      final response = await DioServices.postRequest(
-          AppConstant.createSupplier, data.toJson());
-      if (response.statusCode == 200) {
-        Get.back();
-        getSupplier();
-        snackBar("Success", "Supplier Added Successfully");
-      } else {
-        snackBar("Failed", "Failed to add Supplier");
+  Future<void> addSupplier(context) async {
+    AddSupplierData data = AddSupplierData(
+        name: supplierName.value,
+        mobileNumber: supplierMobile.value,
+        gstin: supplierGstin.value,
+        c_person: supplierPerson.value,
+        c_number: supplierNumber.value);
+    if (supplierName.value.isNotEmpty &&
+        supplierMobile.value.isNotEmpty &&
+        supplierAddress.value.isNotEmpty &&
+        supplierGstin.value.isNotEmpty &&
+        supplierPerson.value.isNotEmpty &&
+        supplierNumber.value.isNotEmpty) {
+      try {
+        final response = await DioServices.postRequest(
+            AppConstant.createSupplier, data.toJson());
+        print(response.data);
+        print(response.statusMessage);
+        if (response.statusCode == 200) {
+          snackBar("Success", "Supplier Added Successfully");
+          Get.off(const InventoryList());
+          getSupplier();
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> updateSupplier(String name, String mobileno, String gstin,
-      String cPerson, String cNumber, id) async {
-    AddSupplier data = AddSupplier(
-        name: name,
-        mobileNumber: mobileno,
-        gstin: gstin,
-        c_person: cPerson,
-        c_number: cNumber);
-    try {
-      final response =
-          await DioServices.put("${AppConstant.suppliers}/$id", data.toJson());
-      if (response.statusCode == 200) {
-        Get.back();
-        getSupplier();
-        snackBar("Success", "Supplier Added Successfully");
-      } else {
-        snackBar("Failed", "Failed to add Supplier");
-      }
-    } catch (e) {
-      print(e);
+    } else {
+      snackBarBottom("Error", "Enter the required field", context);
     }
   }
 
   Future<void> getSupplier() async {
     final response = await DioServices.get(AppConstant.getSupplier);
+    print(response.statusMessage);
     try {
+      final response = await DioServices.get(AppConstant.getSupplier);
       if (response.statusCode == 200) {
-        getInventory = response.data['data']
-            .map<GetSupplierInventory>(
-                (json) => GetSupplierInventory.fromJson(json))
-            .toList();
         print(response.data);
-        update();
+
+        supplierListdata.assignAll((response.data['data'])
+            .map<SupplierData>((json) => SupplierData.fromJson(json)));
 
         dropdownSupplierId.clear();
-        for (int index = 0; index < getInventory.length; index++) {
+        for (int indexs = 0; indexs < supplierListdata.length; indexs++) {
           dropdownSupplierId.add({
-            'name': getInventory[index].name,
-            'id': getInventory[index].id,
-            'index': index,
+            'name': supplierListdata[indexs].name,
+            'id': supplierListdata[indexs].id,
+            "index": indexs
           });
         }
+
+        update();
+      } else {
+        print(response.statusMessage);
       }
     } catch (e) {
-      // print("Data----------->");
       print(e);
     }
   }
 
-  Future<void> deleteSuppliers(i) async {
+  Future<void> deleteSuppliers(int i) async {
     try {
       final response = await DioServices.delete("${AppConstant.suppliers}/$i");
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "Delete Successfully");
-      } else {
-        Fluttertoast.showToast(msg: "Delete Failed");
       }
     } catch (e) {
       print(e);

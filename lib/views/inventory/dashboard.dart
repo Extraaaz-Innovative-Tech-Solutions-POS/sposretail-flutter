@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
-import 'package:spos_retail/views/widgets/export.dart';
+
+import '../widgets/export.dart';
 
 class InventoryDashboard extends StatefulWidget {
   const InventoryDashboard({super.key});
@@ -41,7 +41,6 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
-              //mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 customText(
@@ -63,22 +62,25 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                   color: Theme.of(context).highlightColor,
                 ),
                 Wrap(
-                    direction: Axis.horizontal,
-                    //verticalDirection: VerticalDirection.up,
-                    runSpacing: 15,
-                    //spacing: 10,
-                    children: [
-                      inventorySummary(
-                          "Return", "94", Theme.of(context).hoverColor),
-                      inventorySummary("Return Rate", "49.47 %",
-                          Theme.of(context).indicatorColor),
-                      inventorySummary("Sell Rate", "35.87", Colors.blueAccent),
-                      inventorySummary(
-                          "Value of Stock", "94", Theme.of(context).hoverColor),
-                      inventorySummary("Out of Stock", "10590.00",
-                          Theme.of(context).primaryColor),
-                      inventorySummary("No of Suppliers", "0", Colors.cyan),
-                    ]),
+                  direction: Axis.horizontal,
+                  //verticalDirection: VerticalDirection.up,
+                  runSpacing: 15, 
+                  //spacing: 10, 
+                  children: [
+                  inventorySummary(
+                      "Return", "94", Theme.of(context).hoverColor),
+                  inventorySummary(
+                      "Return Rate", "49.47 %", Theme.of(context).indicatorColor),
+                  inventorySummary(
+                      "Sell Rate", "35.87", Colors.blueAccent),
+                  inventorySummary(
+                      "Value of Stock", "94", Theme.of(context).hoverColor),
+                  inventorySummary(
+                      "Out of Stock", "10590.00", Theme.of(context).primaryColor),
+                  inventorySummary(
+                      "No of Suppliers", "0", Colors.cyan),
+
+                ]),
                 inventoryGraphs(context, usercontroller, graphController,
                     dashboardController),
                 customText(
@@ -108,12 +110,11 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                                 font: 16.0),
                           ],
                         )
-                        //subtitle: customText(allTopSelling[index].itemId.toString(), color: Theme.of(context).highlightColor.withOpacity(0.7))
                         ),
                   ),
                 ),
                 customText(
-                  "Inventory History",
+                  "Top Selling Products",
                   font: 16.0,
                   color: Theme.of(context).highlightColor,
                 ),
@@ -125,73 +126,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                     });
                   },
                 ),
-
-                SizedBox(
-    // height: screenHeight(context),
-    // child: SingleChildScrollView(child:
-    child: GetBuilder<PurchaseController>(
-        builder: (PurchaseController controller) {
-      if (controller.inventoryHistoryList.isEmpty) {
-        return const Center(
-          child: Text("No Top Selling Found"),
-        );
-      } else {
-        final inventoryHistory = query.isEmpty
-            ? controller.inventoryHistoryList
-            : controller.inventoryHistoryList
-                .where(
-                    (e) => e.productName!.toLowerCase().contains(query.toLowerCase()))
-                .toList();
-
-        if (inventoryHistory.isEmpty) {
-          return Center(
-            child: customText("No Search Result Found",
-                color: Theme.of(context).highlightColor),
-          );
-        } else {
-          final inventoryHistory = query.isEmpty
-              ? controller.inventoryHistoryList
-              : controller.inventoryHistoryList
-                  .where((e) =>
-                      e.productName!.toLowerCase().contains(query.toLowerCase()))
-                  .toList();
-
-          if (inventoryHistory.isEmpty) {
-            return Center(
-              child: customText("No Search Result Found",
-                  color: Theme.of(context).highlightColor),
-            );
-          }
-
-          return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: inventoryHistory.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  color: Theme.of(context).focusColor,
-                  child: ListTile(
-                      title: customText(inventoryHistory[index].productName.toString(),
-                          color: Theme.of(context).highlightColor, font: 16.0),
-                      subtitle: customText(
-                          "Quantity Change : ${inventoryHistory[index].qtyChange}",
-                          color: Theme.of(context).highlightColor.withOpacity(0.6),
-                          font: 14.0),
-                      trailing: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          customText(" ${inventoryHistory[index].changeType}",
-                              color: Theme.of(context).hintColor, font: 16.0),
-                        
-                        ],
-                      )
-                      ),
-                );
-              });
-        }
-      }
-    }),
-  ),
+                topSellingProduct(context, query)
               ]),
         ),
       ),

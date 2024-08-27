@@ -40,7 +40,7 @@ class _EditmodifierState extends State<Editmodifier> {
   List<int> listid = [];
   List<int> newDataList = [];
 
-  String? _selectedItem;
+  //String? _selectedItem;
   var selectedSectionId;
 
   @override
@@ -162,7 +162,9 @@ class _EditmodifierState extends State<Editmodifier> {
                               titleController.text,
                               descriptionController.text,
                               typeController.text,
-                              selectedSectionId);
+                              "1"
+                              //selectedSectionId
+                              );
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
@@ -768,53 +770,53 @@ class _EditmodifierState extends State<Editmodifier> {
       const SizedBox(height: 5),
       buildTextFieldWithHeading(
           "Modifier Group Type", widget.type, context, typeController),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-        child: Text(
-          "Select Section",
-          style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
-        ),
-      ),
-      GetBuilder<SectionController>(builder: (SectionController controller) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Theme.of(context).focusColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              border: Border.all(color: Theme.of(context).highlightColor)),
-          padding: const EdgeInsets.only(left: 10),
-          margin: const EdgeInsets.all(10),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButtonFormField(
-              dropdownColor: Theme.of(context).scaffoldBackgroundColor,
-              value: _selectedItem,
-              items: controller.dropdownSectionList
-                  .asMap()
-                  .entries
-                  .map((entry) => DropdownMenuItem(
-                        child: customText(entry.value["sectionName"],
-                            color: Theme.of(context).highlightColor),
-                        value: entry.value["sectionName"],
-                        onTap: () {
-                          selectedSectionId = entry.value["id"];
+      // Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      //   child: Text(
+      //     "Select Section",
+      //     style: TextStyle(fontSize: 16, color: Theme.of(context).primaryColor),
+      //   ),
+      //  ),
+      // GetBuilder<SectionController>(builder: (SectionController controller) {
+      //   return Container(
+      //     decoration: BoxDecoration(
+      //         color: Theme.of(context).focusColor,
+      //         borderRadius: const BorderRadius.all(Radius.circular(10)),
+      //         border: Border.all(color: Theme.of(context).highlightColor)),
+      //     padding: const EdgeInsets.only(left: 10),
+      //     margin: const EdgeInsets.all(10),
+      //     child: DropdownButtonHideUnderline(
+      //       child: DropdownButtonFormField(
+      //         dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+      //         value: _selectedItem,
+      //         items: controller.dropdownSectionList
+      //             .asMap()
+      //             .entries
+      //             .map((entry) => DropdownMenuItem(
+      //                   child: customText(entry.value["sectionName"],
+      //                       color: Theme.of(context).highlightColor),
+      //                   value: entry.value["sectionName"],
+      //                   onTap: () {
+      //                     selectedSectionId = entry.value["id"];
 
-                          setState(() {});
-                        },
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedItem = value.toString();
-                });
-              },
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  labelText: 'Select Section',
-                  labelStyle:
-                      TextStyle(color: Theme.of(context).highlightColor)),
-            ),
-          ),
-        );
-      }),
+      //                     setState(() {});
+      //                   },
+      //                 ))
+      //             .toList(),
+      //         onChanged: (value) {
+      //           setState(() {
+      //             _selectedItem = value.toString();
+      //           });
+      //         },
+      //         decoration: InputDecoration(
+      //             border: InputBorder.none,
+      //             labelText: 'Select Section',
+      //             labelStyle:
+      //                 TextStyle(color: Theme.of(context).highlightColor)),
+      //       ),
+      //     ),
+      //   );
+      // }),
       const SizedBox(height: 5),
       description("Description", context, descriptionController),
       const SizedBox(height: 60),

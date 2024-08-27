@@ -30,11 +30,11 @@ class CompleteOrderModel {
   String table_id;
   int paid;
   String payment_type;
-  var moneyGiven;
-  var isPartial;
-  var isFull;
-  var delivery_address_id;
-  var discounted_amount;
+  dynamic moneyGiven;
+  dynamic isPartial;
+  dynamic isFull;
+  dynamic delivery_address_id;
+  dynamic discounted_amount;
 
   CompleteOrderModel(
       {required this.table_id,
@@ -264,13 +264,13 @@ class AddTaxes {
   }
 }
 
-class AddSupplier {
+class AddSupplierData {
   String name;
   String mobileNumber;
   String gstin;
   String c_person;
   String c_number;
-  AddSupplier({
+  AddSupplierData({
     required this.name,
     required this.mobileNumber,
     required this.gstin,
@@ -352,6 +352,7 @@ class AddPayment {
       "payment_type": payment_type
     };
   }
+
 }
 
 class UpdateQuantity {
@@ -364,6 +365,11 @@ class UpdateQuantity {
     required this.quantity,
   });
   Map<String, dynamic> toJson() {
-    return {"table_id": tableId, "item_id": itemId, "quantity": quantity};
+    return {
+       "table_id":tableId,
+    "item_id":itemId,
+    "quantity":quantity
+    };
   }
+
 }

@@ -1,4 +1,4 @@
-import 'package:spos_retail/views/widgets/export.dart';
+import '../../../views/widgets/export.dart';
 
 enum PaymentDetailsOptions { full, partial }
 

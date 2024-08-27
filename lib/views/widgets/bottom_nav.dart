@@ -207,10 +207,7 @@ class _BottomNavState extends State<BottomNav> {
                     trailing: Icon(Icons.arrow_drop_down,
                         color: Theme.of(context).focusColor),
                     children: [
-                      listTile(context, "Dashboard", onpress: () {
-                        Get.to(const InventoryDashboard());
-                          purchaseController.inventoryHistory();
-                      }),
+                      
                       listTile(context, 'Manage', onpress: () {
                         Get.to(const InventoryList());
                       }),
@@ -220,7 +217,7 @@ class _BottomNavState extends State<BottomNav> {
                       }),
                       listTile(context, 'Purchase', onpress: () {
                         purchaseController.getPurchase();
-                        Get.to(const PurchaseUI());
+                        Get.to(PurchaseUI());
                       }),
                     ],
                   ),

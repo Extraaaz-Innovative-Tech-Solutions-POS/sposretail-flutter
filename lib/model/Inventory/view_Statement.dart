@@ -21,12 +21,12 @@ class ViewStatementData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['created_at'] = this.createdAt;
-    data['quantity'] = this.quantity;
-    data['amount'] = this.amount;
-    data['rate'] = this.rate;
-    data['product_name'] = this.productName;
+    final Map<String, dynamic> data =  <String, dynamic>{};
+    data['created_at'] = createdAt;
+    data['quantity'] = quantity;
+    data['amount'] = amount;
+    data['rate'] = rate;
+    data['product_name'] = productName;
     return data;
   }
 }

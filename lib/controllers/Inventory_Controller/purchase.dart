@@ -1,88 +1,75 @@
-import 'package:spos_retail/model/Inventory/history/inventory_history.dart';
-import 'package:spos_retail/model/Inventory/paymentList.dart';
-import 'package:spos_retail/model/Inventory/purchaseModel.dart';
+import 'package:spos_retail/model/Inventory/purchase/purchase_list_data.dart';
 import 'package:spos_retail/model/common_model.dart';
 import '../../views/widgets/export.dart';
 
 class PurchaseController extends GetxController {
-  List<History> inventoryHistoryList = [];
+  RxList<PurchaseListData> purchadseListdata = <PurchaseListData>[].obs;
+  RxInt restaurantId = 1.obs;
+  RxString purchaseName = "".obs;
+  RxString purchaseUnit = "".obs;
+  RxString purchaseQuantity = "".obs;
+  RxString purchaseRate = "".obs;
+  RxString purchaseCgst = "".obs;
+  RxString purchaseSgst = "".obs;
+  RxString purchaseDiscount = "".obs;
+  RxString purchaseAmount = "".obs;
+  RxString purchaseNetRange = "".obs;
 
- // RxList<History> inventoryHistoryList = <History>[].obs;
-  RxList<PaymentDetailsModel> paymentDetails = <PaymentDetailsModel>[].obs;
-
-  //RxList<PurchaseData> purchaseList = <PurchaseData>[].obs;
-  List<PurchaseData> purchaseList = [];
-  Future<void> createPurchase(
-      // int supplierId,
-      // String productName,
-      // String invoiceNumber,
-      // int unit,
-      // int quantity,
-      // int rate,
-      // int cgst,
-      // int sgst,
-      // int vat,
-      // int tax,
-      // String discount
-      ) async {
-    // AddPurchase addPurchase = AddPurchase(
-    //     supplierId: supplierId,
-    //     productName: productName,
-    //     invoiceNumber: invoiceNumber,
-    //     unit: unit,
-    //     quantity: quantity,
-    //     rate: rate,
-    //     cgst: cgst,
-    //     sgst: sgst,
-    //     vat: vat,
-    //     tax: tax,
-    //     discount: discount       
-    //     );
-
-    try {
-      final response = await DioServices.postRequest(
-          AppConstant.createPurchase, {
-            "supplier_id": 4,
-  "product_name": "oil",
-  "unit": "kg",
-  "quantity": 10,
-  "rate": 200,
-  "cgst": "",
-  "sgst": "",
-  "vat": "",
-  "tax": false,
-  "discount": "",
-  "is_full_paid": 1,
-  "is_partial":0,
-  "status": "Completed",
-  "amount_paid": 2000,
-  "payment_type":"cash"
-          });
-      if (response.statusCode == 200) {
-        debugPrint("Purchase Create sucessfully");
+  Future<void> createPurchase(context, supplierId) async {
+    if (purchaseName.value.isNotEmpty &&
+        purchaseUnit.value.isNotEmpty &&
+        purchaseQuantity.value.isNotEmpty &&
+        purchaseRate.value.isNotEmpty &&
+        purchaseCgst.value.isNotEmpty &&
+        purchaseSgst.value.isNotEmpty &&
+        purchaseUnit.value.isNotEmpty &&
+        purchaseNetRange.value.isNotEmpty &&
+        purchaseAmount.value.isNotEmpty) {
+      try {
+        final response =
+            await DioServices.postRequest(AppConstant.createPurchase, {
+          "supplier_id": supplierId, //4,
+          "product_name": purchaseName.value,
+          "unit": purchaseUnit.value,
+          "quantity": purchaseQuantity.value,
+          "rate": purchaseRate.value,
+          "cgst": purchaseCgst.value,
+          "sgst": purchaseSgst.value,
+          "vat": "",
+          "tax": false,
+          "discount": purchaseDiscount.value,
+          "is_full_paid": 1,
+          "is_partial": 0,
+          "status": "Completed",
+          "amount_paid": purchaseAmount.value,
+          "payment_type": "cash"
+        });
+        if (response.statusCode == 200) {
+          snackBar("Success", "Purchase Created Successfully");
+          print(response.data);
+          restaurantId.value = response.data["data"]["restaurant_id"];
+          print(restaurantId);
+          update();
+          getPurchase();
+          Get.off(PurchaseUI());
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
-    }
+    } else {
+                        snackBarBottom(
+                            "Error", "Enter the required field", context);
+                      }
   }
 
   Future<void> getPurchase() async {
     try {
       final response = await DioServices.get(AppConstant.purchaseList);
       if (response.statusCode == 200) {
-
-
-         purchaseList = response.data['data']
-            .map<PurchaseData>(
-                (json) => PurchaseData.fromJson(json))
-            .toList();
-
-
-
-        // purchaseList.assignAll((response.data as List)
-        //     .map((orderJson) => PurchaseData.fromJson(orderJson)));
+        print(response.data);
+        purchadseListdata.assignAll((response.data['data'])
+            .map<PurchaseListData>((json) => PurchaseListData.fromJson(json)));
         update();
-        print(purchaseList.length);
       }
     } catch (e) {
       print(e);
@@ -94,7 +81,7 @@ class PurchaseController extends GetxController {
       final response =
           await DioServices.delete("${AppConstant.deletePurchase}/$id");
       if (response.statusCode == 200) {
-        debugPrint("Purchase Delete Sucessfully");
+        print("Purchase Delete Sucessfully");
       }
     } catch (e) {
       print(e);
@@ -102,61 +89,18 @@ class PurchaseController extends GetxController {
   }
 
   Future<void> addPayment(int id, int isFullPaid, int isPartial, String status,
-      int amountPaid, String paymentType) async {
+      int amount_paid, String payment_type) async {
     try {
       AddPayment addPayment = AddPayment(
           isFullPaid: isFullPaid,
           isPartial: isPartial,
           status: status,
-          amount_paid: amountPaid,
-          payment_type: paymentType);
+          amount_paid: amount_paid,
+          payment_type: payment_type);
       final response = await DioServices.postRequest(
           AppConstant.addPayment, addPayment.toJson());
       if (response.statusCode == 200) {
-        debugPrint("Payment Added Sucessfully");
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> inventoryHistory() async {
-    try {
-      final response = await DioServices.get(AppConstant.inventoryHistory);
-      if (response.statusCode == 200) {
-        print(response);
-
-
-        // topsellingList.assignAll((response.data['data'] as List)
-        //     .map((orderJson) => TopSelling.fromJson(orderJson)));
-
-        // update();
-
-
-
-        inventoryHistoryList.assignAll((response.data['history'] as List)
-            .map((orderJson) => History.fromJson(orderJson)));
-/////////////////////////////////
-
-            //  inventoryHistoryList = response.data['data']
-            // .map<History>(
-            //     (json) => History.fromJson(json))
-            // .toList();
-        update();
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> viewPaymentList(String id) async {
-    try {
-      // ignore: prefer_interpolation_to_compose_strings
-      final response = await DioServices.get(AppConstant.viewPayment+"/$id");
-      if (response.statusCode == 200) {
-        paymentDetails.assignAll((response.data['paymentDetails'] as List)
-            .map((orderJson) => PaymentDetailsModel.fromJson(orderJson)));
-        update();
+        print("Payment Added Sucessfully");
       }
     } catch (e) {
       print(e);

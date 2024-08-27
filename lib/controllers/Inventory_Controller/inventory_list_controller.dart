@@ -1,5 +1,5 @@
 import 'package:spos_retail/model/Inventory/inventory_list_modal.dart' as il;
-import 'package:spos_retail/views/widgets/export.dart';
+import '../../views/widgets/export.dart';
 
 class InventoryListController extends GetxController {
   RxList<il.InventoryList> inventoryListData = <il.InventoryList>[].obs;
