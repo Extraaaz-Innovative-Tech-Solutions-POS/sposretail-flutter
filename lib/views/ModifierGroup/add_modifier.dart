@@ -14,7 +14,7 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
   final controller = Get.put(AddModifierGroupController());
   final sectionController = Get.put(SectionController());
   String dropdownvalue = 'Varients';
-  var selectedSectionId;
+  // var selectedSectionId;
   var items = ['Varients', 'Addons'];
 
   @override
@@ -129,7 +129,9 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
                               _titleController.text,
                               descriptionController.text,
                               2,
-                              int.parse(selectedSectionId.toString()));
+                              1
+                             // int.parse(selectedSectionId.toString())
+                              );
                         }
                       } else {
                         snackBarBottom("Error",
