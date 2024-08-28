@@ -839,14 +839,14 @@ class DesktopInvoicePdf {
                 )),
             orderType == "Advance"
                 ? pw.Text(
-                    "${totalAmount}".padRight(10),
+                    "$totalAmount".padRight(10),
                     style: pw.TextStyle(
                       fontSize: 20.0,
                       fontWeight: pw.FontWeight.bold,
                     ),
                   )
                 : pw.Text(
-                    "${totalAmount}".padRight(10),
+                    "$totalAmount".padRight(10),
                     style: pw.TextStyle(
                       fontSize: 13,
                       fontWeight: pw.FontWeight.bold,
@@ -865,7 +865,7 @@ class DesktopInvoicePdf {
                         fontSize: 11.5,
                       )),
                   pw.Text(
-                    "${moneytoPay}".padRight(10),
+                    "$moneytoPay".padRight(10),
                     style: pw.TextStyle(
                       fontSize: 10.0,
                       fontWeight: pw.FontWeight.bold,
@@ -884,7 +884,7 @@ class DesktopInvoicePdf {
                         fontSize: 11.5,
                       )),
                   pw.Text(
-                    "${remaningAmount}".padRight(10),
+                    "$remaningAmount".padRight(10),
                     style: pw.TextStyle(
                       fontSize: 10.0,
                       fontWeight: pw.FontWeight.bold,

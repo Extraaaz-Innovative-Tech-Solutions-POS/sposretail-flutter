@@ -73,7 +73,7 @@ class TableData {
   String? tableId;
   String? splitTableNumber;
   int? dividedBy;
-  Null? coverCount;
+  Null coverCount;
   String? createdAt;
   String? updatedAt;
 

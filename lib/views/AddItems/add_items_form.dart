@@ -2,20 +2,20 @@ import 'package:spos_retail/views/widgets/export.dart';
 import 'package:spos_retail/model/common_model.dart';
 
 class AddItemsForm extends StatefulWidget {
-  int category_id;
+  int categoryId;
   bool updateisClick;
-  int? item_id;
+  int? itemId;
   String? price;
   String? name;
   String? discount;
   AddItemsForm({
     Key? key,
-    required this.category_id,
+    required this.categoryId,
     required this.updateisClick,
     this.price,
     this.name,
     this.discount,
-    this.item_id,
+    this.itemId,
   }) : super(key: key);
 
   @override
@@ -81,21 +81,15 @@ class _AddItemsFormState extends State<AddItemsForm> {
                     if (nameController.text.isNotEmpty &&
                         priceController.text.isNotEmpty
                        ) {
-//
-                      // sectionWisePricing.assignSectionWisePricing(
-                      //     widget.item_id,
-                      //     selectedSectionId,
-                      //     sectionPriceController.text);
-                      print(widget.item_id.toString());
                       AddItem addItem = AddItem(
                           item_name: nameController.text,
                           price: priceController.text,
                       discount: "0.00",
                           inventory_status: 'instock',
-                          category_id: widget.category_id);
+                          category_id: widget.categoryId);
                       widget.updateisClick
                           ? itemController.updateItem(
-                              widget.item_id.toString(), addItem)
+                              widget.itemId.toString(), addItem)
                           : itemController.postItem(addItem);
                     } else {
                       snackBarBottom(

@@ -51,9 +51,9 @@ class _AddCategoryState extends State<AddItems> {
                             deleteButtonClicked = false;
                             deleteindex = -1;
                             Get.to(AddItemsForm(
-                              category_id: widget.categoryID,
+                              categoryId: widget.categoryID,
                               updateisClick: true,
-                              item_id: category.value.id,
+                              itemId: category.value.id,
                               price: "${category.value.price}",
                               name: category.value.name.toString(),
                               discount: category.value.discount.toString(),
@@ -131,7 +131,7 @@ class _AddCategoryState extends State<AddItems> {
                       : ElevatedButton(
                           onPressed: () {
                             Get.to(AddItemsForm(
-                              category_id: widget.categoryID,
+                              categoryId: widget.categoryID,
                               updateisClick: false,
                             ));
                           },

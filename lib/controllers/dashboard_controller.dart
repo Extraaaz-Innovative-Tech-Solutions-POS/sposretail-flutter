@@ -17,7 +17,7 @@ class DashboardController extends GetxController {
   List<dynamic> datadashboardList = [].obs;
 
   Future<services.Response> fetchDashboard() async {
-    final url = "${AppConstant.baseUrl}/${AppConstant.dashboardDetails}";
+    const url = "${AppConstant.baseUrl}/${AppConstant.dashboardDetails}";
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString("token");
     var headers = {
@@ -44,7 +44,7 @@ class DashboardController extends GetxController {
           keyValueList = dashboardList.entries.toList();
         } else {
           // Handle the case where response data is not a map
-          print('Something is Wrong in the Dashboard Controller');
+          debugPrint('Something is Wrong in the Dashboard Controller');
         }
       }
       return response;

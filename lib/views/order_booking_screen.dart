@@ -40,15 +40,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   String? openItemName;
   String? openItemPrice;
 
-  var instructionItems = [
-    "NA",
-    'More Spicy',
-    'Less Spicy',
-    'More Sugar',
-    'Less Sugar',
-    'Without ice',
-  ];
-
   final menucontroller = Get.put(AllItemsController());
   // final user = Get.put(UserController());
   //final cartController = Get.put(CartController());
@@ -1083,8 +1074,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   child: ListView.builder(
                     itemCount: order.length,
                     itemBuilder: (BuildContext context, int index) {
-                      dropdownValues = List.generate(
-                          order.length, (index) => instructionItems.first);
 
                       return StatefulBuilder(builder: (BuildContext context,
                           void Function(void Function()) setState) {
@@ -1198,43 +1187,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  flex: 0,
-                                  child: StatefulBuilder(builder: (BuildContext
-                                          context,
-                                      void Function(void Function()) setState) {
-                                    return DropdownButton(
-                                      dropdownColor: Theme.of(context)
-                                          .scaffoldBackgroundColor,
-                                      value: dropdownValues[index],
-                                      icon:
-                                          const Icon(Icons.keyboard_arrow_down),
-                                      items:
-                                          instructionItems.map((String item) {
-                                        return DropdownMenuItem(
-                                          value: item,
-                                          child: customText(
-                                            item,
-                                            color: Theme.of(context)
-                                                .highlightColor,
-                                          ),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          order[index].instruction =
-                                              newValue ?? "NA";
-                                          dropdownValues[index] = newValue!;
-                                        });
-                                      },
-                                    );
-                                  }),
-                                ),
-                                Align(
-                                    alignment: Alignment.topRight,
-                                    child: Icon(Icons.adjust,
-                                        color:
-                                            Theme.of(context).indicatorColor)),
                               ]),
                         );
                       });

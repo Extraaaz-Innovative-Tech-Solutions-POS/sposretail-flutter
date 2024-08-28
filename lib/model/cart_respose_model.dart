@@ -207,7 +207,7 @@ class TaxData {
   String? restaurantId;
   String? cgst;
   String? sgst;
-  Null? vat;
+  Null vat;
   int? status;
   String? createdAt;
   String? updatedAt;
@@ -259,7 +259,7 @@ class Items {
   int? isCancelled;
   String? status;
   int? restaurantId;
-  Null? cancelReason;
+  Null cancelReason;
 
   Items(
       {this.id,

@@ -7,11 +7,15 @@ class InventoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(context, "Inventory History", ""),
+      //
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [            
-            orderedItemsListWidget(context),
+            // Expanded(
+            //  // child: 
+            //  child: orderedItemsListWidget(context)
+            //   ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SizedBox(
@@ -35,7 +39,7 @@ class InventoryList extends StatelessWidget {
   Widget orderedItemsListWidget(BuildContext context) {
     return GetBuilder<RecipeController>(builder: (c) {
       return DataTable(
-          showCheckboxColumn: true,
+         // showCheckboxColumn: true,
           columnSpacing: 14.0,
           border: TableBorder(
               horizontalInside:
@@ -50,17 +54,18 @@ class InventoryList extends StatelessWidget {
 
 
           rows: List<DataRow>.generate(
-          c.ingredientDataList.length,
+            2,
+         // c.ingredientDataList.length,
           (index) {
-            final ingredientData = c.ingredientDataList[index];
+           // final ingredientData = c.ingredientDataList[index];
             
 
             return DataRow(
               cells: [
-                dataCell(context,ingredientData.id),
-                dataCell(context,ingredientData.name),
-                dataCell(context,ingredientData.quantity),
-                dataCell(context,ingredientData.unit),
+                dataCell(context,"ingredientData.id"),
+                dataCell(context,"ingredientData.name"),
+                dataCell(context,"ingredientData.quantity"),
+                dataCell(context,"ingredientData.unit"),
                 DataCell(
                   Icon(
                     Icons.delete,
