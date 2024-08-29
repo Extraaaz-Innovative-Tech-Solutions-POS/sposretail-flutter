@@ -583,6 +583,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             DataCell(Center(
                 child: InkWell(
                     onTap: () async {
+
+                      controller.orderedItems.length == 1 ?
+                      cancelOrderController.cancelorderMethod(
+                                        widget.tableId, "Not Cooked"):
                       await itemCancelcontroller.fetchMenu(
                           widget.tableId,
                           int.parse(item.itemId.toString()),
