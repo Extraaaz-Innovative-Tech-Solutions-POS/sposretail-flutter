@@ -1,8 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:spos_retail/views/ModifierGroup/all_modifiergroup_ui.dart';
 import 'package:spos_retail/views/widgets/export.dart';
-
-import '../../controllers/Inventory_Controller/purchase.dart';
 
 class BottomNav extends StatefulWidget {
   int? pageindex;
@@ -18,7 +15,7 @@ class BottomNav extends StatefulWidget {
 final UserController usercontroller = Get.put(UserController());
 
 class _BottomNavState extends State<BottomNav> {
-  var name, role, dissmisscheck, businessType;
+  var name, role, dissmisscheck, businessType, statusclick;
   final advanceController = Get.put(DeliveryController());
   final floorController = Get.put(FloorController());
   final sectionController = Get.put(SectionController());
@@ -47,6 +44,12 @@ class _BottomNavState extends State<BottomNav> {
     name = pref.getString('name');
     role = pref.getString('role');
     businessType = pref.getString("BusinessType");
+    setState(() {});
+  }
+   Future<void> _statusbool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    statusclick = prefs.getBool("CustomerDetailsBool");
+
     setState(() {});
   }
 
@@ -107,58 +110,6 @@ class _BottomNavState extends State<BottomNav> {
                           Get.to(const StaffSettings());
                         })
                       : const SizedBox.shrink(),
-                  // businessType == "catering"
-                  //     ? const SizedBox.shrink()
-                  //     : usercontroller.user!.role == 'manager'
-                  //         ? listTile(context, 'Floor',
-                  //             leading: Icon(Icons.apartment,
-                  //                 color: Theme.of(context).primaryColor),
-                  //             onpress: () {
-                  //             floorController.fetchAllFloor(true);
-                  //             sectionController.fetchSection();
-                  //           })
-                  //         : const SizedBox.shrink(),
-                  // businessType == "catering"
-                  //     ? const SizedBox.shrink()
-                  //     : usercontroller.user!.role == 'manager'
-                  //         ? listTile(context, "Add Floors",
-                  //             leading: Icon(Icons.six_ft_apart,
-                  //                 color: Theme.of(context).primaryColor),
-                  //             onpress: () {
-                  //             Get.to(AddFloor());
-                  //           })
-                  //         : const SizedBox.shrink(),
-                  // businessType == "catering"
-                  //     ? const SizedBox.shrink()
-                  //     : usercontroller.user!.role == 'manager'
-                  //         ? listTile(context, 'Delete Floors',
-                  //             leading: Icon(
-                  //               Icons.delete,
-                  //               color: Theme.of(context).primaryColor,
-                  //             ), onpress: () {
-                  //             Get.to(const DeleteFloor());
-                  //           })
-                  //         : const SizedBox.shrink(),
-                  // businessType == "catering"
-                  //     ? const SizedBox.shrink()
-                  //     : usercontroller.user!.role == 'manager'
-                  //         ? listTile(context, "Add Section",
-                  //             leading: Icon(Icons.backup_table,
-                  //                 color: Theme.of(context).primaryColor),
-                  //             onpress: () {
-                  //             Get.to(SectionItem());
-                  //           })
-                  //         : const SizedBox.shrink(),
-                  // businessType == "catering"
-                  //     ? const SizedBox.shrink()
-                  //     : usercontroller.user!.role == 'manager'
-                  //         ? listTile(context, "Add Section/Table",
-                  //             leading: Icon(Icons.table_bar,
-                  //                 color: Theme.of(context).primaryColor),
-                  //             onpress: () {
-                  //             floorController.fetchAllFloor(false);
-                  //           })
-                  //         : const SizedBox.shrink(),
                   usercontroller.user!.role == 'manager'
                       ? listTile(context, "Sub Items Groups",
                           leading: Icon(Icons.fastfood,
@@ -315,10 +266,23 @@ class _BottomNavState extends State<BottomNav> {
             Icons.store,
             color: Theme.of(context).focusColor,
           ),
-          onPressed: () {
-            Get.to(() => OrderBookingScreen(
-                  ordertype: "Take Away",
-                ));
+          onPressed: () async{
+
+            _statusbool().whenComplete(() {
+                                if (statusclick == true) {
+                                  Get.to(() => const TakeAwayCustomerDetails());
+                                } else {
+                                  Get.to(() => OrderBookingScreen(
+                                        ordertype: "Take Away",
+                                      ));
+                                }
+                              });
+
+
+
+            // Get.to(() => OrderBookingScreen(
+            //       ordertype: "Take Away",
+            //     ));
           },
           //params
         ),

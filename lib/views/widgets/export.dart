@@ -3,6 +3,8 @@ export 'package:spos_retail/constants/constant.dart';
 export 'package:spos_retail/constants/app_constant.dart';
 
 //others
+
+export 'package:spos_retail/views/ModifierGroup/all_modifiergroup_ui.dart';
 export 'package:spos_retail/views/inventory/RecipeManagement/recipe_list.dart';
 export 'package:spos_retail/views/widgets/custom_data.dart';
 export 'package:spos_retail/views/inventory/Supplier/add_supplier.dart';

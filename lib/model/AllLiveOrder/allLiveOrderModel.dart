@@ -170,7 +170,7 @@ class AllLiveOrderModel {
   dynamic advanceOrderDateTime;
   dynamic deliveryAddress;
   dynamic deliveryStatus;
-  int? total;
+  dynamic total;
   dynamic totalDiscount;
   dynamic totalTax;
   var grandTotal;
