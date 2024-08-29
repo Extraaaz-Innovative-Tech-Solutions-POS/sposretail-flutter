@@ -45,12 +45,14 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   //final cartController = Get.put(CartController());
   final modifierItemsById = Get.put(GetModifierItemById());
   final orderbookingScreen = Get.put(OrderBookingController());
-  TextEditingController quantityController = TextEditingController();
+  final quantityController = TextEditingController();
+  final priceController = TextEditingController();
 
   late InvoiceManager invoiceManager;
   List<Item> order = [];
   var clickonActionChips,
       editingindex,
+      priceIndex,
       varientitemname,
       varientitemprice,
       addonsname,
@@ -71,6 +73,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   Map<int, bool> _isChecked = {};
   double totalPrice = 0;
   bool isQuantityEditing = false;
+  bool isPriceEditing = false;
   bool addvairent = false;
   bool orderTap = false;
 
@@ -1114,12 +1117,50 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   .highlightColor
                                                   .withOpacity(0.7),
                                               fontSize: 19.0)),
-                                      customText("₹ ${order[index].price}",
+                                              GestureDetector(
+                                                onTap: () {
+                                            setState(() {
+                                              isPriceEditing = true;
+                                              priceIndex = index;
+                                            });
+                                          },
+                                                
+                                      child:isPriceEditing &&
+                                                  priceIndex == index
+                                              ? StatefulBuilder(builder:
+                                                  (BuildContext context,
+                                                      void Function(
+                                                              void Function())
+                                                          setState) {
+                                                  return SizedBox(
+                                                      height: 30.0,
+                                                      width: 100.0,
+                                                      child: TextField(
+                                                        controller:
+                                                            priceController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        style: TextStyle(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .highlightColor),
+                                                        onChanged: (value) {
+                                                          setState(() {
+                                                            order[index].price =
+                                                                value;
+                                                            isQuantityEditing =
+                                                                false;
+                                                          });
+                                                        },
+                                                      ));
+                                                })
+                                              :  customText("₹ ${order[index].price}",
                                           color: Theme.of(context)
                                               .highlightColor
                                               .withOpacity(0.7),
                                           weight: FontWeight.bold,
-                                          font: 18.0),
+                                          font: 18.0)),
                                       Row(
                                         children: [
                                           GestureDetector(
