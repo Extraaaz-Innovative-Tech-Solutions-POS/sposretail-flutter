@@ -435,7 +435,7 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
         String invoiceiD = controller.ordernumber.toString();
   final customerName = controller.cartOrder.value!.customer!.name.toString();
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
-    final address = controller.cartOrder.value!.customer!.address.toString();
+    //final address = controller.cartOrder.value!.customer!.address.toString();
     final catGrandTotal = controller.cartOrder.value!.grandTotal == null
             ? ""
             : controller.cartOrder.value!.grandTotal.toString();
@@ -523,7 +523,7 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
         String invoiceiD = controller.ordernumber.toString();
   final customerName = controller.cartOrder.value!.customer!.name.toString();
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
-    final address = controller.cartOrder.value!.customer!.address.toString();
+    // final address = controller.cartOrder.value!.customer!.address.toString();
     final catGrandTotal = controller.cartOrder.value!.grandTotal == null
             ? ""
             : controller.cartOrder.value!.grandTotal.toString();

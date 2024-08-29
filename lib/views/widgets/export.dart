@@ -51,7 +51,6 @@ export 'package:spos_retail/views/staff/staffsettingsUI.dart';
 export 'package:spos_retail/views/widgets/switch_status.dart';
 export 'package:spos_retail/views/reports/reports.dart';
 export 'package:spos_retail/views/widgets/add_category.dart';
-export '../ModifierGroup/all_modifierGroupUI.dart';
 export '../floor_section_table/add_floor.dart';
 export '../settings/extraaazPosUtility.dart';
 export 'package:spos_retail/constants/common_dashboard.dart';

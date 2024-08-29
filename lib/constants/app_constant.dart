@@ -27,7 +27,7 @@ class AppConstant {
   static const String cashPayment = "cash-payment";
   static const String activeTable = "getActiveTables";
   static const String updateItem = "update-item";
-  static const String cancelItem = "cancel-items";
+  static const String cancelItem = "cancel-item";
 
 // Reports -------------------------->
   static const String cashierReport = "cashier-report";
