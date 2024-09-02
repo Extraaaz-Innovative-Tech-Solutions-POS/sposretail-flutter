@@ -44,7 +44,7 @@ class Item {
   int? id;
   String name;
   String price;
-  int quantity;
+  dynamic quantity;
   String vairentId;
   String instruction;
   String modifiersGroupID;

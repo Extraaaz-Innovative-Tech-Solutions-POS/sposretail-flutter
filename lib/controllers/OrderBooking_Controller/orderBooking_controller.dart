@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:spos_retail/views/widgets/export.dart';
+
 import '../../model/PrinterModel/kot_desktopModel.dart';
 import '../../model/common_model.dart';
 
@@ -140,6 +139,7 @@ class OrderBookingController extends GetxController {
       try {
         final response =
             await DioServices.postRequest(AppConstant.cart, orders.toJson());
+            print("response testing... ${response}");
         handlePostRequestResponse(
             response,
             kotBoolChecking ?? false,
@@ -190,6 +190,8 @@ class OrderBookingController extends GetxController {
       var table,
       var floor,
       var kotNo) async {
+
+        print("orderbooking items testing... ${items[0].quantity}");
     // takeAwayIDs =
 
     if (kotBoolChecking) {
@@ -293,6 +295,7 @@ class OrderBookingController extends GetxController {
         Get.to(() => const PendingAdvanceOrder());
         break;
       default:
+      print("items on navigating testing.... ${items[0].quantity}");
         Get.to(() => ShowOngoingOrder(
               ordertype: orderType,
               tableId: takeAwayIDs,

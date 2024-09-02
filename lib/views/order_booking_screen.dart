@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
 
 import 'dart:developer';
+
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {
@@ -82,6 +83,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   bool addons = false;
   DateTime datetime = DateTime.now();
   String query = "";
+
+  double jewellerPrice = 80000.00;
+  double newQuantity = 0.0;
+
+  double unitPrice = 8000;
+
+  double newPrice =0.0;
 
   @override
   void initState() {
@@ -1077,7 +1085,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   child: ListView.builder(
                     itemCount: order.length,
                     itemBuilder: (BuildContext context, int index) {
-
                       return StatefulBuilder(builder: (BuildContext context,
                           void Function(void Function()) setState) {
                         return Container(
@@ -1117,15 +1124,14 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   .highlightColor
                                                   .withOpacity(0.7),
                                               fontSize: 19.0)),
-                                              GestureDetector(
-                                                onTap: () {
+                                      GestureDetector(
+                                          onTap: () {
                                             setState(() {
                                               isPriceEditing = true;
                                               priceIndex = index;
                                             });
                                           },
-                                                
-                                      child:isPriceEditing &&
+                                          child: isPriceEditing &&
                                                   priceIndex == index
                                               ? StatefulBuilder(builder:
                                                   (BuildContext context,
@@ -1147,20 +1153,20 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                                 .highlightColor),
                                                         onChanged: (value) {
                                                           setState(() {
-                                                            order[index].price =
-                                                                value;
+                                                              order[index].price = value;
                                                             isQuantityEditing =
                                                                 false;
                                                           });
                                                         },
                                                       ));
                                                 })
-                                              :  customText("₹ ${order[index].price}",
-                                          color: Theme.of(context)
-                                              .highlightColor
-                                              .withOpacity(0.7),
-                                          weight: FontWeight.bold,
-                                          font: 18.0)),
+                                              : customText(
+                                                  "₹ ${order[index].price}",
+                                                  color: Theme.of(context)
+                                                      .highlightColor
+                                                      .withOpacity(0.7),
+                                                  weight: FontWeight.bold,
+                                                  font: 18.0)),
                                       Row(
                                         children: [
                                           GestureDetector(
@@ -1190,14 +1196,45 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               color: Theme.of(
                                                                       context)
                                                                   .highlightColor),
+                                                                  /////////////////////////
+                                                                  
+                                                          onChanged: (value) {
+                                                            setState(() {
+                                                                 newQuantity = double.tryParse(value) ?? order[index].quantity;
+                                                            order[index].quantity = newQuantity;
+                                                           
+                                                            if (double.parse(order[index].price) == 0) {
+                                                              if(double.parse(order[index].price) == 0 &&  order[index].quantity==1){
+                                                                 newPrice =  unitPrice;
+                                                                 order[index].price = newPrice.toString();
+                                                              }else{
+                                                                newPrice = unitPrice;
+                                                                order[index].price = newPrice.toString();
+                                                              }
+                                                               
+                                                            }
+                                                            });
+                                                          },
+
+                                                          /////////////////////////////
                                                           onSubmitted: (value) {
                                                             setState(() {
-                                                              order[index]
+                                                                if (double.parse(order[index].price) == 0) {
+                                                                   order[index]
+                                                                  .quantity = double
+                                                                      .tryParse(
+                                                                          value) ??
+                                                                  order[index]
+                                                                      .quantity;
+                                                                }else{
+                                                                   order[index]
                                                                   .quantity = int
                                                                       .tryParse(
                                                                           value) ??
                                                                   order[index]
                                                                       .quantity;
+                                                                }
+                                                             
                                                               isQuantityEditing =
                                                                   false;
                                                             });

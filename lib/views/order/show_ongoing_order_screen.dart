@@ -2,8 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:spos_retail/constants/web_sockets.dart';
-import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/model/PrinterModel/bill_desktopModel.dart';
+import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 enum PaymentMethod { card, cash }
@@ -99,6 +99,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   @override
   void initState() {
+    print("items at init ... ${Items}");
     super.initState();
     fullPayment = true;
     //currentdate = time.day
@@ -528,6 +529,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       ],
       rows: orders.asMap().entries.map<DataRow>((entry) {
         final item = entry.value;
+
+        print("final item testing... ${orders[0].quantity}");
 
         return DataRow(
           cells: [

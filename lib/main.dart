@@ -71,7 +71,8 @@ class SplashScreenState extends State<SplashScreen> {
         decoration: bgImageDecor,
         child: Center(
             child: Lottie.asset('assets/Animation/splashScreen.json',
-                repeat: false)),
+                repeat: false)
+                ),
       ),
     );
   }

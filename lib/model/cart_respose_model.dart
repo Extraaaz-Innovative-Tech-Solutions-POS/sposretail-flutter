@@ -252,7 +252,7 @@ class Items {
   String? tableId;
   int? kotId;
   int? itemId;
-  int? quantity;
+  dynamic quantity;
   String? price;
   String? name;
   int? productTotal;

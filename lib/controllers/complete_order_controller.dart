@@ -1,5 +1,7 @@
 import 'dart:developer';
+
 import 'package:spos_retail/model/common_model.dart';
+
 import '../views/widgets/export.dart';
 
 class CompleteOrderController extends GetxController {
@@ -35,6 +37,9 @@ class CompleteOrderController extends GetxController {
         completeOrderModel.toJson(),
       );
 
+
+
+print("complete order....testing ${response.data}");
       if (response.statusCode == 200) {
         grandTotal = response.data['data']['grand_total'];
         update();
