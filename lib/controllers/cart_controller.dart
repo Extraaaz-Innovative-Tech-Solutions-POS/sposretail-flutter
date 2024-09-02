@@ -127,14 +127,14 @@ class CartController extends GetxController {
             customerName: customername,
             customerPhone: customerphone);
 
-        await Printing.layoutPdf(
-          onLayout: (format) {
-            return Future(() => invoicePDF);
-          },
-          format: PdfPageFormat.roll57,
-          name:
-              "${invoiceDate.year}${invoiceDate.month}${invoiceDate.day}${invoiceDate.hour}${invoiceDate.minute}${invoiceDate.second}${invoiceDate.millisecond}",
-        );
+        // await Printing.layoutPdf(
+        //   onLayout: (format) {
+        //     return Future(() => invoicePDF);
+        //   },
+        //   format: PdfPageFormat.roll57,
+        //   name:
+        //       "${invoiceDate.year}${invoiceDate.month}${invoiceDate.day}${invoiceDate.hour}${invoiceDate.minute}${invoiceDate.second}${invoiceDate.millisecond}",
+        // );
         Get.to(BottomNav());
 
         // Future<String> savePDFToFile(Uint8List uint8List) async {

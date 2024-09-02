@@ -76,6 +76,7 @@ class PdfGenerator {
     if (!await reportDirectory.exists()) {
       await reportDirectory.create(recursive: true);
     }
+    
 
     // Save the PDF file
     final file = File(path);
@@ -84,7 +85,7 @@ class PdfGenerator {
     // print('PDF files Saved at: $path');
     // OpenFile.open(path);
 
-    showPrintPreview(file);
+    //showPrintPreview(file);
   }
 
   pw.Widget buildSelectReport(pw.Document pdf, var reportData) {
@@ -276,12 +277,12 @@ class PdfGenerator {
     );
   }
 
-  void showPrintPreview(File pdfFile) async {
-    // Use the Printing package to show the print preview
-    await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdfFile.readAsBytes(),
-    );
-  }
+  // void showPrintPreview(File pdfFile) async {
+  //   // Use the Printing package to show the print preview
+  //   await Printing.layoutPdf(
+  //     onLayout: (PdfPageFormat format) async => pdfFile.readAsBytes(),
+  //   );
+  // }
 
   DataColumn dataColumn(title) {
     return DataColumn(

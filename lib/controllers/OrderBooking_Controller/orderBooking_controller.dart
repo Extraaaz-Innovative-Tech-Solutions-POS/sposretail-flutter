@@ -219,14 +219,14 @@ class OrderBookingController extends GetxController {
       orders: items, //widget.orderedItems
       rebuildStatus: false,
     );
-    await Printing.layoutPdf(
-      onLayout: (format) {
-        return Future(() => invoicePDF);
-      },
-      format: PdfPageFormat.roll57,
-      name:
-          "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
-    );
+    // await Printing.layoutPdf(
+    //   onLayout: (format) {
+    //     return Future(() => invoicePDF);
+    //   },
+    //   format: PdfPageFormat.roll57,
+    //   name:
+    //       "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
+    // );
     navigateBasedOnOrderType(orderType, response, orders, takeAwayIDs, items);
   }
 
