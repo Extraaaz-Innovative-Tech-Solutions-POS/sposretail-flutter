@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:spos_retail/views/Price%20setup/price_setup.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class BottomNav extends StatefulWidget {
@@ -152,6 +153,19 @@ class _BottomNavState extends State<BottomNav> {
                     Get.to(const AddTaxes());
                     //
                   }),
+
+
+
+                   listTile(context, "Price Setup",
+                      leading: Icon(Icons.currency_exchange,
+                          color: Theme.of(context).focusColor), onpress: () {
+                    Get.to(const PriceSetup());
+                    //
+                  }),
+
+
+
+
                   ExpansionTile(
                     title: listTile(context, "Inventory"),
                     leading: Icon(Icons.inventory,

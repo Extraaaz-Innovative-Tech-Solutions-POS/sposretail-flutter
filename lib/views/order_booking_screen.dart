@@ -87,7 +87,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   double jewellerPrice = 80000.00;
   double newQuantity = 0.0;
 
-  double unitPrice = 8000;
+  var unitPrice;
 
   double newPrice =0.0;
 
@@ -105,6 +105,16 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     checkKotStatus();
 
     setState(() {});
+     getJewelleyPrice() ;
+  }
+
+
+   getJewelleyPrice() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    unitPrice = pref.getDouble("jewellery_price");
+    setState(() {});
+
+    print("getiing price setup ${unitPrice}");
   }
 
   checkKotStatus() async {
