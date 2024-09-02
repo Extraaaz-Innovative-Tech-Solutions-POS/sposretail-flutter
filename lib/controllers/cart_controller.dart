@@ -58,11 +58,21 @@ class CartController extends GetxController {
       var thaliPrice,
       var numberOfthali,
       var datetime,
-      var sgst,
+      var sgst, statusclick,
       var cgst}) async {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       printername = pref.getString("BillingPrinter");
+
+      Future<void> _statusbool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    statusclick = prefs.getBool("CustomerDetailsBool");
+
+    update();
+  }
+
+
+
 
       if (Responsive.isDesktop(context)) {
         final desktopInvoicePdf = DesktopInvoicePdf();
@@ -86,11 +96,20 @@ class CartController extends GetxController {
         // sendPDFToAPI(invoicePDF, printername);
 
         final output = await getTemporaryDirectory();
-        final Uint8List pdfBytes = await invoicePDF;
+        final Uint8List pdfBytes = invoicePDF;
         final file = File('${output.path}/invoice.pdf');
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
-        // shareWhatsapp.shareFile(xFile);
+
+       _statusbool().whenComplete(() {
+                                if (statusclick == true) {
+                                  shareWhatsapp.shareFile(xFile);
+                                } 
+                              });
+
+
+
+         shareWhatsapp.shareFile(xFile);
 
         Get.to(BottomNav());
       } else {
@@ -131,7 +150,7 @@ class CartController extends GetxController {
         final file = File('${output.path}/invoice.pdf');
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
-        // shareWhatsapp.shareFile(xFile);
+        shareWhatsapp.shareFile(xFile);
       }
     } catch (e) {
       successful.value = false;
