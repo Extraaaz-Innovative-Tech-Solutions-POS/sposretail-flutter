@@ -436,8 +436,17 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               child: customText('Submit'),
               onPressed: () {
                 setState(() {
-                  openItemName = firstController.text;
-                  openItemPrice = secondController.text;
+                  // openItemName = firstController.text;
+                  // openItemPrice = secondController.text;
+
+                   order.add(Item(
+        name: firstController.text, // New item name
+        price: secondController.text, // New item price
+        quantity: 1, // New item quantity
+        vairentId: "",
+        instruction: "",
+        modifiersGroupID: "",
+        isCustom: true));
                 });
                 // print('First Input: $openItemname');
                 // print('Second Input: $openItemPrice');
@@ -1059,17 +1068,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
   Widget bottomSheetOrder(
       context, List<Item> order, openItemName, openItemPrice) {
-    Item newItem = Item(
-        // Generate a unique ID
-        name: openItemName ?? "", // New item name
-        price: openItemPrice ?? "", // New item price
-        quantity: 1, // New item quantity
-        vairentId: "",
-        instruction: "",
-        modifiersGroupID: "",
-        isCustom: true);
-
-    openItemName == null ? null : order.add(newItem);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
