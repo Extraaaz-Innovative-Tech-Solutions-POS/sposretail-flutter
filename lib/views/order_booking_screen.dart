@@ -277,7 +277,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
           const SizedBox(height: 10),
 
           // Make a Bill button
-          widget.ordertype == "Dine"
+          widget.ordertype == "Dine" || order.isNotEmpty
               ? SizedBox(
                   height: 50,
                   width: 200,

@@ -23,7 +23,7 @@ class _CustomerListState extends State<CustomerList> {
   @override
   void initState() {
     super.initState();
-    customerlistController.getcustomerlist();
+    customerlistController.getcustomerlist(false);
   }
 
   var sectionId, floorId, tablenumber;

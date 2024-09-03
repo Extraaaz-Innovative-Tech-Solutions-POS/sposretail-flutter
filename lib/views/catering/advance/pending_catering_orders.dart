@@ -14,7 +14,7 @@ class _CateringPendingOrderState extends State<CateringPendingOrderList> {
   void initState() {
     super.initState();
     advanceController.cateringAdvancedPendingOrder();
-    customerController.getcustomerlist();
+    customerController.getcustomerlist(false);
     setState(() {});
   }
 

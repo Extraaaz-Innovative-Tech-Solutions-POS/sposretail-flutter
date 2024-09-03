@@ -138,13 +138,13 @@ class _BottomNavState extends State<BottomNav> {
                       leading: Icon(Icons.person,
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const Customerdetails());
-                    customerController.getcustomerlist();
+                    customerController.getcustomerlist(false);
                   }),
                   listTile(context, "Retail Update",
                       leading: Icon(Icons.apartment,
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const RestaurantUpdate());
-                    customerController.getcustomerlist();
+                    customerController.getcustomerlist(false);
                   }),
                   listTile(context, "Taxes Setup",
                       leading: Icon(Icons.currency_rupee,

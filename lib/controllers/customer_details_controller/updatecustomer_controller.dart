@@ -21,7 +21,7 @@ class UpdateCustomerController extends GetxController {
       });
       if (response.statusCode == 200) {
         update();
-        customerlistcontroller.getcustomerlist();
+        customerlistcontroller.getcustomerlist(false);
          Get.back();
         // Get.to(Customerdetails());
         snackBar("Success", "Updated Sucessfully");

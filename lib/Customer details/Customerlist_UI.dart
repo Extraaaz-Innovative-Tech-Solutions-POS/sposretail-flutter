@@ -11,12 +11,26 @@ class _CustomerdetailsState extends State<Customerdetails> {
   String searchQuery = '';
   final DeleteCustomerController deleteCustomercontroller =
       DeleteCustomerController();
+  final customerdetailsController =
+      Get.put(CustomerlistController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: commonAppBar(context, "Customer Details", ""),
+      appBar: commonAppBar(context, "Customer Details", "", action: [
+        IconButton(onPressed: () {
+          //  List<Map<String, dynamic>> data = [
+          //   {
+          //     'Name': customerdetailsController.customer[0].name ["name"].toString(),
+          //     'Phone': response.data["phone"].toString(),
+          //     'Address': response.data["address"].toString(),
+          //   },
+          // ];
+          // await createExcelFile(data, "customer_details");
+          customerdetailsController.getcustomerlist(true);
+        }, icon: const Icon(Icons.download ))
+      ]),
       body: Column(
         children: [
           Padding(

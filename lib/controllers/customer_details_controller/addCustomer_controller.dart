@@ -14,7 +14,7 @@ class AddCustomerController extends GetxController {
           await DioServices.postRequest("customer", addNewCustomer.toJson());
 
       if (response.statusCode == 200) {
-        customerdetailsController.getcustomerlist();
+        customerdetailsController.getcustomerlist(false);
         Get.back();
         snackBar("Success", "Added Sucessfully");
         saveContacts(name, phone);

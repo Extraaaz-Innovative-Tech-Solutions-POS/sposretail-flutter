@@ -7,7 +7,7 @@ class DeleteCustomerController extends GetxController {
     try {
       final response = await DioServices.delete("customer/$id");
       if (response.statusCode == 200) {
-        customerListcontroller.getcustomerlist();
+        customerListcontroller.getcustomerlist(false);
         update();
         snackBar("Success", "Customer  Deleted Successfully");
       }
