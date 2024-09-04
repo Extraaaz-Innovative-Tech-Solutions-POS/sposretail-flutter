@@ -93,6 +93,14 @@ class _KOTstatusState extends State<KOTstatus> {
             });
           }),
 
+          switchButton("Print Preview", settingController.printPreview.value ,
+              onChange: (value) {
+            setState(() {
+              settingController.printPreview.value = value;
+            });
+          }),
+
+
           
           
           switchButton("Light Theme", themeController.lightTheme,

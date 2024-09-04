@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 import '../../model/PrinterModel/kot_desktopModel.dart';
@@ -9,6 +10,7 @@ class OrderBookingController extends GetxController {
   final printerController = Get.put(PrinterController());
   final desktopPrinterController = Get.put(DesktopPrinterController());
   final cartController = Get.put(CartController());
+  final settingsController = Get.put(SettingsController());
   var printername, inchestype;
   DateTime invoiceDate = DateTime.now();
   @override
@@ -219,14 +221,16 @@ class OrderBookingController extends GetxController {
       orders: items, //widget.orderedItems
       rebuildStatus: false,
     );
-    // await Printing.layoutPdf(
-    //   onLayout: (format) {
-    //     return Future(() => invoicePDF);
-    //   },
-    //   format: PdfPageFormat.roll57,
-    //   name:
-    //       "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
-    // );
+
+    settingsController.printPreview.value ?
+    await Printing.layoutPdf(
+      onLayout: (format) {
+        return Future(() => invoicePDF);
+      },
+      format: PdfPageFormat.roll57,
+      name:
+          "${invoiceDate.day}-${invoiceDate.month}${invoiceDate.year}Time:- ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
+    ): null;
     navigateBasedOnOrderType(orderType, response, orders, takeAwayIDs, items);
   }
 
