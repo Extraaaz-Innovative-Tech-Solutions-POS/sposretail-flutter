@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/model/common_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
@@ -9,10 +10,12 @@ class CartController extends GetxController {
   Rx<Kot?> cartOrder = Rx<Kot?>(null);
   RxBool successful = false.obs;
   RxBool completingOrder = false.obs;
+  RxString phone = "".obs;
   var ordernumber, printername;
 
   RxList<TakeAwayOrder> takewayorders = <TakeAwayOrder>[].obs;
   final user = Get.put(UserController());
+  final settingsController = Get.put(SettingsController());
   List<Kot> kot = [];
 
   Future<void> getCartResponse(int floor, int table, String tableId) async {
@@ -102,14 +105,15 @@ class CartController extends GetxController {
         final xFile = XFile(file.path);
 
        _statusbool().whenComplete(() {
-                                if (statusclick == true) {
-                                  shareWhatsapp.shareFile(xFile);
+                                if (statusclick == true && settingsController.whatsappBilling.value) {
+                                  print("PHONE NUMBER : --------------------- +91${phone.value}");
+                                   shareWhatsapp.shareFile(phone: "+91${phone.value}",xFile);
+                                 
                                 } 
                               });
 
 
 
-         shareWhatsapp.shareFile(xFile);
 
         Get.to(BottomNav());
       } else {
@@ -150,7 +154,14 @@ class CartController extends GetxController {
         final file = File('${output.path}/invoice.pdf');
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
-        shareWhatsapp.shareFile(xFile);
+        print("PHONE NUMBER : --------------------- +91${phone.value}");
+       _statusbool().whenComplete(() {
+                                if (statusclick == true && settingsController.whatsappBilling.value) {
+                                  print("PHONE NUMBER : --------------------- +91${phone.value}");
+                                   shareWhatsapp.shareFile(phone: "+91${phone.value}",xFile);
+                                 
+                                } 
+                              });
       }
     } catch (e) {
       successful.value = false;

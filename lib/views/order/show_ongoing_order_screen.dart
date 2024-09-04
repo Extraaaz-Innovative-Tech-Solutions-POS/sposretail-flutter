@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:spos_retail/constants/web_sockets.dart';
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/PrinterModel/bill_desktopModel.dart';
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
@@ -74,6 +75,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final catOrdercontroller = Get.put(CateringOrderController());
   final itemCancelcontroller = Get.put(ItemCancelController());
   final cancelOrderController = Get.put(CancelOrderController());
+  final settingsController = Get.put(SettingsController());
 
   //* Customer Address for Delivery Only------------------->
   final GetCustomerAddressController customerAddressController =
@@ -107,7 +109,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     discountController.text = "";
     discountpercentage = 0;
     selectedAddressid = null;
-    generateBillClick = false;
+    //generateBillClick = false;
+    generateBillClick = settingsController.whatsappBilling.value;
     setState(() {});
 
     sharedPrefrence();
@@ -457,7 +460,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      if (generateBillClick == true) {
+                      if (generateBillClick == true || settingsController.whatsappBilling.value) {
                         if (Responsive.isDesktop(context)) {
                           btnCompleteOrderTap(false);
                         } else {
@@ -480,7 +483,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                     child: Container(
                       height: 48.0,
                       decoration: BoxDecoration(
-                          color: disablebutton || generateBillClick == false
+                          color: disablebutton || generateBillClick == false || settingsController.whatsappBilling.value == false
                               ? Theme.of(context).hintColor
                               : Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(15),

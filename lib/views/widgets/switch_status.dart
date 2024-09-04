@@ -1,3 +1,4 @@
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class KOTstatus extends StatefulWidget {
@@ -12,6 +13,7 @@ class _KOTstatusState extends State<KOTstatus> {
   var statusclick, kotStatusClick;
 
   final themeController = Get.put(ThemeController());
+  final settingController = Get.put(SettingsController());
 
   @override
   void initState() {
@@ -73,6 +75,8 @@ class _KOTstatusState extends State<KOTstatus> {
           //     kotSwitchClick = value;
           //   });
           // }),
+
+          
           switchButton("Client Info", switchclick ?? false,
               onChange: (value) {
             _checkBool();
@@ -81,6 +85,16 @@ class _KOTstatusState extends State<KOTstatus> {
               switchclick = value;
             });
           }),
+
+          switchButton("Whatsapp Billing", settingController.whatsappBilling.value ,
+              onChange: (value) {
+            setState(() {
+              settingController.whatsappBilling.value = value;
+            });
+          }),
+
+          
+          
           switchButton("Light Theme", themeController.lightTheme,
               onChange: (value) {
             setState(() {

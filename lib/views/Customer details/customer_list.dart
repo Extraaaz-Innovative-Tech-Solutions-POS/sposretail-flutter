@@ -16,6 +16,7 @@ final DeleteCustomerController deleteCustomercontroller =
     DeleteCustomerController();
 final CustomerlistController customerlistController =
     Get.put(CustomerlistController());
+    final cartController = Get.put(CartController());
 
 class _CustomerListState extends State<CustomerList> {
   String searchQuery = '';
@@ -122,6 +123,8 @@ class _CustomerListState extends State<CustomerList> {
                                         }
                                       : widget.orderType == "Take Away"
                                           ? () {
+                                              cartController.phone.value = customerlist[index].phone.toString();
+                                  print("CartController PHONEddd : ======================== ${cartController.phone.value}");
                                               Get.to(OrderBookingScreen(
                                                   ordertype: "Take Away",
                                                   customerName: c
