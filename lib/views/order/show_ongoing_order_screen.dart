@@ -150,7 +150,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(context, "Retail Order", "", action: []),
-      body: _buildBody(),
+      body: PopScope(
+        canPop: false,
+        child: _buildBody()),
     );
   }
 
