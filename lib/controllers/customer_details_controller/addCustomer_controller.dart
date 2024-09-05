@@ -2,6 +2,8 @@ import 'package:spos_retail/model/common_model.dart' as cm;
 import 'package:spos_retail/views/widgets/export.dart';
 
 class AddCustomerController extends GetxController {
+
+  RxString newName = "".obs;
   CustomerlistController customerdetailsController =
       Get.put(CustomerlistController());
   final GetCustomerAddressController customerAddressController =
@@ -15,7 +17,7 @@ class AddCustomerController extends GetxController {
 
       if (response.statusCode == 200) {
         customerdetailsController.getcustomerlist(false);
-        Get.back();
+      //  Get.back();
         snackBar("Success", "Added Sucessfully");
         saveContacts(name, phone);
         Fluttertoast.showToast(msg: "Added Sucessfully");

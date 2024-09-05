@@ -1,4 +1,5 @@
 import 'package:spos_retail/views/widgets/export.dart';
+
 class CustomerList extends StatefulWidget {
   bool update;
   String orderType;
@@ -16,7 +17,8 @@ final DeleteCustomerController deleteCustomercontroller =
     DeleteCustomerController();
 final CustomerlistController customerlistController =
     Get.put(CustomerlistController());
-    final cartController = Get.put(CartController());
+final cartController = Get.put(CartController());
+final newcustomer = Get.put(AddCustomerController());
 
 class _CustomerListState extends State<CustomerList> {
   String searchQuery = '';
@@ -55,14 +57,69 @@ class _CustomerListState extends State<CustomerList> {
           final customerlist = searchQuery.isEmpty
               ? c.customer
               : c.customer
-                  .where((e) =>
-                      e.name!.toLowerCase().contains(searchQuery.toLowerCase()))
+                  .where((e) => e.phone!
+                      .toLowerCase()
+                      .contains(searchQuery.toLowerCase()))
                   .toList();
 
           if (customerlist.isEmpty) {
-            return const Center(
-              child: Text('Customer details not found'),
+            return Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(width: 20.0),
+                    Flexible(
+                      // child: textField(context, "Enter Name", nameController, Icons.arrow_right, 10.2),
+                      child: TextField(
+                          onChanged: (value) {
+                            newcustomer.newName.value = value;
+                          },
+                          keyboardType: TextInputType.name,
+                          textInputAction: TextInputAction.next,
+                          enableSuggestions: true,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            
+
+                            hintText: "Enter your name",
+                            contentPadding:
+                                EdgeInsets.only(top: 0.0, bottom: 11.0, left:20.0),
+
+                            //  icon: Icon(icon),
+                          )),
+                    ),
+                    const SizedBox(width: 20.0),
+
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0)),
+                      padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        backgroundColor: Theme.of(context).primaryColor,
+                      ),
+                      child: Text(
+                        'Add Customer',
+                        style: TextStyle(
+                            color: Theme.of(context).scaffoldBackgroundColor),
+                      ),
+                      onPressed: () {
+                        newcustomer.postcustomer(newcustomer.newName.value,
+                            "Not Applicable", searchQuery);
+                      },
+                    ),
+                    const SizedBox(width: 20.0),
+                  ],
+                ),
+              ),
             );
+
+            // const Center(
+            //   child: Text('Customer details not foundgggggggggg'),
+            // );
           } else {
             return ListView.builder(
                 // shrinkWrap: true,
@@ -123,8 +180,12 @@ class _CustomerListState extends State<CustomerList> {
                                         }
                                       : widget.orderType == "Take Away"
                                           ? () {
-                                              cartController.phone.value = customerlist[index].phone.toString();
-                                  print("CartController PHONEddd : ======================== ${cartController.phone.value}");
+                                              cartController.phone.value =
+                                                  customerlist[index]
+                                                      .phone
+                                                      .toString();
+                                              print(
+                                                  "CartController PHONEddd : ======================== ${cartController.phone.value}");
                                               Get.to(OrderBookingScreen(
                                                   ordertype: "Take Away",
                                                   customerName: c
@@ -210,9 +271,6 @@ class _CustomerListState extends State<CustomerList> {
         style: TextButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          // RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.zero,
-          //     ),
           padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
           backgroundColor: Theme.of(context).primaryColor,
         ),

@@ -34,7 +34,7 @@ class _CustomerdetailsState extends State<Customerdetails> {
             backgroundColor:
                 Theme.of(context).scaffoldBackgroundColor.withOpacity(1),
             title: Text(
-              "Are You Sure You Want To Delete  Customer ${name}",
+              "Are You Sure You Want To Delete  Customer $name",
               style: TextStyle(
                   fontSize: 15.0, color: Theme.of(context).highlightColor),
             ),
