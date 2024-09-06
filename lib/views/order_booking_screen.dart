@@ -276,35 +276,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
           // Space between buttons
           const SizedBox(height: 10),
 
-          // Make a Bill button
-          widget.ordertype == "Dine" || order.isNotEmpty
-              ? SizedBox(
-                  height: 50,
-                  width: 200,
-                  child: FloatingActionButton.extended(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    label: customText(
-                      "Make a Bill",
-                      font: 18.0,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                    onPressed: () {
-                      if (widget.table_id != null) {
-                        Get.to(() => ShowOngoingOrder(
-                              floor: widget.floor,
-                              table: widget.table,
-                              ordertype: widget.ordertype,
-                              orderData: order,
-                              tableId: widget.table_id!,
-                              items: const [],
-                            ));
-                      } else {
-                        Fluttertoast.showToast(msg: "Please Order Something");
-                      }
-                    },
-                  ),
-                )
-              : Container()
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
