@@ -132,8 +132,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                                     addressController.text)
                                 : newcustomer.postcustomer(
                                     nameController.text,
-                                    addressController.text,
-                                    // phoneController.text
+                                    // addressController.text,
+                                    phoneController.text
                                     );
                           } else {
                             snackBarBottom("Error", "Phone Number is not Valid", context);
