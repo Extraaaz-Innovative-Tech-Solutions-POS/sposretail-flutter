@@ -350,6 +350,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                         desktopController.postData(formData);
                       } else {
                         final formData = buildFormData();
+                        print("Generate FormData : ${formData.customerNames}");
                         printerController.postData(formData);
                       }
                       generateBillClick = true;

@@ -107,8 +107,8 @@ class _CustomerListState extends State<CustomerList> {
                             color: Theme.of(context).scaffoldBackgroundColor),
                       ),
                       onPressed: () {
-                        newcustomer.postcustomer(newcustomer.newName.value,
-                            "Not Applicable", searchQuery);
+                        newcustomer.postcustomer(newcustomer.newName.value
+                            , searchQuery);
                       },
                     ),
                     const SizedBox(width: 20.0),

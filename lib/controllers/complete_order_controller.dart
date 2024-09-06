@@ -7,6 +7,26 @@ import '../views/widgets/export.dart';
 class CompleteOrderController extends GetxController {
   var grandTotal;
 
+  
+      final  controller = Get.put(CartController());
+
+
+
+   final customerdetailsController =
+      Get.put(CustomerlistController());
+
+
+
+    //     final customerName = controller.cartOrder.value!.customer == null
+    //     ? "-"
+    //     : controller.cartOrder.value!.customer!.name.toString();
+    // final mobileNo = controller.cartOrder.value!.customer == null
+    //     ? "-"
+    //     : controller.cartOrder.value!.customer!.phone.toString();
+    // final address = controller.cartOrder.value!.customer == null
+    //     ? "-"
+    //     : controller.cartOrder.value!.customer!.address.toString();
+
   void completeOrderPost(
     String table_id,
     int paid,
@@ -54,6 +74,9 @@ print("complete order....testing ${response.data}");
           true,
           context,
           controller.orderedItems,
+          customername:  controller.cartOrder.value!.customer!.name.toString(),
+          customerphone: controller.cartOrder.value!.customer!.phone.toString(),
+          customeraddress: controller.cartOrder.value!.customer!.address.toString()
         );
 
         //navigateAfterCompletion(orderType);

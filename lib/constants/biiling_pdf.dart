@@ -1,6 +1,6 @@
+import 'package:pdf/widgets.dart' as pw;
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class InvoicePdf {
   static Future<Uint8List> generateBillingPdf(
@@ -88,7 +88,7 @@ class InvoicePdf {
                             fontSize: 15.0, fontWeight: pw.FontWeight.bold)),
                 ordertype == "Dine"
                     ? pw.SizedBox.shrink()
-                    : pw.Text("${customerName ?? "---"}",
+                    : pw.Text("${customerName ?? "--"}",
                         style: pw.TextStyle(
                             fontSize: 15.0, fontWeight: pw.FontWeight.bold)),
 

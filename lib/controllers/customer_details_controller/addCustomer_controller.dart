@@ -4,14 +4,20 @@ import 'package:spos_retail/views/widgets/export.dart';
 class AddCustomerController extends GetxController {
 
   RxString newName = "".obs;
+
+   // Address
+    RxString newCustomerAddress ="nill".obs;
+
+
+
   CustomerlistController customerdetailsController =
       Get.put(CustomerlistController());
   final GetCustomerAddressController customerAddressController =
       Get.put(GetCustomerAddressController());
-  Future<void> postcustomer(String name, String address, String phone) async {
+  Future<void> postcustomer(String name,  String phone) async {
     try {
       addCustomer addNewCustomer =
-          addCustomer(name: name, address: address, phone: phone);
+          addCustomer(name: name, address: newCustomerAddress.value , phone: phone);
       final response =
           await DioServices.postRequest("customer", addNewCustomer.toJson());
 
@@ -27,6 +33,7 @@ class AddCustomerController extends GetxController {
         // print("Unsuccessful");
       }
     } catch (e) {
+      snackBar("Error", e.toString());
       print("Error occured");
     }
   }

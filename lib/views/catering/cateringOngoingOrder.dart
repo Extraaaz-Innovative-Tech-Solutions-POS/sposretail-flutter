@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -434,6 +433,8 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
             .join('/');
         String invoiceiD = controller.ordernumber.toString();
   final customerName = controller.cartOrder.value!.customer!.name.toString();
+
+  print("complete order customer testing :${customerName}");
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
     //final address = controller.cartOrder.value!.customer!.address.toString();
     final catGrandTotal = controller.cartOrder.value!.grandTotal == null
@@ -522,6 +523,7 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
             .join('/');
         String invoiceiD = controller.ordernumber.toString();
   final customerName = controller.cartOrder.value!.customer!.name.toString();
+  print("complete order customer cash testing :${customerName}");
     final mobileNo = controller.cartOrder.value!.customer!.phone.toString();
     // final address = controller.cartOrder.value!.customer!.address.toString();
     final catGrandTotal = controller.cartOrder.value!.grandTotal == null

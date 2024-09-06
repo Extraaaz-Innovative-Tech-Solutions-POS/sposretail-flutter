@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/model/common_model.dart';
@@ -56,7 +57,7 @@ class CartController extends GetxController {
       List<Items> order,
       {bool cashier = false,
       var customeraddress,
-      var customername,
+      var customername ,
       var customerphone,
       var thaliPrice,
       var numberOfthali,
@@ -73,6 +74,9 @@ class CartController extends GetxController {
 
     update();
   }
+
+
+  print("testing customer details :${customername}");
 
 
 

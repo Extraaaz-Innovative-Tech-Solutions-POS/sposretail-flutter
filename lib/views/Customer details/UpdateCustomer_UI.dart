@@ -1,4 +1,5 @@
 import 'package:spos_retail/controllers/customer_details_controller/updatecustomer_controller.dart';
+import 'package:spos_retail/views/widgets/custom_textfield.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class UpdateCustomer extends StatefulWidget {
@@ -29,6 +30,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
   late final TextEditingController phoneController;
 
   late final TextEditingController addressController;
+
+   String _newCustomerAddress ='';
 
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
@@ -66,9 +69,19 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
             phoneController,
             key: _phoneKey,
           ),
-          itemForms(
-              context, "Address", widget.click ? widget.address :"Enter Address", false, addressController,
-              key: _addressKey,),
+          // itemForms(
+          //     context, "Address", widget.click ? widget.address :"Enter Address", false, addressController,
+          //     key: _addressKey,),
+
+
+              textFieldWithHeading(
+                _addressKey, "Address", context, "Enter Address",TextInputType.name ,
+                onchanged: (v){
+                   newcustomer.newCustomerAddress.value = v;
+                  //  _newCustomerAddress = newcustomer.newCustomerAddress as String;
+                  print("Address : ${ newcustomer.newCustomerAddress}");
+                }
+                ),
 
           // buildTextFieldWithHeading(
           //     widget.name ?? "Name", widget.name ?? "", context, nameController),
@@ -103,8 +116,9 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                       ),
                       onPressed: () {
                         if (nameController.text.isNotEmpty &&
-                            phoneController.text.isNotEmpty &&
-                            addressController.text.isNotEmpty) {
+                            phoneController.text.isNotEmpty
+                            // addressController.text.isNotEmpty
+                            ) {
                           final bool phone = RegExp(r'^[0-9]{10}$')
                               .hasMatch(phoneController.text);
                           if (phone == true) {
@@ -119,7 +133,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                                 : newcustomer.postcustomer(
                                     nameController.text,
                                     addressController.text,
-                                    phoneController.text);
+                                    // phoneController.text
+                                    );
                           } else {
                             snackBarBottom("Error", "Phone Number is not Valid", context);
                           };
