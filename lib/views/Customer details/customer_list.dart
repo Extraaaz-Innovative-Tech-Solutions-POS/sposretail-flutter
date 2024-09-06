@@ -55,12 +55,12 @@ class _CustomerListState extends State<CustomerList> {
           );
         } else {
           final customerlist = searchQuery.isEmpty
-              ? c.customer
+              ? c.customer.reversed.toList()
               : c.customer
                   .where((e) => e.phone!
                       .toLowerCase()
                       .contains(searchQuery.toLowerCase()))
-                  .toList();
+                  .toList().reversed.toList();
 
           if (customerlist.isEmpty) {
             return Align(
@@ -267,27 +267,6 @@ class _CustomerListState extends State<CustomerList> {
           }
         }
       })),
-      TextButton(
-        style: TextButton.styleFrom(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
-        child: Text(
-          'Add Customer',
-          style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
-        ),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => UpdateCustomer(
-                        customerId: '',
-                        click: false,
-                      )));
-        },
-      ),
     ]);
   }
 
