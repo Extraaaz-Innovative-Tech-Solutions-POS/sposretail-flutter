@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:spos_retail/views/settings/invoices/additional_notes.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class BottomNav extends StatefulWidget {
@@ -139,6 +140,12 @@ class _BottomNavState extends State<BottomNav> {
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const Customerdetails());
                     customerController.getcustomerlist(false);
+                  }),
+                  listTile(context, "Add Note",
+                      leading: Icon(Icons.apartment,
+                          color: Theme.of(context).focusColor), onpress: () {
+                             Get.to(() => const AdditionalNotes());
+                    
                   }),
                   listTile(context, "Retail Update",
                       leading: Icon(Icons.apartment,
