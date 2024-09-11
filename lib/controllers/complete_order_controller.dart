@@ -64,6 +64,9 @@ print("complete order....testing ${response.data}");
         grandTotal = response.data['data']['grand_total'];
         update();
 
+        Get.to(BottomNav());
+         snackBar("Success", "Order Completed Successfully");
+
         await controller.completeBilling(
           orderType,
           controller.ordernumber.toString(),
@@ -78,9 +81,10 @@ print("complete order....testing ${response.data}");
           customerphone: controller.cartOrder.value!.customer!.phone.toString(),
           customeraddress: controller.cartOrder.value!.customer!.address.toString()
         );
+        //Get.to(BottomNav());
 
         //navigateAfterCompletion(orderType);
-        snackBar("Success", "Order Completed Successfully");
+        // snackBar("Success", "Order Completed Successfully");
       } else {
         snackBar("Error", "Order Failed to Complete");
       }
