@@ -50,7 +50,7 @@ class ShowOngoingOrder extends StatefulWidget {
 //var currentdate;
 int? data;
 late InvoiceManager invoiceManager;
-int? ratesprice;
+dynamic ratesprice;
 bool discountcheck = false;
 bool quantityEdit = false;
 var discountpercentage = 0;
@@ -528,7 +528,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       columns: [
         dataColumn("Items", false),
         dataColumn("Qty.", true),
-        dataColumn("Rate", true),
+      //  dataColumn("Rate", true),
         dataColumn("Amt.", true),
         dataColumn("", true),
         dataColumn("", true),
@@ -574,7 +574,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                     },
                   ))
                 : dataCell("${entry.value.quantity}"),
-            dataCell("${entry.value.price}"),
+          //  dataCell("${entry.value.price}"),
             dataCell("${entry.value.productTotal}"),
             dataCell(""),
             // DataCell(Center(

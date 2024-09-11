@@ -40,14 +40,14 @@ class Kot {
   var advanceOrderDateTime;
   var deliveryAddress;
   var deliveryStatus;
-  int? total;
+  dynamic total;
   var totalDiscount;
   var totalTax;
   var grandTotal;
   String? cgstTax;
   String? sgstTax;
   String? vatTax;
-  int? totalGivenAmount;
+  dynamic totalGivenAmount;
   var remainingMoney;
   TaxData? taxData;
   List<Items>? items;
@@ -253,9 +253,9 @@ class Items {
   int? kotId;
   int? itemId;
   dynamic quantity;
-  String? price;
+  dynamic price;
   String? name;
-  int? productTotal;
+  dynamic productTotal;
   int? isCancelled;
   String? status;
   int? restaurantId;
