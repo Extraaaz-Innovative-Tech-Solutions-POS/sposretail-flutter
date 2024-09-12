@@ -142,7 +142,7 @@ class _BottomNavState extends State<BottomNav> {
                     customerController.getcustomerlist(false);
                   }),
                   listTile(context, "Add Note",
-                      leading: Icon(Icons.apartment,
+                      leading: Icon(Icons.note_add_sharp,
                           color: Theme.of(context).focusColor), onpress: () {
                              Get.to(() => const AdditionalNotes());
                     

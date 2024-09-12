@@ -345,6 +345,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
+                       generateBillClick = true;
+                      setState(() {});
                       if (Responsive.isDesktop(context)) {
                         final formData = buildDesktopFormData();
                         desktopController.postData(formData);
@@ -353,8 +355,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                         print("Generate FormData : ${formData.customerNames}");
                         printerController.postData(formData);
                       }
-                      generateBillClick = true;
-                      setState(() {});
+                    
                     },
                     child: Container(
                       height: 48.0,
@@ -461,7 +462,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      if (generateBillClick == true || settingsController.whatsappBilling.value) {
+                      if (generateBillClick == true) {
                         if (Responsive.isDesktop(context)) {
                           btnCompleteOrderTap(false);
                         } else {
@@ -484,7 +485,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                     child: Container(
                       height: 48.0,
                       decoration: BoxDecoration(
-                          color: disablebutton || generateBillClick == false || settingsController.whatsappBilling.value == false
+                          color: generateBillClick == false
                               ? Theme.of(context).hintColor
                               : Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(15),
@@ -872,10 +873,48 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            customText("Custom GST",
+                color: Theme.of(context).highlightColor, font: 16.0),
             customText("SGST",
                 color: Theme.of(context).highlightColor, font: 16.0),
             customText("$sGst%",
                 color: Theme.of(context).highlightColor, font: 16.0),
+          ],
+        ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            customText("Custom GST",
+                color: Theme.of(context).highlightColor, font: 16.0),
+            SizedBox(
+                                                      height: 30.0,
+                                                      width: 100.0,
+                                                      child: TextField(
+                                                        // controller:
+                                                        //     priceController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        style: TextStyle(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .highlightColor),
+                                                        onChanged: (value) {
+                                                         final newVal = int.parse(value) / 2;
+                                                          setState(() {
+                                                            print("NEW VAL CGST ++++++++++++ $newVal");
+                                                            controller.cartOrder.value!.taxData?.cgst = newVal.toString();
+                                                            sGst = newVal;
+                                                            // cGst = newVal;
+
+                                                            // order[index].price =
+                                                            //     value;
+                                                            // isQuantityEditing =
+                                                            //     false;
+                                                          });
+                                                        },
+                                                      ))
           ],
         ),
         Row(
