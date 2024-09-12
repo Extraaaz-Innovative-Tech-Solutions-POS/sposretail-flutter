@@ -8,12 +8,17 @@ class AddCustomerController extends GetxController {
    // Address
     RxString newCustomerAddress ="nill".obs;
 
+    RxInt newCustomerID =0.obs;
+
 
 
   CustomerlistController customerdetailsController =
       Get.put(CustomerlistController());
   final GetCustomerAddressController customerAddressController =
       Get.put(GetCustomerAddressController());
+
+       late List<Customermodel> customerList;
+
   Future<void> postcustomer(String name,  String phone) async {
     try {
       addCustomer addNewCustomer =
@@ -23,6 +28,7 @@ class AddCustomerController extends GetxController {
 
       if (response.statusCode == 200) {
         customerdetailsController.getcustomerlist(false);
+        newCustomerID= customerList[customerList.length-1].id! as RxInt; 
       //  Get.back();
         snackBar("Success", "Added Sucessfully");
         saveContacts(name, phone);

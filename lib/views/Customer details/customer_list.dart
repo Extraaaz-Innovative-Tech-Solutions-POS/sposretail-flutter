@@ -107,8 +107,10 @@ class _CustomerListState extends State<CustomerList> {
                             color: Theme.of(context).scaffoldBackgroundColor),
                       ),
                       onPressed: () {
-                        newcustomer.postcustomer(newcustomer.newName.value
-                            , searchQuery);
+                        // newcustomer.postcustomer(newcustomer.newName.value
+                        //     , searchQuery);
+                        newcustomer.postcustomer(newcustomer.newName.value, searchQuery);
+                        print("tes postvale ${ newcustomer.newName.value } ${searchQuery}  newID ${newcustomer.newCustomerID.value}");
                       },
                     ),
                     const SizedBox(width: 20.0),
