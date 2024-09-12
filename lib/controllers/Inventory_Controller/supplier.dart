@@ -1,5 +1,4 @@
 
-import 'package:spos_retail/model/Inventory/get_inventory.dart';
 import 'package:spos_retail/model/common_model.dart';
 
 import '../../model/Inventory/view_statement.dart';
@@ -15,6 +14,7 @@ class SupplierController extends GetxController {
   RxString supplierAddress = "".obs;
   RxString supplierPerson = "".obs;
   RxString supplierNumber = "".obs;
+  
 
   RxList<ViewStatementData> viewStatementList = <ViewStatementData>[].obs;
 
@@ -39,6 +39,38 @@ class SupplierController extends GetxController {
         if (response.statusCode == 200) {
           snackBar("Success", "Supplier Added Successfully");
           Get.off(const InventoryList());
+          getSupplier();
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      snackBarBottom("Error", "Enter the required field", context);
+    }
+  }
+
+
+    Future<void> updateSupplier(context, i) async {
+    AddSupplierData data = AddSupplierData(
+        name: supplierName.value,
+        mobileNumber: supplierMobile.value,
+        gstin: supplierGstin.value,
+        c_person: supplierPerson.value,
+        c_number: supplierNumber.value);
+    if (supplierName.value.isNotEmpty &&
+        supplierMobile.value.isNotEmpty &&
+        supplierAddress.value.isNotEmpty &&
+        supplierGstin.value.isNotEmpty &&
+        supplierPerson.value.isNotEmpty &&
+        supplierNumber.value.isNotEmpty) {
+      try {
+        final response = await DioServices.put(
+            "${AppConstant.suppliers}/$i", data.toJson());
+        print(response.data);
+        print(response.statusMessage);
+        if (response.statusCode == 200) {
+          snackBar("Success", "Supplier Update Successfully");
+          // Get.off(const InventoryList());
           getSupplier();
         }
       } catch (e) {
@@ -78,11 +110,36 @@ class SupplierController extends GetxController {
     }
   }
 
-  Future<void> deleteSuppliers(int i) async {
+
+
+    void getSupplierById(int id){
+     try {
+      // Find the supplier by id in the supplierList
+      SupplierData supplier = supplierListdata.firstWhere((supplier) => supplier.id == id);
+      print("supplier testing : ${supplier.address}");
+      // Update supplier data
+      supplierName.value = supplier.name!;
+      supplierMobile.value = supplier.mobile!;
+      supplierGstin.value = supplier.gstin!;
+      supplierAddress.value = supplier.address;
+      supplierPerson.value = supplier.cPerson!;
+      supplierNumber.value = supplier.cNumber!;
+
+    } catch (e) {
+      print("Supplier with id $id not found");
+    }
+  }
+
+  Future<void> deleteSuppliers(i) async {
     try {
       final response = await DioServices.delete("${AppConstant.suppliers}/$i");
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "Delete Successfully");
+        getSupplier();
+        update();
+      }
+      else {
+        Fluttertoast.showToast(msg: "Failed to Delete");
       }
     } catch (e) {
       print(e);

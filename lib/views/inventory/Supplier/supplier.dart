@@ -1,8 +1,5 @@
-import 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
-import 'package:spos_retail/model/Inventory/get_inventory.dart';
-import 'package:spos_retail/views/inventory/Supplier/add_supplier.dart';
+import 'package:spos_retail/views/inventory/Supplier/update_supplier.dart';
 
-import '../../widgets/custom_data.dart';
 import '../../widgets/export.dart';
 
 class SupplierUI extends StatefulWidget {
@@ -91,8 +88,29 @@ class _SupplierUIState extends State<SupplierUI> {
                 ),
               ),
               dataCell(context,item.name),
-              dataCell(context,item.mobile),
-              dataCell(context,"View"),
+                DataCell(
+                TextButton(
+                  onPressed: () {
+                    Get.to(() => UpdateSupplier(id: item.id!.toInt()));
+                    
+                  },
+                  child: const Text("Update")               
+                ),
+              ),
+
+              DataCell(
+                IconButton(
+                  onPressed: () {
+                    suppliercontroller.supplierName.value = item.name.toString();
+                    suppliercontroller.supplierNumber.value = item.name.toString();
+                    suppliercontroller.deleteSuppliers(item.id);
+                   // suppliercontroller.viewStatement(value);
+                  },
+                  icon: const Icon(Icons.delete)
+                ),
+              ),
+              // dataCell(context,item.mobile),
+              // dataCell(context,"View"),
             ],
           );
         }).toList());
