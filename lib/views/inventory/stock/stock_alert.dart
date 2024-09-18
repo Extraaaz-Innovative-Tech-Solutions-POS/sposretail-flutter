@@ -68,8 +68,10 @@ class StockAlert extends StatelessWidget {
 
     return Scaffold(
         appBar: commonAppBar(context, "Stock Alert", ""),
-        body: Column(
-          children: [orderedItemsListWidget(context)],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [orderedItemsListWidget(context)],
+          ),
         ));
   }
 }

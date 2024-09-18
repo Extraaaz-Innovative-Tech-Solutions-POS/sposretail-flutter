@@ -181,7 +181,6 @@ class _BottomNavState extends State<BottomNav> {
                         purchaseController.getPurchase();
                         Get.to(() => ReturnStock()); 
                       }),
-                      listTile(context, 'Create Supplier', onpress: () {}),
                       listTile(context, 'Supplier list', onpress: () {
                         Get.to(const SupplierUI());
                       }),
