@@ -52,7 +52,7 @@ class StockAlert extends StatelessWidget {
                   DataCell(
                     IconButton(
                       onPressed: () {
-                        stockController.setThreshold(ingredientData.id);
+                        stockController.setThresholdValue(ingredientData.id);
                       },
                       icon: const Icon(Icons.add_box_outlined),
                       color: Theme.of(context).hoverColor,
