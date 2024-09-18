@@ -69,10 +69,11 @@ class _SupplierUIState extends State<SupplierUI> {
             horizontalInside:
                 BorderSide(color: Theme.of(context).highlightColor)),
         columns: [
-          dataColumn(context,"Srno.", true),
-          dataColumn(context,"Name", false),
-          dataColumn(context,"Mob", true),
-          dataColumn(context,"Action", true),
+            dataColumn(context, "Srno.", true),
+          dataColumn(context, "Name", false),
+          dataColumn(context, "Edit", true),
+          dataColumn(context, "View", true),
+          dataColumn(context, "Action", true),
         ],
         rows: orders.asMap().entries.map<DataRow>((entry) {
           final item = entry.value;
@@ -107,8 +108,17 @@ class _SupplierUIState extends State<SupplierUI> {
                         ));
                     
                   },
-                  child: const Text("Update")               
+                  child: const Text("Update")
                 ),
+              ),
+
+
+                DataCell(
+                TextButton(
+                    onPressed: () {
+                      suppliercontroller.viewStatement(item.id);
+                    },
+                    child: const Text("Statement")),
               ),
 
               DataCell(

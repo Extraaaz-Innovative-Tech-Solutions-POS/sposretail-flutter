@@ -12,13 +12,15 @@ class ViewStatementData {
       this.rate,
       this.productName});
 
-  ViewStatementData.fromJson(Map<String, dynamic> json) {
-    createdAt = json['created_at'];
-    quantity = json['quantity'];
-    amount = json['amount'];
-    rate = json['rate'];
-    productName = json['product_name'];
-  }
+    factory ViewStatementData.fromJson(Map<String, dynamic> json) {
+    return ViewStatementData(
+      createdAt: json["created_at"],
+      quantity: json['quantity'],
+    amount :json['amount'],
+    rate : json['rate'],
+    productName: json['product_name']
+    );
+    }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  <String, dynamic>{};

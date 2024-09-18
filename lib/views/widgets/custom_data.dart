@@ -3,7 +3,7 @@ import 'export.dart';
 DataColumn dataColumn(context, title, bool numeric) {
     return DataColumn(
         label: Center(
-          child: customText(title,
+            child: customText(title, alignment: TextAlign.center,
               color: Theme.of(context).highlightColor, font: 16.0),
         ),
         numeric: numeric);

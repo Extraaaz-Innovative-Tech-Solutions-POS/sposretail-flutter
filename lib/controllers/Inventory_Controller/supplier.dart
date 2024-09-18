@@ -1,5 +1,6 @@
 
 import 'package:spos_retail/model/common_model.dart';
+import 'package:spos_retail/views/inventory/Supplier/view_statement.dart';
 
 import '../../model/Inventory/view_statement.dart';
 import '../../views/widgets/export.dart';
@@ -16,7 +17,7 @@ class SupplierController extends GetxController {
   RxString supplierNumber = "".obs;
   
 
-  RxList<ViewStatementData> viewStatementList = <ViewStatementData>[].obs;
+   RxList<ViewStatementData> viewStatementList = <ViewStatementData>[].obs;
 
   Future<void> addSupplier(context) async {
     AddSupplierData data = AddSupplierData(
@@ -159,14 +160,21 @@ class SupplierController extends GetxController {
     }
   }
 
-  Future<void> viewStatement(int id) async {
+  Future<void> viewStatement(int? id) async {
     try {
-      final response =
-          await DioServices.get("${AppConstant.viewStatement}/$id");
+       final response =
+          await DioServices.get("${AppConstant.viewStatement}?supplier_id:$id", queryParameters: {
+    "supplier_id":id
+});
+          print("VIEW STATEMENT CODE -------------------------------------> ");
+          print(response.statusCode);
+          print("VIEW STATEMENT STATUS MESSAGE -------------------------------------> ");
+          print(response.statusMessage);
       if (response.statusCode == 200) {
-        viewStatementList.assignAll((response.data as List)
-            .map((orderJson) => ViewStatementData.fromJson(orderJson)));
+              viewStatementList.assignAll((response.data['statement'])
+            .map<ViewStatementData>((json) => ViewStatementData.fromJson(json)));
         update();
+        Get.to(() => ViewStatement());
       }
     } catch (e) {
       print(e);
