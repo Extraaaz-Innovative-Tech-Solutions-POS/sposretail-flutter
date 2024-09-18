@@ -1,4 +1,5 @@
-import 'package:spos_retail/views/widgets/export.dart';
+
+import '../../views/widgets/export.dart';
 
 class StockController extends GetxController{
   RxString thresholdValue = "".obs;
