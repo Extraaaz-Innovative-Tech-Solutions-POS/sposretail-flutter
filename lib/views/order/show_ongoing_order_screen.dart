@@ -109,7 +109,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     discountController.text = "";
     discountpercentage = 0;
     selectedAddressid = null;
-    print( "ADDDDDDDDressssssss:----------------------    $address");
     //generateBillClick = false;
     generateBillClick = settingsController.whatsappBilling.value;
     setState(() {});
@@ -141,13 +140,24 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   Future<void> sharedPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    printername = pref.getString("BillingPrinter");
+    // printername = pref.getString("BillingPrinter");
+    // restaurantName = pref.getString("RestaurantName");
+    // address = pref.getString("Address");
+    // phone = pref.getString("Phone");
+    // invoiceType = pref.getInt("InchesType");
+
+    setState(() {
+
+      printername = pref.getString("BillingPrinter");
     restaurantName = pref.getString("RestaurantName");
     address = pref.getString("Address");
     phone = pref.getString("Phone");
     invoiceType = pref.getInt("InchesType");
 
-    setState(() {});
+    print("ADDRESS AFTER SAVED : -------------------------------> $address");
+
+
+    });
   }
 
   @override

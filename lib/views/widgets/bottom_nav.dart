@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
 import 'package:spos_retail/views/settings/invoices/additional_notes.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -22,6 +23,7 @@ class _BottomNavState extends State<BottomNav> {
   final sectionController = Get.put(SectionController());
   final usercontroller = Get.put(UserController());
   final purchaseController = Get.put(PurchaseController());
+  final recipeController = Get.put(RecipeController());
 
   final customerController = Get.put(CustomerlistController());
   int _bottomNavIndex = 1;
@@ -178,6 +180,11 @@ class _BottomNavState extends State<BottomNav> {
                         purchaseController.getPurchase();
                         Get.to(PurchaseUI());
                       }),
+                      listTile(context, "Recipe Management", onpress: () {
+                        Get.to(() => const RecipeList());
+                        recipeController.getIngredientList();
+                        recipeController.getRecipe(); 
+                      })
                     ],
                   ),
                   listTile(
