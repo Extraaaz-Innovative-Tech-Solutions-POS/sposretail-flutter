@@ -123,11 +123,16 @@ static const String createPurchase = "create-purchase";
 static const String deletePurchase = "purchase-orders";
 static const String viewStatement = "view-statement";
 static const String addPayment = "add-payment";
+static const String returnStock = "return-stock";
+
+static const String invcredit = "inv-credit";
 
 //recipe
 static const String ingredientList = "ingredient-list";
 static const String recipeList = "recipe-list";
 static const String createRecipe = "create-recipe"; 
 static const String setThreshold = "set-threshold"; 
+
+static const String setThresoldValue = "ingredient/threshold-value";
 
 }

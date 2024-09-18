@@ -1,5 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
+import 'package:spos_retail/views/inventory/stock/return_stock.dart';
 import 'package:spos_retail/views/settings/invoices/additional_notes.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -171,6 +172,10 @@ class _BottomNavState extends State<BottomNav> {
                       
                       listTile(context, 'Manage', onpress: () {
                         Get.to(const InventoryList());
+                      }),
+                       listTile(context, "Return Stock", onpress: () {
+                        purchaseController.getPurchase();
+                        Get.to(() => ReturnStock()); 
                       }),
                       listTile(context, 'Create Supplier', onpress: () {}),
                       listTile(context, 'Supplier list', onpress: () {
