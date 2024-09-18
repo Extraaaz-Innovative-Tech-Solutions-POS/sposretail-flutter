@@ -98,6 +98,7 @@ Widget itemForms(
   hint,
   bool number,
   TextEditingController controller, {
+  onchanged,
   key,
 }) {
   return Column(
@@ -118,9 +119,8 @@ Widget itemForms(
           child: TextFormField(
             keyboardType:
                 number ? TextInputType.number : TextInputType.emailAddress,
-
+                   onChanged: onchanged,
             controller: controller,
-
             style: TextStyle(color: Theme.of(context).highlightColor),
             // keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,

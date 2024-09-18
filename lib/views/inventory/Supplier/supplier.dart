@@ -47,7 +47,8 @@ class _SupplierUIState extends State<SupplierUI> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {
-                      Get.to(() => AddSupplier());
+                      // Get.to(() => AddSupplier());
+                      Get.to(UpdateSupplier( updateisClick: false));
                     },
                     child: customText('Add Supplier',
                         color: Theme.of(context).scaffoldBackgroundColor),
@@ -91,7 +92,19 @@ class _SupplierUIState extends State<SupplierUI> {
                 DataCell(
                 TextButton(
                   onPressed: () {
-                    Get.to(() => UpdateSupplier(id: item.id!.toInt()));
+                    // Get.to(() => UpdateSupplier(id: item.id!.toInt()));
+                                            print("cnumber..${suppliercontroller.supplierNumber.value}");
+
+                      Get.to(() => UpdateSupplier(
+                        id: item.id!.toInt(),
+                        supplierName: item.name,
+                        supplierMobile:  item.mobile ,
+                        supplierGstIn: item.gstin ,
+                        supplierAddress: item.address ,
+                        supplierContactPerson:item.cPerson,
+                        supplierContactNumber: item.cNumber ,
+                        updateisClick: true,
+                        ));
                     
                   },
                   child: const Text("Update")               

@@ -37,8 +37,14 @@ class SupplierController extends GetxController {
         print(response.data);
         print(response.statusMessage);
         if (response.statusCode == 200) {
+           supplierName.value ='';
+           supplierMobile.value ='';
+           supplierGstin.value ='';
+           supplierAddress.value ='';
+           supplierPerson.value ='';
+            supplierNumber.value ='';
           snackBar("Success", "Supplier Added Successfully");
-          Get.off(const InventoryList());
+          Get.off(const SupplierUI());
           getSupplier();
         }
       } catch (e) {
@@ -69,8 +75,15 @@ class SupplierController extends GetxController {
         print(response.data);
         print(response.statusMessage);
         if (response.statusCode == 200) {
+            supplierName.value ='';
+           supplierMobile.value ='';
+           supplierGstin.value ='';
+           supplierAddress.value ='';
+           supplierPerson.value ='';
+            supplierNumber.value ='';
           snackBar("Success", "Supplier Update Successfully");
           // Get.off(const InventoryList());
+            Get.off(const SupplierUI());
           getSupplier();
         }
       } catch (e) {
@@ -114,7 +127,7 @@ class SupplierController extends GetxController {
 
     void getSupplierById(int id){
      try {
-      // Find the supplier by id in the supplierList
+      //  Find the supplier by id in the supplierList
       SupplierData supplier = supplierListdata.firstWhere((supplier) => supplier.id == id);
       print("supplier testing : ${supplier.address}");
       // Update supplier data
