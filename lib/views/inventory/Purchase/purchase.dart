@@ -3,6 +3,7 @@ import '../../widgets/export.dart';
 
 class PurchaseUI extends StatelessWidget {
   final purchaseController = Get.put(PurchaseController());
+  final supplierController = Get.put(SupplierController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class PurchaseUI extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {
+                       supplierController.getSupplier();
                       //purchaseController.getPurchase();
                       //purchaseController.createPurchase();
                       Get.to(() => const AddPurchaseUI());

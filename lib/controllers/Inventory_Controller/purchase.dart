@@ -1,5 +1,7 @@
+
 import 'package:spos_retail/model/Inventory/purchase/purchase_list_data.dart';
 import 'package:spos_retail/model/common_model.dart';
+
 import '../../views/widgets/export.dart';
 
 class PurchaseController extends GetxController {
@@ -13,7 +15,9 @@ class PurchaseController extends GetxController {
   RxString purchaseSgst = "".obs;
   RxString purchaseDiscount = "".obs;
   RxString purchaseAmount = "".obs;
+  RxString purchasePartialAmount = "".obs;
   RxString purchaseNetRange = "".obs;
+  RxBool isPartial = false.obs;
 
   Future<void> createPurchase(context, supplierId) async {
     if (purchaseName.value.isNotEmpty &&
@@ -25,6 +29,12 @@ class PurchaseController extends GetxController {
         purchaseUnit.value.isNotEmpty &&
         purchaseNetRange.value.isNotEmpty &&
         purchaseAmount.value.isNotEmpty) {
+      // Determine if the payment is full or partial
+      final isFullPaid = !isPartial.value;
+      final isPartialPay = isPartial.value;
+      final amountPaid = isPartialPay
+          ? purchaseNetRange.value
+          : purchaseAmount.value;
       try {
         final response =
             await DioServices.postRequest(AppConstant.createPurchase, {
@@ -38,10 +48,10 @@ class PurchaseController extends GetxController {
           "vat": "",
           "tax": false,
           "discount": purchaseDiscount.value,
-          "is_full_paid": 1,
-          "is_partial": 0,
+          "is_full_paid": isFullPaid ? 1 : 0,
+          "is_partial": isPartialPay ? 1 : 0,
           "status": "Completed",
-          "amount_paid": purchaseAmount.value,
+          "amount_paid": amountPaid,
           "payment_type": "cash"
         });
         if (response.statusCode == 200) {
@@ -57,15 +67,15 @@ class PurchaseController extends GetxController {
         print(e);
       }
     } else {
-                        snackBarBottom(
-                            "Error", "Enter the required field", context);
-                      }
+      snackBarBottom("Error", "Enter the required field", context);
+    }
   }
 
   Future<void> getPurchase() async {
     try {
       final response = await DioServices.get(AppConstant.purchaseList);
       if (response.statusCode == 200) {
+        print("FETCH PURCHASE : ----------------------------");
         print(response.data);
         purchadseListdata.assignAll((response.data['data'])
             .map<PurchaseListData>((json) => PurchaseListData.fromJson(json)));
@@ -76,11 +86,18 @@ class PurchaseController extends GetxController {
     }
   }
 
+
+
+
   Future<void> deletePurchase(int id) async {
     try {
       final response =
           await DioServices.delete("${AppConstant.deletePurchase}/$id");
+          update();
       if (response.statusCode == 200) {
+         purchadseListdata.removeWhere((item) => item.id == id);
+    
+        update();
         print("Purchase Delete Sucessfully");
       }
     } catch (e) {

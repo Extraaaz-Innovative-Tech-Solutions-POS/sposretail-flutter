@@ -96,6 +96,7 @@ class SupplierController extends GetxController {
   }
 
   Future<void> getSupplier() async {
+    dropdownSupplierId.clear();
     final response = await DioServices.get(AppConstant.getSupplier);
     print(response.statusMessage);
     try {
@@ -106,7 +107,7 @@ class SupplierController extends GetxController {
         supplierListdata.assignAll((response.data['data'])
             .map<SupplierData>((json) => SupplierData.fromJson(json)));
 
-        dropdownSupplierId.clear();
+        
         for (int indexs = 0; indexs < supplierListdata.length; indexs++) {
           dropdownSupplierId.add({
             'name': supplierListdata[indexs].name,
