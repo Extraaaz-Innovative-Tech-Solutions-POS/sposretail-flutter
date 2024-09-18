@@ -109,6 +109,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     discountController.text = "";
     discountpercentage = 0;
     selectedAddressid = null;
+    print( "ADDDDDDDDressssssss:----------------------    $address");
     //generateBillClick = false;
     generateBillClick = settingsController.whatsappBilling.value;
     setState(() {});
@@ -1046,9 +1047,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final mobileNo = controller.cartOrder.value!.customer == null
         ? "-"
         : controller.cartOrder.value!.customer!.phone.toString();
-    final address = controller.cartOrder.value!.customer == null
-        ? "-"
-        : controller.cartOrder.value!.customer!.address.toString();
+   // final address = 
+    // controller.cartOrder.value!.customer == null
+    //     ? "-"
+       // : controller.cartOrder.value!.customer!.address.toString();
     final sGst = controller.cartOrder.value!.taxData!.sgst.toString();
     final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
 

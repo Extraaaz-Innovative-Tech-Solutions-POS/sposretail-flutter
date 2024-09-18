@@ -28,7 +28,7 @@ class AddCustomerController extends GetxController {
 
       if (response.statusCode == 200) {
         customerdetailsController.getcustomerlist(false);
-        newCustomerID= customerList[customerList.length-1].id! as RxInt; 
+       // newCustomerID.value = customerList[customerList.length-1].id!; 
       //  Get.back();
         snackBar("Success", "Added Sucessfully");
         saveContacts(name, phone);
