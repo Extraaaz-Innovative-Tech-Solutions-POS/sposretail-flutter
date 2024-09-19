@@ -34,6 +34,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
     return Scaffold(
       appBar: commonAppBar(
         context,
+        //'hello'.tr,
         name,
         "($role)",
       ),

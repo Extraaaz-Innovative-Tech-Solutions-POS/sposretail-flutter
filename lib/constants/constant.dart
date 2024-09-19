@@ -48,7 +48,7 @@ customCardDecor(context) {
 
 customText(title, {color, font, weight, alignment, spacing}) {
   return Text(
-    title.toString(),
+    title.toString().tr,
     textAlign: alignment,
     maxLines: 2,
     style: TextStyle(

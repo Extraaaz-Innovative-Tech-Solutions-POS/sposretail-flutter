@@ -1,4 +1,6 @@
 import 'package:spos_retail/views/widgets/export.dart';
+import 'package:spos_retail/views/widgets/my_translation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; 
 
 void main() {
   Get.put(UtcTimeController());
@@ -13,10 +15,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ThemeController>(builder: (c) {
       return GetMaterialApp(
+        translations: MyTranslations(),
+        locale: const Locale('en', 'US'),      // Default locale
+        fallbackLocale: const Locale('en', 'US'),
+        supportedLocales: [
+    Locale('en', 'US'),
+    Locale('es', 'ES'),
+    Locale('fr', 'FR'),
+  ],
         title: 'sPOS',
         debugShowCheckedModeBanner: false,
         theme: c.lightTheme ? light : dark,
         home: const SplashScreen(),
+
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,  // Add this
+        GlobalWidgetsLocalizations.delegate,   // Add this
+        GlobalCupertinoLocalizations.delegate, // Optional: For iOS
+      ],
       );
     });
   }

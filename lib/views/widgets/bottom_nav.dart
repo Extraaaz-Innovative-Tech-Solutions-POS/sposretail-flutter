@@ -247,9 +247,19 @@ class _BottomNavState extends State<BottomNav> {
         ),
         appBar: commonAppBar(
           context,
-          name,
+          "hello".tr,
+         // name,
           "($role)",
           action: [
+          IconButton(onPressed: () {
+            var locale = Locale('es', 'ES');
+                Get.updateLocale(locale);
+          }, icon: Icon(Icons.access_alarm)),
+          IconButton(onPressed: () {
+             var locale = Locale('fr', 'FR');
+                Get.updateLocale(locale);
+          }, icon: Icon(Icons.abc)),
+        
             // GestureDetector(
             //   onTap: () {
             //     showAdvanceNotify(
