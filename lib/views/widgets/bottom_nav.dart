@@ -247,16 +247,19 @@ class _BottomNavState extends State<BottomNav> {
         ),
         appBar: commonAppBar(
           context,
-          "hello".tr,
+          "welcome_to".tr,
          // name,
           "($role)",
           action: [
           IconButton(onPressed: () {
-            var locale = Locale('es', 'ES');
+            var locale = Locale('mr', 'IN');
                 Get.updateLocale(locale);
           }, icon: Icon(Icons.access_alarm)),
           IconButton(onPressed: () {
-             var locale = Locale('fr', 'FR');
+             var locale = 
+             //Locale('fr', 'FR');
+             Locale('hi', 'IN');
+
                 Get.updateLocale(locale);
           }, icon: Icon(Icons.abc)),
         

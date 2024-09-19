@@ -2,8 +2,11 @@ import 'package:spos_retail/views/widgets/export.dart';
 import 'package:spos_retail/views/widgets/my_translation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(UtcTimeController());
+  MyTranslations myTranslations = MyTranslations();
+   await myTranslations.loadTranslations();
   runApp(MyApp());
 }
 
@@ -20,8 +23,8 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale('en', 'US'),
         supportedLocales: [
     Locale('en', 'US'),
-    Locale('es', 'ES'),
-    Locale('fr', 'FR'),
+    Locale('hi', 'IN'),
+    Locale('mr', 'IN'),
   ],
         title: 'sPOS',
         debugShowCheckedModeBanner: false,
