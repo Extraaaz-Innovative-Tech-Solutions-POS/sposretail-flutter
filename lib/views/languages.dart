@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:spos_retail/controllers/languages_controller.dart';
-
+import 'widgets/export.dart';
 
 class Languages extends StatelessWidget {
-  const Languages({Key? key}) : super(key: key);
+  const Languages({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +17,14 @@ class Languages extends StatelessWidget {
               itemCount: languagesController.languages.length,
               itemBuilder: (context, index) {
                 final language = languagesController.languages[index];
-                final isSelected = languagesController.selectedLocale.value == language['locale'];
-            
+                final isSelected = languagesController.selectedLocale.value == "${language['locale']}_${language['country']}";
+
                 return GestureDetector(
                   onTap: () {
                     languagesController.changeLanguage(language['locale']!, language['country']!);
                   },
                   child: Card(
-                    color: isSelected ? Theme.of(context).secondaryHeaderColor.withOpacity(50) : Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                       side: BorderSide(
@@ -44,10 +41,9 @@ class Languages extends StatelessWidget {
                         language['name']!,
                         style: TextStyle(
                           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected ? Theme.of(context).secondaryHeaderColor : Colors.black,
+                          color: isSelected ? Theme.of(context).secondaryHeaderColor : Theme.of(context).highlightColor,
                         ),
                       ),
-                      trailing: isSelected ? Icon(Icons.check, color: Theme.of(context).secondaryHeaderColor) : null,
                     ),
                   ),
                 );

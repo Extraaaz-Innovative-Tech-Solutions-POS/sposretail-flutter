@@ -12,6 +12,9 @@ class LanguagesController extends GetxController {
 
   void changeLanguage(lan, code) {
     var locale = Locale(lan, code);
+    selectedLocale.value = "${lan}_$code";
+    update();
+    print(selectedLocale.value);
     Get.updateLocale(locale);
   }
 }

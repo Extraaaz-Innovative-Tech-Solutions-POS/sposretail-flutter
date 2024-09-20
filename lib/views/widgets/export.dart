@@ -138,6 +138,7 @@ export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/languages_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/supplier.dart';
