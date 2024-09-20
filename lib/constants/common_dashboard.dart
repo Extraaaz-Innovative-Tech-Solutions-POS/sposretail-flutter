@@ -183,12 +183,12 @@ Widget modeofPayments(BuildContext context, UserController usercontroller,
           child: Row(
             children: [
               GetBuilder<PaymentController>(builder: (c) {
-                return paymentOptions(context, "Online Payment",
+                return paymentOptions(context, "online_payment".tr,
                     paymentController.onlinePaymentAmount.value.toString());
               }),
               const SizedBox(width: 12),
               GetBuilder<PaymentController>(builder: (c) {
-                return paymentOptions(context, "Cash Payment",
+                return paymentOptions(context, "cash_payment".tr,
                     paymentController.cashPaymentAmount.value.toString());
               }),
             ],

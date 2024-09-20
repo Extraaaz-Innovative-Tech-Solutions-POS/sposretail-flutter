@@ -2,6 +2,7 @@ import '../views/widgets/export.dart';
 
 ThemeData dark = ThemeData(
   dividerTheme: const DividerThemeData(color: Colors.transparent),
+  secondaryHeaderColor: Colors.blue,
   //scaffoldBackgroundColor: const Color(0xFF000000),
   scaffoldBackgroundColor: Colors.white,
   // primaryColor: const Color(0xFFFFB401),

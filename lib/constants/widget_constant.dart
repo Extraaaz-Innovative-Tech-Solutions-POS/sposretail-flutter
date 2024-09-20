@@ -16,7 +16,7 @@ Widget search(context, {onchange}) {
         onChanged: onchange,
         decoration: InputDecoration(
           border: InputBorder.none,
-          hintText: 'Search for something',
+          hintText: "search_for_something".tr,
           hintStyle: TextStyle(color: Theme.of(context).hintColor),
           labelStyle: TextStyle(color: Theme.of(context).highlightColor),
           prefixIcon: Icon(Icons.search, color: Theme.of(context).primaryColor),

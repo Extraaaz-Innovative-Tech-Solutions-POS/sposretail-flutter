@@ -161,7 +161,7 @@ class _DashboardState extends State<Dashboard> {
                     // ),
 
                     usercontroller.user!.role == "manager"
-                        ? headingTitle(context, "Dashboard")
+                        ? headingTitle(context, "dashboard".tr)
                         : const SizedBox.shrink(),
                     //* Dashboard Graphs ------------->
                     commondashboardGraphs(context, usercontroller,
@@ -171,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
 
                     headingTitle(
                       context,
-                      "Top Selling Products",
+                      "top_selling_products".tr,
                     ),
                     //* Search
                     search(

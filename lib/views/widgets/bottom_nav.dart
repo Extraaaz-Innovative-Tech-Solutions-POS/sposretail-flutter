@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:spos_retail/views/inventory/stock/return_stock.dart';
 import 'package:spos_retail/views/inventory/stock/stock_alert.dart';
+import 'package:spos_retail/views/languages.dart';
 import 'package:spos_retail/views/settings/invoices/additional_notes.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -195,6 +196,11 @@ class _BottomNavState extends State<BottomNav> {
                       })
                     ],
                   ),
+                  listTile(context, "Languages",
+                      leading: Icon(Icons.apartment,
+                          color: Theme.of(context).focusColor), onpress: () {
+                    Get.to(const Languages());
+                  }),
                   listTile(
                     context,
                     "Logout",
@@ -247,8 +253,7 @@ class _BottomNavState extends State<BottomNav> {
         ),
         appBar: commonAppBar(
           context,
-          "welcome_to".tr,
-         // name,
+          name,
           "($role)",
           action: [
           IconButton(onPressed: () {
