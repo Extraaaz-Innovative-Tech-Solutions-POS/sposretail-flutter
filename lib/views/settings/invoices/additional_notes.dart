@@ -1,41 +1,44 @@
+import 'package:spos_retail/controllers/additional_info_controller.dart';
+
 import '../../widgets/export.dart';
 
-class AdditionalNotes extends StatefulWidget {
-  const AdditionalNotes({super.key});
 
-  @override
-  State<AdditionalNotes> createState() => _AdditionalNotesState();
-}
-
-class _AdditionalNotesState extends State<AdditionalNotes> {
-  final _printernameController = TextEditingController();
-
-  String? noteAdded;
-  @override
-  void initState() {
-    super.initState();
-    getSharedPrefrenceLocal();
-  }
-
-  saveNotes() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("AddNote", _printernameController.text).whenComplete(
-      () {
-        snackBarBottom("Sucess", "Note Saved Sucessfully", context);
-        getSharedPrefrenceLocal();
-      },
-    );
-    setState(() {});
-  }
-
-  getSharedPrefrenceLocal() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    noteAdded = pref.getString("AddNote");
-    setState(() {});
-  }
-
+class AdditionalInfo extends StatelessWidget {
+  final infoController = Get.put(AdditionalInfoController());
+  AdditionalInfo({super.key});
+  
   @override
   Widget build(BuildContext context) {
+
+
+    Widget infoTextField(hint,{onchanged}) {
+  return Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  height: 50,
+                  color: Theme.of(context).focusColor,
+                  child: TextField(
+                    onChanged: onchanged,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: Theme.of(context).highlightColor),
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).highlightColor,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).highlightColor),
+                        ),
+                        hintText: hint,
+                        hintStyle: const TextStyle(color: Colors.grey)),
+                  ),
+                ));
+ }
+
+
     return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: commonAppBar(context, "Additional Notes", ""),
@@ -50,38 +53,16 @@ class _AdditionalNotesState extends State<AdditionalNotes> {
                     fontSize: 16, color: Theme.of(context).primaryColor),
               ),
             ),
-            Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  height: 50,
-                  color: Theme.of(context).focusColor,
-                  child: TextField(
-                    controller: _printernameController,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: Theme.of(context).highlightColor),
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Theme.of(context).highlightColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Theme.of(context).highlightColor),
-                        ),
-                        hintText: 'Enter Your Note',
-                        hintStyle: const TextStyle(color: Colors.grey)),
-                  ),
-                )),
+            infoTextField('Enter Your Note',onchanged: (i) {
+                      infoController.notes.value = i;
+                    }),
             const SizedBox(
               height: 20.0,
             ),
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  saveNotes();
-                 
+                  infoController.saveNotes(context);                
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -111,15 +92,21 @@ class _AdditionalNotesState extends State<AdditionalNotes> {
                     color: Theme.of(context).focusColor,
                     border:
                         Border.all(color: Theme.of(context).highlightColor)),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-                  child: customText(
-                    noteAdded ?? "Not Connected",
-                    color: Theme.of(context).primaryColor, 
-                  ),
+                child: GetBuilder<AdditionalInfoController>(
+                  builder: (c) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+                      child: customText(c.notes.value,
+                        color: Theme.of(context).primaryColor, 
+                      ),
+                    );
+                  }
                 ),
               ),
           ],
         ));
+        
   }
+
+ 
 }

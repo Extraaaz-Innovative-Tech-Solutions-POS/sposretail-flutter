@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:spos_retail/controllers/additional_info_controller.dart';
 import 'package:spos_retail/views/inventory/stock/return_stock.dart';
 import 'package:spos_retail/views/inventory/stock/stock_alert.dart';
 import 'package:spos_retail/views/languages.dart';
@@ -26,6 +27,7 @@ class _BottomNavState extends State<BottomNav> {
   final usercontroller = Get.put(UserController());
   final purchaseController = Get.put(PurchaseController());
   final recipeController = Get.put(RecipeController());
+  final infoController = Get.put(AdditionalInfoController());
 
   final customerController = Get.put(CustomerlistController());
   int _bottomNavIndex = 1;
@@ -145,10 +147,11 @@ class _BottomNavState extends State<BottomNav> {
                     Get.to(const Customerdetails());
                     customerController.getcustomerlist(false);
                   }),
-                  listTile(context, "Add Note",
+                  listTile(context, "Additional Info",
                       leading: Icon(Icons.note_add_sharp,
                           color: Theme.of(context).focusColor), onpress: () {
-                             Get.to(() => const AdditionalNotes());
+                            infoController.getAdditionalInfo();
+                             Get.to(() => AdditionalInfo());
                     
                   }),
                   listTile(context, "Retail Update",
