@@ -17,6 +17,7 @@ class AuthController extends GetxController {
         "password": password,
       });
       if (response.statusCode == 200) {
+        print("CUSTOMER DETAILS: ------------------- ${response.data}");
         bool success = response.data['success'];
         if (success == true) {
           snackBar("Success", "Login Successful");
@@ -51,6 +52,8 @@ class AuthController extends GetxController {
           pref.setString("Phone", phoneNo ?? "--");
           pref.setInt("RestaurantId", restaurantId ?? 0);
           pref.setString("BusinessType", businessType ?? "--");
+
+          print("RESTAUANT ID IS THIS: ------------------$restaurantId");
 
           if (sharedrole == 'manager' || sharedrole == "cashier") {
             userController

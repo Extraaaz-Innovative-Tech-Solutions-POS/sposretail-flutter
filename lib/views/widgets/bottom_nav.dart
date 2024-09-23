@@ -30,6 +30,7 @@ class _BottomNavState extends State<BottomNav> {
   final infoController = Get.put(AdditionalInfoController());
 
   final customerController = Get.put(CustomerlistController());
+  var restaurantId;
   int _bottomNavIndex = 1;
   final List<IconData> iconList = [
     Icons.grid_view,
@@ -46,12 +47,17 @@ class _BottomNavState extends State<BottomNav> {
     sectionController.fetchSection();
   }
 
+
+
   sharedPrefrence() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     name = pref.getString('name');
     role = pref.getString('role');
     businessType = pref.getString("BusinessType");
-    setState(() {});
+    setState(() {
+       restaurantId = pref.getInt("RestaurantId");
+    });
+    print("CUSTOMER RESTAURANT ID -------------------------------- $restaurantId");
   }
    Future<void> _statusbool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -286,8 +292,10 @@ class _BottomNavState extends State<BottomNav> {
                                 if (statusclick == true) {
                                   Get.to(() => const TakeAwayCustomerDetails());
                                 } else {
+                                  print("RESTAURANT PASSING $restaurantId");
                                   Get.to(() => OrderBookingScreen(
                                         ordertype: "Take Away",
+                                        restaurantId: restaurantId.toString(),
                                       ));
                                 }
                               });

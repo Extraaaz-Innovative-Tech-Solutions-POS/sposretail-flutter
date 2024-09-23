@@ -16,6 +16,7 @@ class OrderBookingScreen extends StatefulWidget {
   final String? section_id;
   final String? customerName;
   final String? advanceOrderDateTime;
+  final String? restaurantId;
 
   OrderBookingScreen(
       {Key? key,
@@ -29,6 +30,7 @@ class OrderBookingScreen extends StatefulWidget {
       this.section_id,
       this.customerName,
       this.advanceOrderDateTime,
+      this.restaurantId,
       this.customerId})
       : super(key: key);
 
@@ -42,6 +44,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   String? openItemPrice;
 
   final menucontroller = Get.put(AllItemsController());
+  final authController = Get.put(AuthController());
   // final user = Get.put(UserController());
   //final cartController = Get.put(CartController());
   final modifierItemsById = Get.put(GetModifierItemById());
@@ -91,6 +94,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
   double newPrice =0.0;
 
+
+
   @override
   void initState() {
     super.initState();
@@ -110,7 +115,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   checkKotStatus() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     kotboolChecking = pref.getBool("KOTBoolStatus");
-    setState(() {});
+    setState(() {
+    });
   }
 
 //* Generating the table Id. For the Particular Order.
@@ -1231,6 +1237,33 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                 )
                                         ],
                                       ),
+                                      widget.restaurantId == "217" ? SizedBox(
+                                                        height: 30.0,
+                                                        width: 100.0,
+                                                        child: TextField(
+                                                          controller:
+                                                              quantityController,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .highlightColor),
+                                                                  /////////////////////////
+                                                                  
+                                                          onChanged: (value) {
+                                                            
+                                                          },
+
+                                                          /////////////////////////////
+                                                          onSubmitted: (value) {
+                                                            setState(() {
+                                                                
+                                                            });
+                                                          },
+                                                        )) : const SizedBox.shrink()
+                                      ///////////////
                                     ],
                                   ),
                                 ),

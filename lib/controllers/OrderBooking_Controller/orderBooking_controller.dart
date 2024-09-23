@@ -141,7 +141,7 @@ class OrderBookingController extends GetxController {
       try {
         final response =
             await DioServices.postRequest(AppConstant.cart, orders.toJson());
-            print("response testing... ${response}");
+            print("response testing... ${response.data}");
         handlePostRequestResponse(
             response,
             kotBoolChecking ?? false,

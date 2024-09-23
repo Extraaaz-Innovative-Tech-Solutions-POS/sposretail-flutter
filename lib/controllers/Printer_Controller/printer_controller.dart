@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 import '../../constants/web_sockets.dart';
@@ -39,14 +38,14 @@ class PrinterController extends GetxController {
       var calculatedTime = times.second - notedtimes.value;
 
       if (calculatedTime.abs() > 5) {
-        print("--------------->" + _printerStatus.value);
+        print("--------------->${_printerStatus.value}");
         flag.value = true;
         update();
         await _makePostRequest('http://localhost:2001', formData.toJson());
         break;
       } else {
-        print("----------------->" + _printerStatus.value);
-        await Future.delayed(Duration(seconds: 5));
+        print("----------------->${_printerStatus.value}");
+        await Future.delayed(const Duration(seconds: 5));
         // launchApp("com.example.myapplication");
         flag.value = true;
         update();
@@ -68,7 +67,7 @@ class PrinterController extends GetxController {
         notedtimes.value = times.second;
         break;
       } else {
-        await Future.delayed(Duration(seconds: 5));
+        await Future.delayed(const Duration(seconds: 5));
         // launchApp("com.example.myapplication");
         flag.value = true;
         update();
@@ -89,7 +88,7 @@ class PrinterController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        log('Request Successful: ${data}');
+        log('Request Successful: $data');
       } else {
         log('Request Failed with status code: ${response.statusCode}');
       }
