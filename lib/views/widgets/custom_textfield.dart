@@ -1,12 +1,12 @@
 import 'export.dart';
 
 Widget textFieldWithHeading(
-      key,
+     // key,
       String heading,
       BuildContext context,
       String hinttext,
       TextInputType keyboardtype,
-      {onchanged}) {
+      {onchanged, key, controller}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,6 +23,7 @@ Widget textFieldWithHeading(
             child: SizedBox(
               height: 55,
               child: TextFormField(
+                controller: controller,
                 keyboardType: keyboardtype,
                 style: TextStyle(color: Theme.of(context).highlightColor),
                 decoration: InputDecoration(

@@ -77,8 +77,10 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
               }),
             ),
 
-            textFieldWithHeading(productName, "Product Name", context,
-                "Product Name", TextInputType.text, onchanged: (v) {
+            textFieldWithHeading("Product Name", context,
+                "Product Name", TextInputType.text,
+                key: productName,
+                 onchanged: (v) {
               purchaseController.purchaseName.value = v;
             }),
             const SizedBox(height: 10),
@@ -86,21 +88,25 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
               children: [
                 Expanded(
                     child: textFieldWithHeading(
-                        unit, "Unit", context, "Unit", TextInputType.text,
+                        "Unit", context, "Unit", TextInputType.text,
+                        key: unit,
                         onchanged: (v) {
                   purchaseController.purchaseUnit.value = v;
                 })),
                 // SizedBox(width: 10),
                 Expanded(
-                    child: textFieldWithHeading(quantity, "Quantity", context,
-                        "Quantity", TextInputType.number, onchanged: (v) {
+                    child: textFieldWithHeading("Quantity", context,
+                        "Quantity", TextInputType.number, 
+                        key: quantity,
+                        onchanged: (v) {
                   purchaseController.purchaseQuantity.value = v;
                 })),
               ],
             ),
             const SizedBox(height: 10),
             textFieldWithHeading(
-                rate, "Rate", context, "Rate", TextInputType.text,
+                "Rate", context, "Rate", TextInputType.text,
+                key: rate,
                 onchanged: (v) {
               purchaseController.purchaseRate.value = v;
             }),
@@ -109,14 +115,17 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
               children: [
                 Expanded(
                     child: textFieldWithHeading(
-                        amount, "Amount", context, "Amount", TextInputType.text,
+                        "Amount", context, "Amount", TextInputType.text,
+                        key: amount,
                         onchanged: (v) {
                   purchaseController.purchaseAmount.value = v;
                 })),
                 // SizedBox(width: 10),
                 Expanded(
-                    child: textFieldWithHeading(dicount, "Discount", context,
-                        "Discount", TextInputType.number, onchanged: (v) {
+                    child: textFieldWithHeading("Discount", context,
+                        "Discount", TextInputType.number, 
+                        key: dicount,
+                        onchanged: (v) {
                   purchaseController.purchaseDiscount.value = v;
                 })),
               ],
@@ -126,13 +135,15 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
               children: [
                 Expanded(
                     child: textFieldWithHeading(
-                        csgst, "CGST", context, "CGST", TextInputType.text,
+                        "CGST", context, "CGST", TextInputType.text,
+                        key: csgst,
                         onchanged: (v) {
                   purchaseController.purchaseCgst.value = v;
                 })),
                 Expanded(
                     child: textFieldWithHeading(
-                        sgst, "SGST", context, "SGST", TextInputType.number,
+                        "SGST", context, "SGST", TextInputType.number,
+                        key: sgst,
                         onchanged: (v) {
                   purchaseController.purchaseSgst.value = v;
                 })),
@@ -197,11 +208,11 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
                     children: [
                       const SizedBox(height: 10), // Add spacing
                       textFieldWithHeading(
-                        partialAmount,
                         "Partial Amount",
                         context,
                         "Enter Partial Amount",
                         TextInputType.number,
+                        key: partialAmount,
                         onchanged: (v) {
                           purchaseController.purchasePartialAmount.value = v;
                         },
@@ -215,7 +226,8 @@ class _AddPurchaseUIState extends State<AddPurchaseUI> {
             ),
             
             textFieldWithHeading(
-                netrange, "Net Pay", context, "Net Pay", TextInputType.text,
+                "Net Pay", context, "Net Pay", TextInputType.text,
+                key: netrange,
                 onchanged: (v) {
               purchaseController.purchaseNetRange.value = v;
             }),

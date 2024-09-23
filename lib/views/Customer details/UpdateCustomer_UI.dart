@@ -75,7 +75,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
 
 
               textFieldWithHeading(
-                _addressKey, "Address", context, "Enter Address",TextInputType.name ,
+                "Address", context, "Enter Address",TextInputType.name ,
+                key: _addressKey,
                 onchanged: (v){
                    newcustomer.newCustomerAddress.value = v;
                   //  _newCustomerAddress = newcustomer.newCustomerAddress as String;

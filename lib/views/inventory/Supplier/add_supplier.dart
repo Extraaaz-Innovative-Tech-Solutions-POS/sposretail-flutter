@@ -23,35 +23,36 @@ class AddSupplier extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            textFieldWithHeading(_nameKey, "Supplier Name", context,
-                "Supplier Name", TextInputType.name, onchanged: (v) {
+            textFieldWithHeading("Supplier Name", context,
+                "Supplier Name", TextInputType.name, key: _nameKey, onchanged: (v) {
               suppliercontroller.supplierName.value = v;
             }),
             const SizedBox(height: 5),
-            textFieldWithHeading(_phoneKey, "Mobile Number", context,
-                "Mobilenumber", TextInputType.number, onchanged: (v) {
+            textFieldWithHeading("Mobile Number", context,
+                "Mobilenumber", TextInputType.number, key: _phoneKey, onchanged: (v) {
               suppliercontroller.supplierMobile.value = v;
             }),
             const SizedBox(height: 5),
-            textFieldWithHeading(
-                _emailKey, "Address", context, "Address", TextInputType.text,
+            textFieldWithHeading("Address", context, "Address", TextInputType.text,
+                key: _emailKey,
                 onchanged: (v) {
               suppliercontroller.supplierAddress.value = v;
             }),
             const SizedBox(height: 5),
             textFieldWithHeading(
-                _gstkey, "GSTIN No.", context, "GSTIN No.", TextInputType.text,
+                "GSTIN No.", context, "GSTIN No.", TextInputType.text,
+                key: _gstkey,
                 onchanged: (v) {
               suppliercontroller.supplierGstin.value = v;
             }),
             const SizedBox(height: 5),
-            textFieldWithHeading(_contactpersonKey, "Contact Person", context,
-                "Contact Person", TextInputType.text, onchanged: (v) {
+            textFieldWithHeading("Contact Person", context,
+                "Contact Person", TextInputType.text, key: _contactpersonKey, onchanged: (v) {
               suppliercontroller.supplierPerson.value = v;
             }),
             const SizedBox(height: 5),
-            textFieldWithHeading(_contactNumberKey, "Contact Number", context,
-                "Contact Number", TextInputType.number, onchanged: (v) {
+            textFieldWithHeading("Contact Number", context,
+                "Contact Number", TextInputType.number, key:_contactNumberKey, onchanged: (v) {
               suppliercontroller.supplierNumber.value = v;
             }),
             const SizedBox(height: 10),

@@ -95,7 +95,7 @@ export '../../model/floor_table/fetch_section.dart';
 export '../../model/floor_table/table_section_list.dart';
 export 'package:spos_retail/controllers/Printer_Controller/desktop_printerController.dart';
 export 'package:spos_retail/model/ModifierGroup/get_modifierGroup.dart';
-
+export 'package:spos_retail/views/widgets/custom_textfield.dart';
 export 'package:spos_retail/views/Taxes/addTaxes.dart';
 export 'package:spos_retail/views/dashboard.dart';
 export 'package:spos_retail/views/inventory/Manage/inventory_list.dart';
@@ -138,6 +138,7 @@ export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/additional_info_controller.dart';
 export 'package:spos_retail/controllers/languages_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/purchase.dart';
