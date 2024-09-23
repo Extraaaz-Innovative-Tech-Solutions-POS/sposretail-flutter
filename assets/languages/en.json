@@ -42,7 +42,14 @@
     "item_sales_report": "Item Sales Report",
     "sold_items_report": "Sold Items Report",
     "cancelled_item_report": "Cancelled Item Report",
-    "select_date": "Select Date"
+    "select_date": "Select Date",
+
+
+
+
+    "staff": "Staff",
+    "sub_items_group": "Sub Items Group",
+    "sub_items": "Sub Items"
 
 
 

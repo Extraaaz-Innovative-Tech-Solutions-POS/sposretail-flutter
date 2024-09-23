@@ -70,7 +70,7 @@ class _SupplierUIState extends State<SupplierUI> {
                 BorderSide(color: Theme.of(context).highlightColor)),
         columns: [
             dataColumn(context, "Srno.", true),
-          dataColumn(context, "Name", false),
+          dataColumn(context, "name".tr, false),
           dataColumn(context, "Edit", true),
           dataColumn(context, "View", true),
           dataColumn(context, "Action", true),

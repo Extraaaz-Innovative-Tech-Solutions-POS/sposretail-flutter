@@ -137,14 +137,14 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: customText(
-                                        "Name",
+                                        "name".tr,
                                         color: Theme.of(context).highlightColor,
                                       ),
                                     )
                                   : const SizedBox.shrink(),
                               namefield
                                   ? registerNoObscureForm(size, _namecontroller,
-                                      "Name", Icons.person, () {
+                                      "name".tr, Icons.person, () {
                                       if (_namecontroller.text.isNotEmpty &&
                                           _emailController.text.isNotEmpty &&
                                           _passwordcontroller.text.isNotEmpty &&
@@ -197,7 +197,7 @@ class _RegisterState extends State<Register> {
                                           size.width > 400 ? 400 : size.width,
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
-                                      child: customText("Email",
+                                      child: customText("email".tr,
                                           color:
                                               Theme.of(context).highlightColor),
                                     )
@@ -206,7 +206,7 @@ class _RegisterState extends State<Register> {
                                   ? registerNoObscureForm(
                                       size,
                                       _emailController,
-                                      "Email",
+                                      "email".tr,
                                       Icons.mail, () {
                                       if (_namecontroller.text.isNotEmpty &&
                                           _emailController.text.isNotEmpty &&
@@ -268,7 +268,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: Text(
-                                        "Password",
+                                        "password".tr,
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .highlightColor),
@@ -277,7 +277,7 @@ class _RegisterState extends State<Register> {
                                   : const SizedBox.shrink(),
                               passwordfield
                                   ? registerForm(size, _passwordcontroller,
-                                      "Password", Icons.password_rounded,
+                                      "password".tr, Icons.password_rounded,
                                       obscure: obsucre,
                                       suffixicon: obsucre
                                           ? Icons.visibility_off
@@ -356,7 +356,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: customText(
-                                        "Phone",
+                                        "phone".tr,
                                         color: Theme.of(context).highlightColor,
                                       ),
                                     )
@@ -365,7 +365,7 @@ class _RegisterState extends State<Register> {
                                   ? registerNoObscureForm(
                                       size,
                                       _phoneController,
-                                      "Phone",
+                                      "phone".tr,
                                       keyboardType: TextInputType.phone,
                                       Icons.phone, () {
                                       if (_namecontroller.text.isNotEmpty &&
@@ -432,18 +432,18 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: Text(
-                                        "Retailer Name",
+                                        "retailer_name".tr,
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .highlightColor),
                                       ),
                                     )
-                                  : SizedBox.shrink(),
+                                  : const SizedBox.shrink(),
                               resturantname
                                   ? registerNoObscureForm(
                                       size,
                                       _restaurantController,
-                                      "Retailer Name",
+                                      "retailer_name".tr,
                                       keyboardType: TextInputType.name,
                                       Icons.apartment, () {
                                       if (_namecontroller.text.isNotEmpty &&
@@ -515,7 +515,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: Text(
-                                        "Retailer Address",
+                                        "retailer_address".tr,
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .highlightColor),
@@ -526,7 +526,7 @@ class _RegisterState extends State<Register> {
                                   ? registerNoObscureForm(
                                       size,
                                       _addressController,
-                                      "Retailer Address",
+                                      "retailer_address".tr,
                                       keyboardType: TextInputType.streetAddress,
                                       Icons.location_history, () {
                                       if (_namecontroller.text.isNotEmpty &&
@@ -601,7 +601,7 @@ class _RegisterState extends State<Register> {
                                       margin: const EdgeInsets.only(
                                           left: 30, top: 10.0, bottom: 4.0),
                                       child: customText(
-                                        "Retailer Address",
+                                        "retailer_address".tr,
                                         color: Theme.of(context).highlightColor,
                                       ),
                                     )
@@ -746,7 +746,7 @@ class _RegisterState extends State<Register> {
                                     Get.offAll(Login());
                                   },
                                   child: customText(
-                                    "Login",
+                                    "login".tr,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),

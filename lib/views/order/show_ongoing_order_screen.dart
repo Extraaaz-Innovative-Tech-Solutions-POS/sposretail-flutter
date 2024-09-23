@@ -538,7 +538,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
           horizontalInside:
               BorderSide(color: Theme.of(context).highlightColor)),
       columns: [
-        dataColumn("Items", false),
+        dataColumn("items".tr, false),
         dataColumn("Qty.", true),
       //  dataColumn("Rate", true),
         dataColumn("Amt.", true),

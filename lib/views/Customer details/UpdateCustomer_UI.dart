@@ -59,11 +59,11 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Padding(padding: EdgeInsets.all(8.0)),
-          itemForms(context, "Name", widget.click ?widget.name :"Enter Name", false, nameController,
+          itemForms(context, "name".tr, widget.click ?widget.name :"Enter Name", false, nameController,
               key: _nameKey),
           itemForms(
             context,
-            "Phone",
+            "phone".tr,
             widget.phone,
             true,
             phoneController,
@@ -82,13 +82,6 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                   print("Address : ${ newcustomer.newCustomerAddress}");
                 }
                 ),
-
-          // buildTextFieldWithHeading(
-          //     widget.name ?? "Name", widget.name ?? "", context, nameController),
-          // const SizedBox(height: 5),
-          // buildTextFieldWithHeading("Phone",widget.phone ?? "", context, phoneController),
-          // const SizedBox(height: 5),
-          // description("Address",widget.address ?? "", context, addressController),
           const SizedBox(height: 60),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),

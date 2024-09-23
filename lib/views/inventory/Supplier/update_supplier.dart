@@ -85,7 +85,7 @@ class _UpdateSupplierState extends State<UpdateSupplier> {
 
             itemForms(
                 context,
-                "Name",
+                "name".tr,
                 widget.updateisClick ? widget.supplierName : "Supplier Name",
                 false,
                 supplierNameController,

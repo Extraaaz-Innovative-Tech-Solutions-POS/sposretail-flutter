@@ -77,7 +77,7 @@ class _KOTstatusState extends State<KOTstatus> {
           // }),
 
           
-          switchButton("Client Info", switchclick ?? false,
+          switchButton("client_info".tr, switchclick ?? false,
               onChange: (value) {
             _checkBool();
             _statusbool();

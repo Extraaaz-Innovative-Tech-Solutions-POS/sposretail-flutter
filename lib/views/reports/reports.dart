@@ -70,7 +70,7 @@ class _ReportsState extends State<Reports> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                customText("Reports",
+                customText("reports".tr,
                     color: Theme.of(context).highlightColor, font: 20.0),
                 Container(
                   margin: const EdgeInsets.all(10),
@@ -410,7 +410,7 @@ class _ReportsState extends State<Reports> {
                     child: DataTable(
                         columnSpacing: 25,
                         columns: [
-                          dataColumn("Name"),
+                          dataColumn("name".tr),
                           dataColumn("Qty."),
                           dataColumn("Price"),
                           dataColumn("Total"),
@@ -460,7 +460,7 @@ class _ReportsState extends State<Reports> {
                     child: DataTable(
                         columnSpacing: 25,
                         columns: [
-                          dataColumn("Name"),
+                          dataColumn("name".tr),
                           dataColumn("Qty."),
                           dataColumn("Price"),
                           dataColumn("Total"),

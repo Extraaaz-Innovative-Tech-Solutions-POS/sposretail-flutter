@@ -36,7 +36,7 @@ class _RestaurantUpdateState extends State<RestaurantUpdate> {
 
     // print("TEXT =======${_restaursantNameController.text}");
     _restaursantNameController =
-        TextEditingController(text: restaurantName ?? "Name");
+        TextEditingController(text: restaurantName ?? "name".tr);
     _restaursantAddressController =
         TextEditingController(text: restaurantAddress ?? "address");
     _stateController = TextEditingController(text: restaurantState ?? "");
@@ -67,18 +67,18 @@ class _RestaurantUpdateState extends State<RestaurantUpdate> {
         children: [
           _buildTextFieldWithHeading(
               _restaurantnameKey,
-              "Retailer Name",
+              "retailer_name".tr,
               context,
               _restaursantNameController,
-              "Retailer Name",
+              "retailer_name".tr,
               TextInputType.name),
           const SizedBox(height: 5),
           _buildTextFieldWithHeading(
               _restaurantAddressKey,
-              "Retailer Address",
+              "retailer_address".tr,
               context,
               _restaursantAddressController,
-              "Retailer Address",
+              "retailer_address".tr,
               TextInputType.name),
           const SizedBox(height: 5),
           _buildTextFieldWithHeading(_restaurantStateKey, "State", context,

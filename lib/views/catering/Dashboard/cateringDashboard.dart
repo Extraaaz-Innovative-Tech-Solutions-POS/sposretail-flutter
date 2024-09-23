@@ -127,7 +127,7 @@ class _CateringDashboardState extends State<CateringDashboard> {
                     modeofPayments(context, usercontroller, paymentController),
                     headingTitle(
                       context,
-                      "Top Selling Products",
+                      "top_selling_products".tr,
                     ),
                     //* Search
                     search(

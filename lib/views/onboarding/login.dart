@@ -100,10 +100,10 @@ class _LoginState extends State<Login> {
                                   width: size.width > 400 ? 400 : size.width,
                                   margin: const EdgeInsets.only(
                                       left: 30, top: 10.0, bottom: 4.0),
-                                  child: customText("Email",
+                                  child: customText("email".tr,
                                       color: Theme.of(context).focusColor)),
 
-                              emailForm(size, _emailController, "Email",
+                              emailForm(size, _emailController, "email".tr,
                                   Icons.email, () {}),
 
                               //! Password Field----------->
@@ -111,13 +111,13 @@ class _LoginState extends State<Login> {
                                 width: size.width > 400 ? 400 : size.width,
                                 margin: const EdgeInsets.only(
                                     left: 30, top: 10.0, bottom: 4.0),
-                                child: customText("Password",
+                                child: customText("password".tr,
                                     color: Theme.of(context).focusColor),
                               ),
 
                               textField(
                                 context,
-                                "Password",
+                                "password".tr,
                                 _passwordcontroller,
                                 Icons.password_rounded,
                                 size,
@@ -170,7 +170,7 @@ class _LoginState extends State<Login> {
                                       }
                                     },
                                     child: customText(
-                                      "Login",
+                                      "login".tr,
                                       color: Theme.of(context).focusColor,
                                     ),
                                   ),
@@ -183,10 +183,10 @@ class _LoginState extends State<Login> {
                                     const EdgeInsets.symmetric(horizontal: 30),
                                 child: TextButton(
                                   onPressed: () {
-                                    Get.offAll((Register()));
+                                    Get.offAll((const Register()));
                                   },
                                   child: customText(
-                                    "Create An Account",
+                                    "create_an_account".tr,
                                     color: Theme.of(context).primaryColor,
                                   ),
                                 ),

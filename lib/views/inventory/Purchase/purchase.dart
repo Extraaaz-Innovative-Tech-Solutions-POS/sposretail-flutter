@@ -51,7 +51,7 @@ class PurchaseUI extends StatelessWidget {
                   BorderSide(color: Theme.of(context).highlightColor)),
           columns: [
             dataColumn(context, "Srno.", true),
-            dataColumn(context, "Name", false),
+            dataColumn(context, "name".tr, false),
             dataColumn(context, "Date", true),
             dataColumn(context, "Invoice", true),
             dataColumn(context, "Action", true),

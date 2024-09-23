@@ -612,7 +612,7 @@ class _ShowOngoingOrderState extends State<CateringOngoingOrder> {
       columns: [
         DataColumn(
             label: Center(
-              child: Text("Items",
+              child: Text("items".tr,
                   style: TextStyle(color: Theme.of(context).highlightColor, fontSize: 16.0)),
             ),
             numeric: false),

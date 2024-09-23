@@ -96,7 +96,7 @@ class _CateringAdvanceState extends State<CateringAdvance> {
             text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
-                    text: "Menu".padRight(5),
+                    text: "menu".tr.padRight(5),
                     style: const TextStyle(fontSize: 18)),
                 TextSpan(
                     text: widget.ordertype,

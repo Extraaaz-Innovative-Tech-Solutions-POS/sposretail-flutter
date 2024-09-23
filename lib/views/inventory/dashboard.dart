@@ -115,7 +115,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
                   ),
                 ),
                 customText(
-                  "Top Selling Products",
+                  "top_selling_products".tr,
                   font: 16.0,
                   color: Theme.of(context).highlightColor,
                 ),

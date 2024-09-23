@@ -36,7 +36,7 @@ class _AddCategoryState extends State<AddItems> {
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12.0),
-                    child: headingTitle(context, "Items"),
+                    child: headingTitle(context, "items".tr),
                   ),
                 ),
                 Padding(

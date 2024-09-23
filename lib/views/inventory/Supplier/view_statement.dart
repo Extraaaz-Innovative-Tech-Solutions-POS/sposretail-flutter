@@ -35,7 +35,7 @@ class ViewStatement extends StatelessWidget {
             horizontalInside:
                 BorderSide(color: Theme.of(context).highlightColor)),
         columns: [
-          dataColumn(context, "Name", true),
+          dataColumn(context, "name".tr, true),
           dataColumn(context, "Rate", false),
           dataColumn(context, "Amount", true),
           dataColumn(context, "Quantity", true),

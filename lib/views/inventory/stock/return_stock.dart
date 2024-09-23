@@ -46,7 +46,7 @@ class ReturnStock extends StatelessWidget {
                   BorderSide(color: Theme.of(context).highlightColor)),
           columns: [
             dataColumn(context, "Invoice", true),
-            dataColumn(context, "Items", false),
+            dataColumn(context, "items".tr, false),
             dataColumn(context, "Quantity", true),
             dataColumn(context, "Rate", true),
             dataColumn(context, "Action", true),

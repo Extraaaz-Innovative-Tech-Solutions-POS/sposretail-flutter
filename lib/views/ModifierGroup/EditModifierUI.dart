@@ -426,7 +426,7 @@ class _EditmodifierState extends State<Editmodifier> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Name".padLeft(10),
+                    "name".tr.padLeft(10),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor, fontSize: 17.0),
                   ),
@@ -669,12 +669,12 @@ class _EditmodifierState extends State<Editmodifier> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Name".padLeft(15),
+                    "name".tr.padLeft(15),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor, fontSize: 17.0),
                   ),
                   Text(
-                    "Category".padRight(15),
+                    "category".tr.padRight(15),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor, fontSize: 17.0),
                   )
