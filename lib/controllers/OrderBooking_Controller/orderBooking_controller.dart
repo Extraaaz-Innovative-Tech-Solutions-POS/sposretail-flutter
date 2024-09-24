@@ -11,12 +11,14 @@ class OrderBookingController extends GetxController {
   final desktopPrinterController = Get.put(DesktopPrinterController());
   final cartController = Get.put(CartController());
   final settingsController = Get.put(SettingsController());
+  final infoController = Get.put(AdditionalInfoController());
   var printername, inchestype;
   DateTime invoiceDate = DateTime.now();
   @override
   void onInit() {
     super.onInit(); // Don't forget to call super.onInit()
     sharedPrefrence();
+    infoController.getAdditionalInfo();
   }
 
   Future<void> sharedPrefrence() async {
@@ -301,6 +303,9 @@ class OrderBookingController extends GetxController {
       default:
       print("items on navigating testing.... ${items[0].quantity}");
         Get.to(() => ShowOngoingOrder(
+          gst: infoController.gstNo.value,
+          fssai: infoController.fssai.value,
+
               ordertype: orderType,
               tableId: takeAwayIDs,
               orderData: orders.toJson(),

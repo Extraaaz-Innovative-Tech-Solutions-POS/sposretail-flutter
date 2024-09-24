@@ -26,7 +26,7 @@ class CategoryModel {
         items!.add(ItemModel.fromJson(v));
       });
     }
-    itemImage = json['item_image'];
+    itemImage = json['Image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -57,6 +57,8 @@ class ItemModel {
   var sectionWisePricing;     //"sectionWisePricings"
   List<ModifierGroups>? modifierGroups;
   var shortCode;
+  dynamic itemImage;
+
 
   ItemModel(
       {this.id,
@@ -71,7 +73,9 @@ class ItemModel {
       this.taxPercentage,
       this.sectionWisePricing,
       this.modifierGroups,
-      this.shortCode});
+      this.shortCode,
+      this.itemImage
+      });
 
   ItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -92,6 +96,7 @@ class ItemModel {
       });
     }
     shortCode = json['short_code'];
+    itemImage = json['Image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -111,6 +116,7 @@ class ItemModel {
           modifierGroups!.map((v) => v.toJson()).toList();
     }
     data['short_code'] = shortCode;
+    data['Image'] = itemImage;
     return data;
   }
 }

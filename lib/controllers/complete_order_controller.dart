@@ -77,7 +77,7 @@ print("complete order....testing ${response.data}");
           true,
           context,
           controller.orderedItems,
-          customername:  controller.cartOrder.value!.customer!.name.toString(),
+          customername:   controller.c   cartOrder.value!.customer!.name.toString(),
           customerphone: controller.cartOrder.value!.customer!.phone.toString(),
           customeraddress: controller.cartOrder.value!.customer!.address.toString()
         );

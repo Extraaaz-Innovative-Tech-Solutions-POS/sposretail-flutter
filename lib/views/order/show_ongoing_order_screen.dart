@@ -26,6 +26,8 @@ class ShowOngoingOrder extends StatefulWidget {
   final String? totalAmount;
   final String? remainingAmount;
   final String? totalGivenAmount;
+  final String? gst;
+  final String? fssai;
 
   ShowOngoingOrder({
     Key? key,
@@ -40,7 +42,9 @@ class ShowOngoingOrder extends StatefulWidget {
     this.customerId,
     this.totalAmount,
     this.totalGivenAmount,
-    this.remainingAmount
+    this.remainingAmount,
+    this.gst,
+    this.fssai
   }) : super(key: key);
 
   @override
@@ -82,6 +86,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       Get.put(GetCustomerAddressController());
   final priceController = TextEditingController();
   final quantityController = TextEditingController();
+  final additionalInfo = Get.put(AdditionalInfoController());
   final WebSocketService _webSocketService = WebSocketService();
 
   PaymentMethod? paymentMethod;
@@ -103,6 +108,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   void initState() {
     print("items at init ... ${Items}");
     super.initState();
+
     fullPayment = true;
     //currentdate = time.day
     //;
@@ -114,6 +120,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     setState(() {});
 
     sharedPrefrence();
+    additionalInfo.getAdditionalInfo();
     paymentOptions = PaymentOptions.full;
 
     widget.ordertype == "Delivery"
@@ -1078,7 +1085,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       qty: itemsquantity.toString(),
       billType: '1',
       header:
-          "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/****",
+          "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/****",
       price: itemsprice.toString(),
       amount: itemAmount.toString(),
       dateTime:

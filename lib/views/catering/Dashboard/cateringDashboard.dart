@@ -105,18 +105,18 @@ class _CateringDashboardState extends State<CateringDashboard> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        multipleOption(context, "Catering Advanced Order", () {
-                          // floorController.fetchFloorTable(true, "Advance");
-                          Get.to(() => const CateringPendingOrderList());
-                          // PendingOrderUI(advance: false, catering:true));
-                          // Get.to(() => const CateringAdvance(
-                          //       ordertype: "Advance",
-                          //     ));
-                        }),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     multipleOption(context, "Catering Advanced Order", () {
+                    //       // floorController.fetchFloorTable(true, "Advance");
+                    //       Get.to(() => const CateringPendingOrderList());
+                    //       // PendingOrderUI(advance: false, catering:true));
+                    //       // Get.to(() => const CateringAdvance(
+                    //       //       ordertype: "Advance",
+                    //       //     ));
+                    //     }),
+                    //   ],
+                    // ),
                     usercontroller.user!.role == "manager"
                         ? headingTitle(context, "Dashboard")
                         : const SizedBox.shrink(),

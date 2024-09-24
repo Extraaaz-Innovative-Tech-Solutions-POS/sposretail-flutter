@@ -87,7 +87,7 @@ class FloorController extends GetxController {
 
         // Navigate based on the floor parameter
         if (floor == true) {
-          Get.to(const FloorSectionTable());
+        //  Get.to(const FloorSectionTable());
         } else if (floor == false) {
           Get.to(AddFloorSection());
         } else {

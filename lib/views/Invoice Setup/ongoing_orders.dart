@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:spos_retail/controllers/additional_info_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OngoingOrder extends StatefulWidget {
@@ -11,11 +14,13 @@ class OngoingOrder extends StatefulWidget {
 
 class _OngoingOrderState extends State<OngoingOrder> {
   final allLiveOrderController = Get.put(AllLiveOrderController());
+  final infoController = Get.put(AdditionalInfoController());
 
   @override
   void initState() {
     super.initState();
     allLiveOrderController.fetchallLiveOrder();
+    infoController.getAdditionalInfo();
   }
 
   @override
@@ -47,6 +52,8 @@ class _OngoingOrderState extends State<OngoingOrder> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => ShowOngoingOrder(
+                                      gst: infoController.gstNo.value,
+                                      fssai: infoController.fssai.value,
                                           price: 100,
                                           paymentcount: 1,
                                           ordertype: allLiveOrderController
@@ -182,6 +189,9 @@ class _OngoingOrderState extends State<OngoingOrder> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => ShowOngoingOrder(
+                                      gst: infoController.gstNo.value,
+                                      fssai: infoController.fssai.value,
+
                                           price: allLiveOrderController
                                               .allLiveOrder[index].total, //100,
 

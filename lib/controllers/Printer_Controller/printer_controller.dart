@@ -79,6 +79,7 @@ class PrinterController extends GetxController {
   }
 
   Future<void> _makePostRequest(String url, Map<String, dynamic> data) async {
+    print("PRINTER DATA : ---------------- ${data}");
     try {
       Dio dio = Dio();
       var response = await dio.post(

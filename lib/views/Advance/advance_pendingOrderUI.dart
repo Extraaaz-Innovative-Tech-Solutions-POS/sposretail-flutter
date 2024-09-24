@@ -59,6 +59,7 @@ class _PendingAdvanceOrderState extends State<PendingAdvanceOrder> {
                             return GestureDetector(
                               onTap: () {
                                 Get.to(() => ShowOngoingOrder(
+                                  
                                       ordertype: "Advance",
                                       tableId: controller
                                           .pendingAdvanceOrderList[index]
@@ -73,6 +74,7 @@ class _PendingAdvanceOrderState extends State<PendingAdvanceOrder> {
                                               ?.length ??
                                           0,
                                       items: [],
+                                      
                                       //  orderData: orders.toJson(),
                                     ));
                               },

@@ -1,10 +1,18 @@
+
+
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:spos_retail/model/common_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
+import 'package:http/http.dart' as http;
 
 class ItemController extends GetxController {
   List<ItemModel> items = [];
   RxBool isLoading = false.obs;
   final sectionWisePricing = Get.put(SectionWisePricing());
+
+   Rx<File?> image = Rx<File?>(null);
+  final picker = ImagePicker();
 
   @override
   void onInit() {
@@ -59,6 +67,134 @@ class ItemController extends GetxController {
       isLoading.value = false; // Set loading state to false after API operation
     }
   }
+
+  Future<void> pickImage() async {
+  final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  if (pickedFile != null) {
+    final file = File(pickedFile.path);
+    if (await file.exists() && (file.path.endsWith('.jpg') || file.path.endsWith('.png') || file.path.endsWith('.jpeg'))) {
+      image.value = file; // Set the image using Rx
+      print("Image picked: ${image.value}");
+    } else {
+      print("Picked file is not a valid image.");
+    }
+  } else {
+    print('No image selected.');
+  }
+}
+
+////////////////////
+Future<void> sendToServer(AddItem addItem, String url) async {
+  // Fetch token from SharedPreferences
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  final token = pref.getString("token");
+
+  // Prepare the multipart request
+  var request = http.MultipartRequest('POST', Uri.parse(url));
+
+  // Set headers
+  request.headers['Accept'] = 'application/json';
+  request.headers['Content-Type'] = 'multipart/form-data'; // Automatically set for multipart
+  if (token != null) {
+    request.headers['Authorization'] = 'Bearer $token';
+  }
+
+  // Add fields
+  request.fields['item_name'] = addItem.item_name;
+  request.fields['price'] = addItem.price.toString();
+  request.fields['discount'] = addItem.discount.toString();
+  request.fields['inventory_status'] = addItem.inventory_status;
+  request.fields['category_id'] = addItem.category_id.toString();
+
+  if (image != null) {
+    request.files.add(await http.MultipartFile.fromPath(
+      'item_image', // The name of the field in your API
+      image.value!.path,
+    ));
+  }
+
+  // Print for debugging
+  print('Request URL: $url');
+  print('Authorization Token: $token');
+
+  // Send the request
+  var response = await request.send();
+    print( "data test.... : ${response  }");
+
+
+  // print( "datat test : ${response.}");
+  // Check the response
+  if (response.statusCode == 200) {
+    print( "datat test : ${response  }");
+    print('Item added successfully!');
+    
+    
+    image.value =null;
+      Get.put(CategoryController()).fetchCategories();
+        Get.to(() => BottomNav(pageindex: 0));
+        update();
+  } else {
+    print('Failed to add item: ${response.reasonPhrase}');
+    print('Status code: ${response.statusCode}');
+  }
+}
+///////////////////////
+
+Future<void> postItemImage(AddItem addItem, String url) async {
+  // Fetch token from SharedPreferences
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  final token = pref.getString("token");
+
+  // Prepare the multipart request
+  var request = http.MultipartRequest('PUT', Uri.parse(url));
+
+
+  // Set headers
+  request.headers['Accept'] = 'application/json';
+  request.headers['Content-Type'] = 'multipart/form-data'; // Automatically set for multipart
+  if (token != null) {
+    request.headers['Authorization'] = 'Bearer $token';
+  }
+
+  // Add fields
+  request.fields['item_name'] = addItem.item_name;
+  request.fields['price'] = addItem.price.toString();
+  request.fields['discount'] = addItem.discount.toString();
+  request.fields['inventory_status'] = addItem.inventory_status;
+  request.fields['category_id'] = addItem.category_id.toString();
+
+  if (image != null) {
+    request.files.add(await http.MultipartFile.fromPath(
+      'item_image', // The name of the field in your API
+      image.value!.path,
+    ));
+  }
+
+  // Print for debugging
+  print('Request URL: $url');
+  print('Authorization Token: $token');
+
+  // Send the request
+  var response = await request.send();
+    print( "data test.... : ${response  }");
+
+
+  // print( "datat test : ${response.}");
+  // Check the response
+  if (response.statusCode == 200) {
+    print( "datat test : ${response  }");
+    print('Item added successfully!');
+    
+    
+    image.value =null;
+      Get.put(CategoryController()).fetchCategories();
+        Get.to(() => BottomNav(pageindex: 0));
+        update();
+  } else {
+    print('Failed to Update item: ${response.reasonPhrase}');
+    print('Status code: ${response.statusCode}');
+  }
+}
 
   Future<void> deleteItem(String id) async {
     try {

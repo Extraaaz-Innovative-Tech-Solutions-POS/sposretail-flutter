@@ -82,6 +82,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   bool orderTap = false;
 
   final ScrollController scrollController = ScrollController();
+  final infoController = Get.put(AdditionalInfoController());
   List<String> selectedAddonNames = [];
   bool addons = false;
   DateTime datetime = DateTime.now();
@@ -99,7 +100,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   @override
   void initState() {
     super.initState();
-    //print("fffffffffffffffffffffffffffffffffffffffff  ${widget.section_id}");
+    infoController.getAdditionalInfo();
     menucontroller.fetchMenu(widget.section_id);
     clickonActionChips = "All";
     data = datetime.day;
@@ -212,7 +213,11 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               ? IconButton(
                   onPressed: () {
                     if (widget.table_id != null) {
+                      print("llllllllllllll");
+                      print(infoController.gstNo.value);
                       Get.to(() => ShowOngoingOrder(
+                        gst: infoController.gstNo.value,
+                        fssai: infoController.fssai.value,
                             floor: widget.floor,
                             table: widget.table,
                             ordertype: widget.ordertype,
@@ -587,7 +592,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   itemName: allFilteredItems[index].name!,
                   itemId: allFilteredItems[index].id!,
                   itemPrice: allFilteredItems[index].price!,
-                  image: '',
+                  image: allFilteredItems[index].itemImage,
                   menuItem: allFilteredItems[index],
                   categoryId: allFilteredItems[index].categoryId.toString(),
                 );
@@ -603,7 +608,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     required GlobalKey<State<StatefulWidget>> key,
     required String itemName,
     required String itemPrice,
-    String image = "",
+    String ?image,
     dynamic menuItem,
     required dynamic categoryId,
     required int itemId,
