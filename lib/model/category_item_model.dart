@@ -4,13 +4,16 @@ class CategoryModel {
   int? restaurantId;
   String? description;
   List<ItemModel>? items;
+  dynamic itemImage;
 
   CategoryModel(
       {this.categoryId,
       this.categoryName,
       this.restaurantId,
       this.description,
-      this.items});
+      this.items,
+      this.itemImage
+      });
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id '];
@@ -23,6 +26,7 @@ class CategoryModel {
         items!.add(ItemModel.fromJson(v));
       });
     }
+    itemImage = json['item_image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +35,7 @@ class CategoryModel {
     data['category_name'] = categoryName;
     data['restaurant_id '] = restaurantId;
     data['description'] = description;
+    data['item_name'] = itemImage;
     if (items != null) {
       data['items'] = items!.map((v) => v.toJson()).toList();
     }
@@ -83,7 +88,7 @@ class ItemModel {
     if (json['modifierGroups'] != null) {
       modifierGroups = <ModifierGroups>[];
       json['modifierGroups'].forEach((v) {
-        modifierGroups!.add(new ModifierGroups.fromJson(v));
+        modifierGroups!.add(ModifierGroups.fromJson(v));
       });
     }
     shortCode = json['short_code'];
