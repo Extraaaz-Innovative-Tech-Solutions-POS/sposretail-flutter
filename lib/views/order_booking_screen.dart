@@ -191,29 +191,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
             clickonActionChips = "All";
             setState(() {});
           },
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: "menu".tr.padRight(5),
-                    style: const TextStyle(fontSize: 18)),
-                TextSpan(
-                    text: "Retail Orders",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color:
-                            Theme.of(context).highlightColor.withOpacity(0.7))),
-              ],
-            ),
-          ),
+          child: customText("menu".tr.padRight(5), font: 18.0, color: Theme.of(context).highlightColor)
         ),
         actions: [
           widget.ordertype == "Dine"
               ? IconButton(
                   onPressed: () {
                     if (widget.table_id != null) {
-                      print("llllllllllllll");
                       print(infoController.gstNo.value);
                       Get.to(() => ShowOngoingOrder(
                         gst: infoController.gstNo.value,

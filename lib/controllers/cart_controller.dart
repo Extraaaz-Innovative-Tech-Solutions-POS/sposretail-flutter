@@ -27,7 +27,7 @@ class CartController extends GetxController {
       if (response.statusCode == 200) {
         orderedItems.clear();
         cartOrder.value = Kot.fromJson(response.data['kot']);
-        orderedItems.addAll(cartOrder.value!.items!);
+        orderedItems.assignAll(cartOrder.value!.items!);
         ordernumber = response.data['kot']['order_number'];
         successful.value = true;
         update();
@@ -45,6 +45,7 @@ class CartController extends GetxController {
   }
 
   DateTime invoiceDate = DateTime.now();
+  
   Future<void> completeBilling(
       String orderType,
       String invoicedata,
@@ -154,6 +155,7 @@ class CartController extends GetxController {
 
         //   return file.path;
         // }
+        print("CUSTOMER NAME billlllllllllllll --------------------------> $customername");
 
         final output = await getTemporaryDirectory();
         final Uint8List pdfBytes = await invoicePDF;

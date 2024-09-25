@@ -1,5 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:spos_retail/model/Pending%20orders/catering_pending_order.dart';
 
 import '../../model/Delivery/completedDeliveryModel.dart';
 import '../../model/Delivery/outForDeliveryModel.dart';
@@ -10,7 +9,7 @@ import '../../views/widgets/export.dart';
 class DeliveryController extends GetxController {
   List<PendingOrderData> pendingOrderList = [];
   List<AdvancePendingOrderData> pendingAdvanceOrderList = [];
-  List<CateringPendingOrderData> cateringAdvanceOrderList = [];
+  //List<CateringPendingOrderData> cateringAdvanceOrderList = [];
   List<OutForDeilveryModelData> outForDeliveryList = [];
   List<CompletedDeliveryOrdersData> completedDeliveryOrdersList = [];
   RxBool checkadvance = false.obs;
@@ -41,22 +40,22 @@ class DeliveryController extends GetxController {
     }
   }
 
-  Future<void> cateringAdvancedPendingOrder() async {
-    try {
-      var response = await DioServices.get(AppConstant.pendingCateringOrder);
-      cateringAdvanceOrderList.clear();
+  // Future<void> cateringAdvancedPendingOrder() async {
+  //   try {
+  //     var response = await DioServices.get(AppConstant.pendingCateringOrder);
+  //     cateringAdvanceOrderList.clear();
 
-      cateringAdvanceOrderList.assignAll((response.data['data'] as List)
-          .map((orderJson) => CateringPendingOrderData.fromJson(orderJson)));
-      checkfordavance();
-      update();
-      // print("CATERING PENDING LENGTH----------------------------");
+  //     cateringAdvanceOrderList.assignAll((response.data['data'] as List)
+  //         .map((orderJson) => CateringPendingOrderData.fromJson(orderJson)));
+  //     checkfordavance();
+  //     update();
+  //     // print("CATERING PENDING LENGTH----------------------------");
 
-      // print(cateringAdvanceOrderList.length);
-    } catch (e) {
-      print(e);
-    }
-  }
+  //     // print(cateringAdvanceOrderList.length);
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future<void> outforDelivery() async {
     try {

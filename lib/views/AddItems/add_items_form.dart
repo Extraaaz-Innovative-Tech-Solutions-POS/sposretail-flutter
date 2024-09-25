@@ -368,7 +368,7 @@ class _AddItemsFormState extends State<AddItemsForm> {
 
                         
                       widget.updateisClick
-                          ?  itemController.postItemImage(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}")  
+                          ?  itemController.postItemImage(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image")  
                           
                           // itemController.updateItem(
                           //     widget.itemId.toString(), addItem)

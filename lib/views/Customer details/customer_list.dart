@@ -51,7 +51,7 @@ class _CustomerListState extends State<CustomerList> {
           builder: (CustomerlistController c) {
         if (c.customer.isEmpty) {
           return const Center(
-            child: Text('Error'),
+            child: Text('No Customer Found'),
           );
         } else {
           final customerlist = searchQuery.isEmpty
@@ -187,14 +187,13 @@ class _CustomerListState extends State<CustomerList> {
                                                       .phone
                                                       .toString();
                                               print(
-                                                  "CartController PHONEddd : ======================== ${cartController.phone.value}");
+                                                  "CartController PHONEddd : ======================== ${cartController.phone.value} ${customerlist[index].name
+                                                      .toString()}");
                                               Get.to(OrderBookingScreen(
                                                   ordertype: "Take Away",
-                                                  customerName: c
-                                                      .customer[index].name
+                                                  customerName: customerlist[index].name
                                                       .toString(),
-                                                  customerId:
-                                                      c.customer[index].id));
+                                                  customerId:customerlist[index].id));
                                             }
                                           : () {
                                               _statusbool().whenComplete(() =>

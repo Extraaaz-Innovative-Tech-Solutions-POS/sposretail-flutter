@@ -37,6 +37,7 @@ class CompleteOrderController extends GetxController {
     var money_given,
     var delivery_address_id,
     int discounted_amount,
+
     BuildContext context,
   ) async {
     final CartController controller = Get.put(CartController());
@@ -49,6 +50,7 @@ class CompleteOrderController extends GetxController {
       moneyGiven: money_given,
       delivery_address_id: delivery_address_id,
       discounted_amount: discounted_amount,
+
     );
 
     try {
@@ -77,7 +79,7 @@ print("complete order....testing ${response.data}");
           true,
           context,
           controller.orderedItems,
-          customername:   controller.c   cartOrder.value!.customer!.name.toString(),
+          customername:  controller.cartOrder.value!.customer!.name.toString(),
           customerphone: controller.cartOrder.value!.customer!.phone.toString(),
           customeraddress: controller.cartOrder.value!.customer!.address.toString()
         );

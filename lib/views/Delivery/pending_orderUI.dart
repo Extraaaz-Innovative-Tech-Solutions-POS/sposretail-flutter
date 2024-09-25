@@ -88,9 +88,9 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                             child: ListView.builder(
                               itemCount: widget.advance!
                                   ? controller.pendingAdvanceOrderList.length
-                                  : widget.catering!
-                                      ? controller
-                                          .cateringAdvanceOrderList.length
+                                  // : widget.catering!
+                                  //     ? controller
+                                  //         .cateringAdvanceOrderList.length
                                       : controller.pendingOrderList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
@@ -113,12 +113,12 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                                       index]
                                                   .tableId
                                                   .toString()
-                                              : widget.catering!
-                                                  ? controller
-                                                      .cateringAdvanceOrderList[
-                                                          index]
-                                                      .tableId
-                                                      .toString()
+                                              // : widget.catering!
+                                              //     ? controller
+                                              //         .cateringAdvanceOrderList[
+                                              //             index]
+                                              //         .tableId
+                                              //         .toString()
                                                   : controller
                                                       .pendingOrderList[index]
                                                       .tableId
@@ -152,12 +152,12 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                                         index]
                                                     .status
                                                     .toString()
-                                                : widget.catering!
-                                                    ? controller
-                                                        .cateringAdvanceOrderList[
-                                                            index]
-                                                        .status
-                                                        .toString()
+                                                // : widget.catering!
+                                                //     ? controller
+                                                //         .cateringAdvanceOrderList[
+                                                //             index]
+                                                //         .status
+                                                //         .toString()
                                                     : controller
                                                         .pendingOrderList[index]
                                                         .status
@@ -187,11 +187,11 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                             child: Text(
                                               widget.advance!
                                                   ? "Order Type:- ${controller.pendingAdvanceOrderList[index].orderType!}"
-                                                  : widget.catering!
-                                                      ? controller
-                                                          .cateringAdvanceOrderList[
-                                                              index]
-                                                          .orderType!
+                                                  // : widget.catering!
+                                                  //     ? controller
+                                                  //         .cateringAdvanceOrderList[
+                                                  //             index]
+                                                  //         .orderType!
                                                       : "Order Type:- ${controller.pendingOrderList[index].orderType!}",
                                               style: TextStyle(
                                                   color: Theme.of(context)
@@ -205,12 +205,12 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                             child: Text(
                                               widget.advance!
                                                   ? "Total:- ₹${controller.pendingAdvanceOrderList[index].total!}"
-                                                  : widget.catering!
-                                                      ? controller
-                                                          .cateringAdvanceOrderList[
-                                                              index]
-                                                          .total
-                                                          .toString()
+                                                  // : widget.catering!
+                                                  //     ? controller
+                                                  //         .cateringAdvanceOrderList[
+                                                  //             index]
+                                                  //         .total
+                                                  //         .toString()
                                                       : "Total:- ₹${controller.pendingOrderList[index].total!}",
                                               style: TextStyle(
                                                   color: Theme.of(context)
@@ -224,13 +224,13 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                             child: Text(
                                               widget.advance!
                                                   ? "Item:- ${controller.pendingAdvanceOrderList[index].items!.length}"
-                                                  : widget.catering!
-                                                      ? controller
-                                                          .cateringAdvanceOrderList[
-                                                              index]
-                                                          .items!
-                                                          .length
-                                                          .toString()
+                                                  // : widget.catering!
+                                                  //     ? controller
+                                                  //         .cateringAdvanceOrderList[
+                                                  //             index]
+                                                  //         .items!
+                                                  //         .length
+                                                  //         .toString()
                                                       : "Item:- ${controller.pendingOrderList[index].items!.length}",
                                               style: TextStyle(
                                                   color: Theme.of(context)

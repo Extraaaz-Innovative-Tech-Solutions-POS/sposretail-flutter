@@ -140,13 +140,13 @@ Future<void> sendToServer(AddItem addItem, String url) async {
 }
 ///////////////////////
 
-Future<void> postItemImage(AddItem addItem, String url) async {
+Future<void>postItemImage(AddItem addItem, String url) async {
   // Fetch token from SharedPreferences
   SharedPreferences pref = await SharedPreferences.getInstance();
   final token = pref.getString("token");
 
   // Prepare the multipart request
-  var request = http.MultipartRequest('PUT', Uri.parse(url));
+  var request = http.MultipartRequest('POST', Uri.parse(url));
 
 
   // Set headers
@@ -188,6 +188,7 @@ Future<void> postItemImage(AddItem addItem, String url) async {
     
     image.value =null;
       Get.put(CategoryController()).fetchCategories();
+      Get.put(AllItemsController().fetchMenu(""));
         Get.to(() => BottomNav(pageindex: 0));
         update();
   } else {

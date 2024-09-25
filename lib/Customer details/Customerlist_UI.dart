@@ -49,7 +49,7 @@ class _CustomerdetailsState extends State<Customerdetails> {
               builder: (CustomerlistController c) {
                 if (c.customer.isEmpty) {
                   return const Center(
-                    child: Text('Error'),
+                    child: Text('No Customers'),
                   );
                 } else {
                   final customerlist = searchQuery.isEmpty
