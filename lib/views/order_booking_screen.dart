@@ -646,7 +646,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     children: [
                       Expanded(
                           child: Text(
-                        itemName.length > 8 ? "${itemName.substring(0, 8)}.." : itemName,
+                        itemName.length > 8 ? "${itemName.substring(0, 6)}.." : itemName,
                         maxLines: 2,
                         style: TextStyle(
                           color: Theme.of(context).highlightColor,

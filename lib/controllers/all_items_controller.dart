@@ -12,7 +12,12 @@ class AllItemsController extends GetxController {
       if (response.statusCode == 200) {
         menu = response.data['data']
             .map<CategoryModel>((json) => CategoryModel.fromJson(json))
-            .toList();
+            .toList(); 
+            
+            items.assignAll((response.data['data'])
+          .map<ItemModel>((json) => ItemModel.fromJson(json)));
+
+
         //log(response.data['data'].toString());
         update();
       } else {

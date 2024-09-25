@@ -19,6 +19,7 @@ final CustomerlistController customerlistController =
     Get.put(CustomerlistController());
 final cartController = Get.put(CartController());
 final newcustomer = Get.put(AddCustomerController());
+final allItemsController = Get.put(AllItemsController());
 
 class _CustomerListState extends State<CustomerList> {
   String searchQuery = '';
@@ -51,7 +52,7 @@ class _CustomerListState extends State<CustomerList> {
           builder: (CustomerlistController c) {
         if (c.customer.isEmpty) {
           return const Center(
-            child: Text('No Customer Found'),
+            child: Text('Loading'),
           );
         } else {
           final customerlist = searchQuery.isEmpty
@@ -147,6 +148,8 @@ class _CustomerListState extends State<CustomerList> {
                           },
                           onTap: widget.update
                               ? () {
+                                allItemsController.fetchMenu(
+                                                          sectionId.toString());
                                   _statusbool();
                                   Get.to(() => UpdateCustomer(
                                         click: true,
