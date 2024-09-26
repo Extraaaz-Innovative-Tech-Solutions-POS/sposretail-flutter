@@ -140,6 +140,17 @@ Future<void> sendToServer(AddItem addItem, String url) async {
 }
 ///////////////////////
 
+postItemCondition(AddItem addItem, String url, id) {
+  if(image.value != null) {
+    postItemImage(addItem, url);
+    updateItem(id, addItem);
+  } else {
+    updateItem(id, addItem);
+  }
+
+
+}
+
 Future<void>postItemImage(AddItem addItem, String url) async {
   // Fetch token from SharedPreferences
   SharedPreferences pref = await SharedPreferences.getInstance();
@@ -175,6 +186,8 @@ Future<void>postItemImage(AddItem addItem, String url) async {
   print('Authorization Token: $token');
 
   // Send the request
+
+  
   var response = await request.send();
     print( "data test.... : ${response  }");
 
@@ -183,7 +196,7 @@ Future<void>postItemImage(AddItem addItem, String url) async {
   // Check the response
   if (response.statusCode == 200) {
     print( "datat test : ${response  }");
-    print('Item added successfully!');
+    print('Item image posted successfully!');
     
     
     image.value =null;

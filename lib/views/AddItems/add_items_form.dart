@@ -344,13 +344,7 @@ class _AddItemsFormState extends State<AddItemsForm> {
              
 
                   onPressed: ()async {
-                      File imageFile = File(itemController.image.value!.path);
-                    // var request = http.MultipartRequest('POST', Uri.parse('YOUR_API_ENDPOINT'));
-                    // String filePath = "File: '/data/user/0/com.spos/cache/eeb30127-6bbe-4a11-9134-3c3ef03e98b9/1000068757.jpg'";
-                    //  String extractedPath = filePath.replaceFirst("File: ", "").replaceAll("'", "");
-                    //  File file = File(extractedPath);
-
-
+                    
                     if (nameController.text.isNotEmpty &&
                         priceController.text.isNotEmpty) {
                       sectionWisePricing.assignSectionWisePricing(widget.itemId,
@@ -368,7 +362,8 @@ class _AddItemsFormState extends State<AddItemsForm> {
 
                         
                       widget.updateisClick
-                          ?  itemController.postItemImage(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image")  
+                          ? itemController.postItemCondition(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image", widget.itemId.toString())
+                          // itemController.postItemImage(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image")  
                           
                           // itemController.updateItem(
                           //     widget.itemId.toString(), addItem)
