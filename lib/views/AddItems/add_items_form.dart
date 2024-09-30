@@ -243,43 +243,6 @@ class _AddItemsFormState extends State<AddItemsForm> {
                   )
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      Radio(
-                        value: 1,
-                        activeColor: Theme.of(context).primaryColor,
-                        groupValue: _selectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedValue = value!;
-                          });
-                        },
-                      ),
-                      customText('Pure Veg',
-                          color: Theme.of(context).highlightColor)
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        activeColor: Theme.of(context).primaryColor,
-                        value: 2,
-                        groupValue: _selectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            _selectedValue = value!;
-                          });
-                        },
-                      ),
-                      customText('Non Veg',
-                          color: Theme.of(context).highlightColor)
-                    ],
-                  ),
-                ],
-              ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -363,11 +326,8 @@ class _AddItemsFormState extends State<AddItemsForm> {
                         
                       widget.updateisClick
                           ? itemController.postItemCondition(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image", widget.itemId.toString())
-                          // itemController.postItemImage(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image")  
                           
-                          // itemController.updateItem(
-                          //     widget.itemId.toString(), addItem)
-                          :  itemController.sendToServer(addItem, "https://sposversion2.extraaaz.com/api/items")  ;  //itemController.postItem(addItem);
+                          : itemController.postItemAddCondition(addItem,"https://sposversion2.extraaaz.com/api/items" ) ;    // itemController.sendToServer(addItem, "https://sposversion2.extraaaz.com/api/items")  ;  //itemController.postItem(addItem);
                     } else {
                       snackBarBottom(
                           "Error", "Please Enter the required field", context);

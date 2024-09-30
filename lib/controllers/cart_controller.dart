@@ -45,7 +45,7 @@ class CartController extends GetxController {
   }
 
   DateTime invoiceDate = DateTime.now();
-  
+
   Future<void> completeBilling(
       String orderType,
       String invoicedata,
@@ -58,29 +58,26 @@ class CartController extends GetxController {
       List<Items> order,
       {bool cashier = false,
       var customeraddress,
-      var customername ,
+      var customername,
       var customerphone,
       var thaliPrice,
       var numberOfthali,
       var datetime,
-      var sgst, statusclick,
+      var sgst,
+      statusclick,
       var cgst}) async {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       printername = pref.getString("BillingPrinter");
 
       Future<void> _statusbool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    statusclick = prefs.getBool("CustomerDetailsBool");
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        statusclick = prefs.getBool("CustomerDetailsBool");
 
-    update();
-  }
+        update();
+      }
 
-
-  print("testing customer details :${customername}");
-
-
-
+      print("testing customer details :${customername}");
 
       if (Responsive.isDesktop(context)) {
         final desktopInvoicePdf = DesktopInvoicePdf();
@@ -109,16 +106,12 @@ class CartController extends GetxController {
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
 
-       _statusbool().whenComplete(() {
-                                if (statusclick == true && settingsController.whatsappBilling.value) {
-                                  print("PHONE NUMBER : --------------------- +91${phone.value}");
-                                   shareWhatsapp.shareFile(phone: "+91${phone.value}",xFile);
-                                 
-                                } 
-                              });
-
-
-
+        _statusbool().whenComplete(() {
+          if (statusclick == true && settingsController.whatsappBilling.value) {
+            print("PHONE NUMBER : --------------------- +91${phone.value}");
+            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile);
+          }
+        });
 
         Get.to(BottomNav());
       } else {
@@ -136,16 +129,16 @@ class CartController extends GetxController {
             customerName: customername,
             customerPhone: customerphone);
 
-            settingsController.printPreview.value ?
-
-        await Printing.layoutPdf(
-          onLayout: (format) {
-            return Future(() => invoicePDF);
-          },
-          format: PdfPageFormat.roll57,
-          name:
-              "${invoiceDate.year}${invoiceDate.month}${invoiceDate.day}${invoiceDate.hour}${invoiceDate.minute}${invoiceDate.second}${invoiceDate.millisecond}",
-        ): null;
+        settingsController.printPreview.value
+            ? await Printing.layoutPdf(
+                onLayout: (format) {
+                  return Future(() => invoicePDF);
+                },
+                format: PdfPageFormat.roll57,
+                name:
+                    "${invoiceDate.year}${invoiceDate.month}${invoiceDate.day}${invoiceDate.hour}${invoiceDate.minute}${invoiceDate.second}${invoiceDate.millisecond}",
+              )
+            : null;
         Get.to(BottomNav());
 
         // Future<String> savePDFToFile(Uint8List uint8List) async {
@@ -155,7 +148,8 @@ class CartController extends GetxController {
 
         //   return file.path;
         // }
-        print("CUSTOMER NAME billlllllllllllll --------------------------> $customername");
+        print(
+            "CUSTOMER NAME billlllllllllllll --------------------------> $customername");
 
         final output = await getTemporaryDirectory();
         final Uint8List pdfBytes = await invoicePDF;
@@ -163,13 +157,12 @@ class CartController extends GetxController {
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
         print("PHONE NUMBER : --------------------- +91${phone.value}");
-       _statusbool().whenComplete(() {
-                                if (statusclick == true && settingsController.whatsappBilling.value) {
-                                  print("PHONE NUMBER : --------------------- +91${phone.value}");
-                                   shareWhatsapp.shareFile(phone: "+91${phone.value}",xFile);
-                                 
-                                } 
-                              });
+        _statusbool().whenComplete(() {
+          if (statusclick == true && settingsController.whatsappBilling.value) {
+            print("PHONE NUMBER : --------------------- +91${phone.value}");
+            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile);
+          }
+        });
       }
     } catch (e) {
       successful.value = false;

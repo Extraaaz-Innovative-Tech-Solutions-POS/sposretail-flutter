@@ -147,8 +147,15 @@ postItemCondition(AddItem addItem, String url, id) {
   } else {
     updateItem(id, addItem);
   }
+}
 
-
+postItemAddCondition(addItem, url) {
+   if(image.value != null) {
+    sendToServer(addItem, url);
+  } else {
+    postItem(addItem);
+    
+  }
 }
 
 Future<void>postItemImage(AddItem addItem, String url) async {
