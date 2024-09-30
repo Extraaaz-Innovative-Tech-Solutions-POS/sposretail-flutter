@@ -82,7 +82,7 @@ class CartController extends GetxController {
       if (Responsive.isDesktop(context)) {
         final desktopInvoicePdf = DesktopInvoicePdf();
         final invoicePDF = await desktopInvoicePdf.generateBillingPdf(
-            orders: orderType == "Catering" ? order : orderedItems,
+            orders: orderedItems,
             invoiceId: invoicedata.toString(),
             invoiceID: invoicedata.toString(),
             discount: discount,
@@ -116,7 +116,7 @@ class CartController extends GetxController {
         Get.to(BottomNav());
       } else {
         final invoicePDF = InvoicePdf.generateBillingPdf(
-            orders: orderType == "Catering" ? order : orderedItems,
+            orders:  orderedItems,
             invoiceId: invoicedata.toString(),
             invoiceID: invoicedata.toString(),
             discount: double.parse(discount.toString()),

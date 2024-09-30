@@ -76,7 +76,6 @@ bool generateBillClick = false;
 class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final controller = Get.put(CartController());
   final completeOrdercontroller = Get.put(CompleteOrderController());
-  //final catOrdercontroller = Get.put(CateringOrderController());
   final itemCancelcontroller = Get.put(ItemCancelController());
   final cancelOrderController = Get.put(CancelOrderController());
   final settingsController = Get.put(SettingsController());

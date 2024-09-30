@@ -2,8 +2,8 @@ import 'package:spos_retail/views/widgets/export.dart';
 
 class PendingOrderUI extends StatefulWidget {
   bool? advance;
-  bool? catering;
-  PendingOrderUI({super.key, required this.advance, required this.catering});
+ // bool? catering;
+  PendingOrderUI({super.key, required this.advance});
 
   @override
   State<PendingOrderUI> createState() => _PendingOrderUIState();
@@ -88,9 +88,6 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                             child: ListView.builder(
                               itemCount: widget.advance!
                                   ? controller.pendingAdvanceOrderList.length
-                                  // : widget.catering!
-                                  //     ? controller
-                                  //         .cateringAdvanceOrderList.length
                                       : controller.pendingOrderList.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return GestureDetector(
@@ -103,9 +100,7 @@ class _PendingOrderUIState extends State<PendingOrderUI>
                                               .pendingOrderList[index]
                                               .customerId,
                                           ordertype: widget.advance!
-                                              ? "Advance"
-                                              : widget.catering!
-                                                  ? "Catering"
+                                              ? "Advance"           
                                                   : "Delivery",
                                           tableId: widget.advance!
                                               ? controller

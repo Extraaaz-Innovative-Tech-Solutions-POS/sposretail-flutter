@@ -124,42 +124,6 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     // multipleOption(context, "Dine-In", () {
-                    //     //   floorController.fetchAllFloor(true);
-                    //     // }),
-                    //     const SizedBox(width: 12),
-                    //     // multipleOption(context, "Retails Orders", () async {
-                    //     // //  _statusbool().whenComplete(() {
-                    //     //     // if (statusclick == true) {
-                    //     //     //   Get.to(() => TakeAwayCustomerDetails());
-                    //     //     // } else {
-                    //     //     //   Get.to(() => OrderBookingScreen(
-                    //     //     //         ordertype: "Take Away",
-                    //     //     //       ));
-                    //     //     // }
-                    //     //   //});
-                    //     //   // Get.to(OrderBookingScreen(
-                    //     //   //   ordertype: "Take Away",
-                    //     //   // ));
-                    //     // }),
-                    //   ],
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     multipleOption(context, "Advanced Order", () {
-                    //       // floorController.fetchFloorTable(true, "Advance");
-                    //       Get.to(() => PendingAdvanceOrder());
-                    //     }),
-                    //     const SizedBox(width: 12),
-                    //     multipleOption(context, "Delivery", () {
-                    //       Get.to(() => PendingOrderUI(
-                    //           advance: false, catering: false));
-                    //     }),
-                    //   ],
-                    // ),
-
                     usercontroller.user!.role == "manager"
                         ? headingTitle(context, "dashboard".tr)
                         : const SizedBox.shrink(),

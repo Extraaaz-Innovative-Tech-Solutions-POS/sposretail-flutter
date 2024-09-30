@@ -295,7 +295,7 @@ class OrderBookingController extends GetxController {
         Get.to(() => BottomNav());
         break;
       case "Delivery":
-        Get.to(() => PendingOrderUI(advance: false, catering: false));
+        Get.to(() => PendingOrderUI(advance: false));
         break;
       case "Advance":
         Get.to(() => const PendingAdvanceOrder());

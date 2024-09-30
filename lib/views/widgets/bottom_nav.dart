@@ -72,8 +72,7 @@ class _BottomNavState extends State<BottomNav> {
         builder: (DeliveryController controller) {
       final pages = [
         role == "manager" ? AddCategory() : null,
-        Dashboard(), // Dashboard(),
-        //businessType == "catering" ? const Reports() : null,
+        Dashboard(), 
         role == "manager" ? const Reports() : null,
         role == "manager"
             ? OngoingOrder(
