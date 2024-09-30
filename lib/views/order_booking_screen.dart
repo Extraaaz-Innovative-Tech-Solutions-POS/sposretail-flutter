@@ -9,10 +9,10 @@ class OrderBookingScreen extends StatefulWidget {
   final String ordertype;
   final int? customerId;
   final String? tablenumber;
-  final int? table_divided_by;
-  final String? table_id;
-  final int? sub_table;
-  final String? section_id;
+  final int? tableDividedBy;
+  final String? tableId;
+  final int? subTable;
+  final String? sectionId;
   final String? customerName;
   final String? advanceOrderDateTime;
   final String? restaurantId;
@@ -23,10 +23,10 @@ class OrderBookingScreen extends StatefulWidget {
       this.table = 0,
       this.ordertype = "Dine",
       this.tablenumber,
-      this.table_divided_by,
-      this.sub_table,
-      this.table_id,
-      this.section_id,
+      this.tableDividedBy,
+      this.subTable,
+      this.tableId,
+      this.sectionId,
       this.customerName,
       this.advanceOrderDateTime,
       this.restaurantId,
@@ -100,7 +100,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   void initState() {
     super.initState();
     infoController.getAdditionalInfo();
-    menucontroller.fetchMenu(widget.section_id);
+    menucontroller.fetchMenu(widget.sectionId);
     clickonActionChips = "All";
     data = datetime.day;
     isQuantityEditing = false;
@@ -123,7 +123,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   Future<void> dineinTable() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if (widget.table_id != null) {
+    if (widget.tableId != null) {
       //  print("ID is already created");
       return;
     }
@@ -196,7 +196,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
           widget.ordertype == "Dine"
               ? IconButton(
                   onPressed: () {
-                    if (widget.table_id != null) {
+                    if (widget.tableId != null) {
                       print(infoController.gstNo.value);
                       Get.to(() => ShowOngoingOrder(
                         gst: infoController.gstNo.value,
@@ -205,7 +205,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                             table: widget.table,
                             ordertype: widget.ordertype,
                             orderData: order,
-                            tableId: widget.table_id!,
+                            tableId: widget.tableId!,
                             items: const [],
                           ));
                     } else {
@@ -615,7 +615,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               onTap: () async {
                 processMenuItem(
                     itemId, itemName, double.parse(itemPrice), false);
-                    print( "url image test : https://sposversion2.extraaaz.com/$image",);
+                    debugPrint( "url image test : https://sposversion2.extraaaz.com/$image",);
                 // processMenuAddonsItem(
                 //     item_id, itemName, double.parse(itemPrice), false);
               },
@@ -952,7 +952,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     final item = addonsList[index];
-                                    bool isSelected = addonSelectIndex == index;
+                                   // bool isSelected = addonSelectIndex == index;
 
                                     // setState(() {
                                     addons = true;
@@ -1401,11 +1401,11 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   orderbookingScreen.confirmOrderBtnTap(
                     widget.customerId,
                     order,
-                    widget.table_id,
+                    widget.tableId,
                     widget.ordertype,
                     widget.table,
                     widget.floor,
-                    widget.section_id,
+                    widget.sectionId,
                     takeAwayIDs,
                     dineTableID,
                     deliveryIDS,

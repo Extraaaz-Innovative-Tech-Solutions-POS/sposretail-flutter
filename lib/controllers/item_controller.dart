@@ -119,13 +119,13 @@ Future<void> sendToServer(AddItem addItem, String url) async {
 
   // Send the request
   var response = await request.send();
-    print( "data test.... : ${response  }");
+    print( "data test.... : $response  ");
 
 
   // print( "datat test : ${response.}");
   // Check the response
   if (response.statusCode == 200) {
-    print( "datat test : ${response  }");
+    print( "datat test : $response  ");
     print('Item added successfully!');
     
     
@@ -138,7 +138,6 @@ Future<void> sendToServer(AddItem addItem, String url) async {
     print('Status code: ${response.statusCode}');
   }
 }
-///////////////////////
 
 postItemCondition(AddItem addItem, String url, id) {
   if(image.value != null) {
@@ -196,13 +195,13 @@ Future<void>postItemImage(AddItem addItem, String url) async {
 
   
   var response = await request.send();
-    print( "data test.... : ${response  }");
+    print( "data test.... : $response  ");
 
 
   // print( "datat test : ${response.}");
   // Check the response
   if (response.statusCode == 200) {
-    print( "datat test : ${response  }");
+    print( "datat test : $response  ");
     print('Item image posted successfully!');
     
     

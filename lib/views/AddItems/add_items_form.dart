@@ -327,7 +327,7 @@ class _AddItemsFormState extends State<AddItemsForm> {
                       widget.updateisClick
                           ? itemController.postItemCondition(addItem, "${AppConstant.baseUrl}/items/${widget.itemId}/update-image", widget.itemId.toString())
                           
-                          : itemController.postItemAddCondition(addItem,"https://sposversion2.extraaaz.com/api/items" ) ;    // itemController.sendToServer(addItem, "https://sposversion2.extraaaz.com/api/items")  ;  //itemController.postItem(addItem);
+                          : itemController.postItemAddCondition(addItem,"${AppConstant.baseUrl}/items" ) ;    // itemController.sendToServer(addItem, "https://sposversion2.extraaaz.com/api/items")  ;  //itemController.postItem(addItem);
                     } else {
                       snackBarBottom(
                           "Error", "Please Enter the required field", context);

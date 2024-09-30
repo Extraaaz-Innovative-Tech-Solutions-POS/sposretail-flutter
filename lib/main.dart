@@ -103,10 +103,10 @@ class SplashScreenState extends State<SplashScreen> {
       if (existingPrinter != null) {
         await DeviceApps.openApp(packageName);
       } else {
-        print("Printer is not connected");
+        debugPrint("Printer is not connected");
       }
     } else {
-      print('App is not installed.');
+      debugPrint('App is not installed.');
       // Handle the case where the app is not installed
     }
   }

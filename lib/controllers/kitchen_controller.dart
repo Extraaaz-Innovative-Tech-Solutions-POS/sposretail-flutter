@@ -30,31 +30,4 @@ class KitchenController extends GetxController {
 
     return segregatedLists;
   }
-
-  // Future<void> fetchRunningKot() async {
-  //   try {
-  //     final response = await DioServices.get(getrunningkot);
-
-  //     if (response.statusCode == 200) {
-  //       List<RunningKot> kitchenDataList = (response.data as List)
-  //           .map<RunningKot>((json) => RunningKot.fromJson(json))
-  //           .toList();
-
-  //       kot = kitchenDataList;
-  //       debugPrint("Fetched floor data: $kot");
-  //       Map<String, List<RunningKot>> segregatedLists =
-  //           segregateListByStatus(kot);
-  //       segregatedLists.forEach((status, list) {
-  //         debugPrint("List for status $status: $list");
-  //       });
-  //       Get.to(KitchenDashboard(
-  //         segregatedLists: segregatedLists,
-  //       ));
-  //     } else {
-  //       debugPrint("Error: ${response.statusCode}");
-  //     }
-  //   } catch (e) {
-  //     debugPrint("Error during HTTP request: $e");
-  //   }
-  // }
 }

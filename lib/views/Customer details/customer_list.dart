@@ -204,7 +204,7 @@ class _CustomerListState extends State<CustomerList> {
                                                       floor: floorId,
                                                       table: tablenumber,
                                                       ordertype: "Dine",
-                                                      section_id:
+                                                      sectionId:
                                                           sectionId.toString(),
                                                       customerName: c
                                                           .customer[index].name

@@ -15,7 +15,7 @@ class TopSellingDashboardController extends GetxController {
   List<dynamic> datadashboardList = [].obs;
 
   Future<services.Response> fetchDashboard() async {
-    final url = "${AppConstant.baseUrl}/${AppConstant.topSelling}";
+    const url = "${AppConstant.baseUrl}/${AppConstant.topSelling}";
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString("token");
     var headers = {

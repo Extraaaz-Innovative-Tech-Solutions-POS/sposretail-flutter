@@ -362,7 +362,6 @@ class _ReportsState extends State<Reports> {
             ),
           ],
         );
-        ;
       case 'Billwise':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.billing.isEmpty

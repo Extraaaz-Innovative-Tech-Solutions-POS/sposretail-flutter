@@ -317,7 +317,7 @@ pw.Widget orderedItemsListWidget(
 
 Future<Uint8List> _captureTextAsImage(String text) async {
   final TextSpan span = TextSpan(
-    style: TextStyle(color: Colors.black, fontSize: 40),
+    style: const TextStyle(color: Colors.black, fontSize: 40),
     text: text,
   );
 

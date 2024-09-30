@@ -347,7 +347,7 @@ class DesktopInvoicePdf {
     final directory = await getApplicationDocumentsDirectory();
 
 //    Define the path to save the PDF
-    final path = '${directory.path}/report.pdf';
+   // final path = '${directory.path}/report.pdf';
 
     // Create the necessary directories if they don't exist
     // final reportDirectory = Directory('${directory.path}');

@@ -1092,7 +1092,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
           "${invoiceDate.year}-${invoiceDate.month}-${invoiceDate.day} ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
       lastRecord:
           "${discountpercentage == 0 ? 00.0 : discountpercentage}/$sGst/$cGst/"
-          "${discount}",
+          "$discount",
       ipAddress: '192.168.1.100',
       is3T: invoiceType != null ? invoiceType.toString() : "0",
       iN: '0',
