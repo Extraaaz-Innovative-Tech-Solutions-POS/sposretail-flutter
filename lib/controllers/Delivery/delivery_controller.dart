@@ -40,23 +40,6 @@ class DeliveryController extends GetxController {
     }
   }
 
-  // Future<void> cateringAdvancedPendingOrder() async {
-  //   try {
-  //     var response = await DioServices.get(AppConstant.pendingCateringOrder);
-  //     cateringAdvanceOrderList.clear();
-
-  //     cateringAdvanceOrderList.assignAll((response.data['data'] as List)
-  //         .map((orderJson) => CateringPendingOrderData.fromJson(orderJson)));
-  //     checkfordavance();
-  //     update();
-  //     // print("CATERING PENDING LENGTH----------------------------");
-
-  //     // print(cateringAdvanceOrderList.length);
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   Future<void> outforDelivery() async {
     try {
       var response = await DioServices.get(AppConstant.outForDelivery);

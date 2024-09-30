@@ -19,7 +19,7 @@ class AppConstant {
   static const String dineId = "getTableId/Dine-In";
   static const String takeAwayID = "getTableId/TakeAway";
   static const String advanced = "getTableId/Advance";
-  static const String catering = "getTableId/Catering";
+  //static const String catering = "getTableId/Catering";
   static const String pendingAdvance = "getTotalOrders/Advance";
   static const String completeOrder = "complete-order";
   static const String cancelOrder = "cancel-order";
@@ -77,15 +77,6 @@ class AppConstant {
 // On going Order------------------>
   static const String onGoingOrder = "get-ongoing-orders";
 
-//catering------------------------>
-  static const String confirmCateringOrder = "catering-order-confirm";
-  static const String billCatering = "catering-order-bill";
-  static const String addCatering = "catering-add-item";
-  static const String completeCatering = "complete-order-catering";
-  static const String cancelCatering = "catering-cancel-item";
-  static const String cancelCateringOrder = "cancel-order-catering";
-  static const String pendingCateringOrder = "pending-order-catering";
-  static const String partialCateringPayment = "partial-catering-payment";
 
 //sectionWisePricing----------------------->
   static const String setsectionprice = "setSectionPrice";

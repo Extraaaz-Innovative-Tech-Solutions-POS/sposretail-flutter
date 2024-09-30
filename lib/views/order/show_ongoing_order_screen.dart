@@ -76,7 +76,7 @@ bool generateBillClick = false;
 class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final controller = Get.put(CartController());
   final completeOrdercontroller = Get.put(CompleteOrderController());
-  final catOrdercontroller = Get.put(CateringOrderController());
+  //final catOrdercontroller = Get.put(CateringOrderController());
   final itemCancelcontroller = Get.put(ItemCancelController());
   final cancelOrderController = Get.put(CancelOrderController());
   final settingsController = Get.put(SettingsController());
@@ -364,13 +364,16 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                   child: GestureDetector(
                     onTap: () async {
                        generateBillClick = true;
+                      
                       setState(() {});
                       if (Responsive.isDesktop(context)) {
                         final formData = buildDesktopFormData();
+                         print("FORM DATA : -------- $formData");
                         desktopController.postData(formData);
                       } else {
                         final formData = buildFormData();
                         print("Generate FormData : ${formData.customerNames}");
+                         print("FORM DATA : -------- $formData");
                         printerController.postData(formData);
                       }
                     
@@ -958,8 +961,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             "Payable Amount",
             widget.ordertype == "Advance"
                 ? widget.price.toString()
-                : widget.ordertype == "Catering"
-                    ? widget.price.toString()
                     : discount.toString(),
             17.0),
         Divider(
@@ -1178,15 +1179,15 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   Future<void> updatePendingOrders(
       String paymentType, BuildContext context) async {
-    await catOrdercontroller.updatePendingOrders(
-      widget.tableId,
-      paymentType,
-      "0",
-      "1",
-      widget.price!,
-      context,
-      controller.orderedItems,
-    );
+    // await catOrdercontroller.updatePendingOrders(
+    //   widget.tableId,
+    //   paymentType,
+    //   "0",
+    //   "1",
+    //   widget.price!,
+    //   context,
+    //   controller.orderedItems,
+    // );
   }
 
   Future<void> completeOrderPost(

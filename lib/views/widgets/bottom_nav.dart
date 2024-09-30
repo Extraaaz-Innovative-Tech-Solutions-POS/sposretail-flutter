@@ -1,5 +1,4 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:spos_retail/controllers/additional_info_controller.dart';
 import 'package:spos_retail/views/inventory/stock/return_stock.dart';
 import 'package:spos_retail/views/inventory/stock/stock_alert.dart';
 import 'package:spos_retail/views/languages.dart';
@@ -73,9 +72,7 @@ class _BottomNavState extends State<BottomNav> {
         builder: (DeliveryController controller) {
       final pages = [
         role == "manager" ? AddCategory() : null,
-        businessType == "catering"
-            ? const CateringDashboard()
-            : Dashboard(), // Dashboard(),
+        Dashboard(), // Dashboard(),
         //businessType == "catering" ? const Reports() : null,
         role == "manager" ? const Reports() : null,
         role == "manager"
