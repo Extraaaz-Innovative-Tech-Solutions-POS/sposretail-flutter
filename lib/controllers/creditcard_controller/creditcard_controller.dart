@@ -8,17 +8,36 @@ class CreditCardController extends GetxController {
   RxBool isCreditCard = false.obs;
   RxString outStanding = ''.obs;
 
+  RxInt restaurantId = 0.obs;
+
   //  CreditModel creditModel;
 
-  creditCardPost(int? customerId, int restaurantId) async {
+
+
+
+  creditCardPost(int? customerId) async {
     // final CartController controller = Get.put(CartController());
     try {
+
+       SharedPreferences pref = await SharedPreferences.getInstance();
+       if(restaurantId.value==0){
+        restaurantId.value = 1;
+        update();
+          print("res id :##### ${restaurantId.value}");
+       }else{
+         restaurantId.value =pref.getInt("RestaurantId")!;
+           update();
+          print("res id :##### ${restaurantId.value}");
+       }
+       
+
+
       print(" credit started :");
       final response =
           await DioServices.postRequest("pay-outstanding/${customerId}", {
         "customer_id": customerId, //4,
         "paid_amount": 0,
-        "restaurant_id": restaurantId,
+        "restaurant_id": restaurantId.value,
       });
       print("after respone");
 

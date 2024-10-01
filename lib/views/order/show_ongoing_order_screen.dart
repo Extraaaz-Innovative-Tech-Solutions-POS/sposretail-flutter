@@ -174,7 +174,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       print("customer id: ${widget.customerId} ");
       creditCardController.creditCardPost(
           widget.customerId,
-          1
           );
     }
   }
