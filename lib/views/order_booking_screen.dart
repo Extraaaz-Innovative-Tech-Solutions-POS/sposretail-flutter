@@ -207,6 +207,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                             orderData: order,
                             tableId: widget.tableId!,
                             items: const [],
+                            customerId:  cartController.cartOrder.value!.customer!.id!,
                           ));
                     } else {
                       Fluttertoast.showToast(msg: "Please Order Something");

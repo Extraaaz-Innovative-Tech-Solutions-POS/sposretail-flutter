@@ -12,6 +12,10 @@ class OrderBookingController extends GetxController {
   final cartController = Get.put(CartController());
   final settingsController = Get.put(SettingsController());
   final infoController = Get.put(AdditionalInfoController());
+
+    RxInt customerId = 0.obs;
+
+
   var printername, inchestype;
   DateTime invoiceDate = DateTime.now();
   @override
@@ -310,6 +314,7 @@ class OrderBookingController extends GetxController {
               tableId: takeAwayIDs,
               orderData: orders.toJson(),
               items: items,
+              customerId: customerId.value,
             ));
         break;
     }

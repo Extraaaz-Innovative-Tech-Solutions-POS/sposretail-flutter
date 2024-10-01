@@ -20,6 +20,7 @@ final CustomerlistController customerlistController =
 final cartController = Get.put(CartController());
 final newcustomer = Get.put(AddCustomerController());
 final allItemsController = Get.put(AllItemsController());
+final orderbookingController = Get.put(OrderBookingController());
 
 class _CustomerListState extends State<CustomerList> {
   String searchQuery = '';
@@ -192,6 +193,15 @@ class _CustomerListState extends State<CustomerList> {
                                               print(
                                                   "CartController PHONEddd : ======================== ${cartController.phone.value} ${customerlist[index].name
                                                       .toString()}");
+
+
+                                            print("customer id take away : ${customerlist[index].id}");
+
+                                            orderbookingController.customerId.value = customerlist[index].id!;                                         
+                                            orderbookingController.update();
+
+
+                                            print("after set:${orderbookingController.customerId.value}");
                                               Get.to(OrderBookingScreen(
                                                   ordertype: "Take Away",
                                                   customerName: customerlist[index].name

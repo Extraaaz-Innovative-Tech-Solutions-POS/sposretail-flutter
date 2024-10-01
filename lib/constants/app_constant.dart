@@ -111,4 +111,8 @@ static const String setThreshold = "set-threshold";
 
 static const String setThresoldValue = "ingredient/threshold-value";
 
+
+// credit 
+static const String creditCard = "pay-outstanding/";
+
 }
