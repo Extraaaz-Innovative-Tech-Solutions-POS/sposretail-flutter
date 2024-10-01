@@ -212,7 +212,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       appBar: commonAppBar(context, "Retail Order", "", 
       action: [
 
-         Container(
+        statusclick? Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     border: Border.all(width: 1, color:Theme.of(context).highlightColor ),
@@ -222,7 +222,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                     "Outstanding :${creditCardController.outStanding.value}",
                     style: TextStyle(color: Theme.of(context).highlightColor),
                   );
-                })),
+                })):const SizedBox.shrink()
       ]),
       body: PopScope(
         canPop: false,
@@ -254,7 +254,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                       ? _buildPaymentOption()
                       : const SizedBox.shrink(),
 
-                         Column(
+                        statusclick? Column(
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -283,7 +283,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                         ),
                       ),
                     ],
-                  ),
+                  ):const SizedBox.shrink(),
 
                   // Conditionally show TextField when Credit Card is selected,
 
@@ -369,7 +369,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                                   } else {
                                     priceController.text = v;
                                     disablebutton = false;
-                                    setState(() {});
+                                    setState(() {
+                                      
+                                    });
                                   }
                                 },
                                 keyboardType: TextInputType.number,
