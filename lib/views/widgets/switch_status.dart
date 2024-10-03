@@ -92,6 +92,13 @@ class _KOTstatusState extends State<KOTstatus> {
               settingController.whatsappBilling.value = value;
             });
           }),
+          switchButton("Personal Whatsapp".tr, settingController.whatsappPersonal,
+                onChange: (v) {
+                  setState(() {
+                    
+                settingController.toggleWhatsappPersonal(v);
+                  });
+            }),
 
           switchButton("Print Preview", settingController.printPreview.value ,
               onChange: (value) {
