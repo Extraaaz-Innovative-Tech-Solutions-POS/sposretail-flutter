@@ -109,7 +109,7 @@ class CartController extends GetxController {
         _statusbool().whenComplete(() {
           if (statusclick == true && settingsController.whatsappBilling.value) {
             print("PHONE NUMBER : --------------------- +91${phone.value}");
-            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: WhatsApp.business);
+            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: settingsController.whatsappPersonal ? WhatsApp.standard: WhatsApp.business);
           }
         });
 
@@ -160,7 +160,7 @@ class CartController extends GetxController {
         _statusbool().whenComplete(() {
           if (statusclick == true && settingsController.whatsappBilling.value) {
             print("PHONE NUMBER : --------------------- +91${phone.value}");
-            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: WhatsApp.business);
+            shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: settingsController.whatsappPersonal ? WhatsApp.standard: WhatsApp.business);
           }
         });
       }
