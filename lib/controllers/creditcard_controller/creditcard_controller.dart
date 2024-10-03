@@ -1,6 +1,3 @@
-
-
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class CreditCardController extends GetxController {
@@ -10,12 +7,15 @@ class CreditCardController extends GetxController {
 
   RxInt restaurantId = 0.obs;
 
+
+  RxBool isfullCredit = false.obs;
+
+  RxBool isfullCreditusing = false.obs;
+
   //  CreditModel creditModel;
 
 
-
-
-  creditCardPost(int? customerId) async {
+  creditCardPost(int? customerId,double creditAmount) async {
     // final CartController controller = Get.put(CartController());
     try {
 
@@ -31,12 +31,11 @@ class CreditCardController extends GetxController {
        }
        
 
-
       print(" credit started :");
       final response =
           await DioServices.postRequest("pay-outstanding/${customerId}", {
         "customer_id": customerId, //4,
-        "paid_amount": 0,
+        "paid_amount": creditAmount,
         "restaurant_id": restaurantId.value,
       });
       print("after respone");
@@ -56,13 +55,6 @@ class CreditCardController extends GetxController {
         } else {
           print("outstanding_balance not found in response.");
         }
-
-        // creditModel.clear();
-        // creditModel.add(credit);
-        // outStanding.value = credit.orderPayment.outstandingBalance;
-        // isCreditCard.value = false;
-
-       
 
         print("outstd :${outStanding.value}");
       } else {
