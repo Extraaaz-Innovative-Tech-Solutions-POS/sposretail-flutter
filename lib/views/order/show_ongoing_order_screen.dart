@@ -213,8 +213,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       appBar: commonAppBar(context, "Retail Order", "", 
       action: [
 
-        statusclick!? Container(
-                padding: EdgeInsets.all(10),
+        statusclick ? Container(
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     border: Border.all(width: 1, color:Theme.of(context).highlightColor ),
                     borderRadius: BorderRadius.circular(20)),

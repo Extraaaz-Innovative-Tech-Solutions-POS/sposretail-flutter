@@ -49,6 +49,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   final modifierItemsById = Get.put(GetModifierItemById());
   final orderbookingScreen = Get.put(OrderBookingController());
   final quantityController = TextEditingController();
+  final boxesController = TextEditingController();
+  final piecesController = TextEditingController();
   final priceController = TextEditingController();
 
   late InvoiceManager invoiceManager;
@@ -1351,7 +1353,55 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                 )
                                         ],
                                       ),
-                                      widget.restaurantId == "217" ? SizedBox(
+                                      /////////////////////
+                                      widget.restaurantId == "217" ? Row(
+                                        children: [
+
+                                          customText("Boxes: ${boxesController.text}",
+                                                    //order[index].quantity.toString(),
+                                                    color: Theme.of(context)
+                                                        .highlightColor
+                                                        .withOpacity(0.7),
+                                                    font: 18.0),
+
+                                          SizedBox(
+                                                        height: 30.0,
+                                                        width: 100.0,
+                                                        child: TextField(
+                                                          controller:
+                                                              boxesController,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .highlightColor),
+                                                                  
+                                                          onChanged: (value) {
+                                                            
+                                                          },
+                                                          onSubmitted: (value) {
+                                                            setState(() {
+                                                                
+                                                            });
+                                                          },
+                                                        ))
+
+                                        ],
+                                      ): const SizedBox.shrink(),
+
+                                      widget.restaurantId == "217" ? Row(
+                                        children: [
+
+                                          customText("Pieces: ${quantityController.text}",
+                                                    //order[index].quantity.toString(),
+                                                    color: Theme.of(context)
+                                                        .highlightColor
+                                                        .withOpacity(0.7),
+                                                    font: 18.0),
+
+                                          SizedBox(
                                                         height: 30.0,
                                                         width: 100.0,
                                                         child: TextField(
@@ -1364,19 +1414,19 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               color: Theme.of(
                                                                       context)
                                                                   .highlightColor),
-                                                                  /////////////////////////
                                                                   
                                                           onChanged: (value) {
                                                             
                                                           },
-
-                                                          /////////////////////////////
                                                           onSubmitted: (value) {
                                                             setState(() {
                                                                 
                                                             });
                                                           },
-                                                        )) : const SizedBox.shrink()
+                                                        ))
+
+                                        ],
+                                      ): const SizedBox.shrink(),
                                       ///////////////
                                     ],
                                   ),
