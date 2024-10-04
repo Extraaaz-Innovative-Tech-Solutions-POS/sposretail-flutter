@@ -58,7 +58,6 @@ class AuthController extends GetxController {
           if (sharedrole == 'manager' || sharedrole == "cashier") {
             userController
                 .setUser(User.fromJson(response.data["data"]['user']));
-            sectionController.fetchSection();
             Get.to(BottomNav());
           }
         } else {

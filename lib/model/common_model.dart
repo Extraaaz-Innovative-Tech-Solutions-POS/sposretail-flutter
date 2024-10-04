@@ -107,7 +107,6 @@ class AddTables {
   });
   Map<String, dynamic> toJson() {
     return {
-      // "floor_id": 11,
       "floor_number": floor_number,
       "section_id": section_id,
       "tables": table

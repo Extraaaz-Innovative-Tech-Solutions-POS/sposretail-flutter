@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:spos_retail/views/widgets/export.dart';
+import 'package:url_launcher/src/url_launcher_string.dart';
+import 'package:url_launcher/src/types.dart';
 
 //update the quantity from bills
 var updateQuantity = "update-quantity";

@@ -152,14 +152,4 @@ print("complete order....testing ${response.data}");
     }
   }
 
-  // void navigateAfterCompletion(String orderType) {
-  //   switch (orderType) {
-  //     case "Dine-In":
-  //       Get.to(FloorSectionTable());
-  //       break;
-  //     default:
-  //       Get.to(BottomNav());
-  //       break;
-  //   }
-  // }
 }

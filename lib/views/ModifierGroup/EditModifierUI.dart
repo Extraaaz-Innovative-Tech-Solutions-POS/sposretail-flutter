@@ -24,7 +24,6 @@ bool modifierRestrict = false;
 bool itemRestrict = false;
 final updateModifier = Get.put(UpdateModifierGroupController());
 final modifierlist = Get.put(GetModifierGroupController());
-final sectionController = Get.put(SectionController());
 
 class _EditmodifierState extends State<Editmodifier> {
   late int _selectedIndex;
@@ -63,7 +62,6 @@ class _EditmodifierState extends State<Editmodifier> {
         TextEditingController(text: widget.Onclick ? widget.type : "");
     descriptionController =
         TextEditingController(text: widget.Onclick ? widget.description : "");
-    sectionController.fetchSection();
   }
 
   @override

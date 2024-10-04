@@ -12,7 +12,6 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
   final TextEditingController _titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   final controller = Get.put(AddModifierGroupController());
-  final sectionController = Get.put(SectionController());
   String dropdownvalue = 'Varients';
   // var selectedSectionId;
   var items = ['Varients', 'Addons'];
@@ -20,7 +19,6 @@ class _AddModifierGroupUIState extends State<AddModifierGroupUI> {
   @override
   void initState() {
     super.initState();
-    sectionController.fetchSection();
 
     setState(() {});
   }

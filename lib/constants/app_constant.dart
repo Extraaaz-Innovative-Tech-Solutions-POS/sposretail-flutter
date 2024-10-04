@@ -19,7 +19,6 @@ class AppConstant {
   static const String dineId = "getTableId/Dine-In";
   static const String takeAwayID = "getTableId/TakeAway";
   static const String advanced = "getTableId/Advance";
-  //static const String catering = "getTableId/Catering";
   static const String pendingAdvance = "getTotalOrders/Advance";
   static const String completeOrder = "complete-order";
   static const String cancelOrder = "cancel-order";
@@ -37,10 +36,6 @@ class AppConstant {
   static const String cancelOrderReport = "cancel-order-report";
 
 // Floors, Section, Tables Constants--------->
-  static const String getAllFloor = "floor";
-  static const String getExistingFloor = "floor";
-  static const String sectionsUrl = "section";
-  static const String setSectionTables = "setSectionAndTables";
   static const String graph = "graph";
 
 // ModifiersGroups Constants ---------------------->
@@ -77,10 +72,6 @@ class AppConstant {
 // On going Order------------------>
   static const String onGoingOrder = "get-ongoing-orders";
 
-
-//sectionWisePricing----------------------->
-  static const String setsectionprice = "setSectionPrice";
-  static const String getSectionPrice = "getSectionPrice";
 
 //Taxes----------------->
   static const String taxes = "tax-setting";

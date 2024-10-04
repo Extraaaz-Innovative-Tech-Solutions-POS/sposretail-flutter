@@ -21,8 +21,6 @@ final UserController usercontroller = Get.put(UserController());
 class _BottomNavState extends State<BottomNav> {
   var name, role, dissmisscheck, businessType, statusclick;
   final advanceController = Get.put(DeliveryController());
-  final floorController = Get.put(FloorController());
-  final sectionController = Get.put(SectionController());
   final usercontroller = Get.put(UserController());
   final purchaseController = Get.put(PurchaseController());
   final recipeController = Get.put(RecipeController());
@@ -42,8 +40,6 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     super.initState();
     sharedPrefrence();
-    // advanceController.advancedPendingOrder();
-    sectionController.fetchSection();
   }
 
 
@@ -67,7 +63,6 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    sectionController.fetchSection();
     return GetBuilder<DeliveryController>(
         builder: (DeliveryController controller) {
       final pages = [

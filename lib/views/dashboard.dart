@@ -17,22 +17,16 @@ class _DashboardState extends State<Dashboard> {
   final UserController usercontroller = Get.put(UserController());
   final TopSellingDashboardController topsellingDashboardController =
       Get.put(TopSellingDashboardController());
-  final FloorController floorController = Get.put(FloorController());
   final graphController = Get.put(GraphController());
   final CategoryController categoryController = Get.put(CategoryController());
   final DeliveryController advanceController = Get.put(DeliveryController());
   String query = '';
   bool checkadvance = false;
-  bool isTakeAwayPresent = sectionController.dropdownSectionList
-      .any((map) => map['sectionName'] == "Take Away" ? true : false);
   var statusclick, dismissClick;
 
   @override
   void initState() {
     super.initState();
-    sectionController.fetchSection();
-    isTakeAwayPresent = sectionController.dropdownSectionList
-        .any((map) => map['sectionName'] == "Take Away" ? true : false);
     dashboardController.fetchDashboard();
     topsellingDashboardController.fetchDashboard();
     paymentController.onlinePayment();
@@ -108,12 +102,7 @@ class _DashboardState extends State<Dashboard> {
             LogicalKeySet(LogicalKeyboardKey.keyA): AdvanceIntent(),
           },
           child: Actions(
-            actions: {
-              DineIntent: CallbackAction<DineIntent>(
-                  onInvoke: ((intent) => floorController.fetchAllFloor(true))),
-              TakeAwayIntent: CallbackAction<TakeAwayIntent>(
-                  onInvoke: ((intent) =>
-                      floorController.fetchFloorTable(true, "Take Away"))),
+            actions: {             
               AdvanceIntent: CallbackAction<AdvanceIntent>(
                   onInvoke: ((intent) => Get.to(() => PendingAdvanceOrder())))
             },

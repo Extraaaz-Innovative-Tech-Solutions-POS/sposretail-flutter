@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 class ItemController extends GetxController {
   List<ItemModel> items = [];
   RxBool isLoading = false.obs;
-  final sectionWisePricing = Get.put(SectionWisePricing());
 
    Rx<File?> image = Rx<File?>(null);
   final picker = ImagePicker();
@@ -246,7 +245,6 @@ Future<void>postItemImage(AddItem addItem, String url) async {
         "items/$id",
         updatedItem.toJson(),
       );
-      // sectionWisePricing.assignSectionWisePricing(widget.item_id, selectedSectionId, sectionPriceController.text);
 
       if (response.statusCode == 200) {
         Get.to(BottomNav(
