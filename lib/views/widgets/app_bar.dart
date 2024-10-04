@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar commonAppBar(context, title, role, {onpress, List<Widget>? action}) {
+AppBar commonAppBar(context, title, role,  {onpress, List<Widget>? action}) {
   return AppBar(
     iconTheme: IconThemeData(color: Theme.of(context).highlightColor),
     backgroundColor: Colors.transparent,

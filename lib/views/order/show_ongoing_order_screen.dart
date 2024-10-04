@@ -30,23 +30,23 @@ class ShowOngoingOrder extends StatefulWidget {
   final String? gst;
   final String? fssai;
 
-  ShowOngoingOrder({
-    Key? key,
-    this.floor,
-    this.table,
-    required this.ordertype,
-    this.orderData,
-    required this.items,
-    this.price,
-    required this.tableId,
-    this.paymentcount,
-    this.customerId,
-    this.totalAmount,
-    this.totalGivenAmount,
-    this.remainingAmount,
-    this.gst,
-    this.fssai
-  }) : super(key: key);
+  ShowOngoingOrder(
+      {Key? key,
+      this.floor,
+      this.table,
+      required this.ordertype,
+      this.orderData,
+      required this.items,
+      this.price,
+      required this.tableId,
+      this.paymentcount,
+      this.customerId,
+      this.totalAmount,
+      this.totalGivenAmount,
+      this.remainingAmount,
+      this.gst,
+      this.fssai})
+      : super(key: key);
 
   @override
   State<ShowOngoingOrder> createState() => _ShowOngoingOrderState();
@@ -81,7 +81,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final itemCancelcontroller = Get.put(ItemCancelController());
   final cancelOrderController = Get.put(CancelOrderController());
   final settingsController = Get.put(SettingsController());
-    final creditCardController = Get.put(CreditCardController());
+  final creditCardController = Get.put(CreditCardController());
 
   //* Customer Address for Delivery Only------------------->
   final GetCustomerAddressController customerAddressController =
@@ -91,7 +91,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final additionalInfo = Get.put(AdditionalInfoController());
   final WebSocketService _webSocketService = WebSocketService();
 
-   var _creditController = TextEditingController();
+  var _creditController = TextEditingController();
 
   PaymentMethod? paymentMethod;
   PaymentOptions? paymentOptions;
@@ -107,7 +107,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       phone,
       invoiceType;
   DateTime time = DateTime.now();
-   var clientinfobool, restaurantId;
+  var clientinfobool, restaurantId;
 
   @override
   void initState() {
@@ -142,15 +142,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         : controller.getTakeAwayResponse(widget.tableId);
     _webSocketService.connect('ws://localhost:8080');
     _webSocketService.listen(_onMessageReceived);
-
-    
-
   }
 
-
-
-
-   //* Customer details Status Bool--------------(Get Sharedprefrence Called here)----------->
+  //* Customer details Status Bool--------------(Get Sharedprefrence Called here)----------->
   Future<void> _statusboolcustomer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -172,10 +166,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       print("status check ${statusclick}");
 
       print("customer id: ${widget.customerId} ");
-      creditCardController.creditCardPost(
-          widget.customerId,
-          0
-          );
+      creditCardController.creditCardPost(widget.customerId, 0);
     }
   }
 
@@ -194,40 +185,43 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     // invoiceType = pref.getInt("InchesType");
 
     setState(() {
-
       printername = pref.getString("BillingPrinter");
-    restaurantName = pref.getString("RestaurantName");
-    address = pref.getString("Address");
-    phone = pref.getString("Phone");
-    invoiceType = pref.getInt("InchesType");
+      restaurantName = pref.getString("RestaurantName");
+      address = pref.getString("Address");
+      phone = pref.getString("Phone");
+      invoiceType = pref.getInt("InchesType");
 
-    print("ADDRESS AFTER SAVED : -------------------------------> $address");
-
-
+      print("ADDRESS AFTER SAVED : -------------------------------> $address");
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(context, "Retail Order", "", 
-      action: [
+      appBar: commonAppBar(context, "Retail Order", "", action: [
 
-        statusclick ? Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1, color:Theme.of(context).highlightColor ),
-                    borderRadius: BorderRadius.circular(20)),
-                child: GetBuilder<CreditCardController>(builder: (contextbuilder) {
-                  return Text(
-                    "Outstanding :${creditCardController.outStanding.value}",
-                    style: TextStyle(color: Theme.of(context).highlightColor),
-                  );
-                })):const SizedBox.shrink()
+        if (statusclick != null && statusclick)
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border:
+                  Border.all(width: 1, color: Theme.of(context).highlightColor),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: GetBuilder<CreditCardController>(builder: (contextbuilder) {
+              return Text(
+                "Outstanding: ${creditCardController.outStanding.value}",
+                style: TextStyle(color: Theme.of(context).highlightColor),
+              );
+            }),
+          )
+        else
+          const SizedBox.shrink()
+
+
+          
       ]),
-      body: PopScope(
-        canPop: false,
-        child: _buildBody()),
+      body: PopScope(canPop: false, child: _buildBody()),
     );
   }
 
@@ -256,71 +250,92 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                       ? _buildPaymentOption()
                       : const SizedBox.shrink(),
 
-                        statusclick? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
+                  statusclick
+                      ? Column(
                           children: [
-                            Checkbox(
-                              value: creditCardController.isCreditCard.value,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  creditCardController.isCreditCard.value =
-                                      value ?? false;
-                                });
-                              },
-                              checkColor: Theme.of(context).highlightColor,
-                              activeColor: Theme.of(context).primaryColor,
-                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value:
+                                        creditCardController.isCreditCard.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        creditCardController.isCreditCard
+                                            .value = value ?? false;
 
-                            // Add a title next to the checkbox
-                            Text(
-                              'Pay Partial Credit  & Bill',
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Theme.of(context).highlightColor),
+                                        if (creditCardController
+                                            .isCreditCard.value) {
+                                          creditCardController
+                                                  .isfullCreditusing.value =
+                                              false; // Uncheck the other checkbox
+                                        }
+                                      });
+                                    },
+                                    checkColor:
+                                        Theme.of(context).highlightColor,
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
+
+                                  // Add a title next to the checkbox
+                                  Text(
+                                    'Pay Partial By Credit',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color:
+                                            Theme.of(context).highlightColor),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                    ],
-                  ):const SizedBox.shrink(),
+                        )
+                      : const SizedBox.shrink(),
 
-
-
-
-                  // full credit payment  
-                   statusclick? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Row(
+                  // full credit payment
+                  statusclick
+                      ? Column(
                           children: [
-                            Checkbox(
-                              value: creditCardController.isfullCreditusing.value,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  creditCardController.isfullCreditusing.value =
-                                      value ?? false;
-                                });
-                              },
-                              checkColor: Theme.of(context).highlightColor,
-                              activeColor: Theme.of(context).primaryColor,
-                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: creditCardController
+                                        .isfullCreditusing.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        creditCardController.isfullCreditusing
+                                            .value = value ?? false;
 
-                            // Add a title next to the checkbox
-                            Text(
-                              'Pay Full By Credit & Bill',
-                              style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Theme.of(context).highlightColor),
+                                        if (creditCardController
+                                            .isfullCreditusing.value) {
+                                          creditCardController
+                                                  .isCreditCard.value =
+                                              false; // Uncheck the other checkbox
+                                        }
+                                      });
+                                    },
+                                    checkColor:
+                                        Theme.of(context).highlightColor,
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
+
+                                  // Add a title next to the checkbox
+                                  Text(
+                                    'Pay Full By Credit',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color:
+                                            Theme.of(context).highlightColor),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                    ],
-                  ):const SizedBox.shrink(),
+                        )
+                      : const SizedBox.shrink(),
 
                   // Conditionally show TextField when Credit Card is selected,
 
@@ -333,20 +348,24 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(height: 10,),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     TextField(
                                       controller: _creditController,
                                       keyboardType: TextInputType.number,
-                                      decoration:  InputDecoration(
+                                      decoration: InputDecoration(
                                         hintText:
-                                            'Enter credit Amount', // Hint text
+                                            'Enter Payable Amount', // Hint text
                                         border: OutlineInputBorder(),
-                                        fillColor: Theme.of(context).highlightColor,
-                                        focusColor: Theme.of(context).highlightColor,
+                                        fillColor:
+                                            Theme.of(context).highlightColor,
+                                        focusColor:
+                                            Theme.of(context).highlightColor,
                                       ),
-
-                                      style: TextStyle(color:Theme.of(context).highlightColor ),
-                                      
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).highlightColor),
                                       onChanged: (value) {
                                         // Safely parse the value and update the controller
                                         final parsedValue =
@@ -406,9 +425,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                                   } else {
                                     priceController.text = v;
                                     disablebutton = false;
-                                    setState(() {
-                                      
-                                    });
+                                    setState(() {});
                                   }
                                 },
                                 keyboardType: TextInputType.number,
@@ -468,7 +485,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                           ),
                         ],
                       )),
-                 creditCardController.isfullCreditusing.value ?SizedBox.shrink(): _buildPaymentMethodSelection()
+                  creditCardController.isfullCreditusing.value
+                      ? SizedBox.shrink()
+                      : _buildPaymentMethodSelection()
                   // SizedBox(
                   //   height: screenHeight(context, dividedBy: 3.5),
                   // ),
@@ -499,7 +518,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                                     cancelOrderController.cancelorderMethod(
                                         widget.tableId, "Not Cooked");
                                     // Update the state of the app.
-                                    creditCardController.isCreditCard.value = false;
+                                    creditCardController.isCreditCard.value =
+                                        false;
                                   },
                                   child: customText(
                                     'Yes',
@@ -516,8 +536,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                             ],
                           );
                         });
-
-                        
                   },
                   child: Container(
                     // height: 48.0,
@@ -538,20 +556,19 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                       generateBillClick = true;
-                      
+                      generateBillClick = true;
+
                       setState(() {});
                       if (Responsive.isDesktop(context)) {
                         final formData = buildDesktopFormData();
-                         print("FORM DATA : -------- $formData");
+                        print("FORM DATA : -------- $formData");
                         desktopController.postData(formData);
                       } else {
                         final formData = buildFormData();
                         print("Generate FormData : ${formData.customerNames}");
-                         print("FORM DATA : -------- $formData");
+                        print("FORM DATA : -------- $formData");
                         printerController.postData(formData);
                       }
-                    
                     },
                     child: Container(
                       height: 48.0,
@@ -725,7 +742,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       columns: [
         dataColumn("items".tr, false),
         dataColumn("Qty.", true),
-      //  dataColumn("Rate", true),
+        //  dataColumn("Rate", true),
         dataColumn("Amt.", true),
         dataColumn("", true),
         dataColumn("", true),
@@ -771,7 +788,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                     },
                   ))
                 : dataCell("${entry.value.quantity}"),
-          //  dataCell("${entry.value.price}"),
+            //  dataCell("${entry.value.price}"),
             dataCell("${entry.value.productTotal}"),
             dataCell(""),
             // DataCell(Center(
@@ -789,15 +806,14 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             DataCell(Center(
                 child: InkWell(
                     onTap: () async {
-
-                      controller.orderedItems.length == 1 ?
-                      cancelOrderController.cancelorderMethod(
-                                        widget.tableId, "Not Cooked"):
-                      await itemCancelcontroller.fetchMenu(
-                          widget.tableId,
-                          int.parse(item.itemId.toString()),
-                          "Not want",
-                          context);
+                      controller.orderedItems.length == 1
+                          ? cancelOrderController.cancelorderMethod(
+                              widget.tableId, "Not Cooked")
+                          : await itemCancelcontroller.fetchMenu(
+                              widget.tableId,
+                              int.parse(item.itemId.toString()),
+                              "Not want",
+                              context);
                       controller.getTakeAwayResponse(widget.tableId);
                     },
                     child: Icon(
@@ -808,7 +824,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
           ],
         );
       }).toList(),
-    
     );
   }
 
@@ -1078,40 +1093,35 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                 color: Theme.of(context).highlightColor, font: 16.0),
           ],
         ),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             customText("Custom GST",
                 color: Theme.of(context).highlightColor, font: 16.0),
             SizedBox(
-                                                      height: 30.0,
-                                                      width: 100.0,
-                                                      child: TextField(
-                                                        // controller:
-                                                        //     priceController,
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .number,
-                                                        style: TextStyle(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .highlightColor),
-                                                        onChanged: (value) {
-                                                         final newVal = int.parse(value) / 2;
-                                                          setState(() {
-                                                            print("NEW VAL CGST ++++++++++++ $newVal");
-                                                            controller.cartOrder.value!.taxData?.cgst = newVal.toString();
-                                                            sGst = newVal;
-                                                            // cGst = newVal;
+                height: 30.0,
+                width: 100.0,
+                child: TextField(
+                  // controller:
+                  //     priceController,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(color: Theme.of(context).highlightColor),
+                  onChanged: (value) {
+                    final newVal = int.parse(value) / 2;
+                    setState(() {
+                      print("NEW VAL CGST ++++++++++++ $newVal");
+                      controller.cartOrder.value!.taxData?.cgst =
+                          newVal.toString();
+                      sGst = newVal;
+                      // cGst = newVal;
 
-                                                            // order[index].price =
-                                                            //     value;
-                                                            // isQuantityEditing =
-                                                            //     false;
-                                                          });
-                                                        },
-                                                      ))
+                      // order[index].price =
+                      //     value;
+                      // isQuantityEditing =
+                      //     false;
+                    });
+                  },
+                ))
           ],
         ),
         Row(
@@ -1137,7 +1147,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             "Payable Amount",
             widget.ordertype == "Advance"
                 ? widget.price.toString()
-                    : discount.toString(),
+                : discount.toString(),
             17.0),
         Divider(
           color: Theme.of(context).highlightColor,
@@ -1166,7 +1176,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         ? "${controller.cartOrder.value!.total}"
         : priceController.text;
 
-    if (paymentUPI == true.obs || paymentCash == true.obs|| creditCardController.isfullCreditusing.value == true) {
+    if (paymentUPI == true.obs ||
+        paymentCash == true.obs ||
+        creditCardController.isfullCreditusing.value == true) {
       if (printername != null) {
         await printReceipt(advance, paymentUPI.isTrue ? "online" : "cash");
       } else {
@@ -1192,11 +1204,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             snackBarBottom(
                 "Error", "Please Define the Printer for Printing", context);
           }
-        }
-
-        else if( creditCardController.isfullCreditusing.value == true){
-
-           if (advance) {
+        } else if (creditCardController.isfullCreditusing.value == true) {
+          if (advance) {
             await completeAdvanceOrder(advance, "Credit");
           } else {
             if (widget.ordertype == 'Catering') {
@@ -1209,7 +1218,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
           }
         }
       }
-    } else{
+    } else {
       snackBarBottom("Error", "Please Select Payment", context);
     }
   }
@@ -1256,47 +1265,47 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final mobileNo = controller.cartOrder.value!.customer == null
         ? "-"
         : controller.cartOrder.value!.customer!.phone.toString();
-   // final address = 
+    // final address =
     // controller.cartOrder.value!.customer == null
     //     ? "-"
-       // : controller.cartOrder.value!.customer!.address.toString();
+    // : controller.cartOrder.value!.customer!.address.toString();
     final sGst = controller.cartOrder.value!.taxData!.sgst.toString();
     final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
 
     final invoiceDate = DateTime.now();
     final catGrandTotal = widget.totalAmount;
-    final catPayableAmount = widget.remainingAmount.toString();// "0.0";
-    final  catAmountPaid = widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
-    final catRemainingamount =  "0.0";//widget.remainingAmount.toString();
+    final catPayableAmount = widget.remainingAmount.toString(); // "0.0";
+    final catAmountPaid =
+        widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
+    final catRemainingamount = "0.0"; //widget.remainingAmount.toString();
 
     return BillPrinterModel(
-      printerNames: printername.toString(),
-      billNo: invoiceiD,
-      tableNo: widget.ordertype == 'Dine' ? widget.table.toString() : "00",
-      items: itemsString.toString(),
-      qty: itemsquantity.toString(),
-      billType: '1',
-      header:
-          "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/****",
-      price: itemsprice.toString(),
-      amount: itemAmount.toString(),
-      dateTime:
-          "${invoiceDate.year}-${invoiceDate.month}-${invoiceDate.day} ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
-      lastRecord:
-          "${discountpercentage == 0 ? 00.0 : discountpercentage}/$sGst/$cGst/"
-          "$discount",
-      ipAddress: '192.168.1.100',
-      is3T: invoiceType != null ? invoiceType.toString() : "0",
-      iN: '0',
-      customerNames: customerName,
-      mobileNo: mobileNo,
-      address: address,
-      NP:"0",
-      catGrandTotal: catGrandTotal.toString(),
-      catPayableAmount: catPayableAmount,
-      catAmountPaid: catAmountPaid,
-      catRemainingamount : catRemainingamount 
-    );
+        printerNames: printername.toString(),
+        billNo: invoiceiD,
+        tableNo: widget.ordertype == 'Dine' ? widget.table.toString() : "00",
+        items: itemsString.toString(),
+        qty: itemsquantity.toString(),
+        billType: '1',
+        header:
+            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/****",
+        price: itemsprice.toString(),
+        amount: itemAmount.toString(),
+        dateTime:
+            "${invoiceDate.year}-${invoiceDate.month}-${invoiceDate.day} ${invoiceDate.hour}:${invoiceDate.minute}:${invoiceDate.second}",
+        lastRecord:
+            "${discountpercentage == 0 ? 00.0 : discountpercentage}/$sGst/$cGst/"
+            "$discount",
+        ipAddress: '192.168.1.100',
+        is3T: invoiceType != null ? invoiceType.toString() : "0",
+        iN: '0',
+        customerNames: customerName,
+        mobileNo: mobileNo,
+        address: address,
+        NP: "0",
+        catGrandTotal: catGrandTotal.toString(),
+        catPayableAmount: catPayableAmount,
+        catAmountPaid: catAmountPaid,
+        catRemainingamount: catRemainingamount);
   }
 
   BillDesktopModel buildDesktopFormData() {
@@ -1316,9 +1325,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
     final invoiceDate = DateTime.now();
     final catGrandTotal = widget.totalAmount;
-    final catPayableAmount = widget.remainingAmount.toString();// "0.0";
-    final  catAmountPaid = widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
-    final catRemainingamount =  "0.0";//widget.remainingAmount.toString();
+    final catPayableAmount = widget.remainingAmount.toString(); // "0.0";
+    final catAmountPaid =
+        widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
+    final catRemainingamount = "0.0"; //widget.remainingAmount.toString();
 
     return BillDesktopModel(
         printerNames: printername.toString(),
@@ -1338,15 +1348,11 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
             "${controller.cartOrder.value!.grandTotal!}",
         kotNo: invoiceiD.toString(),
         is3T: invoiceType != null ? invoiceType.toString() : "0",
-        
         NP: "0",
         catGrandTotal: catGrandTotal.toString(),
-      catPayableAmount: catPayableAmount,
-      catAmountPaid: catAmountPaid,
-      catRemainingamount : catRemainingamount 
-
-        );
-        
+        catPayableAmount: catPayableAmount,
+        catAmountPaid: catAmountPaid,
+        catRemainingamount: catRemainingamount);
   }
 
   Future<void> completeAdvanceOrder(bool advance, String paymentType) async {
@@ -1383,23 +1389,30 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   Future<void> completeOrderPost(
       String paymentType, BuildContext context) async {
-    completeOrdercontroller.completeOrderPost(
-      widget.tableId,
-      0,
-      creditCardController.isfullCreditusing.value? "Credit ":paymentType,
-      widget.ordertype,
-      1,
-      0,
-       creditCardController.isfullCreditusing.value
-      ? 0 // Use full grand total if full credit is being used
-      : (creditCardController.isCreditCard.value
-          ? (controller.cartOrder.value!.grandTotal! - creditCardController.creditAmount.value)
-          : controller.cartOrder.value!.grandTotal!),
-      selectedAddressid,
-      int.parse(
-          discountController.text.isEmpty ? "0" : discountController.text),
-      context,
-    );
+    if (creditCardController.creditAmount.value >
+        controller.cartOrder.value!.grandTotal) {
+      snackBar("Error",
+          "Oops! Your amount exceeds the grandtotal balance. Please enter a valid amount!");
+      return;
+    } else {
+      completeOrdercontroller.completeOrderPost(
+        widget.tableId,
+        0,
+        creditCardController.isfullCreditusing.value ? "Credit " : paymentType,
+        widget.ordertype,
+        1,
+        0,
+        creditCardController.isfullCreditusing.value
+            ? 0 // Use full grand total if full credit is being used
+            : (creditCardController.isCreditCard.value
+                ? (creditCardController.creditAmount.value)
+                : controller.cartOrder.value!.grandTotal!),
+        selectedAddressid,
+        int.parse(
+            discountController.text.isEmpty ? "0" : discountController.text),
+        context,
+      );
+    }
   }
 }
 

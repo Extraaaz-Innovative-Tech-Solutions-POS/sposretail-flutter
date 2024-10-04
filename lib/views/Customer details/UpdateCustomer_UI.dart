@@ -327,8 +327,13 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                                       
                                       print("Paying amount: $amount");
                                     } else {
+                                      
                                       // Handle invalid input
                                       print("Invalid amount entered.");
+
+                                      snackBar("Error", "Oops! Your amount exceeds the outstanding balance. Please enter a valid amount!");
+
+                                      
                                     }
                                   }
 

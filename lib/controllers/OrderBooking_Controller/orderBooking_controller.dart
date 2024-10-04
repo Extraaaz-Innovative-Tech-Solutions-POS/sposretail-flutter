@@ -306,7 +306,7 @@ class OrderBookingController extends GetxController {
         break;
       default:
       print("items on navigating testing.... ${items[0].quantity}");
-        Get.to(() => ShowOngoingOrder(
+        Get.off(() => ShowOngoingOrder(
           gst: infoController.gstNo.value,
           fssai: infoController.fssai.value,
 
