@@ -53,6 +53,11 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   final piecesController = TextEditingController();
   final priceController = TextEditingController();
 
+  var quantityOption = [
+    "Boxes",
+    'Pieces',
+  ];
+
   late InvoiceManager invoiceManager;
   List<Item> order = [];
   var clickonActionChips,
@@ -1176,6 +1181,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   child: ListView.builder(
                     itemCount: order.length,
                     itemBuilder: (BuildContext context, int index) {
+                      orderbookingController.initializeSelectedQuantity(order.length);
                       return StatefulBuilder(builder: (BuildContext context,
                           void Function(void Function()) setState) {
                         return Container(
@@ -1332,13 +1338,17 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                           },
                                                         ));
                                                   })
-                                                : customText(
-                                                    "Q: ${order[index].quantity.toString()}",
-                                                    //order[index].quantity.toString(),
-                                                    color: Theme.of(context)
-                                                        .highlightColor
-                                                        .withOpacity(0.7),
-                                                    font: 18.0),
+                                                : GetBuilder<OrderBookingController>(
+                                                  builder: (ob) {
+                                                    return customText( widget.restaurantId == "217" ? "${ob.selectedQuantityList[index].value}: ${order[index].quantity.toString()}":
+                                                        "Q: ${order[index].quantity.toString()}",
+                                                        //order[index].quantity.toString(),
+                                                        color: Theme.of(context)
+                                                            .highlightColor
+                                                            .withOpacity(0.7),
+                                                        font: 18.0);
+                                                  }
+                                                ),
                                           ),
                                           const SizedBox(
                                             width: 10.0,
@@ -1350,84 +1360,32 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   size: 20.0,
                                                   color: Theme.of(context)
                                                       .highlightColor,
-                                                )
+                                                ),
+
+                                                Visibility(
+                                        visible: widget.restaurantId == "217" ? true : false,
+                                        child: Obx(
+              () => DropdownButton<String>(
+                value: orderbookingController.selectedQuantityList[index].value,
+
+                onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          orderbookingController.updateSelectedQuantityIndex(index, newValue);
+                        }},
+                items: orderbookingController.quantityOptions
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            )),
                                         ],
                                       ),
-                                      /////////////////////
-                                      widget.restaurantId == "217" ? Row(
-                                        children: [
+                                      
 
-                                          customText("Boxes: ${boxesController.text}",
-                                                    //order[index].quantity.toString(),
-                                                    color: Theme.of(context)
-                                                        .highlightColor
-                                                        .withOpacity(0.7),
-                                                    font: 18.0),
-
-                                          SizedBox(
-                                                        height: 30.0,
-                                                        width: 100.0,
-                                                        child: TextField(
-                                                          controller:
-                                                              boxesController,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          style: TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .highlightColor),
-                                                                  
-                                                          onChanged: (value) {
-                                                            
-                                                          },
-                                                          onSubmitted: (value) {
-                                                            setState(() {
-                                                                
-                                                            });
-                                                          },
-                                                        ))
-
-                                        ],
-                                      ): const SizedBox.shrink(),
-
-                                      widget.restaurantId == "217" ? Row(
-                                        children: [
-
-                                          customText("Pieces: ${quantityController.text}",
-                                                    //order[index].quantity.toString(),
-                                                    color: Theme.of(context)
-                                                        .highlightColor
-                                                        .withOpacity(0.7),
-                                                    font: 18.0),
-
-                                          SizedBox(
-                                                        height: 30.0,
-                                                        width: 100.0,
-                                                        child: TextField(
-                                                          controller:
-                                                              quantityController,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          style: TextStyle(
-                                                              color: Theme.of(
-                                                                      context)
-                                                                  .highlightColor),
-                                                                  
-                                                          onChanged: (value) {
-                                                            
-                                                          },
-                                                          onSubmitted: (value) {
-                                                            setState(() {
-                                                                
-                                                            });
-                                                          },
-                                                        ))
-
-                                        ],
-                                      ): const SizedBox.shrink(),
-                                      ///////////////
+                                     
                                     ],
                                   ),
                                 ),

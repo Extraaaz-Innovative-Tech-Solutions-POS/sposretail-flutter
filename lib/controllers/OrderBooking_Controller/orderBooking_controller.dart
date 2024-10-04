@@ -13,6 +13,10 @@ class OrderBookingController extends GetxController {
   final settingsController = Get.put(SettingsController());
   final infoController = Get.put(AdditionalInfoController());
 
+   final List<String> quantityOptions = ['Boxes', 'Pieces'];
+  var selectedQuantity = 'Boxes'.obs;
+  List<RxString> selectedQuantityList = <RxString>[].obs;
+
     RxInt customerId = 0.obs;
 
 
@@ -319,4 +323,23 @@ class OrderBookingController extends GetxController {
         break;
     }
   }
+
+  void updateSelectedItem(String value) {
+    selectedQuantity.value = value;
+    update();
+  }
+
+
+
+  void initializeSelectedQuantity(int itemCount) {
+    selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+  }
+
+  // Update selected item for a particular index
+  void updateSelectedQuantityIndex(int index, String value) {
+    selectedQuantityList[index].value = value;
+    update();
+  }
 }
+
+
