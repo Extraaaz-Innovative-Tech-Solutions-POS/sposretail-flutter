@@ -12,6 +12,10 @@ class CreditCardController extends GetxController {
 
   RxBool isfullCreditusing = false.obs;
 
+  RxBool isfullOutstandingPay = false.obs;
+  RxBool isPartialOutstandingPay = false.obs;
+   RxDouble outstandingAmount = 0.0.obs;
+
   //  CreditModel creditModel;
 
 

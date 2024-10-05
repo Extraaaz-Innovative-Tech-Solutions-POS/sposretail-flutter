@@ -92,6 +92,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final WebSocketService _webSocketService = WebSocketService();
 
   var _creditController = TextEditingController();
+   var _outstandingController = TextEditingController();
 
   PaymentMethod? paymentMethod;
   PaymentOptions? paymentOptions;
@@ -158,15 +159,15 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
       setState(() {});
     }
 
-    fetchCredit();
+    fetchCredit(0);
   }
 
-  fetchCredit() {
+  fetchCredit(double payingoutstandingAmount) {
     if (statusclick == true) {
       print("status check ${statusclick}");
 
       print("customer id: ${widget.customerId} ");
-      creditCardController.creditCardPost(widget.customerId, 0);
+      creditCardController.creditCardPost(widget.customerId, payingoutstandingAmount);
     }
   }
 
@@ -293,51 +294,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                         )
                       : const SizedBox.shrink(),
 
-                  // full credit payment
-                  statusclick
-                      ? Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    value: creditCardController
-                                        .isfullCreditusing.value,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        creditCardController.isfullCreditusing
-                                            .value = value ?? false;
 
-                                        if (creditCardController
-                                            .isfullCreditusing.value) {
-                                          creditCardController
-                                                  .isCreditCard.value =
-                                              false; // Uncheck the other checkbox
-                                        }
-                                      });
-                                    },
-                                    checkColor:
-                                        Theme.of(context).highlightColor,
-                                    activeColor: Theme.of(context).primaryColor,
-                                  ),
 
-                                  // Add a title next to the checkbox
-                                  Text(
-                                    'Pay Full By Credit',
-                                    style: TextStyle(
-                                        fontSize: 16.0,
-                                        color:
-                                            Theme.of(context).highlightColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )
-                      : const SizedBox.shrink(),
-
-                  // Conditionally show TextField when Credit Card is selected,
+                                // Conditionally show TextField when Credit Card is selected,
 
                   GetBuilder<CreditCardController>(
                     builder: (controller) {
@@ -389,6 +348,205 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                       );
                     },
                   ),
+
+
+                  // full credit payment
+                  statusclick
+                      ? Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: creditCardController
+                                        .isfullCreditusing.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        creditCardController.isfullCreditusing
+                                            .value = value ?? false;
+
+                                        if (creditCardController
+                                            .isfullCreditusing.value) {
+                                          creditCardController
+                                                  .isCreditCard.value =
+                                              false; // Uncheck the other checkbox
+                                        }
+                                      });
+                                    },
+                                    checkColor:
+                                        Theme.of(context).highlightColor,
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
+
+                                  // Add a title next to the checkbox
+                                  Text(
+                                    'Pay Full By Credit',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color:
+                                            Theme.of(context).highlightColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+
+
+
+
+                
+
+
+
+                      // partial outstanding paymaent
+
+                        statusclick
+                      ? Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value:
+                                        creditCardController.isPartialOutstandingPay.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        creditCardController.isPartialOutstandingPay
+                                            .value = value ?? false;
+
+                                        if (creditCardController
+                                            .isPartialOutstandingPay.value) {
+                                          creditCardController
+                                                  .isfullOutstandingPay.value =
+                                              false; // Uncheck the other checkbox
+                                        }
+                                      });
+                                    },
+                                    checkColor:
+                                        Theme.of(context).highlightColor,
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
+
+                                  // Add a title next to the checkbox
+                                  Text(
+                                    'Pay Partial Outstanding',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color:
+                                            Theme.of(context).highlightColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+
+
+                          // Conditionally show TextField when Credit Card is selected,
+
+                  GetBuilder<CreditCardController>(
+                    builder: (controller) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          controller.isPartialOutstandingPay.value
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    TextField(
+                                      controller: _outstandingController,
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            'Enter Outstanding Amount', // Hint text
+                                        border: OutlineInputBorder(),
+                                        fillColor:
+                                            Theme.of(context).highlightColor,
+                                        focusColor:
+                                            Theme.of(context).highlightColor,
+                                      ),
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).highlightColor),
+                                      onChanged: (value) {
+                                        // Safely parse the value and update the controller
+                                        final parsedValue =
+                                            double.tryParse(value);
+                                        if (parsedValue != null) {
+                                          creditCardController
+                                              .outstandingAmount.value = parsedValue;
+                                        } else {
+                                          creditCardController
+                                                  .outstandingAmount.value =
+                                              0; // Handle invalid input
+                                        }
+                                        print(
+                                            "Credit value: ${creditCardController.creditAmount.value}");
+                                      },
+                                    ),
+                                  ],
+                                )
+                              : Container(),
+                        ],
+                      );
+                    },
+                  ),
+
+
+
+                       // full Outstanding payment
+                  statusclick
+                      ? Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    value: creditCardController
+                                        .isfullOutstandingPay.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        creditCardController.isfullOutstandingPay
+                                            .value = value ?? false;
+
+                                        if (creditCardController
+                                            .isfullOutstandingPay.value) {
+                                          creditCardController
+                                                  .isPartialOutstandingPay.value =
+                                              false; // Uncheck the other checkbox
+                                        }
+                                      });
+                                    },
+                                    checkColor:
+                                        Theme.of(context).highlightColor,
+                                    activeColor: Theme.of(context).primaryColor,
+                                  ),
+
+                                  // Add a title next to the checkbox
+                                  Text(
+                                    'Pay Full Outstanding',
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color:
+                                            Theme.of(context).highlightColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+
+              
                   Visibility(
                       visible: !fullPayment,
                       child: Row(
@@ -1395,6 +1553,16 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
           "Oops! Your amount exceeds the grandtotal balance. Please enter a valid amount!");
       return;
     } else {
+
+      if(creditCardController.isPartialOutstandingPay.value){
+      fetchCredit(creditCardController.outstandingAmount.value);
+      }
+
+      if (creditCardController.isfullOutstandingPay.value) {
+         fetchCredit(double.parse(creditCardController.outStanding.value));
+      }
+
+
       completeOrdercontroller.completeOrderPost(
         widget.tableId,
         0,
