@@ -1135,6 +1135,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       setState(() {
         if (isAddition) {
           order[index].quantity += quantity;
+          
         } else {
           order[index].quantity -= quantity;
           // Remove the item if the quantity becomes zero or less
@@ -1154,6 +1155,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               name: itemName,
               price: price,
               boxes: widget.restaurantId == "217" ? quantity: 0,
+              pieces: 0,
               quantity: quantity,
               vairentId: vairentID,
               instruction: "",
@@ -1372,8 +1374,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 onChanged: (String? newValue) {
                         if (newValue != null) {
                           orderbookingController.updateSelectedQuantityIndex(index, newValue);
-                          order[index].boxes =  newValue =='Boxes'? order[index].quantity: 0;
-                          order[index].pieces = newValue =='Pieces'? order[index].quantity: 0;
+                          order[index].boxes =  newValue =='Boxes'? order[index].quantity: newValue =='Pieces'? 0: 0;
+                          order[index].pieces =  newValue =='Pieces'? order[index].quantity: 0;
+                         
                         }},
                 items: orderbookingController.quantityOptions
                     .map<DropdownMenuItem<String>>((String value) {
@@ -1409,6 +1412,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     ),
                     backgroundColor: Theme.of(context).primaryColor),
                 onPressed: () {
+
                   // print(widget.customerId);
                   orderbookingScreen.confirmOrderBtnTap(
                     widget.customerId,

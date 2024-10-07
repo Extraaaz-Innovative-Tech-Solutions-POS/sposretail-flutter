@@ -18,6 +18,7 @@ class ShowOngoingOrder extends StatefulWidget {
   final int? floor;
   final int? table;
   final String? ordertype;
+  //final List orderData;
   final dynamic orderData;
   List<Item> items;
   var price;
@@ -1407,10 +1408,17 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   }
 
   BillPrinterModel buildFormData() {
+    List<Item> orders = [];
     final itemsString =
         controller.orderedItems.map((element) => element.name).join('/');
     final itemsquantity = controller.orderedItems
         .map((element) => element.quantity.toString())
+        .join('/');
+        final itemBoxes = widget.items
+        .map((element) => element.boxes.toString())
+        .join('/');
+        final itemPieces = widget.items
+        .map((element) => element.pieces.toString())
         .join('/');
     final itemsprice = controller.orderedItems
         .map((element) => element.price.toString())
@@ -1447,7 +1455,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         qty: itemsquantity.toString(),
         billType: '1',
         header:
-            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/****",
+            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/ Boxes: $itemBoxes/ Pieces: $itemPieces/ Quantity: $itemsquantity**",
         price: itemsprice.toString(),
         amount: itemAmount.toString(),
         dateTime:
