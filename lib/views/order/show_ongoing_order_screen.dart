@@ -59,7 +59,8 @@ dynamic ratesprice;
 bool discountcheck = false;
 bool quantityEdit = false;
 var discountpercentage = 0;
-var statusclick, switchclick;
+var switchclick;
+bool statusclick = false;
 
 TextEditingController discountController = TextEditingController();
 bool disablebutton = false;
@@ -149,10 +150,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   Future<void> _statusboolcustomer() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    statusclick = prefs.getBool("CustomerDetailsBool");
+    statusclick = prefs.getBool("CustomerDetailsBool")!;
     restaurantId = prefs.getInt("RestaurantId");
-    print(
-        "CUSTOMER STATUS BOOL VALUE ===============> $statusclick     $restaurantId");
+    // print(
+    //     "CUSTOMER STATUS BOOL VALUE ===============> $statusclick     $restaurantId");
 
     if (statusclick != null) {
       switchclick = statusclick;
@@ -164,7 +165,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   fetchCredit(double payingoutstandingAmount) {
     if (statusclick == true) {
-      print("status check ${statusclick}");
+    //  print("status check ${statusclick}");
 
       print("customer id: ${widget.customerId} ");
       creditCardController.creditCardPost(widget.customerId, payingoutstandingAmount);
@@ -251,8 +252,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                       ? _buildPaymentOption()
                       : const SizedBox.shrink(),
 
-                  statusclick
-                      ? Column(
+                 statusclick
+                     ?
+                       Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 10),

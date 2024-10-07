@@ -1153,6 +1153,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               id: itemId,
               name: itemName,
               price: price,
+              boxes: widget.restaurantId == "217" ? quantity: 0,
               quantity: quantity,
               vairentId: vairentID,
               instruction: "",
@@ -1371,6 +1372,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 onChanged: (String? newValue) {
                         if (newValue != null) {
                           orderbookingController.updateSelectedQuantityIndex(index, newValue);
+                          order[index].boxes =  newValue =='Boxes'? order[index].quantity: 0;
+                          order[index].pieces = newValue =='Pieces'? order[index].quantity: 0;
                         }},
                 items: orderbookingController.quantityOptions
                     .map<DropdownMenuItem<String>>((String value) {

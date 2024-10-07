@@ -45,6 +45,8 @@ class Item {
   String name;
   String price;
   dynamic quantity;
+  dynamic boxes;
+  dynamic pieces;
   String vairentId;
   String instruction;
   String modifiersGroupID;
@@ -55,6 +57,8 @@ class Item {
       required this.name,
       required this.price,
       required this.quantity,
+      this.boxes,
+      this.pieces,
       required this.vairentId,
       required this.instruction,
 
@@ -66,6 +70,8 @@ class Item {
     return {
       'Id': id,
       'quantity': quantity,
+      'boxes': boxes,
+      'pieces': pieces,
       'price': price,
       'name': name,
       'vairentId': vairentId,

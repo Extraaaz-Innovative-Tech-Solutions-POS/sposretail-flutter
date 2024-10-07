@@ -218,20 +218,20 @@ class ModifierGroups {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['user_name'] = this.userName;
-    data['name'] = this.name;
-    data['description'] = this.description;
-    data['type'] = this.type;
-    data['restaurant_id'] = this.restaurantId;
-    data['items_count'] = this.itemsCount;
-    data['modifiers_count'] = this.modifiersCount;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.modifiers != null) {
-      data['modifiers'] = this.modifiers!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['user_name'] = userName;
+    data['name'] = name;
+    data['description'] = description;
+    data['type'] = type;
+    data['restaurant_id'] = restaurantId;
+    data['items_count'] = itemsCount;
+    data['modifiers_count'] = modifiersCount;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (modifiers != null) {
+      data['modifiers'] = modifiers!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -275,17 +275,17 @@ class Modifiers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['name'] = this.name;
-    data['short_name'] = this.shortName;
-    data['description'] = this.description;
-    data['price'] = this.price;
-    data['restaurant_id'] = this.restaurantId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['deleted_at'] = this.deletedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['name'] = name;
+    data['short_name'] = shortName;
+    data['description'] = description;
+    data['price'] = price;
+    data['restaurant_id'] = restaurantId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['deleted_at'] = deletedAt;
     return data;
   }
 }
