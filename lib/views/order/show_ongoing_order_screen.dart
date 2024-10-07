@@ -1454,8 +1454,10 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         items: itemsString.toString(),
         qty: itemsquantity.toString(),
         billType: '1',
+        boxes: itemBoxes,
+        pieces: itemPieces,
         header:
-            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/ Boxes: $itemBoxes/ Pieces: $itemPieces/ Quantity: $itemsquantity**",
+            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/ Boxes: $itemBoxes/ Pieces: $itemPieces/ **",
         price: itemsprice.toString(),
         amount: itemAmount.toString(),
         dateTime:
@@ -1496,7 +1498,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     final catPayableAmount = widget.remainingAmount.toString(); // "0.0";
     final catAmountPaid =
         widget.remainingAmount.toString(); //widget.totalGivenAmount.toString();
-    final catRemainingamount = "0.0"; //widget.remainingAmount.toString();
+    final catRemainingamount = widget.remainingAmount.toString();
 
     return BillDesktopModel(
         printerNames: printername.toString(),

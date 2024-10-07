@@ -21,6 +21,8 @@ class BillPrinterModel {
   final String catGrandTotal;
   final String catPayableAmount;
   final String catAmountPaid;
+  final dynamic boxes;
+  final dynamic pieces;
 
   BillPrinterModel({
     required this.printerNames,
@@ -45,6 +47,8 @@ class BillPrinterModel {
     required this.catGrandTotal,
     required this.catPayableAmount,
     required this.catRemainingamount,
+    this.boxes,
+    this.pieces
   });
 
   Map<String, String> toJson() {
@@ -70,6 +74,8 @@ class BillPrinterModel {
       'CatGrandTotal': catGrandTotal,
       'CatPayableAmount': catPayableAmount,
       'CatRemainingAmount': catRemainingamount,
+      'boxes': boxes,
+      'pieces': pieces,
     };
   }
 }

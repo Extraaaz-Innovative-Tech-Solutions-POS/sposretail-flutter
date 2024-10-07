@@ -53,10 +53,10 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   final piecesController = TextEditingController();
   final priceController = TextEditingController();
 
-  var quantityOption = [
-    "Boxes",
-    'Pieces',
-  ];
+  // var quantityOption = [
+  //   "Boxes",
+  //   'Pieces',
+  // ];
 
   late InvoiceManager invoiceManager;
   List<Item> order = [];
