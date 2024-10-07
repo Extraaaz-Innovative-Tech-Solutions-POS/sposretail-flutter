@@ -1408,7 +1408,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   }
 
   BillPrinterModel buildFormData() {
-    List<Item> orders = [];
     final itemsString =
         controller.orderedItems.map((element) => element.name).join('/');
     final itemsquantity = controller.orderedItems
@@ -1456,8 +1455,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         billType: '1',
         boxes: itemBoxes,
         pieces: itemPieces,
-        header:
-            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/ Boxes: $itemBoxes/ Pieces: $itemPieces/ **",
+        header: widget.gst != null || widget.fssai != null ?
+            "${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/Gst No: ${widget.gst}/Fssai No : ${widget.fssai}/ *****" :"${restaurantName ?? "--"} /${address ?? "---"}/${phone ?? "---"}/ *****",
         price: itemsprice.toString(),
         amount: itemAmount.toString(),
         dateTime:

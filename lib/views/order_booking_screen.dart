@@ -1367,26 +1367,29 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
                                                 Visibility(
                                         visible: widget.restaurantId == "217" ? true : false,
-                                        child: Obx(
-              () => DropdownButton<String>(
-                value: orderbookingController.selectedQuantityList[index].value,
-
-                onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          orderbookingController.updateSelectedQuantityIndex(index, newValue);
-                          order[index].boxes =  newValue =='Boxes'? order[index].quantity: newValue =='Pieces'? 0: 0;
-                          order[index].pieces =  newValue =='Pieces'? order[index].quantity: 0;
-                         
-                        }},
-                items: orderbookingController.quantityOptions
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
+              child: GetBuilder<OrderBookingController>(
+                builder: (ob) {
+                  return DropdownButton<String>(
+                    value: ob.selectedQuantityList[index].value,
+                  
+                    onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              orderbookingController.updateSelectedQuantityIndex(index, newValue);
+                              order[index].boxes =  newValue =='Boxes'? order[index].quantity: newValue =='Pieces'? 0: 0;
+                              order[index].pieces =  newValue =='Pieces'? order[index].quantity: 0;
+                             
+                            }},
+                    items: orderbookingController.quantityOptions
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   );
-                }).toList(),
+                }
               ),
-            )),
+            )
                                         ],
                                       ),
                                       

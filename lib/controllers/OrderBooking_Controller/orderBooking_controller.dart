@@ -339,6 +339,7 @@ class OrderBookingController extends GetxController {
   void updateSelectedQuantityIndex(int index, String value) {
     selectedQuantityList[index].value = value;
     update();
+    print(selectedQuantityList[index].value);
   }
 }
 
