@@ -1,3 +1,4 @@
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class CustomerList extends StatefulWidget {
@@ -21,6 +22,7 @@ final cartController = Get.put(CartController());
 final newcustomer = Get.put(AddCustomerController());
 final allItemsController = Get.put(AllItemsController());
 final orderbookingController = Get.put(OrderBookingController());
+final settingsController = Get.put(SettingsController());
 
 class _CustomerListState extends State<CustomerList> {
   String searchQuery = '';
@@ -166,6 +168,7 @@ class _CustomerListState extends State<CustomerList> {
                               : widget.orderType == "Delivery"
                                   ? () {
                                       Get.to(OrderBookingScreen(
+                                        restaurantId: settingsController.restaurantId.toString(),
                                         ordertype: "Delivery",
                                         customerName:
                                             c.customer[index].name.toString(),
@@ -203,6 +206,7 @@ class _CustomerListState extends State<CustomerList> {
 
                                             print("after set:${orderbookingController.customerId.value}");
                                               Get.to(OrderBookingScreen(
+                                                restaurantId: settingsController.restaurantId.toString(),
                                                   ordertype: "Take Away",
                                                   customerName: customerlist[index].name
                                                       .toString(),
@@ -211,6 +215,7 @@ class _CustomerListState extends State<CustomerList> {
                                           : () {
                                               _statusbool().whenComplete(() =>
                                                   Get.to(OrderBookingScreen(
+                                                    restaurantId: settingsController.restaurantId.toString(),
                                                       floor: floorId,
                                                       table: tablenumber,
                                                       ordertype: "Dine",

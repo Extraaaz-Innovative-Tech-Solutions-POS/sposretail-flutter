@@ -1,3 +1,4 @@
+import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/user_model.dart';
 import 'kitchen_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
@@ -5,6 +6,7 @@ import 'package:spos_retail/views/widgets/export.dart';
 class AuthController extends GetxController {
   final kitchenController = Get.put(KitchenController());
   final userController = Get.put(UserController());
+  final settingsController = Get.put(SettingsController());
   final RxBool isLoading = false.obs;
 
   final user = Get.put(UserController());
@@ -58,6 +60,7 @@ class AuthController extends GetxController {
           if (sharedrole == 'manager' || sharedrole == "cashier") {
             userController
                 .setUser(User.fromJson(response.data["data"]['user']));
+               settingsController.fetchSharedPreference();
             Get.to(BottomNav());
           }
         } else {

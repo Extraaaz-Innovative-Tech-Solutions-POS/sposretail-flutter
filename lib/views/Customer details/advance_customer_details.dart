@@ -174,6 +174,7 @@ class _AdvanceCustomerDetailsState extends State<AdvanceCustomerDetails> {
                 } else {
 
                   Get.to(OrderBookingScreen(
+                    restaurantId: settingsController.restaurantId.toString(),
                     customerId: widget.id,
                     ordertype: "Advance",
                     customerName: widget.name,
