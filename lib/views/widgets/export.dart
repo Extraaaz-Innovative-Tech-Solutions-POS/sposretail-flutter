@@ -3,13 +3,16 @@ export 'package:spos_retail/constants/constant.dart';
 export 'package:spos_retail/constants/app_constant.dart';
 
 //others
-
+export 'package:spos_retail/views/widgets/drawer.dart';
+export 'package:spos_retail/views/inventory/stock/return_stock.dart';
+export 'package:spos_retail/views/inventory/stock/stock_alert.dart';
+export 'package:spos_retail/views/languages.dart';
+export 'package:spos_retail/views/settings/invoices/additional_notes.dart';
 export 'package:spos_retail/views/ModifierGroup/all_modifiergroup_ui.dart';
 export 'package:spos_retail/views/inventory/RecipeManagement/recipe_list.dart';
 export 'package:spos_retail/views/widgets/custom_data.dart';
 export 'package:spos_retail/views/inventory/Supplier/add_supplier.dart';
 export 'package:spos_retail/constants/widget_constant.dart';
-export 'package:spos_retail/controllers/get_modifierItemByID.dart';
 export 'package:spos_retail/services/dio_services.dart';
 export 'package:spos_retail/views/order/cashier_invoice.dart';
 export 'package:spos_retail/model/dashboard_top_selling_items.dart';
@@ -119,6 +122,8 @@ export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/get_modifierItemByID.dart';
+export 'package:spos_retail/controllers/settings_controller.dart';
 export 'package:spos_retail/controllers/additional_info_controller.dart';
 export 'package:spos_retail/controllers/languages_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';

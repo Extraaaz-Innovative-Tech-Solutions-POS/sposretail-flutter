@@ -15,6 +15,7 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
   String queryAll = '';
   final graphController = Get.put(GraphController());
   final dashboardController = Get.put(DashboardController());
+  final usercontroller = Get.put(UserController());
 
   @override
   void initState() {
