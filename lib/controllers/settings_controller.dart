@@ -61,4 +61,43 @@ class SettingsController extends GetxController {
     restaurantId = pref.getInt("RestaurantId");
     update();
   }
+
+  void launchApp(String packageName) async {
+    if (await DeviceApps.isAppInstalled(packageName)) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var existingPrinter = prefs.get("BillingPrinter");
+      if (existingPrinter != null) {
+        await DeviceApps.openApp(packageName);
+      } else {
+        debugPrint("Printer is not connected");
+      }
+    } else {
+      debugPrint('App is not installed.');
+      // Handle the case where the app is not installed
+    }
+  }
+
+  Future<void> checkToken() async {
+    DateTime dateTime = DateTime.now();
+    var currentdate = dateTime.day;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool saved = prefs.getBool('saved') ?? false;
+    String? username = prefs.getString('username');
+    String? password = prefs.getString('password');
+
+    // Check if token is
+    if (saved && username != null && password != null) {
+      prefs.setInt("Currentdate", currentdate);
+      Future.delayed(const Duration(seconds: 3), () {
+        settingsController.launchApp('com.example.myapplication');
+        Get.put(AuthController()).login(username, password, fromsplash: true);
+      });
+    } else {
+      prefs.setInt("Currentdate", currentdate);
+      Future.delayed(const Duration(seconds: 3), () {
+        settingsController.launchApp('com.example.myapplication');
+        Get.to(Login());
+      });
+    }
+  }
 }

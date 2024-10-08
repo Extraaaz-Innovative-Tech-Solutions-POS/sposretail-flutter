@@ -3,6 +3,8 @@ export 'package:spos_retail/constants/constant.dart';
 export 'package:spos_retail/constants/app_constant.dart';
 
 //others
+export 'package:spos_retail/views/onboarding/splash_screen.dart';
+export 'package:spos_retail/views/widgets/my_translation.dart';
 export 'package:spos_retail/views/widgets/drawer.dart';
 export 'package:spos_retail/views/inventory/stock/return_stock.dart';
 export 'package:spos_retail/views/inventory/stock/stock_alert.dart';
@@ -93,6 +95,7 @@ export 'package:spos_retail/views/inventory/Purchase/add_purchase.dart';
 
 
 //packages
+export 'package:flutter_localizations/flutter_localizations.dart'; 
 export 'package:flutter/services.dart';
 export 'package:syncfusion_flutter_charts/charts.dart';
 export 'package:flutter_contacts/flutter_contacts.dart';
