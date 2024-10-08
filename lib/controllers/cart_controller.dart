@@ -69,14 +69,6 @@ class CartController extends GetxController {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
       printername = pref.getString("BillingPrinter");
-
-      Future<void> _statusbool() async {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        statusclick = prefs.getBool("CustomerDetailsBool");
-
-        update();
-      }
-
       print("testing customer details :$customername");
 
       if (Responsive.isDesktop(context)) {
@@ -106,12 +98,10 @@ class CartController extends GetxController {
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
 
-        _statusbool().whenComplete(() {
-          if (statusclick == true && settingsController.whatsappBilling.value) {
+          if (settingsController.clientInfo && settingsController.whatsappBilling.value) {
             print("PHONE NUMBER : --------------------- +91${phone.value}");
             shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: settingsController.whatsappPersonal ? WhatsApp.standard: WhatsApp.business);
           }
-        });
 
         Get.to(BottomNav());
       } else {
@@ -157,12 +147,11 @@ class CartController extends GetxController {
         await file.writeAsBytes(pdfBytes);
         final xFile = XFile(file.path);
         print("PHONE NUMBER : --------------------- +91${phone.value}");
-        _statusbool().whenComplete(() {
-          if (statusclick == true && settingsController.whatsappBilling.value) {
+
+          if (settingsController.clientInfo && settingsController.whatsappBilling.value) {
             print("PHONE NUMBER : --------------------- +91${phone.value}");
             shareWhatsapp.shareFile(phone: "+91${phone.value}", xFile, type: settingsController.whatsappPersonal ? WhatsApp.standard: WhatsApp.business);
           }
-        });
       }
     } catch (e) {
       successful.value = false;

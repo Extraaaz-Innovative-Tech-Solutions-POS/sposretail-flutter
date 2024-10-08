@@ -39,27 +39,8 @@ class _BottomNavState extends State<BottomNav> {
   @override
   void initState() {
     super.initState();
-    sharedPrefrence();
   }
 
-
-
-  sharedPrefrence() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    name = pref.getString('name');
-    role = pref.getString('role');
-    businessType = pref.getString("BusinessType");
-    setState(() {
-       restaurantId = pref.getInt("RestaurantId");
-    });
-    print("CUSTOMER RESTAURANT ID -------------------------------- $restaurantId");
-  }
-   Future<void> _statusbool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    statusclick = prefs.getBool("CustomerDetailsBool");
-
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -279,8 +260,7 @@ class _BottomNavState extends State<BottomNav> {
           ),
           onPressed: () async{
 
-            _statusbool().whenComplete(() {
-                                if (statusclick == true) {
+                                if (settingsController.clientInfo) {
                                   Get.to(() => const TakeAwayCustomerDetails());
                                 } else {
                                   print("RESTAURANT PASSING $restaurantId");
@@ -289,7 +269,6 @@ class _BottomNavState extends State<BottomNav> {
                                         restaurantId: restaurantId.toString(),
                                       ));
                                 }
-                              });
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -375,8 +354,8 @@ Future<void> showPopUpMenu(BuildContext context, Offset offset) async {
     context: context,
     position: RelativeRect.fromLTRB(left, top, right, bottom),
     items: [
-      const PopupMenuItem<MenuItemType>(
-          value: MenuItemType.KOT, child: KOTstatus()),
+      PopupMenuItem<MenuItemType>(
+          value: MenuItemType.KOT, child: ToggleSetting()),
     ],
   );
 }

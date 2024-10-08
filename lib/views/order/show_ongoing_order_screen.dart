@@ -61,7 +61,6 @@ bool discountcheck = false;
 bool quantityEdit = false;
 var discountpercentage = 0;
 var switchclick;
-bool statusclick = false;
 
 TextEditingController discountController = TextEditingController();
 bool disablebutton = false;
@@ -116,7 +115,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   void initState() {
     print("items at init ... ${Items}");
     super.initState();
-    _statusboolcustomer();
+    fetchCredit(0);
     fullPayment = true;
     //currentdate = time.day
     //;
@@ -147,26 +146,9 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     _webSocketService.listen(_onMessageReceived);
   }
 
-  //* Customer details Status Bool--------------(Get Sharedprefrence Called here)----------->
-  Future<void> _statusboolcustomer() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    statusclick = prefs.getBool("CustomerDetailsBool")!;
-    restaurantId = prefs.getInt("RestaurantId");
-    // print(
-    //     "CUSTOMER STATUS BOOL VALUE ===============> $statusclick     $restaurantId");
-
-    if (statusclick != null) {
-      switchclick = statusclick;
-      setState(() {});
-    }
-
-    fetchCredit(0);
-  }
-
+  
   fetchCredit(double payingoutstandingAmount) {
-    if (statusclick == true) {
-    //  print("status check ${statusclick}");
+    if (settingsController.clientInfo) {
 
       print("customer id: ${widget.customerId} ");
       creditCardController.creditCardPost(widget.customerId, payingoutstandingAmount);
@@ -203,7 +185,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
     return Scaffold(
       appBar: commonAppBar(context, "Retail Order", "", action: [
 
-        if (statusclick != null && statusclick)
+        if (settingsController.clientInfo)
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -253,7 +235,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                       ? _buildPaymentOption()
                       : const SizedBox.shrink(),
 
-                 statusclick
+                 settingsController.clientInfo
                      ?
                        Column(
                           children: [
@@ -354,7 +336,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
 
                   // full credit payment
-                  statusclick
+                  settingsController.clientInfo
                       ? Column(
                           children: [
                             Padding(
@@ -406,7 +388,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
                       // partial outstanding paymaent
 
-                        statusclick
+                        settingsController.clientInfo
                       ? Column(
                           children: [
                             Padding(
@@ -506,7 +488,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
 
                        // full Outstanding payment
-                  statusclick
+                  settingsController.clientInfo
                       ? Column(
                           children: [
                             Padding(

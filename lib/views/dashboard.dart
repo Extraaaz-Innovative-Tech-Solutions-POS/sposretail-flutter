@@ -22,7 +22,7 @@ class _DashboardState extends State<Dashboard> {
   final DeliveryController advanceController = Get.put(DeliveryController());
   String query = '';
   bool checkadvance = false;
-  var statusclick, dismissClick;
+  var dismissClick;
 
   @override
   void initState() {
@@ -51,17 +51,12 @@ class _DashboardState extends State<Dashboard> {
     String formattedEndDate = DateFormat('yyyy-MM-dd').format(lastDayOfMonth);
 
     graphController.getGraph(formattedStartDate, formattedEndDate, "");
-    _statusbool();
+
     // dismiss();
     // checkfordavance();
   }
 
-  Future<void> _statusbool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    statusclick = prefs.getBool("CustomerDetailsBool");
-
-    setState(() {});
-  }
+ 
 
   // Future<void> dismiss() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -43,7 +43,7 @@ export 'package:spos_retail/views/Modifier/all_modifier.dart';
 export 'package:spos_retail/views/RestaurantUpdate/restaurant_update.dart';
 
 export 'package:spos_retail/views/staff/staffsettingsUI.dart';
-export 'package:spos_retail/views/widgets/switch_status.dart';
+export 'package:spos_retail/views/widgets/toggle_setting.dart';
 export 'package:spos_retail/views/reports/reports.dart';
 export 'package:spos_retail/views/widgets/add_category.dart';
 export '../settings/extraaazPosUtility.dart';

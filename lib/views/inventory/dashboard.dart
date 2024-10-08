@@ -19,15 +19,8 @@ class _InventoryDashboardState extends State<InventoryDashboard> {
   @override
   void initState() {
     super.initState();
-    sharedPrefrence();
   }
 
-  sharedPrefrence() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    name = pref.getString('name');
-    role = pref.getString('role');
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {

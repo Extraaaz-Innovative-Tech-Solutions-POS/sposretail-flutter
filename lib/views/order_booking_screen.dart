@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:spos_retail/views/widgets/export.dart';
@@ -44,8 +43,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
   final menucontroller = Get.put(AllItemsController());
   final authController = Get.put(AuthController());
-  // final user = Get.put(UserController());
-  //final cartController = Get.put(CartController());
   final modifierItemsById = Get.put(GetModifierItemById());
   final orderbookingScreen = Get.put(OrderBookingController());
   final quantityController = TextEditingController();
@@ -67,8 +64,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       varientitemprice,
       addonsname,
       addonsprice,
-      statusofSwitch,
-      kotboolChecking,
       takeAwayIDs,
       deliveryIDS,
       advanceIds,
@@ -99,9 +94,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
   double unitPrice = 8000;
 
-  double newPrice =0.0;
-
-
+  double newPrice = 0.0;
 
   @override
   void initState() {
@@ -114,24 +107,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     _checkBool();
     dineinTable();
 
-    checkKotStatus();
-
     setState(() {});
   }
 
-  checkKotStatus() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    kotboolChecking = pref.getBool("KOTBoolStatus");
-    setState(() {
-    });
-  }
-
-//* Generating the table Id. For the Particular Order.
   Future<void> dineinTable() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (widget.tableId != null) {
-      //  print("ID is already created");
       return;
     }
 
@@ -177,9 +159,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   }
 
   Future<void> _checkBool() async {
-    statusofSwitch ??= false;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    statusofSwitch = prefs.getBool("CustomerDetailsBool");
 
     prefs.setInt("checkdate", data);
     dineTableID = prefs.getString("DineTableID");
@@ -193,12 +173,12 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
         iconTheme: IconThemeData(color: Theme.of(context).highlightColor),
         backgroundColor: Colors.transparent,
         title: GestureDetector(
-          onTap: () {
-            clickonActionChips = "All";
-            setState(() {});
-          },
-          child: customText("menu".tr.padRight(5), font: 18.0, color: Theme.of(context).highlightColor)
-        ),
+            onTap: () {
+              clickonActionChips = "All";
+              setState(() {});
+            },
+            child: customText("menu".tr.padRight(5),
+                font: 18.0, color: Theme.of(context).highlightColor)),
         actions: [
           widget.ordertype == "Dine"
               ? IconButton(
@@ -206,15 +186,16 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     if (widget.tableId != null) {
                       print(infoController.gstNo.value);
                       Get.to(() => ShowOngoingOrder(
-                        gst: infoController.gstNo.value,
-                        fssai: infoController.fssai.value,
+                            gst: infoController.gstNo.value,
+                            fssai: infoController.fssai.value,
                             floor: widget.floor,
                             table: widget.table,
                             ordertype: widget.ordertype,
                             orderData: order,
                             tableId: widget.tableId!,
                             items: const [],
-                            customerId:  cartController.cartOrder.value!.customer!.id!,
+                            customerId:
+                                cartController.cartOrder.value!.customer!.id!,
                           ));
                     } else {
                       Fluttertoast.showToast(msg: "Please Order Something");
@@ -277,7 +258,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
           // Space between buttons
           const SizedBox(height: 10),
-
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -412,14 +392,14 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   // openItemName = firstController.text;
                   // openItemPrice = secondController.text;
 
-                   order.add(Item(
-        name: firstController.text, // New item name
-        price: secondController.text, // New item price
-        quantity: 1, // New item quantity
-        vairentId: "",
-        instruction: "",
-        modifiersGroupID: "",
-        isCustom: true));
+                  order.add(Item(
+                      name: firstController.text, // New item name
+                      price: secondController.text, // New item price
+                      quantity: 1, // New item quantity
+                      vairentId: "",
+                      instruction: "",
+                      modifiersGroupID: "",
+                      isCustom: true));
                 });
                 // print('First Input: $openItemname');
                 // print('Second Input: $openItemPrice');
@@ -599,7 +579,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     required GlobalKey<State<StatefulWidget>> key,
     required String itemName,
     required String itemPrice,
-    String ?image,
+    String? image,
     dynamic menuItem,
     required dynamic categoryId,
     required int itemId,
@@ -623,7 +603,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               onTap: () async {
                 processMenuItem(
                     itemId, itemName, double.parse(itemPrice), false);
-                    debugPrint( "url image test : https://sposversion2.extraaaz.com/$image",);
+                debugPrint(
+                  "url image test : https://sposversion2.extraaaz.com/$image",
+                );
                 // processMenuAddonsItem(
                 //     item_id, itemName, double.parse(itemPrice), false);
               },
@@ -631,29 +613,31 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                    color: Theme.of(context).highlightColor, 
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
+                      color: Theme.of(context).highlightColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6)),
                     ),
-                  width: MediaQuery.of(context).size.width / 7,
+                    width: MediaQuery.of(context).size.width / 7,
                     child: ClipRRect(
-                   borderRadius: const BorderRadius.all(Radius.circular(6)),
-                   child: image != null && image.isNotEmpty
-                  ? Image.network(
-                 "https://sposversion2.extraaaz.com/$image",
-                 
-                  errorBuilder: (context, error, stackTrace) => Image.asset(Images.bgTable, fit: BoxFit.fill), 
-               )
-              : Image.asset(Images.placeholder),
-             ),
+                      borderRadius: const BorderRadius.all(Radius.circular(6)),
+                      child: image != null && image.isNotEmpty
+                          ? Image.network(
+                              "https://sposversion2.extraaaz.com/$image",
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(Images.bgTable, fit: BoxFit.fill),
+                            )
+                          : Image.asset(Images.placeholder),
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                   // crossAxisAlignment: CrossAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                           child: Text(
-                        itemName.length > 8 ? "${itemName.substring(0, 6)}.." : itemName,
+                        itemName.length > 8
+                            ? "${itemName.substring(0, 6)}.."
+                            : itemName,
                         maxLines: 2,
                         style: TextStyle(
                           color: Theme.of(context).highlightColor,
@@ -960,7 +944,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     final item = addonsList[index];
-                                   // bool isSelected = addonSelectIndex == index;
+                                    // bool isSelected = addonSelectIndex == index;
 
                                     // setState(() {
                                     addons = true;
@@ -1135,7 +1119,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       setState(() {
         if (isAddition) {
           order[index].quantity += quantity;
-          
         } else {
           order[index].quantity -= quantity;
           // Remove the item if the quantity becomes zero or less
@@ -1154,7 +1137,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               id: itemId,
               name: itemName,
               price: price,
-              boxes: widget.restaurantId == "217" ? quantity: 0,
+              boxes: widget.restaurantId == "217" ? quantity : 0,
               pieces: 0,
               quantity: quantity,
               vairentId: vairentID,
@@ -1169,7 +1152,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
   Widget bottomSheetOrder(
       context, List<Item> order, openItemName, openItemPrice) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -1184,7 +1166,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   child: ListView.builder(
                     itemCount: order.length,
                     itemBuilder: (BuildContext context, int index) {
-                      orderbookingController.initializeSelectedQuantity(order.length);
+                      orderbookingController
+                          .initializeSelectedQuantity(order.length);
                       return StatefulBuilder(builder: (BuildContext context,
                           void Function(void Function()) setState) {
                         return Container(
@@ -1253,7 +1236,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                                 .highlightColor),
                                                         onChanged: (value) {
                                                           setState(() {
-                                                              order[index].price = value;
+                                                            order[index].price =
+                                                                value;
                                                             isQuantityEditing =
                                                                 false;
                                                           });
@@ -1296,62 +1280,89 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               color: Theme.of(
                                                                       context)
                                                                   .highlightColor),
-                                                                  /////////////////////////
-                                                                  
+                                                          /////////////////////////
+
                                                           onChanged: (value) {
                                                             setState(() {
-                                                                 newQuantity = double.tryParse(value) ?? order[index].quantity;
-                                                            order[index].quantity = newQuantity;
-                                                           
-                                                            if (double.parse(order[index].price) == 0) {
-                                                              if(double.parse(order[index].price) == 0 &&  order[index].quantity==1){
-                                                                 newPrice =  unitPrice;
-                                                                 order[index].price = newPrice.toString();
-                                                              }else{
-                                                                newPrice = unitPrice;
-                                                                order[index].price = newPrice.toString();
+                                                              newQuantity = double
+                                                                      .tryParse(
+                                                                          value) ??
+                                                                  order[index]
+                                                                      .quantity;
+                                                              order[index]
+                                                                      .quantity =
+                                                                  newQuantity;
+
+                                                              if (double.parse(order[
+                                                                          index]
+                                                                      .price) ==
+                                                                  0) {
+                                                                if (double.parse(order[index]
+                                                                            .price) ==
+                                                                        0 &&
+                                                                    order[index]
+                                                                            .quantity ==
+                                                                        1) {
+                                                                  newPrice =
+                                                                      unitPrice;
+                                                                  order[index]
+                                                                          .price =
+                                                                      newPrice
+                                                                          .toString();
+                                                                } else {
+                                                                  newPrice =
+                                                                      unitPrice;
+                                                                  order[index]
+                                                                          .price =
+                                                                      newPrice
+                                                                          .toString();
+                                                                }
                                                               }
-                                                               
-                                                            }
                                                             });
                                                           },
 
                                                           /////////////////////////////
                                                           onSubmitted: (value) {
                                                             setState(() {
-                                                                if (double.parse(order[index].price) == 0) {
-                                                                   order[index]
-                                                                  .quantity = double
-                                                                      .tryParse(
-                                                                          value) ??
-                                                                  order[index]
-                                                                      .quantity;
-                                                                }else{
-                                                                   order[index]
-                                                                  .quantity = int
-                                                                      .tryParse(
-                                                                          value) ??
-                                                                  order[index]
-                                                                      .quantity;
-                                                                }
-                                                             
+                                                              if (double.parse(order[
+                                                                          index]
+                                                                      .price) ==
+                                                                  0) {
+                                                                order[index]
+                                                                    .quantity = double
+                                                                        .tryParse(
+                                                                            value) ??
+                                                                    order[index]
+                                                                        .quantity;
+                                                              } else {
+                                                                order[index]
+                                                                    .quantity = int
+                                                                        .tryParse(
+                                                                            value) ??
+                                                                    order[index]
+                                                                        .quantity;
+                                                              }
+
                                                               isQuantityEditing =
                                                                   false;
                                                             });
                                                           },
                                                         ));
                                                   })
-                                                : GetBuilder<OrderBookingController>(
-                                                  builder: (ob) {
-                                                    return customText( widget.restaurantId == "217" ? "${ob.selectedQuantityList[index].value}: ${order[index].quantity.toString()}":
-                                                        "Q: ${order[index].quantity.toString()}",
+                                                : GetBuilder<
+                                                        OrderBookingController>(
+                                                    builder: (ob) {
+                                                    return customText(
+                                                        widget.restaurantId ==
+                                                                "217"
+                                                            ? "${ob.selectedQuantityList[index].value}: ${order[index].quantity.toString()}"
+                                                            : "Q: ${order[index].quantity.toString()}",
                                                         //order[index].quantity.toString(),
                                                         color: Theme.of(context)
                                                             .highlightColor
                                                             .withOpacity(0.7),
                                                         font: 18.0);
-                                                  }
-                                                ),
+                                                  }),
                                           ),
                                           const SizedBox(
                                             width: 10.0,
@@ -1364,37 +1375,54 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   color: Theme.of(context)
                                                       .highlightColor,
                                                 ),
-
-                                                Visibility(
-                                        visible: widget.restaurantId == "217" ? true : false,
-              child: GetBuilder<OrderBookingController>(
-                builder: (ob) {
-                  return DropdownButton<String>(
-                    value: ob.selectedQuantityList[index].value,
-                  
-                    onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              orderbookingController.updateSelectedQuantityIndex(index, newValue);
-                              order[index].boxes =  newValue =='Boxes'? order[index].quantity: newValue =='Pieces'? 0: 0;
-                              order[index].pieces =  newValue =='Pieces'? order[index].quantity: 0;
-                             
-                            }},
-                    items: orderbookingController.quantityOptions
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  );
-                }
-              ),
-            )
+                                          Visibility(
+                                            visible:
+                                                widget.restaurantId == "217"
+                                                    ? true
+                                                    : false,
+                                            child: GetBuilder<
+                                                    OrderBookingController>(
+                                                builder: (ob) {
+                                              return DropdownButton<String>(
+                                                value: ob
+                                                    .selectedQuantityList[index]
+                                                    .value,
+                                                onChanged: (String? newValue) {
+                                                  if (newValue != null) {
+                                                    orderbookingController
+                                                        .updateSelectedQuantityIndex(
+                                                            index, newValue);
+                                                    order[index]
+                                                        .boxes = newValue ==
+                                                            'Boxes'
+                                                        ? order[index].quantity
+                                                        : newValue == 'Pieces'
+                                                            ? 0
+                                                            : 0;
+                                                    order[index].pieces =
+                                                        newValue == 'Pieces'
+                                                            ? order[index]
+                                                                .quantity
+                                                            : 0;
+                                                  }
+                                                },
+                                                items: orderbookingController
+                                                    .quantityOptions
+                                                    .map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                  return DropdownMenuItem<
+                                                      String>(
+                                                    value: value,
+                                                    child: Text(value),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            }),
+                                          )
                                         ],
                                       ),
-                                      
-
-                                     
                                     ],
                                   ),
                                 ),
@@ -1415,7 +1443,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     ),
                     backgroundColor: Theme.of(context).primaryColor),
                 onPressed: () {
-
                   // print(widget.customerId);
                   orderbookingScreen.confirmOrderBtnTap(
                     widget.customerId,
@@ -1429,7 +1456,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     dineTableID,
                     deliveryIDS,
                     advanceIds,
-                    kotboolChecking,
+                    settingsController.kotOption,
                     context,
                     dateTime: widget.advanceOrderDateTime,
                   );
