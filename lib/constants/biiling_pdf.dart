@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:pdf/widgets.dart' as pw;
+import 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
 import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -291,6 +294,7 @@ class InvoicePdf {
 
   static pw.Widget orderSummaryWidget(var discount, String? orderType,
       totalAmount, remaningAmount, moneytoPay, fullpayment) {
+          final creditController = Get.put(CreditCardController());
     return pw.Column(
       children: [
         // pw.Row(
@@ -374,6 +378,8 @@ class InvoicePdf {
         ),
 
         pw.Divider(),
+        pw.Column(
+          children: [
         pw.Row(
           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
@@ -396,8 +402,32 @@ class InvoicePdf {
                       fontWeight: pw.FontWeight.bold,
                     ),
                   ),
+
+                 
           ],
         ),
+
+      
+
+       creditController.isCreditCard.value? pw.Row(
+           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+          children: [
+              pw.Text("Credit Amount",
+                style: const pw.TextStyle(
+                  fontSize: 13.5,
+                )),
+
+
+                  pw.Text("${totalAmount -(creditController.creditAmount.value)}" ,
+               style: pw.TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: pw.FontWeight.bold,
+                    ),),
+        ]):pw.SizedBox.shrink()
+
+        
+        
+        ]),
 
         orderType == "Advance" ||
                 orderType == "Catering" && fullpayment == false

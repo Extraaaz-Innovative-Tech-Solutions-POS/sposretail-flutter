@@ -68,7 +68,7 @@ print("complete order....testing ${response.data}");
       if (response.statusCode == 200) {
         grandTotal = response.data['data']['grand_total'];
         update();
-        creditController.isCreditCard.value = false;
+        // creditController.isCreditCard.value = false;
         Get.to(BottomNav());
          snackBar("Success", "Order Completed Successfully");
 

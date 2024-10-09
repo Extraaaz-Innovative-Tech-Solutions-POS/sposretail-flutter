@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:ui' as ui;
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -96,6 +98,8 @@ class DesktopInvoicePdf {
                           fullpayment,
                           thaliprice ?? "0",
                           numberOfThali ?? "0"),
+
+                          // pw.Text("Credit Amount", style:  pw.TextStyle(color: PdfColors.black)  )
 
                       // pw.Text("Customer Details",
                       //     style: pw.TextStyle(
@@ -837,6 +841,8 @@ class DesktopInvoicePdf {
                 style: pw.TextStyle(
                   fontSize: 10,
                 )),
+
+                
             orderType == "Advance"
                 ? pw.Text(
                     "$totalAmount".padRight(10),
@@ -852,6 +858,17 @@ class DesktopInvoicePdf {
                       fontWeight: pw.FontWeight.bold,
                     ),
                   ),
+
+                   pw.Text("Credit Amount:- ",
+                style: pw.TextStyle(
+                  fontSize: 10,
+                )),
+
+                  //    orderType == "Advance"?
+                  //  pw.Text(''):pw.Text("Credit Amount"),
+
+
+                  
           ],
         ),
 

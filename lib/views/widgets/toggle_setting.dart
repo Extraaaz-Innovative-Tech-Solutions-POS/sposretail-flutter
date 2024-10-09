@@ -1,4 +1,3 @@
-import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class ToggleSetting extends StatelessWidget {

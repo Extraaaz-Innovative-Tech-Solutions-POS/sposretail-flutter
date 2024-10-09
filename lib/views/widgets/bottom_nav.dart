@@ -43,6 +43,20 @@ class BottomNav extends StatelessWidget {
               context,
               c.name,
               "(${c.role})",
+
+              action: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10),
+                  child: GestureDetector(
+                      child: const Icon(
+                        Icons.toggle_off,
+                        size: 40,
+                      ),
+                      onTapDown: (details) {
+                        showPopUpMenu(context, details.globalPosition);
+                      })),
+              ]
             ),
             body: pages[c.bottomNavIndex ?? 1],
             bottomNavigationBar: buildBottomNav(context),
