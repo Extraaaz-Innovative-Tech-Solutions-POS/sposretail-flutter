@@ -775,11 +775,12 @@ class _RegisterState extends State<Register> {
       children: [
         Expanded(
           flex: 5,
-          child: textField(context, title, contoller, icondata, size,
+          child: textField(context, title, icondata, size,
               width: 275.0,
               suffixicon: suffixicon,
               onTap: onTap,
               keyboardType: keyboardType,
+              controller: contoller,
               obscure: obscure),
         ),
         //textField(title, contoller, icondata, size, width: 275.0),
@@ -808,11 +809,11 @@ class _RegisterState extends State<Register> {
       children: [
         Expanded(
           flex: 5,
-          child: noObscureTextField(context, title, contoller, icondata, size,
+          child: noObscureTextField(context, title, icondata, size,
               width: 275.0,
               suffixicon: suffixicon,
               onTap: onTap,
-              keyboardType: keyboardType),
+              keyboardType: keyboardType, controller: contoller),
         ),
         //textField(title, contoller, icondata, size, width: 275.0),
         forwardIconStatus

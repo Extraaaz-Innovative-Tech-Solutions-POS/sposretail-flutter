@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Widget textField(context, title, controller, IconData icon, size,
+Widget textField(context, title, IconData icon, size,
     {IconData? suffixicon,
     void Function()? onTap,
     bool? obscure,
     double? width,
-    TextInputType? keyboardType}) {
+    TextInputType? keyboardType, onchanged, controller}) {
   return Container(
     height: 60.0,
     width: width,
@@ -19,6 +19,7 @@ Widget textField(context, title, controller, IconData icon, size,
     child: TextField(
         controller: controller,
         keyboardType: keyboardType,
+        onChanged: onchanged,
         textInputAction: TextInputAction.next,
         enableSuggestions: true,
         obscureText: obscure ?? false,
@@ -32,8 +33,9 @@ Widget textField(context, title, controller, IconData icon, size,
   );
 }
 
-Widget noObscureTextField(context, title, controller, IconData icon, size,
-    {IconData? suffixicon,
+Widget noObscureTextField(context, title, IconData icon, size,
+    {onchanged, controller,
+      IconData? suffixicon,
     void Function()? onTap,
     double? width,
     TextInputType? keyboardType}) {
@@ -53,6 +55,7 @@ Widget noObscureTextField(context, title, controller, IconData icon, size,
         textInputAction: TextInputAction.next,
         enableSuggestions: true,
         obscureText: false,
+        onChanged: onchanged,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "$title",

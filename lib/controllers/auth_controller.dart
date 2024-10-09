@@ -1,4 +1,3 @@
-import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/user_model.dart';
 import 'kitchen_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
@@ -8,6 +7,9 @@ class AuthController extends GetxController {
   final userController = Get.put(UserController());
   final settingsController = Get.put(SettingsController());
   final RxBool isLoading = false.obs;
+  final RxBool passObscureLogin = false.obs;
+  RxString emailLogin = "".obs;
+  RxString passwordLogin= "".obs;
 
   final user = Get.put(UserController());
 

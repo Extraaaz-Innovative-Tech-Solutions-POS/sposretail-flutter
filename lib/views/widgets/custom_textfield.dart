@@ -6,7 +6,7 @@ Widget textFieldWithHeading(
       BuildContext context,
       String hinttext,
       TextInputType keyboardtype,
-      {onchanged, key, controller}) {
+      {onchanged, key, controller, obscure}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,6 +23,7 @@ Widget textFieldWithHeading(
             child: SizedBox(
               height: 55,
               child: TextFormField(
+                obscureText: obscure,
                 controller: controller,
                 keyboardType: keyboardtype,
                 style: TextStyle(color: Theme.of(context).highlightColor),

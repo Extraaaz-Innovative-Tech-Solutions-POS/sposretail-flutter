@@ -1,29 +1,30 @@
 import 'dart:ui';
-
 import 'package:spos_retail/views/widgets/export.dart';
 
-class Login extends StatefulWidget {
-  @override
-  State<Login> createState() => _LoginState();
-}
+class Login extends StatelessWidget {
 
-class _LoginState extends State<Login> {
-  final name = TextEditingController();
   final authController = Get.put(AuthController());
-  final _emailController = TextEditingController();
-  final _passwordcontroller = TextEditingController();
-  bool obsucre = true;
 
-  @override
-  void initState() {
-    super.initState();
-    obsucre = false;
-    setState(() {});
-  }
+  Login({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    Widget emailForm(
+        size, String title, IconData icondata, void Function()? onPressed,
+        {onchange}) {
+      return noObscureTextField(
+        context,
+        title,
+        icondata,
+        size,
+        width: MediaQuery.of(context).size.width,
+        keyboardType: TextInputType.emailAddress,
+        onchanged: onchange,
+      );
+    }
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         body: Stack(
@@ -33,7 +34,6 @@ class _LoginState extends State<Login> {
               decoration: bgImageDecor,
               child: SingleChildScrollView(
                 child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 80),
                     Container(
@@ -48,7 +48,6 @@ class _LoginState extends State<Login> {
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                         child: Container(
-                          // height: size.height / 1.5,
                           width: double.infinity,
                           margin: const EdgeInsets.only(
                               top: 25.0, right: 10.0, left: 10.0),
@@ -94,19 +93,16 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                               ),
-                              //! Name Feild------------->
-                              // icondata, size, width: 400.0
                               Container(
                                   width: size.width > 400 ? 400 : size.width,
                                   margin: const EdgeInsets.only(
                                       left: 30, top: 10.0, bottom: 4.0),
                                   child: customText("email".tr,
                                       color: Theme.of(context).focusColor)),
-
-                              emailForm(size, _emailController, "email".tr,
-                                  Icons.email, () {}),
-
-                              //! Password Field----------->
+                              emailForm(size, "email".tr, Icons.email, () {},
+                                  onchange: (v) {
+                                authController.emailLogin.value = v;
+                              }),
                               Container(
                                 width: size.width > 400 ? 400 : size.width,
                                 margin: const EdgeInsets.only(
@@ -114,28 +110,26 @@ class _LoginState extends State<Login> {
                                 child: customText("password".tr,
                                     color: Theme.of(context).focusColor),
                               ),
-
-                              textField(
-                                context,
-                                "password".tr,
-                                _passwordcontroller,
-                                Icons.password_rounded,
-                                size,
-                                obscure: obsucre,
-                                suffixicon: obsucre
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                onTap: () {
-                                  if (obsucre == true) {
-                                    obsucre = false;
-                                    setState(() {});
-                                  } else {
-                                    obsucre = true;
-                                    setState(() {});
-                                  }
-                                },
-                              ),
-
+                              GetBuilder<AuthController>(builder: (c) {
+                                return textField(
+                                  onchanged: (v) {
+                                    authController.passwordLogin.value = v;
+                                  },
+                                  context,
+                                  "password".tr,
+                                  Icons.password_rounded,
+                                  size,
+                                  obscure: c.passObscureLogin.value,
+                                  suffixicon: c.passObscureLogin.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  onTap: () {
+                                    c.passObscureLogin.value =
+                                        !authController.passObscureLogin.value;
+                                    c.update();
+                                  },
+                                );
+                              }),
                               Center(
                                 child: Container(
                                   height: 45.0,
@@ -150,10 +144,10 @@ class _LoginState extends State<Login> {
                                             borderRadius:
                                                 BorderRadius.circular(5.0))),
                                     onPressed: () async {
-                                      if (_emailController.text.isEmpty ||
-                                          _passwordcontroller.text.isEmpty) {
-                                        //Get.to(BottomNav());
-                                        // Show alert dialog if either field is empty
+                                      if (authController
+                                              .emailLogin.value.isEmpty ||
+                                          authController
+                                              .passwordLogin.value.isEmpty) {
                                         showAlertDialog(
                                           context: context,
                                           title: "Oops!",
@@ -161,11 +155,9 @@ class _LoginState extends State<Login> {
                                               "Please enter both email and password.",
                                         );
                                       } else {
-                                        // Get.to(BottomNav());
-                                        //Call login method if both fields are not emrpty
                                         authController.login(
-                                          _emailController.text,
-                                          _passwordcontroller.text,
+                                          authController.emailLogin.value,
+                                          authController.passwordLogin.value,
                                         );
                                       }
                                     },
@@ -176,7 +168,6 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                               ),
-
                               Container(
                                 width: size.width > 400 ? 400 : size.width,
                                 margin:
@@ -202,17 +193,5 @@ class _LoginState extends State<Login> {
             ),
           ],
         ));
-  }
-
-  Widget registerForm(size, TextEditingController contoller, String title,
-      IconData icondata, void Function()? onPressed) {
-    return textField(context, title, contoller, icondata, size, width: 400.0);
-  }
-
-  Widget emailForm(size, TextEditingController contoller, String title,
-      IconData icondata, void Function()? onPressed) {
-    return noObscureTextField(context, title, contoller, icondata, size,
-        width: MediaQuery.of(context).size.width,
-        keyboardType: TextInputType.emailAddress);
   }
 }
