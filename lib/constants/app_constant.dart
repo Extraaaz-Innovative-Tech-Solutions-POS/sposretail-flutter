@@ -35,6 +35,20 @@ class AppConstant {
   static const String soldItemTotal = "itemtotalreport";
   static const String cancelOrderReport = "cancel-order-report";
 
+
+static const String saleReport = "sale-report";
+static const String itemDetailsReport = "item-details-report";
+static const String stockReport = "stock-report";
+
+static const String cutOffdayReport = "cut-Offday-report";
+static const String dayBlockReport ="day-block-report";
+static const String salesProfitLossReport = "sales-profitLoss-report";
+
+
+static const String itemSalesQuantityWise = "items-sales";
+static const String purchaseReport = "purchase-report";
+static const String creditPaymentReport = "credit-payment-report";
+
 // Floors, Section, Tables Constants--------->
   static const String graph = "graph";
 

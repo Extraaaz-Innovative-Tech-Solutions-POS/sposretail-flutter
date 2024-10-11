@@ -17,27 +17,25 @@ class PdfGenerator {
     switch (dropdownValue) {
       case 'Select':
         reportData =
-            await reportsController.cashierReport(startDate, endDate, false);
+            await reportsController.cashierReport( false);
         break;
       case 'Cashier Hallwise':
         reportData =
-            await reportsController.dayReport(startDate, endDate, false);
+            await reportsController.dayReport( false);
         break;
       case 'Billwise':
         reportData =
-            await reportsController.dayReport(startDate, endDate, false);
+            await reportsController.dayReport( false);
         break;
       case 'Item Sales':
-        reportData = await reportsController.fetchItemsSalesReport(
-            startDate, endDate, false);
+        reportData = await reportsController.fetchItemsSalesReport( false);
         break;
       case 'Sold Items':
-        reportData = await reportsController.fetchSoldItemsReport(
-            startDate, endDate, false);
+        reportData = await reportsController.fetchSoldItemsReport( false);
         break;
       case 'Cancelled Item':
         reportData =
-            await reportsController.cancelledReport(startDate, endDate, true);
+            await reportsController.cancelledReport( true);
         break;
       default:
         return; // Exit function if no valid report type is found

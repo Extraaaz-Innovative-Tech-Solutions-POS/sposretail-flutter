@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:pdf/widgets.dart' as pw;
 import 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
