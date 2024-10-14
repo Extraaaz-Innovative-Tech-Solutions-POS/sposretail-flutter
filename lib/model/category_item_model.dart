@@ -58,6 +58,7 @@ class ItemModel {
   List<ModifierGroups>? modifierGroups;
   var shortCode;
   dynamic itemImage;
+  dynamic upc;
 
 
   ItemModel(
@@ -74,7 +75,8 @@ class ItemModel {
       this.sectionWisePricing,
       this.modifierGroups,
       this.shortCode,
-      this.itemImage
+      this.itemImage,
+      this.upc
       });
 
   ItemModel.fromJson(Map<String, dynamic> json) {
@@ -89,6 +91,7 @@ class ItemModel {
     associatedItem = json['associated_item'];
     taxPercentage = json['tax_percentage'];
     sectionWisePricing = json["sectionWisePricings"];
+    upc = json["upc"];
     if (json['modifierGroups'] != null) {
       modifierGroups = <ModifierGroups>[];
       json['modifierGroups'].forEach((v) {
@@ -117,6 +120,7 @@ class ItemModel {
     }
     data['short_code'] = shortCode;
     data['Image'] = itemImage;
+    data['upc'] = upc;
     return data;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:spos_retail/controllers/barcode_controller.dart';
 import 'package:spos_retail/model/common_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
@@ -41,6 +42,8 @@ class _AddItemsFormState extends State<AddItemsForm> {
 
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _priceKey = GlobalKey<FormState>();
+  final upcController = TextEditingController();
+  final barcodeController = Get.put(BarcodeController());
 
   @override
   void initState() {
@@ -69,6 +72,13 @@ class _AddItemsFormState extends State<AddItemsForm> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+
+               GetBuilder<ItemController>(builder: (c) {
+                    return toggleOption("UPC", c.barcodeUpc.value,
+                        onchange: (v) {
+                      c.toggleBarcodeUpc(v);
+                    });
+                  }),
               itemForms(
                   context,
                   "name".tr,
@@ -155,6 +165,8 @@ class _AddItemsFormState extends State<AddItemsForm> {
                               ),
                             );
                       }
+
+                      
                       // return itemController.image.value != null
                       //     ? ClipRRect(
                       //         borderRadius: BorderRadius.circular(10),
@@ -184,6 +196,80 @@ class _AddItemsFormState extends State<AddItemsForm> {
                   )
                 ],
               ),
+              GetBuilder<ItemController>(builder: (c) {
+                return Visibility(
+                  visible: c.barcodeUpc.value,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12.0, bottom: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("UPC",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor)),
+                        ),
+                      ),
+                      Container(
+                        height: 70.0,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 06),
+                        child: TextFormField(
+                          controller: upcController,
+                          onChanged: (v) {
+                          },
+
+                          style: TextStyle(
+                              color: Theme.of(context).highlightColor),
+                          // keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
+                          enableSuggestions: true,
+                          decoration: InputDecoration(
+                            hintText: "Enter UPC",
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).focusColor,
+                                  width: 1.0), // Set border color and width
+                            ),
+                            hintStyle: TextStyle(
+                                color: Theme.of(context)
+                                    .highlightColor
+                                    .withOpacity(0.6)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).highlightColor),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              gapPadding: 19,
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).highlightColor),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 16.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).highlightColor),
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                barcodeController.scanBarcodeNormal();
+                                upcController.text =
+                                    barcodeController.scanBarcode.value;
+                                    setState(() {
+                                      
+                                    });
+                                    print("UPC TEXT CONTROLLER : -----------------------${upcController.text}");
+                              },
+                              icon: const Icon(Icons.qr_code),
+                            ),
+                          ),
+                        ),
+                      ),
+                      spacer(10)
+                    ],
+                  ),
+                );
+              }),
               const SizedBox(
                 height: 20.0,
               ),
@@ -204,6 +290,7 @@ class _AddItemsFormState extends State<AddItemsForm> {
                           discount: "0.00",
                           inventory_status: 'instock',
                           category_id: widget.categoryId,
+                          upc: upcController.text
                           );
 
                         
@@ -234,5 +321,17 @@ class _AddItemsFormState extends State<AddItemsForm> {
         ),
       ),
     );
+
+    
+  }
+
+  Widget toggleOption(heading, value, {onchange}) {
+    return SwitchListTile(
+        contentPadding: const EdgeInsets.only(left: 5.0, right: 5.0),
+        title: customText(heading,
+            color: Theme.of(context).highlightColor, font: 18.0),
+        activeColor: Theme.of(context).primaryColor,
+        value: value,
+        onChanged: onchange);
   }
 }

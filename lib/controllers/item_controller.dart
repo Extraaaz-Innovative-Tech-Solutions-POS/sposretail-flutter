@@ -8,10 +8,16 @@ import 'package:http/http.dart' as http;
 
 class ItemController extends GetxController {
   List<ItemModel> items = [];
+  RxBool barcodeUpc = false.obs;
   RxBool isLoading = false.obs;
 
    Rx<File?> image = Rx<File?>(null);
   final picker = ImagePicker();
+
+    toggleBarcodeUpc(upc) {
+    barcodeUpc.value = upc;
+    update(); 
+  }
 
   @override
   void onInit() {

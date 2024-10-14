@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:spos_retail/controllers/barcode_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {
@@ -45,6 +46,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   final authController = Get.put(AuthController());
   final modifierItemsById = Get.put(GetModifierItemById());
   final orderbookingScreen = Get.put(OrderBookingController());
+  final barcodeController = Get.put(BarcodeController());
   final quantityController = TextEditingController();
   final boxesController = TextEditingController();
   final piecesController = TextEditingController();
@@ -221,7 +223,48 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     ),
                   ),
                 )
-              : const Text("")
+              : const Text(""),
+
+              IconButton(
+            onPressed: () {
+              // Get.to(BarcodeItems());
+              barcodeController.scanBarcodeNormal().then((value) {
+                setState(() {
+                  allItemsController.menu.asMap().entries.map((entry) {
+                    int index = entry.key;
+                    CategoryModel category = entry.value;
+
+                    if (category.items != null) {
+                      for (var item in category.items!) {
+                        if (item.upc == barcodeController.scanBarcode.value) {
+                          order.add(Item(
+                              name: item.name??"", 
+                              price: item.price,
+                              quantity: 1, 
+                              vairentId: "",
+                              instruction: "",
+                              modifiersGroupID: "",
+                              isCustom:
+                                  false)); 
+                          break; 
+                        }
+                      }
+                    }
+                  }).toList();
+
+                  // order.add(Item(
+                  //     name: barcodeController.scanBarcode.value,
+                  //     price: "30",
+                  //     quantity: 1, // New item quantity
+                  //     vairentId: "",
+                  //     instruction: "",
+                  //     modifiersGroupID: "",
+                  //     isCustom: true));
+                });
+              });
+            },
+            icon: const Icon(Icons.qr_code),
+          ),
         ],
       ),
       floatingActionButton: Column(

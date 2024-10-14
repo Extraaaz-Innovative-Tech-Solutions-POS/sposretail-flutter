@@ -8,12 +8,14 @@ class AddItem {
   String discount;
   String inventory_status;
   int category_id;
+  dynamic upc;
   AddItem({
     required this.item_name,
     required this.price,
     required this.discount,
     required this.inventory_status,
     required this.category_id,
+    this.upc
   });
   Map<String, dynamic> toJson() {
     return {
@@ -21,7 +23,8 @@ class AddItem {
       "price": price,
       "discount": discount,
       "inventory_status": inventory_status,
-      "category_id": category_id
+      "category_id": category_id,
+      "upc": upc
     };
   }
 }
