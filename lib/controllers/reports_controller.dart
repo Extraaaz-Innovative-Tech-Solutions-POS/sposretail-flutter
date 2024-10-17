@@ -37,9 +37,9 @@ class ReportsController extends GetxController {
 
   RxList<StockReportModdel> stockReportModelList =<StockReportModdel>[].obs;
 
-    RxList<CutOffDayModdel> cuttOffDayModelList =<CutOffDayModdel>[].obs;
-     RxList<DayBlockModel> dayblockModelList =<DayBlockModel>[].obs;
-      RxList<SalesProfitLossModel> salesProfitLossModelList =<SalesProfitLossModel>[].obs;
+  RxList<CutOffDayModdel> cuttOffDayModelList =<CutOffDayModdel>[].obs;
+  RxList<DayBlockModel> dayblockModelList =<DayBlockModel>[].obs;
+  RxList<SalesProfitLossModel> salesProfitLossModelList =<SalesProfitLossModel>[].obs;
 
 
 
@@ -47,7 +47,6 @@ class ReportsController extends GetxController {
   RxList<CreditReport> creditReportList = <CreditReport>[].obs;
   RxList<QuantityWiseItemSales> quantityWiseItemList = <QuantityWiseItemSales>[].obs;
   RxList<PurchaseModel> purchaseList = <PurchaseModel>[].obs;
-
 
 
 
