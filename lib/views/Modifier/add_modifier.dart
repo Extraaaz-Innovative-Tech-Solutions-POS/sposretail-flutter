@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:spos_retail/constants/constant.dart';
-import 'package:spos_retail/controllers/modifier_controller/add_Modifier_controller.dart';
-import 'package:spos_retail/controllers/modifier_controller/update_modifiers_controller.dart';
-import 'package:spos_retail/views/widgets/app_bar.dart';
+import 'package:spos_retail/views/widgets/export.dart';
 
 class AddModifierUI extends StatefulWidget {
   String? modifierId;

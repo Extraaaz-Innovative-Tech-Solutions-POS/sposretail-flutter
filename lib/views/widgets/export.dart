@@ -3,6 +3,7 @@ export 'package:spos_retail/constants/constant.dart';
 export 'package:spos_retail/constants/app_constant.dart';
 
 //others
+export 'package:spos_retail/views/unit.dart';
 export 'package:spos_retail/views/onboarding/splash_screen.dart';
 export 'package:spos_retail/views/widgets/my_translation.dart';
 export 'package:spos_retail/views/widgets/drawer.dart';
@@ -21,7 +22,6 @@ export 'package:spos_retail/model/dashboard_top_selling_items.dart';
 export 'package:spos_retail/views/AddItems/add_items_form.dart';
 export 'package:spos_retail/views/order/show_ongoing_order_screen.dart';
 export 'package:spos_retail/views/settings/invoices/invoice_manager.dart';
-export 'package:spos_retail/views/widgets/export.dart';
 export 'package:spos_retail/views/AddItems/add_items_ui.dart';
 export 'package:spos_retail/views/widgets/add_category_form.dart';
 export 'package:flutter/widgets.dart';
@@ -38,7 +38,6 @@ export 'package:spos_retail/views/onboarding/register.dart';
 export 'package:spos_retail/model/Modifier/all_item_Modifier.dart';
 export 'package:spos_retail/views/widgets/textfield.dart';
 export 'package:spos_retail/views/Modifier/add_modifier.dart';
-export 'package:spos_retail/controllers/modifier_controller/all_itemsModifier.dart';
 export 'package:spos_retail/services/date_formatting.dart';
 export 'package:http_parser/http_parser.dart';
 export 'package:spos_retail/constants/desktop_invoicePdf.dart';
@@ -80,7 +79,6 @@ export 'package:spos_retail/views/Advance/advance_pendingOrderUI.dart';
 export 'package:spos_retail/views/DineInCustDetails/dine_customerDetails.dart';
 export 'package:spos_retail/views/TakeOrderCustDetails/takeOderCustDetails.dart';
 export 'package:spos_retail/views/reports/print_preview.dart';
-export 'package:spos_retail/controllers/Printer_Controller/desktop_printerController.dart';
 export 'package:spos_retail/model/ModifierGroup/get_modifierGroup.dart';
 export 'package:spos_retail/views/widgets/custom_textfield.dart';
 export 'package:spos_retail/views/Taxes/addTaxes.dart';
@@ -107,6 +105,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'dart:async';
 
 //Models
+export 'package:spos_retail/model/cart_respose_model.dart';
 export 'package:spos_retail/model/Inventory/get_inventory.dart';
 export 'package:spos_retail/model/Inventory/Recipe/ingredient_details.dart';
 export 'package:spos_retail/model/Inventory/Recipe/recipe_list.dart';
@@ -125,6 +124,15 @@ export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/all_items_controller.dart';
+export 'package:spos_retail/controllers/Inventory_Controller/stock_controller.dart';
+export 'package:spos_retail/controllers/modifier_controller/add_Modifier_controller.dart';
+export 'package:spos_retail/controllers/modifier_controller/update_modifiers_controller.dart';
+export 'package:spos_retail/controllers/register_controller.dart';
+export 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
+export 'package:spos_retail/controllers/Printer_Controller/desktop_printerController.dart';
+export 'package:spos_retail/controllers/modifier_controller/all_itemsModifier.dart';
+export 'package:spos_retail/controllers/barcode_controller.dart';
 export 'package:spos_retail/controllers/get_modifierItemByID.dart';
 export 'package:spos_retail/controllers/settings_controller.dart';
 export 'package:spos_retail/controllers/additional_info_controller.dart';
@@ -145,10 +153,8 @@ export 'package:spos_retail/controllers/customer_details_controller/addCustomer_
 export 'package:spos_retail/controllers/complete_order_controller.dart';
 export '../../controllers/item_cancel_controller.dart';
 export 'package:spos_retail/controllers/customer_details_controller/getAllCustomerAddress_controller.dart';
-export 'package:spos_retail/controllers/customer_controller.dart';
 export 'package:spos_retail/controllers/Taxes/taxes_controller.dart';
 export 'package:spos_retail/controllers/user_controller.dart';
-export 'package:spos_retail/controllers/all_items_controller.dart';
 export 'package:spos_retail/controllers/cart_controller.dart';
 export 'package:spos_retail/controllers/OrderBooking_Controller/orderBooking_controller.dart';
 export 'package:spos_retail/controllers/item_controller.dart';

@@ -1,5 +1,3 @@
-import 'package:spos_retail/controllers/Inventory_Controller/stock_controller.dart';
-
 import '../../widgets/export.dart';
 
 

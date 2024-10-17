@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:spos_retail/controllers/settings_controller.dart';
-import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/model/common_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 

@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:spos_retail/controllers/register_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class Register extends StatefulWidget {

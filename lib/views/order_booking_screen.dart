@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:spos_retail/controllers/barcode_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {

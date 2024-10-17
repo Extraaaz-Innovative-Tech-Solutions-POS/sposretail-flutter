@@ -1,8 +1,4 @@
-import 'package:get/get.dart';
-import 'package:spos_retail/constants/constant.dart';
-import 'package:spos_retail/controllers/all_items_controller.dart';
-import '../model/category_item_model.dart';
-import '../services/dio_services.dart';
+import 'package:spos_retail/views/widgets/export.dart';
 
 class CategoryController extends GetxController {
   List<CategoryModel> menu = [];

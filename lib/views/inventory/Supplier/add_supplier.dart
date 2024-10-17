@@ -1,5 +1,3 @@
-import 'package:spos_retail/views/widgets/custom_textfield.dart';
-
 import '../../widgets/export.dart';
 
 class AddSupplier extends StatelessWidget {

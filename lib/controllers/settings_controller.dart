@@ -15,6 +15,12 @@ class SettingsController extends GetxController {
   String? role;
   String? businessType;
   int? restaurantId;
+  int? unitValue;
+
+  void toggleUnit(v) {
+    unitValue = v;
+    update();
+  }
 
   void toggleWhatsapp(bool value) {
     whatsappBilling.value = value;

@@ -1,7 +1,5 @@
 
 import 'package:pdf/widgets.dart' as pw;
-import 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
-import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class InvoicePdf {

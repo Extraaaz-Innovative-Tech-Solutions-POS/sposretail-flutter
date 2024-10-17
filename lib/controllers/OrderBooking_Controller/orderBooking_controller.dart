@@ -151,6 +151,7 @@ class OrderBookingController extends GetxController {
       try {
         final response =
             await DioServices.postRequest(AppConstant.cart, orders.toJson());
+            print("ORDER CONFIRM BODY... ${orders.toJson()}");
             print("response testing... ${response.data}");
         handlePostRequestResponse(
             response,

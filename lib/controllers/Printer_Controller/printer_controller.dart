@@ -41,7 +41,7 @@ class PrinterController extends GetxController {
         print("--------------->${_printerStatus.value}");
         flag.value = true;
         update();
-        await _makePostRequest('http://localhost:2001', formData.toJson());
+        await _makePostRequest('http://localhost:2001/print', formData.toJson());
         break;
       } else {
         print("----------------->${_printerStatus.value}");
@@ -49,7 +49,7 @@ class PrinterController extends GetxController {
         // launchApp("com.example.myapplication");
         flag.value = true;
         update();
-        await _makePostRequest('http://localhost:2001', formData.toJson());
+        await _makePostRequest('http://localhost:2001/print', formData.toJson());
         break;
       }
     }
@@ -63,7 +63,7 @@ class PrinterController extends GetxController {
       if (calculatedTime.abs() > 5) {
         flag.value = true;
         update();
-        await _makePostRequest('http://localhost:2001', formData.toJson());
+        await _makePostRequest('http://localhost:2001/print', formData.toJson());
         notedtimes.value = times.second;
         break;
       } else {
@@ -71,7 +71,7 @@ class PrinterController extends GetxController {
         // launchApp("com.example.myapplication");
         flag.value = true;
         update();
-        await _makePostRequest('http://localhost:2001', formData.toJson());
+        await _makePostRequest('http://localhost:2001/print', formData.toJson());
         notedtimes.value = times.second;
         break;
       }

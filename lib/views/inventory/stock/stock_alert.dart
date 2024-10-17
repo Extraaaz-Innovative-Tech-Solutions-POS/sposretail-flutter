@@ -1,7 +1,3 @@
-import 'package:spos_retail/controllers/Inventory_Controller/recipe_controller.dart';
-import 'package:spos_retail/controllers/Inventory_Controller/stock_controller.dart';
-import 'package:spos_retail/views/widgets/custom_data.dart';
-
 import '../../widgets/export.dart';
 
 class StockAlert extends StatelessWidget {

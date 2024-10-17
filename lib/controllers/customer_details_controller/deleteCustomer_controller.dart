@@ -1,5 +1,3 @@
-import 'package:spos_retail/controllers/customer_details_controller/customerlist_controller.dart';
-
 import '../../views/widgets/export.dart';
 
 class DeleteCustomerController extends GetxController {

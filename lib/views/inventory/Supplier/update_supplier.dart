@@ -35,8 +35,6 @@ class _UpdateSupplierState extends State<UpdateSupplier> {
   late final TextEditingController discountController;
 
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
-  // final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
-  // final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _addressKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _gstkey = GlobalKey<FormState>();
@@ -47,10 +45,7 @@ class _UpdateSupplierState extends State<UpdateSupplier> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // suppliercontroller.getSupplierById(widget.id as int);
-    // suppliercontroller.getSupplierById(widget.id as int);
     supplierNameController = TextEditingController(
         text: widget.updateisClick ? widget.supplierName : "");
     supplierMobileController = TextEditingController(
@@ -67,8 +62,6 @@ class _UpdateSupplierState extends State<UpdateSupplier> {
 
   @override
   Widget build(BuildContext context) {
-    print("checking updatesupplier id ${widget.id}");
-
     return Scaffold(
       appBar: commonAppBar(context, "Update Supplier", ""),
       body: SingleChildScrollView(

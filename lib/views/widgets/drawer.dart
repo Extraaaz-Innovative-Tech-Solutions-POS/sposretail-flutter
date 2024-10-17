@@ -86,7 +86,11 @@ Widget drawer(context) {
                       leading: Icon(Icons.currency_rupee,
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const AddTaxes());
-                    //
+                  }),
+                  listTile(context, "Unit",
+                      leading: Icon(Icons.ac_unit,
+                          color: Theme.of(context).focusColor), onpress: () {
+                    Get.to(Unit());
                   }),
                   ExpansionTile(
                     title: listTile(context, "Inventory"),

@@ -43,9 +43,7 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
   @override
   void initState() {
     super.initState();
-    // getcustomercontroller.getcustomerlist();
-    // getcustomercontroller.getcustomerlist(widget.customerId);
-    fetchCredit();
+    widget.click ? fetchCredit(): null;
 
     nameController =
         TextEditingController(text: widget.click ? widget.name : "");
@@ -54,6 +52,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
     addressController =
         TextEditingController(text: widget.click ? widget.address : "");
   }
+
+
 
   fetchCredit() {
     // print("status check ${statusclick}");

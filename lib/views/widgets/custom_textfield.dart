@@ -23,7 +23,7 @@ Widget textFieldWithHeading(
             child: SizedBox(
               height: 55,
               child: TextFormField(
-                obscureText: obscure,
+                obscureText: obscure??false,
                 controller: controller,
                 keyboardType: keyboardtype,
                 style: TextStyle(color: Theme.of(context).highlightColor),

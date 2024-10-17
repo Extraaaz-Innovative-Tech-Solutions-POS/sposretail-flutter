@@ -2,10 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:spos_retail/constants/web_sockets.dart';
-import 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
-import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/model/PrinterModel/bill_desktopModel.dart';
-import 'package:spos_retail/model/cart_respose_model.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 enum PaymentMethod { card, cash }
