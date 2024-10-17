@@ -122,8 +122,10 @@ export '../../model/ModifierGroup/select_items.dart';
 export '../../model/ModifierGroup/select_modifiers.dart';
 export '../../model/ModifierGroup/show_itemModel.dart';
 export '../../model/ModifierGroup/show_modifierModel.dart';
+export 'package:spos_retail/model/user_model.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/kitchen_controller.dart';
 export 'package:spos_retail/controllers/all_items_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/stock_controller.dart';
 export 'package:spos_retail/controllers/modifier_controller/add_Modifier_controller.dart';

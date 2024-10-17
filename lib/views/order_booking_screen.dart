@@ -1409,6 +1409,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                           const SizedBox(
                                             width: 10.0,
                                           ),
+                                         
                                           isQuantityEditing
                                               ? const SizedBox.shrink()
                                               : Icon(
@@ -1417,6 +1418,39 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   color: Theme.of(context)
                                                       .highlightColor,
                                                 ),
+                                                 settingsController.unitValue == 0 ? 
+                                                 
+                                                 Row(
+            children: [
+                 const SizedBox(width: 10),
+              buildRoundedTextField(changed: (v) {
+              orderbookingScreen.toggleLength(int.parse(v));
+              } ),
+              const SizedBox(width: 10),
+              const Text(
+                '×',
+                style: TextStyle(fontSize: 24), 
+              ),
+              const SizedBox(width: 10),
+              buildRoundedTextField(
+                changed: (v) {
+                  orderbookingScreen.toggleWidth(int.parse(v));
+                }),
+              const Text(
+                '=',
+                style: TextStyle(fontSize: 24),
+              ),
+              GetBuilder<OrderBookingController>(
+                builder: (o) {
+                  return Text(o.sqft.value.toString());
+                }
+              ),
+            ],
+          ):
+                                                 
+                                                 
+                                                 
+                                                 Text("data"),
                                           Visibility(
                                             visible:
                                                 widget.restaurantId == "217"
@@ -1616,4 +1650,80 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       break;
     }
   }
+
+   Widget buildRoundedTextField({submitted, changed}) {
+    return Container(
+      width: 40,
+      child: TextField(
+        onChanged: changed,
+        onSubmitted: submitted,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+        ),
+      ),
+    );
+  }
 }
+
+
+
+/////////////////
+
+
+// class MultiplicationInputFields extends StatefulWidget {
+//   @override
+//   _MultiplicationInputFieldsState createState() => _MultiplicationInputFieldsState();
+// }
+
+// class _MultiplicationInputFieldsState extends State<MultiplicationInputFields> {
+//   final TextEditingController _controller1 = TextEditingController();
+//   final TextEditingController _controller2 = TextEditingController();
+//   final TextEditingController _resultController = TextEditingController();
+
+//   void _multiply() {
+//     double value1 = double.tryParse(_controller1.text) ?? 0;
+//     double value2 = double.tryParse(_controller2.text) ?? 0;
+//     double result = value1 * value2;
+//     _resultController.text = result.toString();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(20.0),
+//       child: Column(
+//         children: <Widget>[
+//           buildRoundedTextField(_controller1, 'Input 1'),
+//           SizedBox(height: 10),
+//           buildRoundedTextField(_controller2, 'Input 2'),
+//           SizedBox(height: 10),
+//           ElevatedButton(
+//             onPressed: _multiply,
+//             child: Text('Multiply'),
+//           ),
+//           SizedBox(height: 10),
+//           buildRoundedTextField(_resultController, 'Result', readOnly: true),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Widget _buildRoundedTextField(TextEditingController controller, String hint, {bool readOnly = false}) {
+//     return TextField(
+//       controller: controller,
+//       readOnly: readOnly,
+//       decoration: InputDecoration(
+//         border: OutlineInputBorder(
+//           borderRadius: BorderRadius.circular(12),
+//         ),
+//         hintText: hint,
+//         contentPadding: EdgeInsets.symmetric(horizontal: 10),
+//       ),
+//       keyboardType: TextInputType.number,
+//     );
+//   }
+// }

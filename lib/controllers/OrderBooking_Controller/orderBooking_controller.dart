@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 import '../../model/PrinterModel/kot_desktopModel.dart';
@@ -12,12 +11,33 @@ class OrderBookingController extends GetxController {
   final cartController = Get.put(CartController());
   final settingsController = Get.put(SettingsController());
   final infoController = Get.put(AdditionalInfoController());
+  RxInt sqftLength = 0.obs;
+  RxInt sqftWidth = 0.obs;
+  RxInt sqft = 0.obs;
 
    final List<String> quantityOptions = ['Boxes', 'Pieces'];
   var selectedQuantity = 'Boxes'.obs;
   List<RxString> selectedQuantityList = <RxString>[].obs;
 
     RxInt customerId = 0.obs;
+
+    void toggleLength(v) {
+    sqftLength.value = v;
+    print("SQFT : ------------------ Length $sqftLength + WIDTH $sqftWidth + SQ: $sqft");
+    update();
+  }
+
+  void toggleWidth(v) {
+    sqftWidth.value = v;
+    toggleSqft();
+    print("SQFT : ------------------ Length $sqftLength + WIDTH $sqftWidth + SQ: $sqft");
+    update();
+  }
+
+  void toggleSqft() {
+    sqft.value = sqftLength.value * sqftWidth.value ;
+    update();
+  }
 
 
   var printername, inchestype;

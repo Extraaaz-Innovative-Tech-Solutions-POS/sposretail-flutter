@@ -15,7 +15,7 @@ class SettingsController extends GetxController {
   String? role;
   String? businessType;
   int? restaurantId;
-  int? unitValue;
+  int unitValue = 0;
 
   void toggleUnit(v) {
     unitValue = v;

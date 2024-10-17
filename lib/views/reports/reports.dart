@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class Reports extends StatefulWidget {
@@ -201,7 +200,7 @@ class _ReportsState extends State<Reports> {
                             );
 
                             // Optionally, you can display a message to the user or perform additional actions after the PDF has been generated
-                            print("PDF report has been generated.");
+                            debugPrint("PDF report has been generated.");
                           },
                           child: customText("Print",
                               color: Theme.of(context).highlightColor)),

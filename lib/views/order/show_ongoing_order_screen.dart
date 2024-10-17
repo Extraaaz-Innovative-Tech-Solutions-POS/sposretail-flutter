@@ -89,8 +89,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
   final additionalInfo = Get.put(AdditionalInfoController());
   final WebSocketService _webSocketService = WebSocketService();
 
-  var _creditController = TextEditingController();
-   var _outstandingController = TextEditingController();
+  final _creditController = TextEditingController();
+  final _outstandingController = TextEditingController();
 
   PaymentMethod? paymentMethod;
   PaymentOptions? paymentOptions;
@@ -289,7 +289,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     TextField(
@@ -298,7 +298,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
                                       decoration: InputDecoration(
                                         hintText:
                                             'Enter Payable Amount', // Hint text
-                                        border: OutlineInputBorder(),
+                                        border: const OutlineInputBorder(),
                                         fillColor:
                                             Theme.of(context).highlightColor,
                                         focusColor:

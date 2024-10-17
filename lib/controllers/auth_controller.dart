@@ -1,5 +1,4 @@
-import 'package:spos_retail/model/user_model.dart';
-import 'kitchen_controller.dart';
+
 import 'package:spos_retail/views/widgets/export.dart';
 
 class AuthController extends GetxController {
@@ -21,7 +20,7 @@ class AuthController extends GetxController {
         "password": password,
       });
       if (response.statusCode == 200) {
-        print("CUSTOMER DETAILS: ------------------- ${response.data}");
+        debugPrint("CUSTOMER DETAILS: ------------------- ${response.data}");
         bool success = response.data['success'];
         if (success == true) {
           snackBar("Success", "Login Successful");
@@ -55,9 +54,9 @@ class AuthController extends GetxController {
           pref.setString("Address", address ?? "--");
           pref.setString("Phone", phoneNo ?? "--");
           pref.setInt("RestaurantId", restaurantId ?? 0);
-          pref.setString("BusinessType", businessType ?? "--");
+          pref.setString("BusinessType", businessType);
 
-          print("RESTAUANT ID IS THIS: ------------------$restaurantId");
+          debugPrint("RESTAUANT ID IS THIS: ------------------$restaurantId");
 
           if (sharedrole == 'manager' || sharedrole == "cashier") {
             userController
