@@ -1,31 +1,17 @@
-import 'dart:developer';
-
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {
-  final int floor;
-  final int table;
   final String ordertype;
   final int? customerId;
-  final String? tablenumber;
-  final int? tableDividedBy;
   final String? tableId;
-  final int? subTable;
-  final String? sectionId;
   final String? customerName;
   final String? advanceOrderDateTime;
   final String? restaurantId;
 
   OrderBookingScreen(
       {Key? key,
-      this.floor = 0,
-      this.table = 0,
       this.ordertype = "Dine",
-      this.tablenumber,
-      this.tableDividedBy,
-      this.subTable,
       this.tableId,
-      this.sectionId,
       this.customerName,
       this.advanceOrderDateTime,
       this.restaurantId,
@@ -69,7 +55,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       deliveryIDS,
       advanceIds,
       data,
-      dineTableID,
+     // dineTableID,
       identifier,
       iv_code,
       addonsVarientid,
@@ -101,11 +87,10 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   void initState() {
     super.initState();
     infoController.getAdditionalInfo();
-    menucontroller.fetchMenu(widget.sectionId);
+    menucontroller.fetchMenu("");
     clickonActionChips = "All";
     data = datetime.day;
     isQuantityEditing = false;
-    _checkBool();
     dineinTable();
 
     setState(() {});
@@ -146,7 +131,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
         final id = response.toString();
         prefs.setString(prefKey, id);
         setState(() {
-          if (widget.ordertype == "Dine") dineTableID = id;
           if (widget.ordertype == "Delivery") deliveryIDS = id;
           if (widget.ordertype == "Advance") advanceIds = id;
           if (widget.ordertype == "Take Away") takeAwayIDs = id;
@@ -159,13 +143,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     }
   }
 
-  Future<void> _checkBool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    prefs.setInt("checkdate", data);
-    dineTableID = prefs.getString("DineTableID");
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +166,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                       Get.to(() => ShowOngoingOrder(
                             gst: infoController.gstNo.value,
                             fssai: infoController.fssai.value,
-                            floor: widget.floor,
-                            table: widget.table,
                             ordertype: widget.ordertype,
                             orderData: order,
                             tableId: widget.tableId!,
@@ -895,7 +870,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     //  bothvarientId = '';
                     selectedAddonNames.clear();
                     // Reset the state
-                    log("All Variable are cleared");
+                    debugPrint("All Variable are cleared");
                     setState(() {});
                   },
                   child: Container(
@@ -1015,7 +990,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                             selectedAddonNames
                                                 .remove(item.name);
                                           }
-                                          log(totalPrice.toString());
                                         });
                                       },
                                       title: Row(
@@ -1061,8 +1035,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                       modifierGroupID.toString());
                                 } else {
                                   iv_code = "${itemId}0000$identifier";
-                                  log(modifierItemsById.modifiersGroupID
-                                      .toString());
                                   addItemToOrder(
                                       itemId,
                                       1,
@@ -1362,8 +1334,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               }
                                                             });
                                                           },
-
-                                                          /////////////////////////////
                                                           onSubmitted: (value) {
                                                             setState(() {
                                                               if (double.parse(order[
@@ -1450,7 +1420,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                  
                                                  
                                                  
-                                                 Text("data"),
+                                                 const Text("data"),
                                           Visibility(
                                             visible:
                                                 widget.restaurantId == "217"
@@ -1525,11 +1495,11 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     order,
                     widget.tableId,
                     widget.ordertype,
-                    widget.table,
-                    widget.floor,
-                    widget.sectionId,
+                    0,
+                    0,
+                    "",
                     takeAwayIDs,
-                    dineTableID,
+                    '',
                     deliveryIDS,
                     advanceIds,
                     settingsController.kotOption,

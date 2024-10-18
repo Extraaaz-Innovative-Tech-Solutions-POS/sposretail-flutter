@@ -1,4 +1,3 @@
-import 'package:spos_retail/controllers/settings_controller.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class CustomerList extends StatefulWidget {
@@ -31,15 +30,6 @@ class _CustomerListState extends State<CustomerList> {
   void initState() {
     super.initState();
     customerlistController.getcustomerlist(false);
-  }
-
-  var sectionId, floorId, tablenumber;
-  Future<void> _statusbool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    floorId = prefs.getInt("SelectedFloorID");
-    sectionId = prefs.getString("SectionId");
-    tablenumber = prefs.getInt("TableNumber");
-    setState(() {});
   }
 
   @override
@@ -151,9 +141,7 @@ class _CustomerListState extends State<CustomerList> {
                           },
                           onTap: widget.update
                               ? () {
-                                allItemsController.fetchMenu(
-                                                          sectionId.toString());
-                                  _statusbool();
+                                allItemsController.fetchMenu("");
                                   Get.to(() => UpdateCustomer(
                                         click: true,
                                         customerId:
@@ -211,23 +199,8 @@ class _CustomerListState extends State<CustomerList> {
                                                   customerName: customerlist[index].name
                                                       .toString(),
                                                   customerId:customerlist[index].id));
-                                            }
-                                          : () {
-                                              _statusbool().whenComplete(() =>
-                                                  Get.to(OrderBookingScreen(
-                                                    restaurantId: settingsController.restaurantId.toString(),
-                                                      floor: floorId,
-                                                      table: tablenumber,
-                                                      ordertype: "Dine",
-                                                      sectionId:
-                                                          sectionId.toString(),
-                                                      customerName: c
-                                                          .customer[index].name
-                                                          .toString(),
-                                                      customerId: c
-                                                          .customer[index]
-                                                          .id)));
-                                            },
+                                            }: null,
+                                          
                           title: Column(
                             children: [
                               Container(
