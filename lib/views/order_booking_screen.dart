@@ -1,3 +1,4 @@
+import 'package:spos_retail/controllers/OrderBooking_Controller/sqftController.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class OrderBookingScreen extends StatefulWidget {
 
   OrderBookingScreen(
       {Key? key,
-      this.ordertype = "Dine",
+      this.ordertype = "Take Away",
       this.tableId,
       this.customerName,
       this.advanceOrderDateTime,
@@ -37,11 +38,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
   final piecesController = TextEditingController();
   final priceController = TextEditingController();
 
-  // var quantityOption = [
-  //   "Boxes",
-  //   'Pieces',
-  // ];
-
   late InvoiceManager invoiceManager;
   List<Item> order = [];
   var clickonActionChips,
@@ -55,14 +51,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       deliveryIDS,
       advanceIds,
       data,
-     // dineTableID,
       identifier,
       iv_code,
       addonsVarientid,
       selectedvarients;
 
   List<GlobalKey> itemKeys = [];
-  Map<int, bool> _isChecked = {};
+  final Map<int, bool> _isChecked = {};
   double totalPrice = 0;
   bool isQuantityEditing = false;
   bool isPriceEditing = false;
@@ -107,17 +102,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     String prefKey;
 
     switch (widget.ordertype) {
-      case "Dine":
-        endpoint = AppConstant.dineId;
-        prefKey = "DineTableID";
-        break;
       case "Delivery":
         endpoint = "getTableId/Delivery";
         prefKey = "DeliveryID";
-        break;
-      case "Advance":
-        endpoint = AppConstant.advanced;
-        prefKey = "advance_id";
         break;
       default:
         endpoint = AppConstant.takeAwayID;
@@ -132,17 +119,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
         prefs.setString(prefKey, id);
         setState(() {
           if (widget.ordertype == "Delivery") deliveryIDS = id;
-          if (widget.ordertype == "Advance") advanceIds = id;
           if (widget.ordertype == "Take Away") takeAwayIDs = id;
         });
-        // print("Your $widget.ordertype ID value-------->");
-        // print(response.toString());
       }
     } catch (e) {
       print("Failed to fetch table ID: $e");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -158,82 +141,29 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
             child: customText("menu".tr.padRight(5),
                 font: 18.0, color: Theme.of(context).highlightColor)),
         actions: [
-          widget.ordertype == "Dine"
-              ? IconButton(
-                  onPressed: () {
-                    if (widget.tableId != null) {
-                      print(infoController.gstNo.value);
-                      Get.to(() => ShowOngoingOrder(
-                            gst: infoController.gstNo.value,
-                            fssai: infoController.fssai.value,
-                            ordertype: widget.ordertype,
-                            orderData: order,
-                            tableId: widget.tableId!,
-                            items: const [],
-                            customerId:
-                                cartController.cartOrder.value!.customer!.id!,
-                          ));
-                    } else {
-                      Fluttertoast.showToast(msg: "Please Order Something");
-                    }
-                  },
-                  icon: const Icon(Icons.receipt_long_rounded),
-                  tooltip: "get bill",
-                )
-              : const Text(""),
-          widget.ordertype == "Delivery"
-              ? Container(
-                  height: 30.0,
-                  width: 120.0,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(5.0)),
-                  child: Center(
-                    child: Text(
-                      widget.customerName.toString(),
-                      style: TextStyle(
-                          color: Theme.of(context).highlightColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                )
-              : const Text(""),
-
-              IconButton(
+          IconButton(
             onPressed: () {
-              // Get.to(BarcodeItems());
               barcodeController.scanBarcodeNormal().then((value) {
                 setState(() {
                   allItemsController.menu.asMap().entries.map((entry) {
-                    int index = entry.key;
                     CategoryModel category = entry.value;
 
                     if (category.items != null) {
                       for (var item in category.items!) {
                         if (item.upc == barcodeController.scanBarcode.value) {
                           order.add(Item(
-                              name: item.name??"", 
+                              name: item.name ?? "",
                               price: item.price,
-                              quantity: 1, 
+                              quantity: 1,
                               vairentId: "",
                               instruction: "",
                               modifiersGroupID: "",
-                              isCustom:
-                                  false)); 
-                          break; 
+                              isCustom: false));
+                          break;
                         }
                       }
                     }
                   }).toList();
-
-                  // order.add(Item(
-                  //     name: barcodeController.scanBarcode.value,
-                  //     price: "30",
-                  //     quantity: 1, // New item quantity
-                  //     vairentId: "",
-                  //     instruction: "",
-                  //     modifiersGroupID: "",
-                  //     isCustom: true));
                 });
               });
             },
@@ -363,7 +293,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                   ),
                                 )
                               : const SizedBox.shrink();
-                    }).toList(),
+                    }),
                   ],
                 );
               }),
@@ -406,22 +336,16 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               child: customText('Submit'),
               onPressed: () {
                 setState(() {
-                  // openItemName = firstController.text;
-                  // openItemPrice = secondController.text;
 
                   order.add(Item(
-                      name: firstController.text, // New item name
-                      price: secondController.text, // New item price
-                      quantity: 1, // New item quantity
+                      name: firstController.text, 
+                      price: secondController.text, 
+                      quantity: 1,
                       vairentId: "",
                       instruction: "",
                       modifiersGroupID: "",
                       isCustom: true));
                 });
-                // print('First Input: $openItemname');
-                // print('Second Input: $openItemPrice');
-
-                // Close the dialog
                 Navigator.of(context).pop();
               },
             ),
@@ -445,9 +369,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 e.name!.toLowerCase().contains(query.toLowerCase()) ||
                 e.shortCode.toString() == query)
             .toList();
-    //    e.shortCode.toString().contains(query))
-    // .toList();
-    //  print(allFilteredItems.length);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Visibility(
@@ -461,11 +382,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 style: TextStyle(
                     fontSize: 20,
                     letterSpacing: 3,
-                    //wordSpacing: ,d
                     color: Theme.of(context).highlightColor),
               ),
             ),
-            //
             Container(
               decoration: BoxDecoration(
                   border: Border.all(
@@ -494,13 +413,12 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     childAspectRatio: 1.2,
                     children: List.generate(
                       allFilteredItems.length,
-                      // items.length,
                       (index) {
                         GlobalKey itemKey =
-                            GlobalKey(); // Create a GlobalKey for each item
-                        itemKeys.add(itemKey); // Store the GlobalKey in a list
+                            GlobalKey(); 
+                        itemKeys.add(itemKey); 
                         return _menuItemWidget(
-                          key: itemKey, // Pass the GlobalKey to the item widget
+                          key: itemKey, 
                           itemName: allFilteredItems[index].name!,
                           itemId: allFilteredItems[index].id!,
                           itemPrice: allFilteredItems[index].price!,
@@ -515,9 +433,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                 }
               }),
             )
-            // _menuCategoryItemsGrid(
-            //     context, entry.value.items!),
-            //const SizedBox(height: 20),
           ],
         ),
       ),
@@ -1379,7 +1294,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                           const SizedBox(
                                             width: 10.0,
                                           ),
-                                         
                                           isQuantityEditing
                                               ? const SizedBox.shrink()
                                               : Icon(
@@ -1388,39 +1302,42 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   color: Theme.of(context)
                                                       .highlightColor,
                                                 ),
-                                                 settingsController.unitValue == 0 ? 
-                                                 
-                                                 Row(
-            children: [
-                 const SizedBox(width: 10),
-              buildRoundedTextField(changed: (v) {
-              orderbookingScreen.toggleLength(int.parse(v));
-              } ),
-              const SizedBox(width: 10),
-              const Text(
-                '×',
-                style: TextStyle(fontSize: 24), 
-              ),
-              const SizedBox(width: 10),
-              buildRoundedTextField(
-                changed: (v) {
-                  orderbookingScreen.toggleWidth(int.parse(v));
-                }),
-              const Text(
-                '=',
-                style: TextStyle(fontSize: 24),
-              ),
-              GetBuilder<OrderBookingController>(
-                builder: (o) {
-                  return Text(o.sqft.value.toString());
-                }
-              ),
-            ],
-          ):
-                                                 
-                                                 
-                                                 
-                                                 const Text("data"),
+                                          settingsController.unitValue == 1
+                                              ? Row(
+                                                  children: [
+                                                    const SizedBox(width: 10),
+                                                    buildRoundedTextField(
+                                                        changed: (v) {
+                                                      orderbookingScreen
+                                                          .toggleLength(
+                                                              int.parse(v));
+                                                    }),
+                                                    const SizedBox(width: 10),
+                                                    const Text(
+                                                      '×',
+                                                      style: TextStyle(
+                                                          fontSize: 24),
+                                                    ),
+                                                    const SizedBox(width: 10),
+                                                    buildRoundedTextField(
+                                                        changed: (v) {
+                                                      orderbookingScreen
+                                                          .toggleWidth(
+                                                              int.parse(v));
+                                                              order[index].sqft = orderbookingScreen.sqft.value;
+                                                              num newPrice = int.parse(order[index].price) * order[index].sqft;
+                                                              order[index].price = newPrice.toString();
+                                                              setState(() {});
+                                                    }),
+                                                    const Text(
+                                                      '=',
+                                                      style: TextStyle(
+                                                          fontSize: 24),
+                                                    ),
+                                                   Text(order[index].sqft == null ? "0":order[index].sqft.toString()),
+                                                  ],
+                                                )
+                                              : const Text("data"),
                                           Visibility(
                                             visible:
                                                 widget.restaurantId == "217"
@@ -1601,11 +1518,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       ItemModel selectedItem, String itemName, int item_id, double itemPrice) {
     for (ModifierGroups group in selectedItem.modifierGroups!) {
       for (Modifiers modifier in group.modifiers!) {
-        // Add logic here to determine which modifier to remove
-        // For example, you can check if the modifier meets certain conditions
-
-        // This is where you can add logic to determine which modifier to remove
-        // Based on your application, you might want to pass different parameters
         addItemToOrder(
           item_id,
           1,
@@ -1621,7 +1533,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     }
   }
 
-   Widget buildRoundedTextField({submitted, changed}) {
+  Widget buildRoundedTextField({submitted, changed}) {
     return Container(
       width: 40,
       child: TextField(
@@ -1638,62 +1550,3 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     );
   }
 }
-
-
-
-/////////////////
-
-
-// class MultiplicationInputFields extends StatefulWidget {
-//   @override
-//   _MultiplicationInputFieldsState createState() => _MultiplicationInputFieldsState();
-// }
-
-// class _MultiplicationInputFieldsState extends State<MultiplicationInputFields> {
-//   final TextEditingController _controller1 = TextEditingController();
-//   final TextEditingController _controller2 = TextEditingController();
-//   final TextEditingController _resultController = TextEditingController();
-
-//   void _multiply() {
-//     double value1 = double.tryParse(_controller1.text) ?? 0;
-//     double value2 = double.tryParse(_controller2.text) ?? 0;
-//     double result = value1 * value2;
-//     _resultController.text = result.toString();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(20.0),
-//       child: Column(
-//         children: <Widget>[
-//           buildRoundedTextField(_controller1, 'Input 1'),
-//           SizedBox(height: 10),
-//           buildRoundedTextField(_controller2, 'Input 2'),
-//           SizedBox(height: 10),
-//           ElevatedButton(
-//             onPressed: _multiply,
-//             child: Text('Multiply'),
-//           ),
-//           SizedBox(height: 10),
-//           buildRoundedTextField(_resultController, 'Result', readOnly: true),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildRoundedTextField(TextEditingController controller, String hint, {bool readOnly = false}) {
-//     return TextField(
-//       controller: controller,
-//       readOnly: readOnly,
-//       decoration: InputDecoration(
-//         border: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(12),
-//         ),
-//         hintText: hint,
-//         contentPadding: EdgeInsets.symmetric(horizontal: 10),
-//       ),
-//       keyboardType: TextInputType.number,
-//     );
-//   }
-// }

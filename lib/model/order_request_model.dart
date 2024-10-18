@@ -51,6 +51,7 @@ class Item {
   String instruction;
   String modifiersGroupID;
   bool? isCustom;
+  dynamic sqft;
 
   Item(
       {this.id,
@@ -63,7 +64,8 @@ class Item {
       required this.instruction,
 
       required this.modifiersGroupID,
-      this.isCustom
+      this.isCustom,
+      this.sqft
       });
 
   Map<String, dynamic> toJson() {
@@ -76,7 +78,7 @@ class Item {
       'name': name,
       'vairentId': vairentId,
       'instruction': instruction,
-      "is_custom": isCustom
+      "is_custom": isCustom,
       
     };
   }

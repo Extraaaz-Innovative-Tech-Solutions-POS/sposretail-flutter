@@ -56,6 +56,7 @@ class OrderBookingController extends GetxController {
     // kotprinterName = pref.getString("KOTBillingPrinter");
     update();
   }
+  
 
   Future<void> confirmOrderBtnTap(
       int? customerID,
