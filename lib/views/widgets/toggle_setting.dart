@@ -21,7 +21,7 @@ class ToggleSetting extends StatelessWidget {
         child: GetBuilder<SettingsController>(builder: (c) {
           return Column(children: [
             switchButton("kot".tr, c.kotOption, onChange: (v) {
-              settingsController.toggleOrderBilling(v);
+              settingsController.toggleKotoption(v);
             }),
             switchButton("client_info".tr, c.clientInfo, onChange: (v) {
               settingsController.toggleClientInfo(v);
