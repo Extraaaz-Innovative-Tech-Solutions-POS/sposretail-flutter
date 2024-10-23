@@ -20,9 +20,6 @@ class ToggleSetting extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
         child: GetBuilder<SettingsController>(builder: (c) {
           return Column(children: [
-            switchButton("kot".tr, c.kotOption, onChange: (v) {
-              settingsController.toggleKotoption(v);
-            }),
             switchButton("client_info".tr, c.clientInfo, onChange: (v) {
               settingsController.toggleClientInfo(v);
             }),

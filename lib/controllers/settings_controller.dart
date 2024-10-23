@@ -9,7 +9,7 @@ class SettingsController extends GetxController {
 
   bool clientInfo = false;
   bool orderBilling = false;
-  bool kotOption = false;
+  //bool kotOption = false;
   int? bottomNavIndex = 1;
   String? name;
   String? role;
@@ -47,10 +47,10 @@ class SettingsController extends GetxController {
     update();
   }
 
-  void toggleKotoption(bool value) {
-    kotOption = value;
-    update();
-  }
+  // void toggleKotoption(bool value) {
+  //   kotOption = value;
+  //   update();
+  // }
 
   void toggleBottomNavIndex(i) {
     bottomNavIndex = i;

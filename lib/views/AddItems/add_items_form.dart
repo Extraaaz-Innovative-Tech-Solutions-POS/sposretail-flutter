@@ -143,10 +143,10 @@ class _AddItemsFormState extends State<AddItemsForm> {
                                       fit: BoxFit.cover,
                                       height: 100,
                                       width: 100,
-                                    ),
+                          ),
                             );
                       }else if(widget.updateisClick && widget.itemimage != null){
-                        print("check url :  https://sposversion2.extraaaz.com/${widget.itemimage!}");
+                        debugPrint("check url :  https://sposversion2.extraaaz.com/${widget.itemimage!}");
                           return ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: widget.itemimage != null ? Image.network(

@@ -91,7 +91,9 @@ class MoneyoutlistController extends GetxController {
         totalDeposit.value = newTotal;
         update();
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
 
@@ -101,7 +103,7 @@ class MoneyoutlistController extends GetxController {
     try {
 
        MoneyInOutModel moneyInOutModel =
-          MoneyInOutModel(receiptNo: "${moneyInListController.receiptNo.value}", amount:moneyInListController. amountReceived.value, paymentMethod: "cash", moneyInDate: moneyInListController.moneyInDate.value, paymentType: "Withdraw");
+          MoneyInOutModel(receiptNo: moneyInListController.receiptNo.value, amount:moneyInListController. amountReceived.value, paymentMethod: "cash", moneyInDate: moneyInListController.moneyInDate.value, paymentType: "Withdraw");
 
       final response =
           await DioServices.postRequest(AppConstant.moneyInOut, moneyInOutModel.toJson());
@@ -113,7 +115,7 @@ class MoneyoutlistController extends GetxController {
         Fluttertoast.showToast(msg: "Added Sucessfully");
         withdrawal();
         moneyInListController.isDeposit.value= true;
-        Get.to(MoneyOutList());
+        Get.to(const MoneyOutList());
         update();
 
         // print("New Customer Added");

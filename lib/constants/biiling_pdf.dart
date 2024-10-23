@@ -6,8 +6,6 @@ class InvoicePdf {
   static Future<Uint8List> generateBillingPdf(
       {required List<Items> orders,
       required String invoiceId,
-      //required UserController userController,
-      // required dynamic orderdata,
       required String invoiceID,
       required var totalAmount,
       required dynamic ordertype,

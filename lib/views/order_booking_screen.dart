@@ -1,4 +1,3 @@
-import 'package:spos_retail/controllers/OrderBooking_Controller/sqftController.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class OrderBookingScreen extends StatefulWidget {
@@ -1325,8 +1324,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                           .toggleWidth(
                                                               int.parse(v));
                                                               order[index].sqft = orderbookingScreen.sqft.value;
-                                                              num newPrice = int.parse(order[index].price) * order[index].sqft;
+                                                              num newPrice = num.parse(order[index].price) * order[index].sqft;
                                                               order[index].price = newPrice.toString();
+                                                              order[index].name = "${order[index].name} (${orderbookingScreen.sqftLength.value} x ${orderbookingScreen.sqftWidth.value} = ${order[index].sqft})";
                                                               setState(() {});
                                                     }),
                                                     const Text(
@@ -1419,7 +1419,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     '',
                     deliveryIDS,
                     advanceIds,
-                    settingsController.kotOption,
+                    false,
                     context,
                     dateTime: widget.advanceOrderDateTime,
                   );

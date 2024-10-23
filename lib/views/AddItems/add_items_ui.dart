@@ -87,7 +87,7 @@ class _AddCategoryState extends State<AddItems> {
                                     // child: Flexible(
                                       child:
                                     Text(
-                                      category.value.name.toString(),
+                                      "${category.value.name} (${category.value.id})",
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 2,
                                       style: TextStyle(
