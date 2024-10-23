@@ -1,3 +1,7 @@
+import 'package:spos_retail/controllers/moneyManagement/moneyinlist_controller.dart';
+import 'package:spos_retail/controllers/moneyManagement/moneyoutlist_controller.dart';
+import 'package:spos_retail/views/MoneyManagement/moneyin_list.dart';
+import 'package:spos_retail/views/MoneyManagement/moneyout_list.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 Widget drawer(context) {
@@ -6,6 +10,8 @@ Widget drawer(context) {
   final recipeController = Get.put(RecipeController());
   final infoController = Get.put(AdditionalInfoController());
   final customerController = Get.put(CustomerlistController());
+  final moneyinController = Get.put(MoneyinlistController());
+    final moneyoutController = Get.put(MoneyoutlistController());
   return Align(
           alignment: Alignment.topLeft,
           child: Container(
@@ -92,6 +98,25 @@ Widget drawer(context) {
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(Unit());
                   }),
+
+
+
+                   listTile(context, "Money In List",
+                      leading: Icon(Icons.ac_unit,
+                          color: Theme.of(context).focusColor), onpress: () {
+                            moneyinController.deposits();
+                            
+                    Get.to(MoneyInList());
+                  }),
+
+
+                    listTile(context, "Money Out List",
+                      leading: Icon(Icons.ac_unit,
+                          color: Theme.of(context).focusColor), onpress: () {
+                             moneyoutController.withdrawal();
+                    Get.to(MoneyOutList());
+                  }),
+
                   ExpansionTile(
                     title: listTile(context, "Inventory"),
                     leading: Icon(Icons.inventory,

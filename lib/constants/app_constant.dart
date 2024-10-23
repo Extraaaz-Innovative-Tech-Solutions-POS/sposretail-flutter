@@ -120,4 +120,16 @@ static const String setThresoldValue = "ingredient/threshold-value";
 // credit 
 static const String creditCard = "pay-outstanding/";
 
+
+//moneyin-moneyout
+
+static const String moneyInOut ="moneyInOut";
+static const String deposits = "deposits";
+static const String withdrawals ="withdrawals";
+static const String updateTransaction = "transactions";
+static const String deleteTransaction = "delete";
+static const String moneyInReport = "moneyin-report";
+static const String moneyOutReport = "moneout-report";
+
+
 }
