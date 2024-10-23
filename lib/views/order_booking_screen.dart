@@ -152,6 +152,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                         if (item.upc == barcodeController.scanBarcode.value) {
                           order.add(Item(
                               name: item.name ?? "",
+                              originalName: item.name ?? '',
+                              originalPrice: item.price,
                               price: item.price,
                               quantity: 1,
                               vairentId: "",
@@ -338,6 +340,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
 
                   order.add(Item(
                       name: firstController.text, 
+                      originalName: firstController.text,
+                      originalPrice: secondController.text,
                       price: secondController.text, 
                       quantity: 1,
                       vairentId: "",
@@ -1064,6 +1068,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
             Item(
               id: itemId,
               name: itemName,
+              originalName: itemName,
+              originalPrice: price,
               price: price,
               boxes: widget.restaurantId == "217" ? quantity : 0,
               pieces: 0,
@@ -1126,7 +1132,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [
+                                    children: [                                      
                                       Text(order[index].name,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
@@ -1324,9 +1330,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                           .toggleWidth(
                                                               int.parse(v));
                                                               order[index].sqft = orderbookingScreen.sqft.value;
-                                                              num newPrice = num.parse(order[index].price) * order[index].sqft;
+                                                              num newPrice = num.parse(order[index].originalPrice) * order[index].sqft;
                                                               order[index].price = newPrice.toString();
-                                                              order[index].name = "${order[index].name} (${orderbookingScreen.sqftLength.value} x ${orderbookingScreen.sqftWidth.value} = ${order[index].sqft})";
+                                                              order[index].name = "${order[index].originalName} (${orderbookingScreen.sqftLength.value} x ${orderbookingScreen.sqftWidth.value} = ${order[index].sqft})";
                                                               setState(() {});
                                                     }),
                                                     const Text(

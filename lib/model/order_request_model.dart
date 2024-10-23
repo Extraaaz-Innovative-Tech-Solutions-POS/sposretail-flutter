@@ -43,7 +43,9 @@ class Item {
 
   int? id;
   String name;
+  String originalName;
   String price;
+  String originalPrice;
   dynamic quantity;
   dynamic boxes;
   dynamic pieces;
@@ -53,10 +55,13 @@ class Item {
   bool? isCustom;
   dynamic sqft;
 
+
   Item(
       {this.id,
       required this.name,
+      required this.originalName,
       required this.price,
+      required this.originalPrice,
       required this.quantity,
       this.boxes,
       this.pieces,
@@ -76,6 +81,8 @@ class Item {
       'pieces': pieces,
       'price': price,
       'name': name,
+      'original_name': originalName,
+      'original_price': originalPrice,
       'vairentId': vairentId,
       'instruction': instruction,
       "is_custom": isCustom,

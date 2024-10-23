@@ -15,11 +15,13 @@ class SettingsController extends GetxController {
   String? role;
   String? businessType;
   int? restaurantId;
-  int unitValue = 0;
+  int? unitValue;
 
-  void toggleUnit(v) {
+  void toggleUnit(v) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
     unitValue = v;
     update();
+    pref.setInt('unit', unitValue!);
   }
 
   void toggleWhatsapp(bool value) {
@@ -65,6 +67,7 @@ class SettingsController extends GetxController {
     role = pref.getString('role');
     businessType = pref.getString("BusinessType");
     restaurantId = pref.getInt("RestaurantId");
+    unitValue = pref.getInt("unit");
     update();
   }
 
