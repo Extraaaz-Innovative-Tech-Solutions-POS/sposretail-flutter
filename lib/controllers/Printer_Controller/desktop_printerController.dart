@@ -34,6 +34,7 @@ class DesktopPrinterController extends GetxController {
   }
 
   Future<void> postData(BillDesktopModel formData) async {
+    print("DESKTOP FORM DATA JSOn : -------- ${formData.toJson()}");
     while (true) {
       DateTime times = DateTime.now();
       var calculatedTime = times.second - notedtimes.value;
@@ -91,7 +92,7 @@ class DesktopPrinterController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        log('Request Successful: ${data}');
+        log('Request Successful: $data');
       } else {
         log('Request Failed with status code: ${response.statusCode}');
       }

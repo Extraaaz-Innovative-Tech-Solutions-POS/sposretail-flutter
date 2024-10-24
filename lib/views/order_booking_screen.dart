@@ -479,31 +479,56 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
             );
           }
 
-          return GridView.count(
-            crossAxisCount: gridCount,
-            physics: const ClampingScrollPhysics(),
-            shrinkWrap: true,
-            mainAxisSpacing: 2,
-            crossAxisSpacing: 15,
-            childAspectRatio: 1.2,
-            children: List.generate(
-              allFilteredItems.length,
-              // items.length,
-              (index) {
-                GlobalKey itemKey =
-                    GlobalKey(); // Create a GlobalKey for each item
-                itemKeys.add(itemKey); // Store the GlobalKey in a list
-                return _menuItemWidget(
-                  key: itemKey, // Pass the GlobalKey to the item widget
-                  itemName: allFilteredItems[index].name!,
-                  itemId: allFilteredItems[index].id!,
-                  itemPrice: allFilteredItems[index].price!,
-                  image: allFilteredItems[index].itemImage,
-                  menuItem: allFilteredItems[index],
-                  categoryId: allFilteredItems[index].categoryId.toString(),
-                );
-              },
-            ),
+          return Stack(
+            children: [
+              GridView.count(
+                crossAxisCount: gridCount,
+                physics: const ClampingScrollPhysics(),
+                shrinkWrap: true,
+                mainAxisSpacing: 2,
+                crossAxisSpacing: 15,
+                childAspectRatio: 1.2,
+                children: List.generate(
+                  allFilteredItems.length,
+                  // items.length,
+                  (index) {
+                    GlobalKey itemKey =
+                        GlobalKey(); // Create a GlobalKey for each item
+                    itemKeys.add(itemKey); // Store the GlobalKey in a list
+                    return _menuItemWidget(
+                      key: itemKey, // Pass the GlobalKey to the item widget
+                      itemName: allFilteredItems[index].name!,
+                      itemId: allFilteredItems[index].id!,
+                      itemPrice: allFilteredItems[index].price!,
+                      image: allFilteredItems[index].itemImage,
+                      menuItem: allFilteredItems[index],
+                      categoryId: allFilteredItems[index].categoryId.toString(),
+                    );
+                  },
+                ),
+              ),
+              // Visibility(
+              //   visible: true,
+              //   child: Positioned.fill(
+              //   child: Center(
+              //     child: GestureDetector(
+              //       onTap: () {
+              //         setState(() {
+              //          // selectedItemImage = null;
+              //         });
+              //       },
+              //       child: Container(
+              //         color: Colors.black.withOpacity(0.7),
+              //         child: Image.network(
+              //           allFilteredItems[index].itemImage,
+              //           fit: BoxFit.contain,
+              //         ),
+              //       ),
+              //     )))
+              //   // Positioned.(child: )
+              //   )
+              
+            ],
           );
         }
       }),
@@ -535,15 +560,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               color: Theme.of(context).focusColor,
             ),
             child: GestureDetector(
-              onTap: () async {
-                processMenuItem(
-                    itemId, itemName, double.parse(itemPrice), false);
-                debugPrint(
-                  "url image test : https://sposversion2.extraaaz.com/$image",
-                );
-                // processMenuAddonsItem(
-                //     item_id, itemName, double.parse(itemPrice), false);
-              },
+              onTap: () async {},
               child: Row(
                 children: [
                   Container(
@@ -564,30 +581,36 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                          child: Text(
-                        itemName.length > 8
-                            ? "${itemName.substring(0, 6)}.."
-                            : itemName,
-                        maxLines: 2,
-                        style: TextStyle(
-                          color: Theme.of(context).highlightColor,
-                          fontSize: 16.0,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      )),
-                      Flexible(
-                          flex: 1,
-                          child: Text("${AppConstant.currency}$itemPrice",
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 16.0,
-                              ))),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      processMenuItem(
+                    itemId, itemName, double.parse(itemPrice), false);
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                            child: Text(
+                          itemName.length > 8
+                              ? "${itemName.substring(0, 6)}.."
+                              : itemName,
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: Theme.of(context).highlightColor,
+                            fontSize: 16.0,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
+                        Flexible(
+                            flex: 1,
+                            child: Text("${AppConstant.currency}$itemPrice",
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 16.0,
+                                ))),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -598,8 +621,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               onTap: () {
                 processMenuItem(
                     itemId, itemName, double.parse(itemPrice), true);
-                // processMenuAddonsItem(
-                //     item_id, itemName, double.parse(itemPrice), true);
               },
               child: Container(
                   padding: const EdgeInsets.all(7),
@@ -644,8 +665,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                       onTap: () async {
                         processMenuItem(
                             itemId, itemName, double.parse(itemPrice), false);
-                        // processMenuAddonsItem(
-                        //     item_id, itemName, double.parse(itemPrice), false);
                       },
                       child: Icon(Icons.add,
                           color: Theme.of(context).indicatorColor),
@@ -655,107 +674,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
           ],
         ],
       ),
-      // child: Column(
-      //   children: [
-      //     Container(
-      //       height: 70,
-      //       padding: const EdgeInsets.only(left: 8, right: 8, bottom: 3),
-      //       decoration: BoxDecoration(
-      //         color: Theme.of(context).focusColor,
-      //       ),
-      //       child: GestureDetector(
-      //         onTap: () async {
-      //           processMenuItem(
-      //               itemId, itemName, double.parse(itemPrice), false);
-      //           // processMenuAddonsItem(
-      //           //     item_id, itemName, double.parse(itemPrice), false);
-      //         },
-      //         child: Row(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           children: [
-      //             Flexible(
-      //                 child: Text(
-      //               itemName,
-      //               maxLines: 2,
-      //               style: TextStyle(
-      //                 color: Theme.of(context).highlightColor,
-      //                 fontSize: 16.0,
-      //                 overflow: TextOverflow.ellipsis,
-      //               ),
-      //             )),
-      //             Flexible(
-      //                 flex: 1,
-      //                 child: Text("${AppConstant.currency}$itemPrice",
-      //                     style: TextStyle(
-      //                       color: Theme.of(context).primaryColor,
-      //                       fontSize: 16.0,
-      //                     ))),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //     if (existingOrderItemIndex == -1) ...[
-      //       GestureDetector(
-      //         onTap: () {
-      //           processMenuItem(
-      //               itemId, itemName, double.parse(itemPrice), true);
-      //           // processMenuAddonsItem(
-      //           //     item_id, itemName, double.parse(itemPrice), true);
-      //         },
-      //         child: Container(
-      //             padding: const EdgeInsets.all(7),
-      //             decoration: BoxDecoration(
-      //                 color: Theme.of(context).scaffoldBackgroundColor,
-      //                 border: Border.all(color: Theme.of(context).hintColor)),
-      //             width: double.infinity,
-      //             child: Center(
-      //                 child: Text("ORDER",
-      //                     style: TextStyle(
-      //                         color: Theme.of(context).highlightColor)))),
-      //       ),
-      //     ],
-      //     if (existingOrderItemIndex != -1) ...[
-      //       Container(
-      //           padding: const EdgeInsets.all(3),
-      //           decoration: BoxDecoration(
-      //               border: Border.all(color: Theme.of(context).primaryColor)),
-      //           width: double.infinity,
-      //           child: Row(
-      //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //             children: [
-      //               GestureDetector(
-      //                 onTap: () {
-      //                   subtractItem(itemId, itemName, double.parse(itemPrice));
-      //                   orderTap = true;
-      //                   Fluttertoast.showToast(msg: "One Item is removed");
-      //                   setState(() {});
-      //                 },
-      //                 child: Icon(
-      //                   Icons.remove,
-      //                   color: Theme.of(context).hoverColor,
-      //                 ),
-      //               ),
-      //               customText(
-      //                 order[existingOrderItemIndex].quantity.toString(),
-      //                 weight: FontWeight.w900,
-      //                 font: 14.0,
-      //                 color: Theme.of(context).highlightColor,
-      //               ),
-      //               GestureDetector(
-      //                 onTap: () async {
-      //                   processMenuItem(
-      //                       itemId, itemName, double.parse(itemPrice), false);
-      //                   // processMenuAddonsItem(
-      //                   //     item_id, itemName, double.parse(itemPrice), false);
-      //                 },
-      //                 child: Icon(Icons.add,
-      //                     color: Theme.of(context).indicatorColor),
-      //               )
-      //             ],
-      //           )),
-      //     ],
-      //   ],
-      // ),
     );
   }
 

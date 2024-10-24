@@ -13,6 +13,11 @@ class SettingsController extends GetxController {
   int? bottomNavIndex = 1;
   String? name;
   String? role;
+  String? printerName;
+  String? restaurantName;
+  String? address;
+  String? phone;
+  int? invoiceType;
   String? businessType;
   int? restaurantId;
   int? unitValue;
@@ -68,6 +73,11 @@ class SettingsController extends GetxController {
     businessType = pref.getString("BusinessType");
     restaurantId = pref.getInt("RestaurantId");
     unitValue = pref.getInt("unit");
+    printerName = pref.getString("BillingPrinter");
+    restaurantName = pref.getString("RestaurantName");
+    address = pref.getString("Address");
+    phone = pref.getString("Phone");
+    invoiceType = pref.getInt("InchesType");
     update();
   }
 

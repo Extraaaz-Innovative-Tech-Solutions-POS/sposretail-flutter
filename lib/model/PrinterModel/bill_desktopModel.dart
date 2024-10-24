@@ -4,6 +4,7 @@ class BillDesktopModel {
   final String billNo;
   final String tableNo;
   final String items;
+  final String itemsPrice;
   final String qty;
   final String price;
   final String amount;
@@ -13,6 +14,9 @@ class BillDesktopModel {
   final String is3T;
   final String kotNo;
   final String NP;
+  final String customerName;
+  final String mobileNo;
+  final String address;
   final String catRemainingamount;
   final String catGrandTotal;
   final String catPayableAmount;
@@ -24,6 +28,7 @@ class BillDesktopModel {
     required this.billNo,
     required this.tableNo,
     required this.items,
+    required this.itemsPrice,
     required this.qty,
     required this.price,
     required this.amount,
@@ -32,7 +37,10 @@ class BillDesktopModel {
     required this.lastRecord,
     required this.is3T,
     required this.kotNo,
-     required this.NP,
+    required this.NP,
+    required this.customerName,
+    required this.mobileNo,
+    required this.address,
     required this.catAmountPaid,
     required this.catGrandTotal,
     required this.catPayableAmount,
@@ -46,6 +54,7 @@ class BillDesktopModel {
       'bill_no': billNo,
       'tableNo': tableNo,
       'items': items,
+      'itemsPrice': itemsPrice,
       'qty': qty,
       'price': price,
       'amount': amount,
@@ -55,6 +64,9 @@ class BillDesktopModel {
       'is3T': is3T,
       'kotNo': kotNo,
       "NP": NP,
+      "customerName": customerName,
+      "MobileNo": mobileNo,
+      "address": address,
       'CatAmountPaid': catAmountPaid,
       'CatGrandTotal': catGrandTotal,
       'CatPayableAmount': catPayableAmount,
