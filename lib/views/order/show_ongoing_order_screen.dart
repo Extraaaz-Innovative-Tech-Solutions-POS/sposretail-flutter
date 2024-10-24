@@ -1435,15 +1435,6 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
 
   Future<void> updatePendingOrders(
       String paymentType, BuildContext context) async {
-    // await catOrdercontroller.updatePendingOrders(
-    //   widget.tableId,
-    //   paymentType,
-    //   "0",
-    //   "1",
-    //   widget.price!,
-    //   context,
-    //   controller.orderedItems,
-    // );
   }
 
   Future<void> completeOrderPost(

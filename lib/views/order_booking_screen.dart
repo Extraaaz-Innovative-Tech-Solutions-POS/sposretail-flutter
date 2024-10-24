@@ -337,12 +337,11 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               child: customText('Submit'),
               onPressed: () {
                 setState(() {
-
                   order.add(Item(
-                      name: firstController.text, 
+                      name: firstController.text,
                       originalName: firstController.text,
                       originalPrice: secondController.text,
-                      price: secondController.text, 
+                      price: secondController.text,
                       quantity: 1,
                       vairentId: "",
                       instruction: "",
@@ -417,11 +416,10 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     children: List.generate(
                       allFilteredItems.length,
                       (index) {
-                        GlobalKey itemKey =
-                            GlobalKey(); 
-                        itemKeys.add(itemKey); 
+                        GlobalKey itemKey = GlobalKey();
+                        itemKeys.add(itemKey);
                         return _menuItemWidget(
-                          key: itemKey, 
+                          key: itemKey,
                           itemName: allFilteredItems[index].name!,
                           itemId: allFilteredItems[index].id!,
                           itemPrice: allFilteredItems[index].price!,
@@ -479,56 +477,31 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
             );
           }
 
-          return Stack(
-            children: [
-              GridView.count(
-                crossAxisCount: gridCount,
-                physics: const ClampingScrollPhysics(),
-                shrinkWrap: true,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 15,
-                childAspectRatio: 1.2,
-                children: List.generate(
-                  allFilteredItems.length,
-                  // items.length,
-                  (index) {
-                    GlobalKey itemKey =
-                        GlobalKey(); // Create a GlobalKey for each item
-                    itemKeys.add(itemKey); // Store the GlobalKey in a list
-                    return _menuItemWidget(
-                      key: itemKey, // Pass the GlobalKey to the item widget
-                      itemName: allFilteredItems[index].name!,
-                      itemId: allFilteredItems[index].id!,
-                      itemPrice: allFilteredItems[index].price!,
-                      image: allFilteredItems[index].itemImage,
-                      menuItem: allFilteredItems[index],
-                      categoryId: allFilteredItems[index].categoryId.toString(),
-                    );
-                  },
-                ),
-              ),
-              // Visibility(
-              //   visible: true,
-              //   child: Positioned.fill(
-              //   child: Center(
-              //     child: GestureDetector(
-              //       onTap: () {
-              //         setState(() {
-              //          // selectedItemImage = null;
-              //         });
-              //       },
-              //       child: Container(
-              //         color: Colors.black.withOpacity(0.7),
-              //         child: Image.network(
-              //           allFilteredItems[index].itemImage,
-              //           fit: BoxFit.contain,
-              //         ),
-              //       ),
-              //     )))
-              //   // Positioned.(child: )
-              //   )
-              
-            ],
+          return GridView.count(
+            crossAxisCount: gridCount,
+            physics: const ClampingScrollPhysics(),
+            shrinkWrap: true,
+            mainAxisSpacing: 2,
+            crossAxisSpacing: 15,
+            childAspectRatio: 1.2,
+            children: List.generate(
+              allFilteredItems.length,
+              // items.length,
+              (index) {
+                GlobalKey itemKey =
+                    GlobalKey(); // Create a GlobalKey for each item
+                itemKeys.add(itemKey); // Store the GlobalKey in a list
+                return _menuItemWidget(
+                  key: itemKey, // Pass the GlobalKey to the item widget
+                  itemName: allFilteredItems[index].name!,
+                  itemId: allFilteredItems[index].id!,
+                  itemPrice: allFilteredItems[index].price!,
+                  image: allFilteredItems[index].itemImage,
+                  menuItem: allFilteredItems[index],
+                  categoryId: allFilteredItems[index].categoryId.toString(),
+                );
+              },
+            ),
           );
         }
       }),
@@ -560,7 +533,31 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               color: Theme.of(context).focusColor,
             ),
             child: GestureDetector(
-              onTap: () async {},
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Dialog(
+                      child: Container(
+                          padding: const EdgeInsets.all(10),
+                          color: Colors.black.withOpacity(0.7),
+                          child: image != null && image.isNotEmpty
+                              ? Container(
+                                  height: MediaQuery.sizeOf(context).height / 2,
+                                  child: Image.network(
+                                    "https://sposversion2.extraaaz.com/$image",
+                                    fit: BoxFit.contain,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(Images.bgTable,
+                                                fit: BoxFit.fill),
+                                  ),
+                                )
+                              : Image.asset(Images.placeholder)),
+                    );
+                  },
+                );
+              },
               child: Row(
                 children: [
                   Container(
@@ -584,7 +581,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   GestureDetector(
                     onTap: () {
                       processMenuItem(
-                    itemId, itemName, double.parse(itemPrice), false);
+                          itemId, itemName, double.parse(itemPrice), false);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -1050,7 +1047,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [                                      
+                                    children: [
                                       Text(order[index].name,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
@@ -1247,18 +1244,30 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                       orderbookingScreen
                                                           .toggleWidth(
                                                               int.parse(v));
-                                                              order[index].sqft = orderbookingScreen.sqft.value;
-                                                              num newPrice = num.parse(order[index].originalPrice) * order[index].sqft;
-                                                              order[index].price = newPrice.toString();
-                                                              order[index].name = "${order[index].originalName} (${orderbookingScreen.sqftLength.value} x ${orderbookingScreen.sqftWidth.value} = ${order[index].sqft})";
-                                                              setState(() {});
+                                                      order[index].sqft =
+                                                          orderbookingScreen
+                                                              .sqft.value;
+                                                      num newPrice = num.parse(
+                                                              order[index]
+                                                                  .originalPrice) *
+                                                          order[index].sqft;
+                                                      order[index].price =
+                                                          newPrice.toString();
+                                                      order[index].name =
+                                                          "${order[index].originalName} (${orderbookingScreen.sqftLength.value} x ${orderbookingScreen.sqftWidth.value} = ${order[index].sqft})";
+                                                      setState(() {});
                                                     }),
                                                     const Text(
                                                       '=',
                                                       style: TextStyle(
                                                           fontSize: 24),
                                                     ),
-                                                   Text(order[index].sqft == null ? "0":order[index].sqft.toString()),
+                                                    Text(order[index].sqft ==
+                                                            null
+                                                        ? "0"
+                                                        : order[index]
+                                                            .sqft
+                                                            .toString()),
                                                   ],
                                                 )
                                               : const Text("data"),
