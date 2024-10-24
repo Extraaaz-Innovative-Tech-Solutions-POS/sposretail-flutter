@@ -1,9 +1,5 @@
-
-import 'package:spos_retail/controllers/moneyManagement/moneyinlist_controller.dart';
-import 'package:spos_retail/views/MoneyManagement/moneyin_form.dart';
-import 'package:spos_retail/views/MoneyManagement/custom_dropdown.dart';
 import 'package:spos_retail/views/widgets/export.dart';
-import 'package:spos_retail/views/MoneyManagement/money_listItem.dart';
+
 
 class MoneyInList extends StatelessWidget {
   const MoneyInList({super.key});
@@ -20,22 +16,22 @@ class MoneyInList extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
-                GetBuilder<MoneyinlistController>(builder: (mc) {
-                  return CustomDropdown(
-                    currentValue: mc.selectedTimePeriod.value,
-                    items: <String>[
-                      'Today',
-                      'Last Week',
-                      'Last Month',
-                      'Last Year',
-                    ],
-                    onChanged: (String? newValue) {
-                      if (newValue != null) {
-                        mc.changeTimePeriod(newValue);
-                      }
-                    },
-                  );
-                }),
+                // GetBuilder<MoneyinlistController>(builder: (mc) {
+                //   return CustomDropdown(
+                //     currentValue: mc.selectedTimePeriod.value,
+                //     items: <String>[
+                //       'Today',
+                //       'Last Week',
+                //       'Last Month',
+                //       'Last Year',
+                //     ],
+                //     onChanged: (String? newValue) {
+                //       if (newValue != null) {
+                //         mc.changeTimePeriod(newValue);
+                //       }
+                //     },
+                //   );
+                // }),
             
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

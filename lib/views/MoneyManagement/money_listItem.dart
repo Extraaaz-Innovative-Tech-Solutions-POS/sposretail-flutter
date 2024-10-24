@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spos_retail/views/MoneyManagement/money_in_out.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class MoneyListItem extends StatelessWidget {

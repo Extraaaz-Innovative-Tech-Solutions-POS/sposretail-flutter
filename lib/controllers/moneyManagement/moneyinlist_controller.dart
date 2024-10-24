@@ -1,7 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:spos_retail/model/MoneymanagementModel/money_deposit_model.dart';
-import 'package:spos_retail/model/MoneymanagementModel/money_inout_model.dart';
-import 'package:spos_retail/views/MoneyManagement/moneyin_list.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class MoneyinlistController extends GetxController {
@@ -14,6 +11,9 @@ class MoneyinlistController extends GetxController {
   var customer = ''.obs;
   var amountReceived = 0.0.obs;
   var isDeposit = true.obs;
+   var selectedPaymentMethod = ''.obs;
+
+   var isMoneyInout = false.obs;
 
   RxDouble totalDeposit = 0.0.obs;
 
@@ -64,6 +64,16 @@ class MoneyinlistController extends GetxController {
     update();
   }
 
+
+void changeIsMoneyInout(){
+  isMoneyInout.value == true;
+  update();
+}
+
+ void selectPayment(String method) {
+    selectedPaymentMethod.value = method;
+    update();
+  }
   void saveForm() {
     // Handle form submission logic here
     print('Receipt No: ${receiptNo.value}');
@@ -71,9 +81,6 @@ class MoneyinlistController extends GetxController {
     print('Customer: ${customer.value}');
     print('Amount Received: ${amountReceived.value}');
   }
-
-
-
 
   ///fetch deposits
   deposits() async {
@@ -103,7 +110,7 @@ class MoneyinlistController extends GetxController {
     try {
 
        MoneyInOutModel moneyInOutModel =
-          MoneyInOutModel(receiptNo: "${receiptNo.value}", amount: amountReceived.value, paymentMethod: "cash", moneyInDate: moneyInDate.value, paymentType: "Deposit");
+          MoneyInOutModel(receiptNo: "${receiptNo.value}", amount: amountReceived.value, paymentMethod: selectedPaymentMethod.value, moneyInDate: moneyInDate.value, paymentType: "Deposit");
 
       final response =
           await DioServices.postRequest(AppConstant.moneyInOut, moneyInOutModel.toJson());

@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:spos_retail/controllers/moneyManagement/moneyinlist_controller.dart';
-import 'package:spos_retail/controllers/moneyManagement/moneyoutlist_controller.dart';
 
-import 'package:spos_retail/views/widgets/app_bar.dart';
+import 'package:spos_retail/views/widgets/export.dart';
 
 class MoneyInOutForm extends StatelessWidget {
-  const MoneyInOutForm({super.key});
+  final String? customerId;
+  final String? customerName;
+  const MoneyInOutForm({super.key, this.customerId, this.customerName});
 
   @override
   Widget build(BuildContext context) {
-    final MoneyinlistController moneyinlistController = Get.put(MoneyinlistController());
-    final MoneyoutlistController moneyoutlistController = Get.put(MoneyoutlistController());
+    final MoneyinlistController moneyinlistController =
+        Get.put(MoneyinlistController());
+    final MoneyoutlistController moneyoutlistController =
+        Get.put(MoneyoutlistController());
 
     return Scaffold(
       appBar: commonAppBar(context, "Money In", ''),
@@ -24,7 +24,8 @@ class MoneyInOutForm extends StatelessWidget {
                 labelText: 'Receipt No',
                 border: OutlineInputBorder(),
               ),
-              onChanged: (value) => moneyinlistController.receiptNo.value = value,
+              onChanged: (value) =>
+                  moneyinlistController.receiptNo.value = value,
             ),
             SizedBox(height: 16.0),
             GestureDetector(
@@ -37,36 +38,69 @@ class MoneyInOutForm extends StatelessWidget {
                 );
                 if (pickedDate != null) {
                   moneyinlistController.moneyInDate.value =
-                      "${pickedDate.toLocal()}".split(' ')[0]; // format date as needed
-                      moneyinlistController.update();
+                      "${pickedDate.toLocal()}"
+                          .split(' ')[0]; // format date as needed
+                  moneyinlistController.update();
 
-                      print('moneyin date :${moneyinlistController.moneyInDate.value}');
+                  print(
+                      'moneyin date :${moneyinlistController.moneyInDate.value}');
                 }
               },
               child: AbsorbPointer(
-                child: GetBuilder<MoneyinlistController>(
-                  builder: (mc) {
-                    return TextField(
-                      decoration: InputDecoration(
-                        // labelText: 'Money In Date',
-                        border: OutlineInputBorder(),
-                        hintText: mc.moneyInDate.value.isEmpty
-                            ? 'Select Date'
-                            : mc.moneyInDate.value,
-                      ),
-                    );
-                  }
+                child: GetBuilder<MoneyinlistController>(builder: (mc) {
+                  return TextField(
+                    decoration: InputDecoration(
+                      // labelText: 'Money In Date',
+                      border: OutlineInputBorder(),
+                      hintText: mc.moneyInDate.value.isEmpty
+                          ? 'Select Date'
+                          : mc.moneyInDate.value,
+                    ),
+                  );
+                }),
+              ),
+            ),
+            // SizedBox(height: 16.0),
+
+
+            // TextField(
+            //   decoration: InputDecoration(
+            //     labelText: 'Customer',
+            //     border: OutlineInputBorder(),
+            //   ),
+            //   onChanged: (value) =>
+            //       moneyinlistController.customer.value = value,
+            // ),
+
+
+               SizedBox(height: 16.0),
+
+               Container(
+                width: double.infinity,
+                padding: EdgeInsets.only(right: 10,top: 10,bottom: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.circular(5)
                 ),
-              ),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Customer',
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (value) => moneyinlistController.customer.value = value,
-            ),
+                 child: TextButton(
+                  onPressed: (){
+                    // moneyinlistController.changeIsMoneyInout();
+                    moneyinlistController.isMoneyInout.value =true;
+                    moneyinlistController.update();
+                    print("custome m id: ${  moneyinlistController.isMoneyInout.value} ");
+
+                    Get.to(Customerdetails());
+                 
+                  },
+                   child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(customerId != null ? "$customerName" : "Customer",style: TextStyle(color: Theme.of(context).highlightColor),)
+   
+
+                     )
+                   ),
+               ),
+
             SizedBox(height: 16.0),
             TextField(
               decoration: InputDecoration(
@@ -74,36 +108,82 @@ class MoneyInOutForm extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number,
-              onChanged: (value) => moneyinlistController.amountReceived.value = double.tryParse(value) ?? 0.0,
+              onChanged: (value) => moneyinlistController.amountReceived.value =
+                  double.tryParse(value) ?? 0.0,
             ),
-
-            
             SizedBox(height: 20.0),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle UPI payment
+                GetBuilder<MoneyinlistController>(
+                  builder: (controller) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        controller.selectPayment('UPI');
+                        // Handle UPI payment
+                      },
+                      child: Text('UPI',
+                          style:
+                              TextStyle(color:controller.selectedPaymentMethod == 'UPI'
+                                ? Theme.of(context).focusColor
+                                : Theme.of(context).highlightColor,)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            controller.selectedPaymentMethod == 'UPI'
+                                ? Theme.of(context).primaryColor
+                                : null,
+                      ),
+                    );
                   },
-                  child: const Text('UPI'),
                 ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle Cash payment
+                const SizedBox(width: 10),
+                GetBuilder<MoneyinlistController>(
+                  builder: (controller) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        controller.selectPayment('Cash');
+                        // Handle Cash payment
+                      },
+                      child: Text('Cash',
+                          style:
+                              TextStyle(color:controller.selectedPaymentMethod == 'Cash'
+                                ? Theme.of(context).focusColor
+                                : Theme.of(context).highlightColor,)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            controller.selectedPaymentMethod == 'Cash'
+                                ? Theme.of(context).primaryColor
+                                : null,
+                      ),
+                    );
                   },
-                  child: const Text('Cash'),
                 ),
-                SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle Cheque payment
+                const SizedBox(width: 10),
+                GetBuilder<MoneyinlistController>(
+                  builder: (controller) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        controller.selectPayment('Cheque');
+                        // Handle Cheque payment
+                      },
+                      child: Text(
+                        'Cheque',
+                        style: TextStyle(color:  controller.selectedPaymentMethod == 'Cheque'
+                                ? Theme.of(context).focusColor
+                                : Theme.of(context).highlightColor,),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            controller.selectedPaymentMethod == 'Cheque'
+                                ? Theme.of(context).primaryColor
+                                : null,
+                      ),
+                    );
                   },
-                  child: const Text('Cheque'),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),
@@ -114,15 +194,12 @@ class MoneyInOutForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(40),
           child: InkWell(
             onTap: () {
-
-              if(moneyinlistController.isDeposit.value){
+              if (moneyinlistController.isDeposit.value) {
                 moneyinlistController.postMoneyIn();
-              }else{
+              } else {
                 moneyoutlistController.postMoneyOut();
               }
 
-              
-              
               // Add any additional actions you want to perform on Save
             },
             child: Container(

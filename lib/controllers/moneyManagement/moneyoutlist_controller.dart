@@ -1,20 +1,10 @@
 import 'package:intl/intl.dart';
-import 'package:spos_retail/controllers/moneyManagement/moneyinlist_controller.dart';
-import 'package:spos_retail/model/MoneymanagementModel/money_deposit_model.dart';
-import 'package:spos_retail/model/MoneymanagementModel/money_inout_model.dart';
-import 'package:spos_retail/views/MoneyManagement/moneyout_list.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class MoneyoutlistController extends GetxController {
   var selectedTimePeriod = 'Today'.obs;
 
   var selectedFilter = 'All'.obs;
-
-  // var receiptNo = ''.obs;
-  // var moneyInDate = ''.obs;
-  // var customer = ''.obs;
-  // var amountReceived = 0.0.obs;
-
   RxDouble totalDeposit = 0.0.obs;
 
   DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
@@ -103,7 +93,7 @@ class MoneyoutlistController extends GetxController {
     try {
 
        MoneyInOutModel moneyInOutModel =
-          MoneyInOutModel(receiptNo: moneyInListController.receiptNo.value, amount:moneyInListController. amountReceived.value, paymentMethod: "cash", moneyInDate: moneyInListController.moneyInDate.value, paymentType: "Withdraw");
+          MoneyInOutModel(receiptNo: "${moneyInListController.receiptNo.value}", amount:moneyInListController. amountReceived.value, paymentMethod: moneyInListController.selectedPaymentMethod.value, moneyInDate: moneyInListController.moneyInDate.value, paymentType: "Withdraw");
 
       final response =
           await DioServices.postRequest(AppConstant.moneyInOut, moneyInOutModel.toJson());

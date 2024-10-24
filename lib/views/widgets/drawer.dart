@@ -1,7 +1,3 @@
-import 'package:spos_retail/controllers/moneyManagement/moneyinlist_controller.dart';
-import 'package:spos_retail/controllers/moneyManagement/moneyoutlist_controller.dart';
-import 'package:spos_retail/views/MoneyManagement/moneyin_list.dart';
-import 'package:spos_retail/views/MoneyManagement/moneyout_list.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 Widget drawer(context) {
@@ -74,6 +70,8 @@ Widget drawer(context) {
                           color: Theme.of(context).focusColor), onpress: () {
                     Get.to(const Customerdetails());
                     customerController.getcustomerlist(false);
+                    moneyinController.isMoneyInout.value =false;
+                    moneyinController.update();
                   }),
                   listTile(context, "Additional Info",
                       leading: Icon(Icons.note_add_sharp,
@@ -107,6 +105,7 @@ Widget drawer(context) {
                             moneyinController.deposits();
                             
                     Get.to(MoneyInList());
+                     customerController.getcustomerlist(false);
                   }),
 
 
@@ -115,6 +114,7 @@ Widget drawer(context) {
                           color: Theme.of(context).focusColor), onpress: () {
                              moneyoutController.withdrawal();
                     Get.to(MoneyOutList());
+                     customerController.getcustomerlist(false);
                   }),
 
                   ExpansionTile(

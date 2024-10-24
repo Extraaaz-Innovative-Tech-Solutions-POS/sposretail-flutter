@@ -14,6 +14,8 @@ class _CustomerdetailsState extends State<Customerdetails> {
   final customerdetailsController =
       Get.put(CustomerlistController());
 
+      final moneyinlistController = Get.put(MoneyinlistController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +86,13 @@ class _CustomerdetailsState extends State<Customerdetails> {
                                     customerlist[index].name.toString());
                               },
                               onTap: () {
-                                Get.to(() => UpdateCustomer(
+                                  print("custome m id: ${  moneyinlistController.isMoneyInout.value} ");
+                                if(moneyinlistController.isMoneyInout.value){
+
+                                  Get.to(MoneyInOutForm(customerId:customerlist[index].id.toString() ,customerName: customerlist[index].name.toString(),));
+                                  
+                                }else{
+                                   Get.to(() => UpdateCustomer(
                                       click: true,
                                       customerId:
                                           customerlist[index].id.toString(),
@@ -95,6 +103,8 @@ class _CustomerdetailsState extends State<Customerdetails> {
                                       phone:
                                           customerlist[index].phone.toString(),
                                     ));
+                                }
+                               
                               },
                               title: Column(
                                 children: [

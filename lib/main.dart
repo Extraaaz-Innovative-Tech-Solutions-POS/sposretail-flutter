@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate, 
             GlobalWidgetsLocalizations.delegate,   
-            GlobalCupertinoLocalizations.delegate, // Optional: For iOS
+            GlobalCupertinoLocalizations.delegate, 
           ],
+          
           );
         });
       }
