@@ -801,6 +801,58 @@ class _ReportsState extends State<Reports> {
                     ),
                   ));
         });
+       case 'Money In':
+        return GetBuilder<ReportsController>(builder: (c) {
+          return c.moneyReportList.isEmpty
+              ? Center(
+                  child: customText("No Reports Found",
+                      color: Theme.of(context).highlightColor),
+                )
+              : DataTable(
+                  // columnSpacing: 16,
+                  columns: [
+                      dataColumn("Receipt"),
+                      dataColumn("Method"),
+                      dataColumn("Type")
+                    ],
+                  rows: List<DataRow>.generate(
+                    c.moneyReportList.length,
+                    (index) => DataRow(
+                      cells: [
+                        dataCell(c.moneyReportList[index].receiptNo),
+                        dataCell(c.moneyReportList[index].paymentMethod),
+                        dataCell(c.moneyReportList[index].paymentType)
+                      ],
+                    ),
+                  ));
+        });
+        case 'Money Out':
+        return GetBuilder<ReportsController>(builder: (c) {
+          return c.moneyReportList.isEmpty
+              ? Center(
+                  child: customText("No Reports Found",
+                      color: Theme.of(context).highlightColor),
+                )
+              : DataTable(
+                  // columnSpacing: 16,
+                  columns: [
+                      dataColumn("Receipt"),
+                      dataColumn("Method"),
+                      dataColumn("Type")
+                    ],
+                  rows: List<DataRow>.generate(
+                    c.moneyReportList.length,
+                    (index) => DataRow(
+                      cells: [
+                        dataCell(c.moneyReportList[index].receiptNo),
+                        dataCell(c.moneyReportList[index].paymentMethod),
+                        dataCell(c.moneyReportList[index].paymentType)
+                      ],
+                    ),
+                  ));
+        });
+
+ 
 
       default:
         return Container(); // Return an empty container if no match found

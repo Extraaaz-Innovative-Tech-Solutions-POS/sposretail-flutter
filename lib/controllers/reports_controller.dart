@@ -488,7 +488,7 @@ fetchMoneyInReport() async {
     try{
       final response = await DioServices.get(AppConstant.moneyInReport, queryParameters: {"fromDate": formattedStartDate, "toDate": formattedEndDate});
       print(response.data);
-      moneyReportList.assignAll((response.data['data']['withdrawals'])
+      moneyReportList.assignAll((response.data['data']['deposits'])
             .map<MoneyReportsModel>((json) => MoneyReportsModel.fromJson(json)));
         update();
         print("LENGTH ------------ ${quantityWiseItemList.length}");
@@ -501,8 +501,8 @@ fetchMoneyInReport() async {
 fetchMoneyOutReport() async {
     try{
       final response = await DioServices.get(AppConstant.moneyOutReport, queryParameters: {"fromDate": formattedStartDate, "toDate": formattedEndDate});
-      print(response.data);
-      moneyReportList.assignAll((response.data['data']['withdrawals'])
+      print(response.data['data']['withdrawals']);
+      moneyReportList.assignAll((response.data["data"]['withdrawals'])
             .map<MoneyReportsModel>((json) => MoneyReportsModel.fromJson(json)));
         update();
         print("LENGTH ------------ ${moneyReportList.length}");

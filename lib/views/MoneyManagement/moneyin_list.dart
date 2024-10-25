@@ -13,7 +13,7 @@ class MoneyInList extends StatelessWidget {
         appBar: commonAppBar(context, "MoneyIn List", ''),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
                 // GetBuilder<MoneyinlistController>(builder: (mc) {
@@ -78,20 +78,20 @@ class MoneyInList extends StatelessWidget {
                   Expanded(
             flex: 4, // 40% of the total width
             child: Container(
-              margin: EdgeInsets.only(right: 8,left: 8),
+              margin: const EdgeInsets.only(right: 8,left: 8),
               decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(10)
               ),
-              padding: EdgeInsets.all(8), // Optional padding
+              padding: const EdgeInsets.all(8), // Optional padding
               child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start, // Align text to the start
                 children: [
-                  Text("Amount"),
-                  SizedBox(height: 2,),
+                  const Text("Amount"),
+                  const SizedBox(height: 2,),
                   GetBuilder<MoneyinlistController>(
                     builder: (mc) {
-                      return Text("₹ ${mc.totalDeposit.value}",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w100));
+                      return Text("₹ ${mc.totalDeposit.value}",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w100));
                     }
                   ),
                 ],
@@ -101,8 +101,8 @@ class MoneyInList extends StatelessWidget {
                   Expanded(
             flex: 4, // 40% of the total width
             child: Container(
-              margin: EdgeInsets.only(right: 8),
-              padding: EdgeInsets.all(8), // Optional padding
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.all(8), // Optional padding
                decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Theme.of(context).primaryColor),
                  borderRadius: BorderRadius.circular(10)
@@ -110,46 +110,30 @@ class MoneyInList extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Count"),
-                  SizedBox(height: 2,),
+                  const Text("Count"),
+                  const SizedBox(height: 2,),
                   GetBuilder<MoneyinlistController>(
                     builder: (mc) {
-                      return Text("${mc.moneyDepositModelList.length}", style: TextStyle(fontSize: 18,fontWeight: FontWeight.w100));
+                      return Text("${mc.moneyDepositModelList.length}", style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w100));
                     }
                   ),
                 ],
               ),
             ),
                   ),
-                  Expanded(
-            flex: 2, // 20% of the total width
-            child: Container(
-                margin: EdgeInsets.only(right: 8),
-               decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Theme.of(context).primaryColor),
-                 borderRadius: BorderRadius.circular(10)
-              ),
-              padding: EdgeInsets.all(8), // Optional padding
-              child: IconButton(
-                onPressed: () {
-                  // Your delete action here
-                },
-                icon: Icon(Icons.delete, size: 30,),
-              ),
-            ),
-                  ),
+                 
                 ],
               ),
             ),
             
             
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             
             
                 GetBuilder<MoneyinlistController>(builder: (mc) {
                   return CustomDropdown(
                     currentValue: mc.selectedFilter.value,
-                    items: <String>[
+                    items: const <String>[
                       'All',
                       'Cash',
                     ],
@@ -199,7 +183,7 @@ class MoneyInList extends StatelessWidget {
             borderRadius: BorderRadius.circular(40),
             child: InkWell(
                 onTap: () {
-                  Get.to(MoneyInOutForm());
+                  Get.to(const MoneyInOutForm());
                 },
                 child: Container(
                     width: 150, // Set the width
