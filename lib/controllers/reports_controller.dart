@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:intl/intl.dart';
+import 'package:spos_retail/model/MoneyController/money_reports_model.dart';
 import 'package:spos_retail/model/reports/credit_report.dart';
 import 'package:spos_retail/model/reports/cutoffmodel.dart';
 import 'package:spos_retail/model/reports/dayblock_model.dart';
@@ -47,6 +48,7 @@ class ReportsController extends GetxController {
   RxList<CreditReport> creditReportList = <CreditReport>[].obs;
   RxList<QuantityWiseItemSales> quantityWiseItemList = <QuantityWiseItemSales>[].obs;
   RxList<PurchaseModel> purchaseList = <PurchaseModel>[].obs;
+  RxList<MoneyReportsModel> moneyReportList = <MoneyReportsModel>[].obs;
 
 
 
@@ -117,8 +119,6 @@ class ReportsController extends GetxController {
               .toList();
           await createExcelFile(billingData, "bill_wise");
         }
-
-        print(" BILLING DONE ${billing[0].paymentType}");
       }
     } catch (e) {}
   }
@@ -152,6 +152,8 @@ class ReportsController extends GetxController {
       print('Error: $e');
     }
   }
+
+  
 
   fetchCashierWiseReport( bool downloadcheck) async {
     try {
@@ -482,13 +484,40 @@ class ReportsController extends GetxController {
   }
 
 
+fetchMoneyInReport() async {
+    try{
+      final response = await DioServices.get(AppConstant.moneyInReport, queryParameters: {"fromDate": formattedStartDate, "toDate": formattedEndDate});
+      print(response.data);
+      moneyReportList.assignAll((response.data['data']['withdrawals'])
+            .map<MoneyReportsModel>((json) => MoneyReportsModel.fromJson(json)));
+        update();
+        print("LENGTH ------------ ${quantityWiseItemList.length}");
+    } catch(e) {
+
+    }
+
+}
+
+fetchMoneyOutReport() async {
+    try{
+      final response = await DioServices.get(AppConstant.moneyOutReport, queryParameters: {"fromDate": formattedStartDate, "toDate": formattedEndDate});
+      print(response.data);
+      moneyReportList.assignAll((response.data['data']['withdrawals'])
+            .map<MoneyReportsModel>((json) => MoneyReportsModel.fromJson(json)));
+        update();
+        print("LENGTH ------------ ${moneyReportList.length}");
+    } catch(e) {
+
+    }
+
+}
 
 
 
 
 
 
-
+//////////////////////
     fetchItemsQualityWise() async {
     try{
       final response = await DioServices.get(AppConstant.itemSalesQuantityWise, queryParameters: {"fromDate": formattedStartDate, "toDate": formattedEndDate});

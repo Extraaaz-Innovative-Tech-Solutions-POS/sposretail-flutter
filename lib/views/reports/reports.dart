@@ -30,44 +30,12 @@ class _ReportsState extends State<Reports> {
     'cut Offday',
     'day Block',
     'sales Profit Loss',
-      'Item Quantitywise',
+    'Item Quantitywise',
     'Purchase',
-    'Credit Payment'
+    'Credit Payment',
+    'Money In',
+    'Money Out'
   ];
-
-  // startDatePicker() async {
-  //   DateTime? selectedDate = await showDatePicker(
-  //     // barrierColor: Theme.of(context).highlightColor,
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now().add(const Duration(days: -(365 * 5))),
-  //     lastDate: DateTime.now(),
-  //   );
-
-  //   setState(() {
-  //     startDate = selectedDate as DateTime;
-  //     formattedStartDate = DateFormat('yyyy-MM-dd').format(startDate);
-
-  //   });
-
-  //   return formattedStartDate;
-  // }
-
-  // endDatePicker() async {
-  //   DateTime? selectedDate = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime.now().add(const Duration(days: -(365 * 5))),
-  //     lastDate: DateTime.now(),
-  //   );
-
-  //   setState(() {
-  //     endDate = selectedDate!;
-  //     formattedEndDate = DateFormat('yyyy-MM-dd').format(endDate);
-  //   });
-
-  //   return endDate;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,40 +81,33 @@ class _ReportsState extends State<Reports> {
                     children: [
                       customText("From".padRight(6),
                           color: Theme.of(context).highlightColor),
-                      GetBuilder<ReportsController>(
-                        builder: (rc) {
-                          return datePick(context, false,
-                              title: rc.formattedStartDate.isNotEmpty
-                                  ? rc.formattedStartDate
-                                  : null,
-                              color: Theme.of(context).highlightColor, onpress: () {
-                            rc.startDatePicker(context);
-                          });
-                        }
-                      ),
-
-
+                      GetBuilder<ReportsController>(builder: (rc) {
+                        return datePick(context, false,
+                            title: rc.formattedStartDate.isNotEmpty
+                                ? rc.formattedStartDate
+                                : null,
+                            color: Theme.of(context).highlightColor,
+                            onpress: () {
+                          rc.startDatePicker(context);
+                        });
+                      }),
                       const SizedBox(width: 5),
                       customText("To".padRight(4),
                           color: Theme.of(context).highlightColor),
-
-                      GetBuilder<ReportsController>(
-                        builder: (rc) {
-                          return datePick(context, false,
-                              title: rc.formattedEndDate.isNotEmpty
-                                  ? rc.formattedEndDate
-                                  : null,
-                              color: Theme.of(context).highlightColor, onpress: () {
-                            rc.endDatePicker(context);
-                          });
-                        }
-                      ),
+                      GetBuilder<ReportsController>(builder: (rc) {
+                        return datePick(context, false,
+                            title: rc.formattedEndDate.isNotEmpty
+                                ? rc.formattedEndDate
+                                : null,
+                            color: Theme.of(context).highlightColor,
+                            onpress: () {
+                          rc.endDatePicker(context);
+                        });
+                      }),
                       const SizedBox(width: 5),
                     ],
                   ),
                 ),
-
-                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -177,7 +138,6 @@ class _ReportsState extends State<Reports> {
                           ),
                           onPressed: () {
                             getDownloadSubmit();
-                            //reportsController.dayReport(formattedStartDate, formattedEndDate);
                           },
                           child: customText("Download",
                               color: Theme.of(context).highlightColor)),
@@ -194,14 +154,12 @@ class _ReportsState extends State<Reports> {
                           onPressed: () async {
                             final pdfGenerator =
                                 PdfGenerator(reportsController);
-                            // Call the generatePdf method with the selected dropdown value, start date, and end date
                             await pdfGenerator.generateReportPdf(
                               dropdownvalue,
                               reportsController.formattedStartDate,
-                             reportsController.formattedEndDate,
+                              reportsController.formattedEndDate,
                             );
 
-                            // Optionally, you can display a message to the user or perform additional actions after the PDF has been generated
                             debugPrint("PDF report has been generated.");
                           },
                           child: customText("Print",
@@ -276,49 +234,49 @@ class _ReportsState extends State<Reports> {
   getDropDownSubmit() {
     switch (dropdownvalue) {
       case 'Select':
-        return reportsController.cashierReport( false);
+        return reportsController.cashierReport(false);
       case 'Cashierwise':
-        return reportsController.fetchCashierWiseReport( false);
+        return reportsController.fetchCashierWiseReport(false);
       case 'Billwise':
         return reportsController.dayReport(false);
       case 'Item Sales':
         return reportsController.fetchItemsSalesReport(false);
       case 'Sold Items':
-        return reportsController.fetchSoldItemsReport( false);
+        return reportsController.fetchSoldItemsReport(false);
       case 'Cancelled Item':
         return reportsController.cancelledReport(false);
 
-     case 'Sale Reports':
-        return reportsController.saleReport( false);
+      case 'Sale Reports':
+        return reportsController.saleReport(false);
 
-    case 'Best Selling Items':
-        return reportsController.saleReport( false);
+      case 'Best Selling Items':
+        return reportsController.saleReport(false);
 
-    case 'Worst Selling Items':
-        return reportsController.saleReport( false);
+      case 'Worst Selling Items':
+        return reportsController.saleReport(false);
 
-    case 'stock report':
-        return reportsController.StockReport( false);
+      case 'stock report':
+        return reportsController.StockReport(false);
 
+      case 'cut Offday':
+        return reportsController.CutOffdayReport(false);
 
-    case 'cut Offday':
-        return reportsController.CutOffdayReport( false);
+      case 'day Block':
+        return reportsController.DayBlockReport(false);
 
-
-    case 'day Block':
-        return reportsController.DayBlockReport( false);
-
-    case 'sales Profit Loss':
-        return reportsController.salesProfitLossReport( false);
-
+      case 'sales Profit Loss':
+        return reportsController.salesProfitLossReport(false);
 
       case 'Item Quantitywise':
         return reportsController.fetchItemsQualityWise();
       case 'Purchase':
-        return reportsController.fetchPurchaseReport(); 
+        return reportsController.fetchPurchaseReport();
       case 'Credit Payment':
         return reportsController.fetchCreditPaymentReport();
-        
+      case 'Money In':
+        return reportsController.fetchMoneyInReport();
+      case 'Money Out':
+        return reportsController.fetchMoneyOutReport();
 
       default:
         return () {};
@@ -329,49 +287,46 @@ class _ReportsState extends State<Reports> {
   getDownloadSubmit() {
     switch (dropdownvalue) {
       case 'Select':
-        return reportsController.cashierReport( true);
+        return reportsController.cashierReport(true);
       case 'Cashierwise':
-        return reportsController.fetchCashierWiseReport( true);
+        return reportsController.fetchCashierWiseReport(true);
       case 'Billwise':
-        return reportsController.dayReport( true);
+        return reportsController.dayReport(true);
       case 'Item Sales':
         return reportsController.fetchItemsSalesReport(true);
       case 'Sold Items':
-        return reportsController.fetchSoldItemsReport( true);
+        return reportsController.fetchSoldItemsReport(true);
       case 'Cancelled Item':
         return reportsController.cancelledReport(true);
 
       case 'Sale Reports':
-        return reportsController.saleReport( true);
+        return reportsController.saleReport(true);
 
       case 'Best Selling Items':
-        return reportsController.saleReport( true);
+        return reportsController.saleReport(true);
 
       case 'Worst Selling Items':
-        return reportsController.saleReport( true);
+        return reportsController.saleReport(true);
 
       case 'stock report':
-        return reportsController.StockReport( true);
+        return reportsController.StockReport(true);
 
       case 'cut Offday':
-        return reportsController.CutOffdayReport( true);
-
+        return reportsController.CutOffdayReport(true);
 
       case 'day Block':
-        return reportsController.DayBlockReport( true);
+        return reportsController.DayBlockReport(true);
 
       case 'sales Profit Loss':
-        return reportsController.salesProfitLossReport( false);
-
-
+        return reportsController.salesProfitLossReport(false);
 
       case 'Item Quantitywise':
         return reportsController.fetchItemsQualityWise();
       case 'Purchase':
-        return reportsController.fetchPurchaseReport(); 
+        return reportsController.fetchPurchaseReport();
       case 'Credit Payment':
         return reportsController.fetchCreditPaymentReport();
-        
+
       default:
         return () {};
     }
@@ -577,13 +532,9 @@ class _ReportsState extends State<Reports> {
                   ));
         });
 
-
-
-
-
 //////// sale Report
 
-          case 'Sale Reports':
+      case 'Sale Reports':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.salesDataList.isEmpty
               ? Center(
@@ -609,11 +560,7 @@ class _ReportsState extends State<Reports> {
                   ));
         });
 
-
-
-
-
-           case 'Best Selling Items':
+      case 'Best Selling Items':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.bestSellingItemList.isEmpty
               ? Center(
@@ -639,9 +586,7 @@ class _ReportsState extends State<Reports> {
                   ));
         });
 
-
-
-                   case 'Worst Selling Items':
+      case 'Worst Selling Items':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.worstSellingItemList.isEmpty
               ? Center(
@@ -661,14 +606,13 @@ class _ReportsState extends State<Reports> {
                       cells: [
                         dataCell(c.worstSellingItemList[index].itemName),
                         dataCell(c.worstSellingItemList[index].quantitySold),
-                        dataCell(c.worstSellingItemList[index].totalRevenue ),
+                        dataCell(c.worstSellingItemList[index].totalRevenue),
                       ],
                     ),
                   ));
         });
 
-
-                           case 'stock report':
+      case 'stock report':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.stockReportModelList.isEmpty
               ? Center(
@@ -684,20 +628,17 @@ class _ReportsState extends State<Reports> {
                     ],
                   rows: List<DataRow>.generate(
                     c.stockReportModelList.length,
-                   
                     (index) => DataRow(
                       cells: [
                         dataCell(c.stockReportModelList[index].productName),
                         dataCell(c.stockReportModelList[index].quantity),
-                        dataCell(c.stockReportModelList[index].thresholdValue ),
+                        dataCell(c.stockReportModelList[index].thresholdValue),
                       ],
                     ),
                   ));
         });
 
-
-
-                              case 'cut Offday':
+      case 'cut Offday':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.cuttOffDayModelList.isEmpty
               ? Center(
@@ -714,22 +655,18 @@ class _ReportsState extends State<Reports> {
                     ],
                   rows: List<DataRow>.generate(
                     c.cuttOffDayModelList.length,
-                   
                     (index) => DataRow(
                       cells: [
                         dataCell(c.cuttOffDayModelList[index].totalSales),
                         dataCell(c.cuttOffDayModelList[index].totalDiscounts),
-                        dataCell(c.cuttOffDayModelList[index].totalOrders ),
-                        dataCell(c.cuttOffDayModelList[index].totalItemsSold ),
+                        dataCell(c.cuttOffDayModelList[index].totalOrders),
+                        dataCell(c.cuttOffDayModelList[index].totalItemsSold),
                       ],
                     ),
                   ));
         });
 
-
-
-
-                                      case 'day Block':
+      case 'day Block':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.dayblockModelList.isEmpty
               ? Center(
@@ -746,22 +683,18 @@ class _ReportsState extends State<Reports> {
                     ],
                   rows: List<DataRow>.generate(
                     c.dayblockModelList.length,
-                   
                     (index) => DataRow(
                       cells: [
                         dataCell(c.dayblockModelList[index].totalSales),
                         dataCell(c.dayblockModelList[index].totalDiscounts),
-                        dataCell(c.dayblockModelList[index].totalOrders ),
-                        dataCell(c.dayblockModelList[index].totalItemsSold ),
+                        dataCell(c.dayblockModelList[index].totalOrders),
+                        dataCell(c.dayblockModelList[index].totalItemsSold),
                       ],
                     ),
                   ));
         });
 
-
-
-
-                                              case 'sales Profit Loss':
+      case 'sales Profit Loss':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.salesProfitLossModelList.isEmpty
               ? Center(
@@ -778,21 +711,18 @@ class _ReportsState extends State<Reports> {
                     ],
                   rows: List<DataRow>.generate(
                     c.salesProfitLossModelList.length,
-                   
                     (index) => DataRow(
                       cells: [
                         dataCell(c.salesProfitLossModelList[index].revenue),
                         dataCell(c.salesProfitLossModelList[index].discounts),
-                        dataCell(c.salesProfitLossModelList[index].cogs ),
-                        dataCell(c.salesProfitLossModelList[index].netProfit ),
+                        dataCell(c.salesProfitLossModelList[index].cogs),
+                        dataCell(c.salesProfitLossModelList[index].netProfit),
                       ],
                     ),
                   ));
         });
 
-
-
-                //more reports to add rrrrrrrrrrrrrrrrrrrr
+      //more reports to add rrrrrrrrrrrrrrrrrrrr
       case 'Item Quantitywise':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.quantityWiseItemList.isEmpty
@@ -818,7 +748,7 @@ class _ReportsState extends State<Reports> {
                     ),
                   ));
         });
-        
+
       case 'Purchase':
         return GetBuilder<ReportsController>(builder: (c) {
           return c.purchaseList.isEmpty
@@ -829,7 +759,7 @@ class _ReportsState extends State<Reports> {
               : DataTable(
                   // columnSpacing: 16,
                   columns: [
-                    dataColumn("Supplier"),
+                      dataColumn("Supplier"),
                       dataColumn("Product"),
                       dataColumn("Qty."),
                       dataColumn("Amount")
@@ -871,8 +801,6 @@ class _ReportsState extends State<Reports> {
                     ),
                   ));
         });
-
-        
 
       default:
         return Container(); // Return an empty container if no match found
