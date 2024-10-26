@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final moneyReportsModel = moneyReportsModelFromJson(jsonString);
+
 import 'dart:convert';
 
 MoneyReportsModel moneyReportsModelFromJson(String str) => MoneyReportsModel.fromJson(json.decode(str));
@@ -7,14 +11,14 @@ String moneyReportsModelToJson(MoneyReportsModel data) => json.encode(data.toJso
 class MoneyReportsModel {
     int id;
     int userId;
-    int receiptNo;
-    DateTime moneyInDate;
-    int amount;
+    String receiptNo;
+    String moneyInDate;
+    String amount;
     String paymentMethod;
     String paymentType;
-    DateTime createdAt;
+    String createdAt;
     int restaurantId;
-    DateTime updatedAt;
+    String updatedAt;
 
     MoneyReportsModel({
         required this.id,
@@ -33,25 +37,25 @@ class MoneyReportsModel {
         id: json["id"],
         userId: json["user_id"],
         receiptNo: json["receipt_no"],
-        moneyInDate: DateTime.parse(json["money_in_date"]),
+        moneyInDate: json["money_in_date"],
         amount: json["amount"],
         paymentMethod: json["payment_method"],
         paymentType: json["payment_type"],
-        createdAt: DateTime.parse(json["created_at"]),
+        createdAt: json["created_at"],
         restaurantId: json["restaurant_id"],
-        updatedAt: DateTime.parse(json["updated_at"]),
+        updatedAt: json["updated_at"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "receipt_no": receiptNo,
-        "money_in_date": moneyInDate.toIso8601String(),
+        "money_in_date": moneyInDate,
         "amount": amount,
         "payment_method": paymentMethod,
         "payment_type": paymentType,
-        "created_at": createdAt.toIso8601String(),
+        "created_at": createdAt,
         "restaurant_id": restaurantId,
-        "updated_at": updatedAt.toIso8601String(),
+        "updated_at": updatedAt,
     };
 }
