@@ -549,8 +549,6 @@ fetchPurchaseReport() async {
     } catch(e) {
 
     }
-
-
 }
 
 fetchCreditPaymentReport() async {

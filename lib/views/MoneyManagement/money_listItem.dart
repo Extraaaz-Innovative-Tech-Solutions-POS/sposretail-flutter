@@ -7,19 +7,32 @@ class MoneyListItem extends StatelessWidget {
   final String paymentMethod;
   final String date;
 
+    final String receiptNo;
+  final String customerId;
+  final String paymentType;
+  final int moneyinoutId;
+
   const MoneyListItem({
     Key? key,
     required this.customerName,
     required this.money,
     required this.paymentMethod,
     required this.date,
+
+        required this.receiptNo,
+    required this.customerId,
+    required this.paymentType,
+    required this.moneyinoutId
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+       final moneyinlistController= Get.put(MoneyinlistController());
     return InkWell(
       onTap: (){
         // Get.to(MoneyInOut());
+                moneyinlistController.setFormData(receiptNo, date, customerId, double.parse(money), paymentMethod, paymentType,moneyinoutId);
+        Get.to(MoneyInOut());
       },
       child: Container(
         decoration: BoxDecoration(

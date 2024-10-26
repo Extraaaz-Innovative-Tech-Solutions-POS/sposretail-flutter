@@ -11,7 +11,9 @@ class MoneyinlistController extends GetxController {
   var customer = ''.obs;
   var amountReceived = 0.0.obs;
   var isDeposit = true.obs;
-   var selectedPaymentMethod = ''.obs;
+  var selectedPaymentMethod = ''.obs;
+  var paymentType=''.obs;
+  var moneyInOutId=0.obs; 
 
    var isMoneyInout = false.obs;
 
@@ -82,6 +84,28 @@ void changeIsMoneyInout(){
     print('Amount Received: ${amountReceived.value}');
   }
 
+
+
+
+
+    
+  //se EditForm Data
+
+
+  void setFormData(String receiptno, String moneyinoutDate,String customerId,double moneyInOutAmount, String paymentMethod, String paymenttype, int moneyinoutid){
+
+    receiptNo.value = receiptno;
+    amountReceived.value = moneyInOutAmount;
+    moneyInDate.value = moneyinoutDate;
+    customer.value = customerId;
+    selectedPaymentMethod.value =  paymentMethod;
+    paymentType.value = paymenttype;
+    moneyInOutId.value = moneyinoutid;
+
+    print("data of minout : id${customer.value}  receipt${receiptNo.value} money${amountReceived.value}, mdate${moneyInDate.value}, mmethd${selectedPaymentMethod.value}");
+    update();
+  }
+
   ///fetch deposits
   deposits() async {
     try {
@@ -131,6 +155,58 @@ void changeIsMoneyInout(){
     } catch (e) {
       snackBar("Error", e.toString());
       print("Error occured");
+    }
+  }
+
+
+
+
+
+    //
+    Future<void> updateMoneyInOut(
+  final String money,
+  final String paymentMethod,
+  final String date,
+  final String receiptNo,
+  final int minOutId,
+  final String paymentType
+  ) async {
+    try {
+      // isLoading.value = true;
+      print("Started.........#########");
+      final response = await DioServices.put("${AppConstant.updateTransaction}/${minOutId}", {
+        "receipt_no": receiptNo,
+        "amount": money,
+        "payment_method": paymentMethod,
+        "money_in_date": date,
+        "payment_type": paymentType,
+      });
+       print("Started.........#########end");
+      if (response.statusCode == 200) {
+        update();
+        // customerlistcontroller.getcustomerlist();
+         Get.back();
+        snackBar("Success", "Updated Sucessfully");
+      }
+    } catch (e) {
+         print("Started...error $e");
+    } finally {
+      // isLoading.value = false;
+    }
+  }
+
+
+
+   Future<void> deleteMoneyInOut(int id,) async {
+    try {
+      final response = await DioServices.delete("${AppConstant.deleteTransaction}/$id");
+      if (response.statusCode == 200) {
+        // customerListcontroller.getcustomerlist();
+        update();
+        snackBar("Success", "Deleted Successfully");
+      }
+    } catch (e) {
+      print('Unsuccessful $e');
     }
   }
 }

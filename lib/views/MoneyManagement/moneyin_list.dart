@@ -156,7 +156,16 @@ class MoneyInList extends StatelessWidget {
                     itemCount: mc.moneyDepositModelList.length,
                     itemBuilder: (BuildContext context, int index) {
                       print("Length of inout :${mc.moneyDepositModelList.length}");
-                      return MoneyListItem(customerName: mc.moneyDepositModelList[index].userId.toString(), money: mc.moneyDepositModelList[index].amount, paymentMethod: mc.moneyDepositModelList[index].paymentMethod, date: mc.moneyDepositModelList[index].moneyInDate.toString());
+                      return MoneyListItem(
+                        customerName: mc.moneyDepositModelList[index].userId.toString(), 
+                        money: mc.moneyDepositModelList[index].amount,
+                         paymentMethod: mc.moneyDepositModelList[index].paymentMethod, 
+                         date: mc.moneyDepositModelList[index].moneyInDate.toString(),
+                          customerId: mc.moneyDepositModelList[index].userId.toString(),
+                           receiptNo: mc.moneyDepositModelList[index].receiptNo,
+                           paymentType: mc.moneyDepositModelList[index].paymentType,
+                           moneyinoutId:  mc.moneyDepositModelList[index].id,
+                         );
                     });
                   }
                 ),
