@@ -4,19 +4,21 @@ import '../../views/widgets/export.dart';
 
 class UpdateCustomerController extends GetxController {
   static RxBool isLoading = false.obs;
+  RxString updateCustomerAdd = "".obs;
+
   final CustomerlistController customerlistcontroller =
       Get.put(CustomerlistController());
   Future<void> updatecustomer(
     String customerId,
     String customerName,
     String customerphone,
-    String customeraddress,
+    //String customeraddress,
   ) async {
     try {
       isLoading.value = true;
       final response = await DioServices.put("customer/$customerId", {
         "name": customerName,
-        "address": customeraddress,
+        "address": updateCustomerAdd.value,
         "phone": customerphone,
       });
       if (response.statusCode == 200) {

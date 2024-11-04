@@ -1,6 +1,3 @@
-import 'package:spos_retail/controllers/creditcard_controller/creditcard_controller.dart';
-import 'package:spos_retail/controllers/customer_details_controller/updatecustomer_controller.dart';
-import 'package:spos_retail/views/widgets/custom_textfield.dart';
 import 'package:spos_retail/views/widgets/export.dart';
 
 class UpdateCustomer extends StatefulWidget {
@@ -35,15 +32,13 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
 
   final TextEditingController _amountController = TextEditingController();
 
-  String _newCustomerAddress = '';
-
   final GlobalKey<FormState> _nameKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _addressKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
-    widget.click ? fetchCredit(): null;
+    widget.click ? fetchCredit() : null;
 
     nameController =
         TextEditingController(text: widget.click ? widget.name : "");
@@ -53,16 +48,8 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
         TextEditingController(text: widget.click ? widget.address : "");
   }
 
-
-
   fetchCredit() {
-    // print("status check ${statusclick}");
-
-    // print("customer id: ${widget.customerId} ");
-    creditCardController.creditCardPost(
-      int.parse(widget.customerId),
-      0
-    );
+    creditCardController.creditCardPost(int.parse(widget.customerId), 0);
   }
 
   @override
@@ -85,15 +72,16 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
             phoneController,
             key: _phoneKey,
           ),
-          // itemForms(
-          //     context, "Address", widget.click ? widget.address :"Enter Address", false, addressController,
-          //     key: _addressKey,),
-
           textFieldWithHeading(
-              "Address", context, "Enter Address", TextInputType.name,
+              controller: addressController,
+              "Address",
+              context,
+              "Enter Address",
+              TextInputType.name,
               key: _addressKey, onchanged: (v) {
-            newcustomer.newCustomerAddress.value = v;
-            //  _newCustomerAddress = newcustomer.newCustomerAddress as String;
+            widget.click
+                ? updateCustomercontroller.updateCustomerAdd.value = v
+                : newcustomer.newCustomerAddress.value = v;
             print("Address : ${newcustomer.newCustomerAddress}");
           }),
           const SizedBox(height: 60),
@@ -132,18 +120,13 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                           final bool phone = RegExp(r'^[0-9]{10}$')
                               .hasMatch(phoneController.text);
                           if (phone == true) {
-                            //              addCustomer addNewCustomer =
-                            // addCustomer(name: nameController.text, address: addressController.text, phone: phoneController.text);
                             widget.click
                                 ? updateCustomercontroller.updatecustomer(
                                     widget.customerId,
                                     nameController.text,
-                                    phoneController.text,
-                                    addressController.text)
+                                    phoneController.text)
                                 : newcustomer.postcustomer(
-                                    nameController.text,
-                                    // addressController.text,
-                                    phoneController.text);
+                                    nameController.text, phoneController.text);
                           } else {
                             snackBarBottom(
                                 "Error", "Phone Number is not Valid", context);
@@ -158,7 +141,6 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
               ],
             ),
           ),
-
           SizedBox(
             height: 20,
           ),
@@ -169,28 +151,6 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
               color: Theme.of(context).primaryColor,
             ),
           ),
-
-          // Padding(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: Container(
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(5)
-
-          //     ),
-          //     padding: EdgeInsets.all(10),
-          //     child: Row(
-          //       children: [
-          //         Text("Outstanding Amount "),
-          //         GetBuilder<CreditCardController>(
-          //           builder: (context) {
-          //             return Text("${creditCardController.outStanding}");
-          //           }
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // )
-
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
@@ -308,36 +268,26 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
 
                                   if (creditCardController.isfullCredit.value) {
                                     // Handle full payment logic here
-                                        creditCardController.creditCardPost(
-                                      int.parse(widget.customerId),outstanding
-                                      );
+                                    creditCardController.creditCardPost(
+                                        int.parse(widget.customerId),
+                                        outstanding);
                                     print("Paying full amount: $outstanding");
-                                  
                                   } else {
                                     double amount =
                                         double.tryParse(enteredAmount) ?? 0.0;
                                     if (amount > 0 && amount <= outstanding) {
-                                      // Handle partial payment logic here
-                                        creditCardController.creditCardPost(
-                                      int.parse(widget.customerId),amount
-                                      );
+                                      creditCardController.creditCardPost(
+                                          int.parse(widget.customerId), amount);
 
                                       _amountController.text = '';
 
-                                      
                                       print("Paying amount: $amount");
                                     } else {
-                                      
-                                      // Handle invalid input
-                                      print("Invalid amount entered.");
 
-                                      snackBar("Error", "Oops! Your amount exceeds the outstanding balance. Please enter a valid amount!");
-
-                                      
+                                      snackBar("Error",
+                                          "Oops! Your amount exceeds the outstanding balance. Please enter a valid amount!");
                                     }
                                   }
-
-
 
                                   Navigator.of(context)
                                       .pop(); // Close the dialog after payment
@@ -438,7 +388,6 @@ class _UpdatecustomerState extends State<UpdateCustomer> {
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 10.0, vertical: 10.0),
                   hintText: hint,
-                  //widget.click ? : 'Enter $heading...',
                   hintStyle: const TextStyle(color: Colors.grey)),
             ),
           ),
