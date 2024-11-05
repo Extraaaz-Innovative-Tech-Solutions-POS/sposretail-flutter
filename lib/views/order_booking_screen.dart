@@ -527,7 +527,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
       child: Column(
         children: [
           Container(
-            height: 70,
+            height: 65,
             padding: const EdgeInsets.only(left: 8, right: 8, bottom: 3),
             decoration: BoxDecoration(
               color: Theme.of(context).focusColor,
@@ -578,41 +578,37 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  GestureDetector(
-                    onTap: () {
-                      processMenuItem(
-                          itemId, itemName, double.parse(itemPrice), false);
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                            child: Text(
-                          itemName.length > 8
-                              ? "${itemName.substring(0, 6)}.."
-                              : itemName,
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: Theme.of(context).highlightColor,
-                            fontSize: 16.0,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        )),
-                        Flexible(
-                            flex: 1,
-                            child: Text("${AppConstant.currency}$itemPrice",
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 16.0,
-                                ))),
-                      ],
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     processMenuItem(
+                  //         itemId, itemName, double.parse(itemPrice), false);
+                  //   },
+                  //   child: 
+                    Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: customText(itemName,                     
+                          color: Theme.of(context).highlightColor, font: 14.0),
                     ),
-                  ),
+                  )
+                    
+                    
+                  //),
                 ],
               ),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Text("${AppConstant.currency}$itemPrice",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16.0,
+                    )),
+              )
+              ),
           if (existingOrderItemIndex == -1) ...[
             GestureDetector(
               onTap: () {

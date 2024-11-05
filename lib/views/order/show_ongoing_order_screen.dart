@@ -1299,8 +1299,12 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         final itemPieces = widget.items
         .map((element) => element.pieces.toString())
         .join('/');
+      
     final itemsprice = controller.orderedItems
         .map((element) => element.price.toString())
+        .join('/');
+        final itemRate = controller.orderedItems
+        .map((element) => element.toString())
         .join('/');
     final itemAmount = controller.orderedItems
         .map((element) => element.productTotal.toString())
@@ -1333,6 +1337,7 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         items: itemsString.toString(),
         qty: itemsquantity.toString(),
         billType: '1',
+        rate: itemRate,
         boxes: itemBoxes,
         pieces: itemPieces,
         header: widget.gst != null || widget.fssai != null ?
@@ -1370,8 +1375,8 @@ class _ShowOngoingOrderState extends State<ShowOngoingOrder> {
         .map((element) => element.productTotal.toString())
         .join('/');
     final invoiceiD = controller.ordernumber.toString();
-    final sGst = controller.cartOrder.value!.taxData!.sgst.toString();
-    final cGst = controller.cartOrder.value!.taxData!.cgst.toString();
+    final sGst = controller.cartOrder.value?.taxData?.sgst.toString();
+    final cGst = controller.cartOrder.value?.taxData?.cgst.toString();
     final invoiceDate = DateTime.now();
     final customerName = controller.cartOrder.value!.customer == null
         ? "-"

@@ -21,6 +21,7 @@ class SettingsController extends GetxController {
   String? businessType;
   int? restaurantId;
   int? unitValue;
+  String? token;
 
   void toggleUnit(v) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -78,6 +79,7 @@ class SettingsController extends GetxController {
     address = pref.getString("Address");
     phone = pref.getString("Phone");
     invoiceType = pref.getInt("InchesType");
+    token = pref.getString("token");
     update();
   }
 
