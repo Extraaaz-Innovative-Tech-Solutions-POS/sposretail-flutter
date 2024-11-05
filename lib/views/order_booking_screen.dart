@@ -499,6 +499,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   image: allFilteredItems[index].itemImage,
                   menuItem: allFilteredItems[index],
                   categoryId: allFilteredItems[index].categoryId.toString(),
+                  shortCode: allFilteredItems[index].shortCode.toString()
                 );
               },
             ),
@@ -516,6 +517,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
     dynamic menuItem,
     required dynamic categoryId,
     required int itemId,
+    dynamic shortCode
   }) {
     var existingOrderItemIndex =
         order.indexWhere((element) => element.id == itemId);
@@ -598,17 +600,34 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
               ),
             ),
           ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Text("${AppConstant.currency}$itemPrice",
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                    )),
-              )
-              ),
+          Row(
+            children: [
+
+               Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Text("$shortCode",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                        )),
+                  )
+                  ),
+
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Text("${AppConstant.currency}$itemPrice",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 16.0,
+                        )),
+                  )
+                  ),
+            ],
+          ),
           if (existingOrderItemIndex == -1) ...[
             GestureDetector(
               onTap: () {
