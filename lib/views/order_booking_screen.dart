@@ -427,7 +427,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                           menuItem: allFilteredItems[index],
                           categoryId:
                               allFilteredItems[index].categoryId.toString(),
-                              shortCode: allFilteredItems[index].shortCode.toString()
+                               shortCode :allFilteredItems[index].shortCode == null ? '' : allFilteredItems[index].shortCode.toString()
                         );
                       },
                     ),
@@ -500,7 +500,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                   image: allFilteredItems[index].itemImage,
                   menuItem: allFilteredItems[index],
                   categoryId: allFilteredItems[index].categoryId.toString(),
-                  shortCode: allFilteredItems[index].shortCode.toString()
+                   shortCode :allFilteredItems[index].shortCode == null ? '' : allFilteredItems[index].shortCode.toString()
+
                 );
               },
             ),
