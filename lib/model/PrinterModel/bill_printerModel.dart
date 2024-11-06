@@ -11,6 +11,7 @@ class BillPrinterModel {
   final String header;
   final String price;
   final String amount;
+  final dynamic rate;
   final String dateTime;
   final String lastRecord;
   final String ipAddress;
@@ -37,6 +38,7 @@ class BillPrinterModel {
     required this.header,
     required this.price,
     required this.amount,
+    this.rate,
     required this.dateTime,
     required this.lastRecord,
     required this.ipAddress,
@@ -59,6 +61,7 @@ class BillPrinterModel {
       'CMobile':mobileNo,
       'CAddress':customerNames,
       'tableNo': tableNo,
+      'rate': rate,
       'items': items,
       'qty': qty,
       'bill_type': billType,

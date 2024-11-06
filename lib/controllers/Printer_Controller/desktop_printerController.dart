@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
 import 'package:spos_retail/constants/web_sockets.dart';
 import 'package:spos_retail/model/PrinterModel/bill_desktopModel.dart';
 import 'package:spos_retail/model/PrinterModel/kot_desktopModel.dart';
+import 'package:spos_retail/views/widgets/export.dart';
 
 class DesktopPrinterController extends GetxController {
   var flag = false.obs;
@@ -48,7 +48,7 @@ class DesktopPrinterController extends GetxController {
         break;
       } else {
         print(_printerStatus.value);
-        await Future.delayed(Duration(seconds: 0));
+        await Future.delayed(const Duration(seconds: 0));
         flag.value = true;
         update();
         await _makePostRequest(
@@ -71,7 +71,7 @@ class DesktopPrinterController extends GetxController {
         notedtimes.value = times.second;
         break;
       } else {
-        await Future.delayed(Duration(seconds: 0));
+        await Future.delayed(const Duration(seconds: 0));
         flag.value = true;
         update();
         await _makePostRequest(
@@ -83,21 +83,32 @@ class DesktopPrinterController extends GetxController {
   }
 
   Future<void> _makePostRequest(String url, Map<String, dynamic> data) async {
+    print("DESKTOP PRINT URL : --- $url + DESKTOP PRINT data : --- $data");
     try {
       Dio dio = Dio();
       var response = await dio.post(
         url,
         data: data,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
-      );
+        options: Options(contentType: Headers.formUrlEncodedContentType, headers: {
+          'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${settingsController.token}',
+    }
+        // options.headers['Access-Control-Allow-Origin'] = '*';),
+        )  );
 
       if (response.statusCode == 200) {
+        snackBar("Success", "${response.data}");
+        print("DESKTOP PRINT MAKE POST REQUEST 200");
         log('Request Successful: $data');
       } else {
+        snackBar("Failed", "${response.statusMessage}");
         log('Request Failed with status code: ${response.statusCode}');
       }
     } catch (e) {
-      log('Error occurred: $e');
+      snackBar("Failed", "$e");
+      print("Error Dewsktop : $e");
+      log('Error occurred: ${e.toString()}');
     }
   }
 }

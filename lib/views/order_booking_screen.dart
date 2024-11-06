@@ -427,6 +427,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                           menuItem: allFilteredItems[index],
                           categoryId:
                               allFilteredItems[index].categoryId.toString(),
+                              shortCode: allFilteredItems[index].shortCode.toString()
                         );
                       },
                     ),
@@ -602,7 +603,6 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
           ),
           Row(
             children: [
-
                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(

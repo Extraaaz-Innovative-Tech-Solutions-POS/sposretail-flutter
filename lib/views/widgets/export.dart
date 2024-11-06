@@ -133,6 +133,7 @@ export 'package:spos_retail/model/MoneymanagementModel/money_deposit_model.dart'
 export 'package:spos_retail/model/MoneymanagementModel/money_inout_model.dart';
 
 //Controllers
+export 'package:spos_retail/controllers/customer_details_controller/updatecustomer_controller.dart';
 export 'package:spos_retail/controllers/kitchen_controller.dart';
 export 'package:spos_retail/controllers/all_items_controller.dart';
 export 'package:spos_retail/controllers/Inventory_Controller/stock_controller.dart';
