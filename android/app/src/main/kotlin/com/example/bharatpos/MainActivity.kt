@@ -1,4 +1,4 @@
-package com.example.bharatpos
+package com.extraaazbharatpos
 
 import io.flutter.embedding.android.FlutterActivity
 

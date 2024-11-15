@@ -39,9 +39,11 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         dynamic responseData = response.data;
         if (responseData is Map<String, dynamic>) {
+          print("DASHBOARD : - ---------------");
           Map<String, dynamic> dashboardList = responseData;
 
           keyValueList = dashboardList.entries.toList();
+          print(dashboardList.entries.toString());
         } else {
           // Handle the case where response data is not a map
           debugPrint('Something is Wrong in the Dashboard Controller');
