@@ -16,6 +16,7 @@ class OrderBookingController extends GetxController {
   RxInt sqft = 0.obs;
 
    final List<String> quantityOptions = ['Boxes', 'Pieces'];
+  
   var selectedQuantity = 'Boxes'.obs;
   List<RxString> selectedQuantityList = <RxString>[].obs;
 
@@ -353,16 +354,44 @@ class OrderBookingController extends GetxController {
 
 
 
+  // void initializeSelectedQuantity(int itemCount) {
+  //   selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+  //   print('sqqq :$selectedQuantityList');
+  // }
+
+  // // Update selected item for a particular index
+  // void updateSelectedQuantityIndex(int index, String value) {
+
+  //   selectedQuantityList[index].value = value;
+  //    print('sqqq :$selectedQuantityList');
+  //   update();
+  //   print('selected q list ;  ${selectedQuantityList[index].value}');
+  // }
+
+
+
+    // Initialize the selected quantity list with default values
   void initializeSelectedQuantity(int itemCount) {
-    selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+    // Only initialize once
+    if (selectedQuantityList.isEmpty) {
+      selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+      print('Selected Quantity List Initialized: $selectedQuantityList');
+    }
   }
 
   // Update selected item for a particular index
   void updateSelectedQuantityIndex(int index, String value) {
-    selectedQuantityList[index].value = value;
-    update();
-    print(selectedQuantityList[index].value);
+    // Only update if the value is different
+    if (selectedQuantityList[index].value != value) {
+      selectedQuantityList[index].value = value;
+      print('Updated selected quantity at index $index: ${selectedQuantityList[index].value}');
+      update(); // Trigger UI update
+    }
   }
+
+
+
+
 }
 
 

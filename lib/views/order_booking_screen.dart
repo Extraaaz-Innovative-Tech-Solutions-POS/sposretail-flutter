@@ -1145,10 +1145,15 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               color: Theme.of(
                                                                       context)
                                                                   .highlightColor),
-                                                          /////////////////////////
+                                                          
+
+                                                   
+                                            
 
                                                           onChanged: (value) {
                                                             setState(() {
+
+                                                             
                                                               newQuantity = double
                                                                       .tryParse(
                                                                           value) ??
@@ -1157,6 +1162,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                               order[index]
                                                                       .quantity =
                                                                   newQuantity;
+
+                                                                   print('newqqq ; $newQuantity');
+                                                                  
 
                                                               if (double.parse(order[
                                                                           index]
@@ -1174,6 +1182,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                                           .price =
                                                                       newPrice
                                                                           .toString();
+
                                                                 } else {
                                                                   newPrice =
                                                                       unitPrice;
@@ -1210,7 +1219,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                                   false;
                                                             });
                                                           },
-                                                        ));
+                                                        )
+                                                        
+                                                        );
                                                   })
                                                 : GetBuilder<
                                                         OrderBookingController>(
@@ -1287,11 +1298,13 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                   ],
                                                 )
                                               : const Text("data"),
+
+                                              SizedBox(width: 30,),
                                           Visibility(
                                             visible:
                                                 widget.restaurantId == "217"
                                                     ? true
-                                                    : false,
+                                                    : true,
                                             child: GetBuilder<
                                                     OrderBookingController>(
                                                 builder: (ob) {
@@ -1324,6 +1337,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                             DropdownMenuItem<
                                                                 String>>(
                                                         (String value) {
+                                                          
                                                   return DropdownMenuItem<
                                                       String>(
                                                     value: value,
