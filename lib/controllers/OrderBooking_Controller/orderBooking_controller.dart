@@ -355,9 +355,13 @@ class OrderBookingController extends GetxController {
 
 
   // void initializeSelectedQuantity(int itemCount) {
+
   //   selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
   //   print('sqqq :$selectedQuantityList');
   // }
+
+
+  
 
   // // Update selected item for a particular index
   // void updateSelectedQuantityIndex(int index, String value) {
@@ -371,13 +375,29 @@ class OrderBookingController extends GetxController {
 
 
     // Initialize the selected quantity list with default values
+  // void initializeSelectedQuantity(int itemCount) {
+  //   // Only initialize once
+  //   if (selectedQuantityList.isEmpty) {
+  //     selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+  //     print('Selected Quantity List Initialized: $selectedQuantityList');
+  //   }
+  // }
+
+
+
   void initializeSelectedQuantity(int itemCount) {
-    // Only initialize once
-    if (selectedQuantityList.isEmpty) {
-      selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
-      print('Selected Quantity List Initialized: $selectedQuantityList');
-    }
+  // Check if the list is empty or needs to be extended
+  if (selectedQuantityList.isEmpty) {
+    selectedQuantityList = List.generate(itemCount, (index) => 'Boxes'.obs);
+    print('Selected Quantity List Initialized: $selectedQuantityList');
+  } else if (selectedQuantityList.length < itemCount) {
+    // If the list has fewer items than itemCount, generate the remaining items and add them
+    int remainingCount = itemCount - selectedQuantityList.length;
+    selectedQuantityList.addAll(List.generate(remainingCount, (index) => 'Boxes'.obs));
+    print('Selected Quantity List Extended: $selectedQuantityList');
   }
+}
+
 
   // Update selected item for a particular index
   void updateSelectedQuantityIndex(int index, String value) {

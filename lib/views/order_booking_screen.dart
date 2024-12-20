@@ -1226,6 +1226,9 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                 : GetBuilder<
                                                         OrderBookingController>(
                                                     builder: (ob) {
+                                                      ob.initializeSelectedQuantity(order.length);
+                                                      print("check lets length:${ob.selectedQuantityList.length} ");
+                                                      print("${ob.selectedQuantityList[index].value}: ${order[index].quantity.toString()}");
                                                     return customText(
                                                         widget.restaurantId ==
                                                                 "217"
@@ -1304,12 +1307,10 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                             visible:
                                                 widget.restaurantId == "217"
                                                     ? true
-                                                    : true,
-                                            child: GetBuilder<
-                                                    OrderBookingController>(
-                                                builder: (ob) {
+                                                    : false,
+                                            child:Obx(() {
                                               return DropdownButton<String>(
-                                                value: ob
+                                                value: orderbookingController
                                                     .selectedQuantityList[index]
                                                     .value,
                                                 onChanged: (String? newValue) {
@@ -1317,6 +1318,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                     orderbookingController
                                                         .updateSelectedQuantityIndex(
                                                             index, newValue);
+                                                           
                                                     order[index]
                                                         .boxes = newValue ==
                                                             'Boxes'
@@ -1329,6 +1331,8 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                             ? order[index]
                                                                 .quantity
                                                             : 0;
+
+                                                            orderbookingController.update(); 
                                                   }
                                                 },
                                                 items: orderbookingController
@@ -1339,6 +1343,7 @@ class _OrderBookingScreenState extends State<OrderBookingScreen> {
                                                         (String value) {
                                                           
                                                   return DropdownMenuItem<
+                                                  
                                                       String>(
                                                     value: value,
                                                     child: Text(value),

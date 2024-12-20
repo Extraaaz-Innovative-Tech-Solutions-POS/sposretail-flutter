@@ -25,7 +25,10 @@ class SupplierController extends GetxController {
         mobileNumber: supplierMobile.value,
         gstin: supplierGstin.value,
         c_person: supplierPerson.value,
-        c_number: supplierNumber.value);
+        c_number: supplierNumber.value,
+        address: supplierAddress.value
+        );
+        
     if (supplierName.value.isNotEmpty &&
         supplierMobile.value.isNotEmpty &&
         supplierAddress.value.isNotEmpty &&
@@ -63,7 +66,10 @@ class SupplierController extends GetxController {
         mobileNumber: supplierMobile.value,
         gstin: supplierGstin.value,
         c_person: supplierPerson.value,
-        c_number: supplierNumber.value);
+        c_number: supplierNumber.value,
+        address: supplierAddress.value
+        
+        );
     if (supplierName.value.isNotEmpty &&
         supplierMobile.value.isNotEmpty &&
         supplierAddress.value.isNotEmpty &&

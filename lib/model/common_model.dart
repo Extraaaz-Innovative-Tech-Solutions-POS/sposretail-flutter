@@ -272,12 +272,14 @@ class AddSupplierData {
   String gstin;
   String c_person;
   String c_number;
+  String address;
   AddSupplierData({
     required this.name,
     required this.mobileNumber,
     required this.gstin,
     required this.c_person,
     required this.c_number,
+    required this.address,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -285,7 +287,8 @@ class AddSupplierData {
       "name": name,
       "gstin": gstin,
       "c_person": c_person,
-      "c_number": c_number
+      "c_number": c_number,
+      "address":address
     };
   }
 }

@@ -11,7 +11,7 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {   //
   MyApp({super.key});
   final themeController = Get.put(ThemeController());
 
