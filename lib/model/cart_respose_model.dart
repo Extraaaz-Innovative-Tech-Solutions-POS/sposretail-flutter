@@ -207,7 +207,7 @@ class TaxData {
   String? restaurantId;
   String? cgst;
   String? sgst;
-  Null vat;
+  String? vat;
   int? status;
   String? createdAt;
   String? updatedAt;
@@ -225,9 +225,9 @@ class TaxData {
   TaxData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     restaurantId = json['restaurant_id'];
-    cgst = json['cgst'];
-    sgst = json['sgst'];
-    vat = json['vat'];
+    cgst = json['cgst']??0;
+    sgst = json['sgst']??0;
+    vat = json['vat']??0;
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
